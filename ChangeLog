@@ -1,0 +1,13 @@
+
+2009-11-25, version 0.6-3
+
+Functions summary.copas and plot.copas:
+ - modified so that the signifiance level for the test of
+   residual selection bias can be chosen by the user
+   (new argument sign.rsb)
+ - help file changed accordingly
+
+
+2009-04-08, version 0.6-2
+
+No ChangeLog available for versions < 0.6-2

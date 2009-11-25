@@ -1,0 +1,6 @@
+export(copas, plot.copas, print.copas, print.summary.copas, summary.copas)
+
+S3method(plot, copas)
+S3method(print, copas)
+S3method(print, summary.copas)
+S3method(summary, copas)
