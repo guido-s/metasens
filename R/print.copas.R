@@ -1,4 +1,4 @@
-print.copas <- function(x, ...){
+print.copas <- function(x, sign.rsb=0.1, ...){
   
   if (!inherits(x, "copas"))
     stop("Argument 'x' must be an object of class \"copas\"")
@@ -43,7 +43,7 @@ print.copas <- function(x, ...){
   prmatrix(res, quote=FALSE, right=TRUE)
   
   cat("\n\n")
-  print(summary(x))
+  print(summary(x, sign.rsb=0.1))
   
   invisible(NULL)
 }

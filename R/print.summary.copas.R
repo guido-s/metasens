@@ -61,6 +61,10 @@ print.summary.copas <- function(x,
   ##
   prmatrix(res, quote=FALSE, right=TRUE, ...)
   ##
+  cat("\n",
+      "Significance level for test of residual selection bias:",
+      ifelse(is.null(x$sign.rsb), 0.1, x$sign.rsb), "\n")
+  ##
   cat("\n Legend:\n")
   cat(" publprob   - Probability of publishing the study with the largest standard error\n")
   cat(" pval.treat - P-value for hypothesis that the treatment effect is equal in both groups\n")

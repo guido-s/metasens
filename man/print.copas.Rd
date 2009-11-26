@@ -7,9 +7,9 @@
    Print and summary method for objects of class \code{copas}.
 }
 \usage{
-\method{print}{copas}(x, ...)
+\method{print}{copas}(x, sign.rsb=0.1, ...)
 
-\method{summary}{copas}(object, level=0.95, ...)
+\method{summary}{copas}(object, level=0.95, sign.rsb=0.1, ...)
 
 \method{print}{summary.copas}(x,
                               digits = max(3, .Options$digits - 3),
@@ -22,6 +22,8 @@
     0 and 1).}
   \item{digits}{Minimal number of significant digits, see
     \code{print.default}.}
+  \item{sign.rsb}{The significance level for the test of residual
+    selection bias (between 0 and 1).}
   \item{...}{other arguments to the function will be ignored (this
     option included only to conform with R standards)}
 }
@@ -57,11 +59,11 @@
 
   Below this is displayed the results of the Copas analysis for the
   smallest degree of selection for which the p-value for evidence of
-  residual selection bias exceeds 0.1. This is simply extracted from the
-  corresponding row in the table above.
+  residual selection bias exceeds \code{sign.rsb} (default: 0.1). This
+  is simply extracted from the corresponding row in the table above.
 
   Lastly, the usual random effects estimate (based on the
-  DerSimonianLaird method) and 95\% confidence interval
+  DerSimonian-Laird method) and 95\% confidence interval
   is printed.
 
   The function \code{print.copas} prints the summary information above
@@ -98,6 +100,8 @@
     remain unpublished}
   \item{adjust}{Result of Copas selection model adjusted for selection
     bias (a list with elements TE, seTE, lower, upper, z, p, level).}
+  \item{sign.rsb}{The significance level for the test of residual
+    selection bias.}
   \item{pval.rsb.adj}{P-value for test on presence of residual selection
     bias for adjusted effect given in \code{adjust}.}
   \item{N.unpubl.adj}{Approximate number of studies the model suggests

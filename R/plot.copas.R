@@ -7,6 +7,7 @@ plot.copas <- function(x,
                        level=0.95,
                        orthogonal.line=TRUE,
                        lines=FALSE,
+                       sign.rsb=0.1,
                        warn=-1,
                        ...){
   
@@ -235,7 +236,7 @@ plot.copas <- function(x,
           side=1, line=2)
     mtext("P-value for residual selection bias", side=2, line=2)
     ##
-    abline(h=0.10, lty=2)
+    abline(h=sign.rsb, lty=2)
     box()
     ## TODO: remove next line?
     ##text(xvalue-0.01, yvalue-0.05, labels=xylab)

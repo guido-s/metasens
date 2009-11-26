@@ -1,4 +1,4 @@
-summary.copas <- function(object, level=0.95, ...){
+summary.copas <- function(object, level=0.95, sign.rsb=0.1, ...){
   
   if (!inherits(object, "copas"))
     stop("Argument 'object' must be an object of class \"copas\"")
@@ -34,8 +34,8 @@ summary.copas <- function(object, level=0.95, ...){
   ## Copas estimate adjusted for selection bias (added by sc, 24.09.2007):
   ##
   tres <- data.frame(seq=seq(along=pval.rsb),
-                     cumsum=cumsum(pval.rsb <= 0.1),
-                     diff=seq(along=pval.rsb) - cumsum(pval.rsb <= 0.1))
+                     cumsum=cumsum(pval.rsb <= sign.rsb),
+                     diff=seq(along=pval.rsb) - cumsum(pval.rsb <= sign.rsb))
   pval.rsb.sign.all <- all(tres$diff==0)
   pval.rsb.sign <- ifelse(sum(tres$diff==0)>0, TRUE, FALSE)
   ##
@@ -68,6 +68,7 @@ summary.copas <- function(object, level=0.95, ...){
               pval.rsb=pval.rsb,
               N.unpubl=N.unpubl,
               adjust=adjust,
+              sign.rsb=sign.rsb,
               pval.rsb.adj=pval.rsb.adj,
               N.unpubl.adj=N.unpubl.adj,
               random=ci.random,
