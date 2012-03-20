@@ -1,9 +1,9 @@
 Package: copas
 Title: Statistical methods to model and adjust for bias in meta-analysis
-Version: 0.6-3
+Version: 0.6-5
 Author: James Carpenter <James.Carpenter@lshtm.ac.uk>, Guido Schwarzer <sc@imbi.uni-freiburg.de>
 Maintainer: Guido Schwarzer <sc@imbi.uni-freiburg.de>
 Depends: meta (>= 0.8)
-Date: 2009-11-26
+Date: 2012-03-20
 Description: Copas selection model.
 License: GPL (>= 2)

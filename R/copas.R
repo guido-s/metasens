@@ -125,7 +125,7 @@ copas <- function(x,
   }
   ##
   if (is.null(left))
-    left <- as.logical(sign(metabias(x, meth="linreg")$estimate[1])==1)
+    left <- as.logical(sign(metabias(x, meth="linreg", k.min=3)$estimate[1])==1)
   ##
   if (left)
     rho0 <-  rho.bound/2
@@ -394,14 +394,14 @@ copas <- function(x,
                        method="L-BFGS-B"),
         silent=TRUE)
     ##
-    TE.slope.bc[i]   <- junk3$par[1]
-    rho.slope.bc[i]  <- junk3$par[2]
-    tau.slope.bc[i]  <- junk3$par[3]
-    beta.slope.bc[i] <- junk3$par[4]
+    TE.slope.bc[i]   <- try(junk3$par[1])
+    rho.slope.bc[i]  <- try(junk3$par[2])
+    tau.slope.bc[i]  <- try(junk3$par[3])
+    beta.slope.bc[i] <- try(junk3$par[4])
     ##
-    loglik2[i]  <- junk3$value
-    conv2[i]    <- junk3$convergence
-    message2[i] <- junk3$message
+    loglik2[i]  <- try(junk3$value)
+    conv2[i]    <- try(junk3$convergence)
+    message2[i] <- try(junk3$message)
   }
   ##
   ## P-value for test of residual selection bias:

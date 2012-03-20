@@ -7,7 +7,7 @@
   for residual publication bias plot. By default, all plots are provided.
 }
 \usage{
-plot.copas(x,
+\method{plot}{copas}(x,
            which=1:4,
            caption=c("Funnel plot", "Contour plot",
                      "Treatment effect plot",
