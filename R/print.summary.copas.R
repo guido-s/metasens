@@ -1,5 +1,6 @@
 print.summary.copas <- function(x,
                                 digits=max(3, .Options$digits - 3),
+                                header=TRUE,
                                 ...){
   
   sm <- x$sm
@@ -56,6 +57,8 @@ print.summary.copas <- function(x,
                         c("publprob", sm, x$ci.lab,
                           "pval.treat", "pval.rsb", "N.unpubl"))
   
+  if (header)
+    crtitle(x)
   
   cat("Summary of Copas selection model analysis:\n\n")
   ##
@@ -66,10 +69,10 @@ print.summary.copas <- function(x,
       ifelse(is.null(x$sign.rsb), 0.1, x$sign.rsb), "\n")
   ##
   cat("\n Legend:\n")
-  cat(" publprob   - Probability of publishing the study with the largest standard error\n")
-  cat(" pval.treat - P-value for hypothesis that the treatment effect is equal in both groups\n")
-  cat(" pval.rsb   - P-value for hypothesis that no further selection remains unexplained\n")
-  cat(" N.unpubl   - Approximate number of studies the model suggests remain unpublished\n")
+  cat(" publprob   - Probability of publishing study with largest standard error\n")
+  cat(" pval.treat - P-value for hypothesis of overall treatment effect\n")
+  cat(" pval.rsb   - P-value for hypothesis that no selection remains unexplained\n")
+  cat(" N.unpubl   - Approximate number of unpublished studies suggested by model\n")
   
   invisible(NULL)
 }

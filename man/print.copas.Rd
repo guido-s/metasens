@@ -7,23 +7,25 @@
    Print and summary method for objects of class \code{copas}.
 }
 \usage{
-\method{print}{copas}(x, sign.rsb=0.1, ...)
+\method{print}{copas}(x, sign.rsb=0.1, digits=max(3, .Options$digits - 3), ...)
 
 \method{summary}{copas}(object, level=0.95, sign.rsb=0.1, ...)
 
 \method{print}{summary.copas}(x,
                               digits = max(3, .Options$digits - 3),
-                              ...)
+                              header=TRUE, ...)
 }
 \arguments{
   \item{x}{An object of class \code{copas} or \code{summary.copas}.}
   \item{object}{An object of class \code{copas}.}
   \item{level}{The level used to calculate confidence intervals (between
     0 and 1).}
-  \item{digits}{Minimal number of significant digits, see
-    \code{print.default}.}
   \item{sign.rsb}{The significance level for the test of residual
     selection bias (between 0 and 1).}
+  \item{digits}{Minimal number of significant digits, see \code{print.default}.}
+  \item{header}{A logical indicating whether information on title of
+    meta-analysis, comparison and outcome should be printed at the
+    beginning of the printout.}
   \item{...}{other arguments to the function will be ignored (this
     option included only to conform with R standards)}
 }
@@ -110,6 +112,10 @@
     elements TE, seTE, lower, upper, z, p, level).}
   \item{sm}{A character string indicating underlying summary measure.}
   \item{ci.lab}{Label for confidence interval.}
+  \item{title}{Title of meta-analysis / systematic review.}
+  \item{complab}{Comparison label.}
+  \item{outclab}{Outcome label.}
+  \item{version}{Version of R package copas used to create object.}
 }
 \author{James Carpenter \email{James.Carpenter@lshtm.ac.uk}, Guido Schwarzer \email{sc@imbi.uni-freiburg.de}}
 \seealso{\code{\link{copas}}, \code{\link{plot.copas}} \code{\link[meta]{metabias}}, \code{\link[meta]{metagen}}}

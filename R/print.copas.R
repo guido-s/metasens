@@ -1,10 +1,14 @@
-print.copas <- function(x, sign.rsb=0.1, ...){
+print.copas <- function(x, sign.rsb=0.1,
+                        digits=max(3, .Options$digits - 3),
+                        ...){
   
   if (!inherits(x, "copas"))
     stop("Argument 'x' must be an object of class \"copas\"")
   
   
-  cat("\nCopas selection model analysis\n\n")
+  crtitle(x)
+
+  cat("Copas selection model analysis\n\n")
   
   
   res <- cbind(c("range of gamma0: ", "range of gamma1: "),
@@ -43,7 +47,8 @@ print.copas <- function(x, sign.rsb=0.1, ...){
   prmatrix(res, quote=FALSE, right=TRUE)
   
   cat("\n\n")
-  print(summary(x, sign.rsb=0.1))
+  print(summary(x, sign.rsb=0.1),
+        digits=digits, header=FALSE)
   
   invisible(NULL)
 }

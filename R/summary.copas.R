@@ -78,5 +78,11 @@ summary.copas <- function(object, level=0.95, sign.rsb=0.1, ...){
   
   class(res) <- c("summary.copas")
   
+  res$complab <- object$complab
+  res$outclab <- object$outclab
+  res$title   <- object$title
+  
+  res$version <- packageDescription("copas")$Version
+  
   res
 }

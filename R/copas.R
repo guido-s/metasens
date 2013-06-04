@@ -473,6 +473,15 @@ copas <- function(x,
               N.unpubl=N.unpubl,
               sm=x$sm, call=match.call(), x=x)
   
+  res$version <- packageDescription("copas")$Version
+  
+  if (!is.null(x$title))
+    res$title <- x$title
+  if (!is.null(x$complab))
+    res$complab <- x$complab
+  if (!is.null(x$outclab))
+    res$outclab <- x$outclab
+  
   class(res) <- c("copas")
   
   res
