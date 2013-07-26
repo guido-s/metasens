@@ -1,25 +1,32 @@
+2013-07-26, version 0.8-0
+
+New functions orbbound and print.orbbound:
+- implementation of method by Copas and Jackson (2004) to investigate
+  outcome reporting bias
+
+
 2013-06-04, version 0.7-0
 
 Functions copas and summary.copas:
- - new list elements:
-   - title (Title of meta-analysis / Cochrane review)
-   - complab (Comparison label)
-   - outclab (Outcome label)
-   - version (version number of R package copas)
+- new list elements:
+  - title (Title of meta-analysis / Cochrane review)
+  - complab (Comparison label)
+  - outclab (Outcome label)
+  - version (version number of R package copas)
 
 Function print.copas:
- - new argument digits
- - information on meta-analysis printed if provided by object from
-   R package meta (i.e. list elements title, complab, outclab)
+- new argument digits
+- information on meta-analysis printed if provided by object from
+  R package meta (i.e. list elements title, complab, outclab)
 
 Function print.summary.copas:
- - new argument header
- - information on meta-analysis printed if provided by object from
-   R package meta (i.e. list elements title, complab, outclab)
+- new argument header
+- information on meta-analysis printed if provided by object from
+  R package meta (i.e. list elements title, complab, outclab)
 
 New functions:
- - crtitle   (function used internally)
- - .onAttach (function used internally)
+- crtitle   (function used internally)
+- .onAttach (function used internally)
 
 Minor changes to help pages.
 
@@ -27,26 +34,26 @@ Minor changes to help pages.
 2012-03-20, version 0.6-5
 
 Function copas:
- - modified so that call of function metabias from R package meta
-   considers the new parameter k.min
+- modified so that call of function metabias from R package meta
+  considers the new parameter k.min
 
 
 2010-10-01, version 0.6-4
 
 Function copas:
- - modified so that an error in calculating the test of
-   residual selection bias does not stop the execution of
-   the function
+- modified so that an error in calculating the test of
+  residual selection bias does not stop the execution of
+  the function
 
 
 2009-11-25, version 0.6-3
 
 Functions plot.copas, print.copas, print.summary.copas,
 	  summary.copas:
- - modified so that the signifiance level for the test of
-   residual selection bias can be chosen by the user
-   (new argument sign.rsb)
- - help pages changed accordingly
+- modified so that the signifiance level for the test of
+  residual selection bias can be chosen by the user
+  (new argument sign.rsb)
+- help pages changed accordingly
 
 
 2009-04-08, version 0.6-2

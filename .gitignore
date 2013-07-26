@@ -1,5 +1,6 @@
 *~
 *.bak
+src-x86_64
 .Rbuildignore
 .Rhistory
 .DS_Store

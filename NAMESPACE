@@ -1,9 +1,13 @@
-export(copas, plot.copas, print.copas, print.summary.copas, summary.copas)
+export(copas, plot.copas, print.copas,
+       print.summary.copas, summary.copas,
+       orbbound, print.orbbound, forest.orbbound)
 
 # not visible:
-# crtitle
+# crtitle, forest
 
 S3method(plot, copas)
 S3method(print, copas)
 S3method(print, summary.copas)
 S3method(summary, copas)
+S3method(print, orbbound)
+S3method(forest, orbbound)
