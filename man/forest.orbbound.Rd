@@ -70,7 +70,6 @@
 \seealso{\code{\link{orbbound}}, \code{\link{print.orbbound}}}
 
 \examples{
-
 data(Fleiss93, package="meta")
 
 meta1 <- metabin(event.e, n.e, event.c, n.c,
@@ -81,7 +80,6 @@ orb1 <- orbbound(meta1, k.suspect=1:5)
 print(orb1, digits=2)
 
 forest(orb1, xlim=c(0.7, 1.5))
-
 }
 
 \keyword{hplot}

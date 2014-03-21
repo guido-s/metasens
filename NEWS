@@ -1,8 +1,12 @@
-2013-07-26, version 0.8-0
+2014-03-21, version 0.8-0
 
-New functions orbbound and print.orbbound:
+New functions orbbound, forest.orbbound, and print.orbbound:
 - implementation of method by Copas and Jackson (2004) to investigate
   outcome reporting bias
+
+Internally used functions crtitle, forest, format.p, p.ci, rmSpace
+removed (these functions are replaced by calls to corresponding
+functions in R package meta).
 
 
 2013-06-04, version 0.7-0

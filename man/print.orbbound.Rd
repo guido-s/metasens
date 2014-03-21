@@ -43,7 +43,6 @@
 \seealso{\code{\link{orbbound}}, \code{\link{forest.orbbound}}}
 
 \examples{
-
 data(Fleiss93, package="meta")
 
 meta1 <- metabin(event.e, n.e, event.c, n.c,
@@ -61,7 +60,6 @@ meta2 <- metabin(event.e, n.e, event.c, n.c,
 orb2 <- orbbound(meta2, k.suspect=1:5)
 
 print(orb2, digits=2)
-
 }
 
 \keyword{print}

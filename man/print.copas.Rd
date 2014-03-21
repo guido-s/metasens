@@ -12,8 +12,8 @@
 \method{summary}{copas}(object, level=0.95, sign.rsb=0.1, ...)
 
 \method{print}{summary.copas}(x,
-                              digits = max(3, .Options$digits - 3),
-                              header=TRUE, ...)
+      digits = max(3, .Options$digits - 3),
+      header=TRUE, ...)
 }
 \arguments{
   \item{x}{An object of class \code{copas} or \code{summary.copas}.}
@@ -121,17 +121,18 @@
 \seealso{\code{\link{copas}}, \code{\link{plot.copas}} \code{\link[meta]{metabias}}, \code{\link[meta]{metagen}}}
 
 \examples{
-# Load data
-#
+##
+## Load data
+##
 data(Fleiss93)
-#
-# Perform meta analysis, effect measure is odds ratio (OR)
-#
+##
+## Perform meta analysis, effect measure is odds ratio (OR)
+##
 meta1 <- metabin(event.e, n.e, event.c, n.c,
                  data=Fleiss93, sm="OR")
-#
-# Perform Copas analysis
-#
+##
+## Perform Copas analysis
+##
 cop1 <- copas(meta1)
 summary(cop1, level=0.95)
 }

@@ -1,4 +1,4 @@
-orbbound <- function(x, k.suspect=1, tau){
+orbbound <- function(x, k.suspect=1, tau=x$tau){
   
   ## Copas J, Jackson D. A bound for publication bias based on the
   ## fraction of unpublished studies. Biometrics 2004,
@@ -7,9 +7,6 @@ orbbound <- function(x, k.suspect=1, tau){
   if (!inherits(x, "meta"))
     stop("Argument 'x' must be an object of class \"meta\"")
   
-  if (missing(tau))
-    tau <- x$tau
-
   if (!(is.numeric(k.suspect)))
     stop("Argument 'k.suspect' must be a numeric vector")
   ##
@@ -61,8 +58,8 @@ orbbound <- function(x, k.suspect=1, tau){
     warning("Direction of outcome reporting bias is unclear as estimate from random effects model is equal to null effect")
   }
 
-  ci.f <- meta:::ci(x$TE.fixed-sign.f*maxbias, x$seTE.fixed)
-  ci.r <- meta:::ci(x$TE.random-sign.r*maxbias, x$seTE.random)
+  ci.f <- meta::ci(x$TE.fixed-sign.f*maxbias, x$seTE.fixed)
+  ci.r <- meta::ci(x$TE.random-sign.r*maxbias, x$seTE.random)
   
   res <- list(maxbias=maxbias,
               k.suspect=k.suspect,

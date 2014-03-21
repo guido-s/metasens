@@ -4,6 +4,6 @@ Version: 0.8-0
 Author: James Carpenter <James.Carpenter@lshtm.ac.uk>, Guido Schwarzer <sc@imbi.uni-freiburg.de>
 Maintainer: Guido Schwarzer <sc@imbi.uni-freiburg.de>
 Depends: meta (>= 0.8)
-Date: 2013-07-26
+Date: 2014-03-21
 Description: Copas selection model.
 License: GPL (>= 2)

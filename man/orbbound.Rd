@@ -10,15 +10,14 @@
   with outcome reporting bias.
 }
 
-\usage{orbbound(x, k.suspect, tau)
+\usage{orbbound(x, k.suspect=1, tau=x$tau)
 }
 
 \arguments{
   \item{x}{An object of class \code{meta}.}
   \item{k.suspect}{Number of studies with suspected outcome reporting bias.}
   \item{tau}{Square-root of between-study variance
-    tau-squared. Corresponding value from meta object 'x' is taken if
-    \code{tau} is missing.}
+    tau-squared.}
 }
 
 \details{
@@ -62,7 +61,6 @@
 \seealso{\code{\link{forest.orbbound}}, \code{\link{print.orbbound}}}
 
 \examples{
-
 data(Fleiss93, package="meta")
 
 meta1 <- metabin(event.e, n.e, event.c, n.c,
@@ -73,5 +71,4 @@ orb1 <- orbbound(meta1, k.suspect=1:5)
 print(orb1, digits=2)
 
 forest(orb1, xlim=c(0.7, 1.5))
-
 }

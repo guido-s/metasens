@@ -88,15 +88,15 @@ forest.orbbound <- function(x,
   else
     m1$maxbias <- format(round(m1$maxbias, digits))
   
-  meta:::forest(m1,
-                comb.fixed=FALSE, comb.random=FALSE,
-                hetstat=FALSE,
-                leftcols=leftcols,
-                leftlabs=leftlabs,
-                smlab=smlab,
-                just.studlab="center",
-                weight="same",
-                ...)
+  forest(m1,
+         comb.fixed=FALSE, comb.random=FALSE,
+         hetstat=FALSE,
+         leftcols=leftcols,
+         leftlabs=leftlabs,
+         smlab=smlab,
+         just.studlab="center",
+         weight="same",
+         ...)
   
   invisible(NULL)
 }

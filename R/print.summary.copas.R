@@ -46,19 +46,21 @@ print.summary.copas <- function(x,
   res <- cbind(c(format(round(publprob, 2)),
                  "", "Copas model (adj)","Random effects model"),
                ifelse(TE=="NA", "", TE),
-               p.ci(format(c(lowTE.slope, NA, lowTE.adj, lowTE.random)),
-                    format(c(uppTE.slope, NA, uppTE.adj, uppTE.random))),
-               format.p(c(pval.TE, NA, x$adjust$p, x$random$p)),
-               format.p(c(pval.rsb, NA, x$pval.rsb.adj, NA)),
+               meta:::p.ci(format(c(lowTE.slope, NA, lowTE.adj, lowTE.random)),
+                           format(c(uppTE.slope, NA, uppTE.adj, uppTE.random))),
+               meta:::format.p(c(pval.TE, NA, x$adjust$p, x$random$p)),
+               meta:::format.p(c(pval.rsb, NA, x$pval.rsb.adj, NA)),
                ifelse(N.unpubl=="NA", "", N.unpubl)
                )
+  ##
+  res[meta:::rmSpace(res)=="--"] <- ""
   ##
   dimnames(res) <- list(rep("", dim(res)[[1]]),
                         c("publprob", sm, x$ci.lab,
                           "pval.treat", "pval.rsb", "N.unpubl"))
   
   if (header)
-    crtitle(x)
+    meta:::crtitle(x)
   
   cat("Summary of Copas selection model analysis:\n\n")
   ##

@@ -6,7 +6,7 @@ print.copas <- function(x, sign.rsb=0.1,
     stop("Argument 'x' must be an object of class \"copas\"")
   
   
-  crtitle(x)
+  meta:::crtitle(x)
 
   cat("Copas selection model analysis\n\n")
   
