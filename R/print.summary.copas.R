@@ -1,11 +1,18 @@
 print.summary.copas <- function(x,
+                                logscale=FALSE,
                                 digits=max(3, .Options$digits - 3),
                                 header=TRUE,
                                 ...){
   
   sm <- x$sm
+  ##
+  if (logscale & (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR"))
+    sm.lab <- paste("log", sm, sep="")
+  else
+    sm.lab <- sm
   
-  if (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR"){
+  
+  if (!logscale & (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR")){
     x$slope$TE    <- exp(x$slope$TE)
     x$slope$lower <- exp(x$slope$lower)
     x$slope$upper <- exp(x$slope$upper)
@@ -56,7 +63,7 @@ print.summary.copas <- function(x,
   res[meta:::rmSpace(res)=="--"] <- ""
   ##
   dimnames(res) <- list(rep("", dim(res)[[1]]),
-                        c("publprob", sm, x$ci.lab,
+                        c("publprob", sm.lab, x$ci.lab,
                           "pval.treat", "pval.rsb", "N.unpubl"))
   
   if (header)

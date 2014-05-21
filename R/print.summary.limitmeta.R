@@ -1,18 +1,26 @@
 print.summary.limitmeta <- function(x,
+                                    logscale=FALSE,
                                     digits=max(3, .Options$digits - 3),
                                     header=TRUE){
   
   if (!inherits(x, "summary.limitmeta"))
     stop("Argument 'x' must be an object of class \"summary.limitmeta\"")
-
+  
+  
   sm <- x$sm
-
+  ##
+  if (logscale & (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR"))
+    sm.lab <- paste("log", sm, sep="")
+  else
+    sm.lab <- sm
+  
+  
   TEs <- c(x$TE.adjust, x$TE.random)
   lower <- c(x$lower.adjust, x$lower.random)
   upper <- c(x$upper.adjust, x$upper.random)
 
 
-  if (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR"){
+  if (!logscale & (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR")){
     TEs   <- exp(TEs)
     lower <- exp(lower)
     upper <- exp(upper)
@@ -56,7 +64,8 @@ print.summary.limitmeta <- function(x,
   res[meta:::rmSpace(res)=="--"] <- ""
   ##
   dimnames(res) <- list(rep("", dim(res)[[1]]),
-                        c("Random effects model", sm, ci.lab, "z", "pval"))
+                        c("Random effects model",
+                          sm.lab, ci.lab, "z", "pval"))
   
   
   if (header)

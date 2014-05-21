@@ -36,13 +36,13 @@ limitmeta <- function(x,
   ##
   ## Radial plot, slope best fit (beta-F)
   ##
-  ## reg.f <- radialregression(TE, seTE, k=k)
+  ## reg.f <- radialregression(TE, seTE, k)
   
   
   ##
   ## Generalized radial plot, slope best fit (beta-R)
   ##
-  reg.r <- radialregression(TE, seTE, tau, k)
+  reg.r <- radialregression(TE, seTE.tau, k)
   ##
   alpha.r <- reg.r$intercept
   beta.r  <- reg.r$slope
@@ -81,7 +81,7 @@ limitmeta <- function(x,
       ##
       ## Limit radial plot, slope best fit (beta-lim)
       ##
-      reg.l <- radialregression(m.lim$TE, m.lim$seTE, k=k)
+      reg.l <- radialregression(m.lim$TE, m.lim$seTE, k)
       ##
       TE.adjust   <- as.vector(reg.l$slope)
       seTE.adjust <- as.vector(reg.l$se.slope)
@@ -129,6 +129,8 @@ limitmeta <- function(x,
               upper.random=upper.random,
               zval.random=zval.random,
               pval.random=pval.random,
+              w.random=w.random,
+              tau=tau,
               ##
               TE.adjust=TE.adjust,
               seTE.adjust=seTE.adjust,
@@ -136,6 +138,9 @@ limitmeta <- function(x,
               upper.adjust=upper.adjust,
               zval.adjust=zval.adjust,
               pval.adjust=pval.adjust,
+              ##
+              alpha.r=alpha.r,
+              beta.r=beta.r,
               ##
               level=level,
               level.comb=level.comb,

@@ -6,7 +6,7 @@ forest.orbbound <- function(x,
                             smlab=NULL,
                             leftcols=c("studlab", "maxbias"),
                             leftlabs=c("Missing\nstudies", "Maximum\nbias"),
-                            logscale=x$meta$logscale,
+                            logscale=FALSE,
                             digits=max(3, .Options$digits - 3),
                             ...){
 

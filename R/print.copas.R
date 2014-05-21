@@ -1,4 +1,5 @@
 print.copas <- function(x, sign.rsb=0.1,
+                        logscale=FALSE,
                         digits=max(3, .Options$digits - 3),
                         ...){
   
@@ -48,7 +49,7 @@ print.copas <- function(x, sign.rsb=0.1,
   
   cat("\n\n")
   print(summary(x, sign.rsb=0.1),
-        digits=digits, header=FALSE)
+        digits=digits, header=FALSE, logscale=logscale)
   
   invisible(NULL)
 }

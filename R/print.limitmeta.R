@@ -95,7 +95,8 @@ print.limitmeta <- function(x,
   cat("\n")
   
   
-  print(summary(x, digits=digits, header=FALSE))
+  print(summary(x),
+        digits=digits, header=FALSE, logscale=logscale)
   
   
   invisible(NULL)
