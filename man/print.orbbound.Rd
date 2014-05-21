@@ -11,7 +11,7 @@
 \usage{
 \method{print}{orbbound}(x,
       comb.fixed=x$meta$comb.fixed, comb.random=x$meta$comb.random,
-      header=TRUE, logscale=x$meta$logscale,
+      header=TRUE, logscale=FALSE,
       digits=max(3, .Options$digits - 3),
       ...)
 }

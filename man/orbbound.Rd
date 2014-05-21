@@ -47,7 +47,7 @@
     seTE, lower, upper, z, p, level, df).}
   \item{meta}{Meta-analysis object (i.e. argument \code{x} from function call).}
   \item{call}{Function call.}
-  \item{version}{Version of R package copas used to create object.}
+  \item{version}{Version of R package metasens used to create object.}
 }
 
 \references{

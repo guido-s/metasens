@@ -156,6 +156,10 @@ limitmeta <- function(x,
               call=match.call(),
               x=x)
   
+  
+  res$version <- utils::packageDescription("metasens")$Version
+  
+  
   class(res) <- c("limitmeta")
   
   res

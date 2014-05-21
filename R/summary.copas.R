@@ -82,7 +82,7 @@ summary.copas <- function(object, level=0.95, sign.rsb=0.1, ...){
   res$outclab <- object$outclab
   res$title   <- object$title
   
-  res$version <- packageDescription("copas")$Version
+  res$version <- utils::packageDescription("metasens")$Version
   
   res
 }

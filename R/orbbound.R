@@ -67,8 +67,9 @@ orbbound <- function(x, k.suspect=1, tau=x$tau){
               fixed=ci.f,
               random=ci.r,
               meta=x,
-              call=match.call(),
-              version=packageDescription("copas")$Version)
+              call=match.call())
+  
+  res$version <- utils::packageDescription("metasens")$Version
   
   class(res) <- "orbbound"
   

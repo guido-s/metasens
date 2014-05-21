@@ -1,6 +1,4 @@
 funnel.limitmeta <- function(x,
-                             from,
-                             to,
                              ##
                              pch=21,
                              cex=1,
@@ -10,6 +8,9 @@ funnel.limitmeta <- function(x,
                              pch.adjust=18,
                              cex.adjust=1.5,
                              col.adjust="gray",
+                             ##
+                             xmin.line,
+                             xmax.line,
                              lty.line=1,
                              col.line="gray",
                              lwd.line=2,
@@ -37,22 +38,22 @@ funnel.limitmeta <- function(x,
   sm <- x$sm
   
   
-  if (missing(from)){
+  if (missing(xmin.line)){
     if (beta.r < 0)
-      from <- x$TE.adjust+0.01
+      xmin.line <- x$TE.adjust+0.01
     if (beta.r > 0)
-      from <- x$TE.adjust-0.01
+      xmin.line <- x$TE.adjust-0.01
     if (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR")
-      from <- exp(from)
+      xmin.line <- exp(xmin.line)
   }
   ##
-  if (missing(to)){
+  if (missing(xmax.line)){
     if (beta.r < 0)
-      to <- max(TE)
+      xmax.line <- max(TE)
     if (beta.r > 0)
-      to <- min(TE)
+      xmax.line <- min(TE)
     if (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR")
-      to <- exp(to)
+      xmax.line <- exp(xmax.line)
   }
   
   
@@ -67,13 +68,13 @@ funnel.limitmeta <- function(x,
   ##
   if (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR"){
     curve(sqrt((log(x)-beta.r)^2 / alpha.r^2 - tau^2),
-          from=from, to=to,
+          from=xmin.line, to=xmax.line,
           lty=lty.line, col=col.line, lwd=lwd.line, add=TRUE)
     points(exp(TE.adjust), 0, pch=pch.adjust, cex=cex.adjust, col=col.adjust)
   }
   else{
     curve(sqrt((x-beta.r)^2 / alpha.r^2 - tau^2),
-          from=from, to=to,
+          from=xmin.line, to=xmax.line,
           lty=lty.line, col=col.line, lwd=lwd.line, add=TRUE)
     points(TE.adjust, 0, pch=pch.adjust, cex=cex.adjust, col=col.adjust)
   }

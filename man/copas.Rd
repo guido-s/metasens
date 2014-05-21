@@ -254,7 +254,7 @@ copas(x,
   \item{complab}{Comparison label.}
   \item{outclab}{Outcome label.}
   \item{call}{Call to \code{copas} function}
-  \item{version}{Version of R package copas used to create object.}
+  \item{version}{Version of R package metasens used to create object.}
   \item{x}{Details of meta-analysis input into \code{copas} function}
 }
 

@@ -7,11 +7,12 @@
    Print and summary method for objects of class \code{copas}.
 }
 \usage{
-\method{print}{copas}(x, sign.rsb=0.1, digits=max(3, .Options$digits - 3), ...)
+\method{print}{copas}(x, sign.rsb=0.1, logscale=FALSE,
+      digits=max(3, .Options$digits - 3), ...)
 
 \method{summary}{copas}(object, level=0.95, sign.rsb=0.1, ...)
 
-\method{print}{summary.copas}(x,
+\method{print}{summary.copas}(x, logscale=FALSE,
       digits = max(3, .Options$digits - 3),
       header=TRUE, ...)
 }
@@ -22,6 +23,9 @@
     0 and 1).}
   \item{sign.rsb}{The significance level for the test of residual
     selection bias (between 0 and 1).}
+  \item{logscale}{A logical indicating whether results for summary
+    measures 'RR', 'OR', 'HR', and 'IRR' will be printed on
+    logarithmic scale.}
   \item{digits}{Minimal number of significant digits, see \code{print.default}.}
   \item{header}{A logical indicating whether information on title of
     meta-analysis, comparison and outcome should be printed at the
@@ -115,7 +119,7 @@
   \item{title}{Title of meta-analysis / systematic review.}
   \item{complab}{Comparison label.}
   \item{outclab}{Outcome label.}
-  \item{version}{Version of R package copas used to create object.}
+  \item{version}{Version of R package metasens used to create object.}
 }
 \author{James Carpenter \email{James.Carpenter@lshtm.ac.uk}, Guido Schwarzer \email{sc@imbi.uni-freiburg.de}}
 \seealso{\code{\link{copas}}, \code{\link{plot.copas}} \code{\link[meta]{metabias}}, \code{\link[meta]{metagen}}}

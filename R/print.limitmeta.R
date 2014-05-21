@@ -2,7 +2,7 @@ print.limitmeta <- function(x,
                             sortvar,
                             logscale=FALSE,
                             digits=max(3, .Options$digits - 3),
-                            header=TRUE){
+                            header=TRUE, ...){
   
   if (!inherits(x, "limitmeta"))
     stop("Argument 'x' must be an object of class \"limitmeta\"")

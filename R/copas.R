@@ -473,7 +473,7 @@ copas <- function(x,
               N.unpubl=N.unpubl,
               sm=x$sm, call=match.call(), x=x)
   
-  res$version <- packageDescription("copas")$Version
+  res$version <- utils::packageDescription("metasens")$Version
   
   if (!is.null(x$title))
     res$title <- x$title

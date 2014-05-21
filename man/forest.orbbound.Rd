@@ -18,7 +18,7 @@
        smlab=NULL,
        leftcols=c("studlab", "maxbias"),
        leftlabs=c("Missing\nstudies", "Maximum\nbias"),
-       logscale=x$meta$logscale,
+       logscale=FALSE,
        digits=max(3, .Options$digits - 3),
        ...)
 }
@@ -43,8 +43,8 @@
     (additional) columns on left side of the forest plot (see
     \code{\link{forest.meta}} help page for details).}
   \item{logscale}{A logical indicating whether results for summary
-    measures 'RR', 'OR', and 'HR' will be printed on logarithmic
-    scale.}
+    measures 'RR', 'OR', 'HR', and 'IRR' will be printed on
+    logarithmic scale.}
   \item{digits}{Minimal number of significant digits, see
     \code{print.default}.}
   \item{\dots}{Additional arguments for \code{\link{forest.meta}}

@@ -1,7 +1,7 @@
 print.summary.limitmeta <- function(x,
                                     logscale=FALSE,
                                     digits=max(3, .Options$digits - 3),
-                                    header=TRUE){
+                                    header=TRUE, ...){
   
   if (!inherits(x, "summary.limitmeta"))
     stop("Argument 'x' must be an object of class \"summary.limitmeta\"")
