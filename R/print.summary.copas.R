@@ -5,7 +5,7 @@ print.summary.copas <- function(x,
   
   sm <- x$sm
   
-  if (sm == "RR" | sm == "OR" | sm == "HR"){
+  if (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR"){
     x$slope$TE    <- exp(x$slope$TE)
     x$slope$lower <- exp(x$slope$lower)
     x$slope$upper <- exp(x$slope$upper)

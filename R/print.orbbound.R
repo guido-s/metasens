@@ -20,7 +20,7 @@ print.orbbound <- function(x,
     sm.lab <- "proportion"
   else if (!logscale & sm == "PLN")
     sm.lab <- "proportion"
-  else if (logscale & (sm == "RR" | sm == "OR" | sm == "HR"))
+  else if (logscale & (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR"))
     sm.lab <- paste("log", sm, sep="")
   else
     sm.lab <- sm
@@ -43,7 +43,7 @@ print.orbbound <- function(x,
   ##
   maxbias <- x$maxbias
   
-  if (!logscale & (sm == "RR" | sm == "OR" | sm == "HR" | sm=="PLN")){
+  if (!logscale & (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR" | sm=="PLN")){
     TE.fixed    <- exp(TE.fixed)
     lowTE.fixed <- exp(lowTE.fixed)
     uppTE.fixed <- exp(uppTE.fixed)

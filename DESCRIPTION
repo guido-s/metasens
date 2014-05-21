@@ -1,9 +1,11 @@
-Package: copas
+Package: metasens
 Title: Statistical methods to model and adjust for bias in meta-analysis
-Version: 0.8-0
-Author: James Carpenter <James.Carpenter@lshtm.ac.uk>, Guido Schwarzer <sc@imbi.uni-freiburg.de>
-Maintainer: Guido Schwarzer <sc@imbi.uni-freiburg.de>
+Version: 0.1-0
+Authors@R: c(person("Guido","Schwarzer", email="sc@imbi.uni-freiburg.de", role=c("aut","cre")),
+    person("James","Carpenter", role="aut"),
+    person("Gerta","Rücker", role="aut"))
 Depends: meta (>= 0.8)
-Date: 2014-03-21
-Description: Copas selection model.
+Date: 2014-05-27
+Description: Sensitivity analyses to model and adjust for bias in meta-analysis
 License: GPL (>= 2)
+Encoding: UTF-8

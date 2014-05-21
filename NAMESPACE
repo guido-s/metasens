@@ -1,6 +1,10 @@
 export(copas, plot.copas, print.copas,
        print.summary.copas, summary.copas,
-       orbbound, print.orbbound, forest.orbbound)
+       orbbound, print.orbbound, forest.orbbound,
+       limitmeta, print.limitmeta,
+       summary.limitmeta, print.summary.limitmeta)
+
+## Not exported: radialregression
 
 S3method(plot, copas)
 S3method(print, copas)
@@ -8,5 +12,8 @@ S3method(print, summary.copas)
 S3method(summary, copas)
 S3method(print, orbbound)
 S3method(forest, orbbound)
+S3method(print, limitmeta)
+S3method(print, summary.limitmeta)
+S3method(summary, limitmeta)
 
 importFrom(meta, forest)
