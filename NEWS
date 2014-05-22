@@ -1,3 +1,7 @@
 2014-05-27, version 0.1-0
 
-Change in name ...
+First version of metasens published on CRAN (replacement of R package copas)
+
+Changes compared to R package copas:
+
+
