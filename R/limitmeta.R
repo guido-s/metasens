@@ -13,6 +13,7 @@ limitmeta <- function(x,
   tau <- x$tau
   w.random <- x$w.random
   k <- x$k
+  Q <- x$Q
   ##
   seTE.tau  <- sqrt(1/w.random)
   ##
@@ -36,7 +37,7 @@ limitmeta <- function(x,
   ##
   ## Radial plot, slope best fit (beta-F)
   ##
-  ## reg.f <- radialregression(TE, seTE, k)
+  reg.f <- radialregression(TE, seTE, k)
   
   
   ##
@@ -55,6 +56,8 @@ limitmeta <- function(x,
   seTE.limit <- seTE / 1 # 1 == "Infinity"
   ##
   m.lim <- metagen(TE.limit, seTE.limit, sm=sm)
+  ##
+  reg.l <- radialregression(m.lim$TE, m.lim$seTE, k)
   
   
   ##
@@ -81,8 +84,6 @@ limitmeta <- function(x,
       ##
       ## Limit radial plot, slope best fit (beta-lim)
       ##
-      reg.l <- radialregression(m.lim$TE, m.lim$seTE, k)
-      ##
       TE.adjust   <- as.vector(reg.l$slope)
       seTE.adjust <- as.vector(reg.l$se.slope)
     }
@@ -108,13 +109,14 @@ limitmeta <- function(x,
   }
   
   
-  ## cat("\n****************\n")
-  ## cat("*** G-square ***\n")
-  ## cat("****************\n")
-  ## GSquare <- 1-reg.l$r.squared
-  ## print(GSquare)
+  ## Ruecker et al. (2011), Biostatistics, pages 133-134
+  ##
+  Q.resid <- reg.f$sigma^2*(k-2)
+  Q.small <- Q - Q.resid
+  ##
+  G.squared=1-reg.l$r.squared
   
-
+  
   res <- list(TE=TE,
               seTE=seTE,
               ##
@@ -141,6 +143,11 @@ limitmeta <- function(x,
               ##
               alpha.r=alpha.r,
               beta.r=beta.r,
+              ##
+              Q=Q,
+              Q.small=Q.small,
+              Q.resid=Q.resid,
+              G.squared=G.squared,
               ##
               level=level,
               level.comb=level.comb,

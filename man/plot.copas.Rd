@@ -114,10 +114,17 @@
 \author{James Carpenter \email{James.Carpenter@lshtm.ac.uk}, Guido
   Schwarzer \email{sc@imbi.uni-freiburg.de}}
 
-\references{Carpenter JR, Schwarzer G, Rucker G and Kunstler R (2008), Empirical
-  evaluation shows the Copas selection model provides a useful summary
-  in 80\% of meta-analyses. \emph{Revision submitted to Journal of Clinical Epidemiology}.
-  }
+\references{
+  Carpenter JR, Schwarzer G, Rücker G, Künstler R (2009),
+  Empirical evaluation showed that the Copas selection model provided
+  a useful summary in 80\% of meta-analyses.
+  \emph{Journal of Clinical Epidemiology}, \bold{62}, 624--631.
+
+  Schwarzer G, Carpenter J, Rücker G (2010),
+  Empirical evaluation suggests Copas selection model preferable to
+  trim-and-fill method for selection bias in meta-analysis.
+  \emph{Journal of Clinical Epidemiology}, \bold{63}, 282--288.
+}
   
 
 \seealso{\code{\link{copas}}, \code{\link{summary.copas}}, \code{\link[meta]{metabias}}, \code{\link[meta]{metagen}}}

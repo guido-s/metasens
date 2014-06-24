@@ -1,6 +1,9 @@
 \name{copas}
+
 \alias{copas}
+
 \title{Copas selection model analysis}
+
 \description{
   Perform a Copas selection model analysis for selection bias in
   meta-analysis.
@@ -14,6 +17,7 @@
   table and graphs subsequently, without re-running the analysis, using
   the \code{print}, \code{summary} and \code{plot} function.
 }
+
 \usage{
 copas(x,
       gamma0.range=NULL, gamma1.range=NULL,
@@ -21,6 +25,7 @@ copas(x,
       slope=NULL, left=NULL, rho.bound=0.9999,
       silent=TRUE, warn=options()$warn)
 }
+
 \arguments{
   \item{x}{An object of class \code{meta}, obtained from one of the
     functions \code{metabin}, \code{metacont} and \code{metagen} in
@@ -150,6 +155,7 @@ copas(x,
     \code{help(options)}.
   }
 }
+
 \details{Conduct a Copas selection model analysis to investigate, and
   attempt to correct for, selection/publication bias in a meta-analysis.
   
@@ -188,9 +194,10 @@ copas(x,
   \code{print.copas}.
   
   For a fuller description of the model, our implementation and
-  specifically our approach to estimating the locally parallel contours,
-  see Carpenter, Schwarzer, Rucker et. al (2008).
+  specifically our approach to estimating the locally parallel
+  contours, see Carpenter et al. (2009) and Schwarzer et al. (2010).
 }
+
 \value{
   An object of class \code{copas} with corresponding \code{print},
   \code{summary}, \code{plot} function. The object is a
@@ -258,23 +265,29 @@ copas(x,
   \item{x}{Details of meta-analysis input into \code{copas} function}
 }
 
-\references{
-  Carpenter JR, Schwarzer G, Rucker G and Kunstler R (2008),
-  Empirical evaluation shows the Copas selection model provides a useful
-  summary in 80\% of meta-analyses. \emph{Revision submitted to Journal
-  of Clinical Epidemiology}.
+\references{  
+  Carpenter JR, Schwarzer G, Rücker G, Künstler R (2009),
+  Empirical evaluation showed that the Copas selection model provided
+  a useful summary in 80\% of meta-analyses.
+  \emph{Journal of Clinical Epidemiology}, \bold{62}, 624--631.
   
-  Copas J (1999), What works?: Selectivity models and meta-analysis.
+  Copas J (1999),
+  What works?: Selectivity models and meta-analysis.
   \emph{Journal of the Royal Statistical Society, Series A},
   \bold{162}, 95--109.
 
   Copas J, Shi JQ (2000),
-  Meta-analysis, funnel plots and sensitivity
-  analysis. \emph{Biostatistics}, \bold{1}, 247--262.
+  Meta-analysis, funnel plots and sensitivity analysis.
+  \emph{Biostatistics}, \bold{1}, 247--262.
 
   Copas JB, Shi JQ (2001),
-  A sensitivity analysis for publication bias in
-  systematic reviews. \emph{Statistical Methods in Medical Research}, \bold{10}, 251--265.
+  A sensitivity analysis for publication bias in systematic reviews.
+  \emph{Statistical Methods in Medical Research}, \bold{10}, 251--265.
+
+  Schwarzer G, Carpenter J, Rücker G (2010),
+  Empirical evaluation suggests Copas selection model preferable to
+  trim-and-fill method for selection bias in meta-analysis.
+  \emph{Journal of Clinical Epidemiology}, \bold{63}, 282--288.
 }
 
 \author{James Carpenter \email{James.Carpenter@lshtm.ac.uk}, Guido Schwarzer \email{sc@imbi.uni-freiburg.de}}

@@ -1,7 +1,21 @@
-2014-05-27, version 0.1-0
+2014-06-24, version 0.1-0
 
-First version of metasens published on CRAN (replacement of R package copas)
+First version of R package metasens published on CRAN (replacement of
+R package copas).
 
-Changes compared to R package copas:
+Changes compared to version 0.8-0 of R package copas.
 
+New functions:
+- limitmeta (limit meta-analysis)
+- print.limitmeta, summary.limitmeta, print.summary.limitmeta
+  (print and summary functions)
+- funnel.limitmeta (funnel plot for limit meta-analysis object)
+- radialregression (regression based on radial plot, used internally)
 
+Functions print.copas and print.summary.copas:
+- new argument 'logscale' (print results for relative effect measures
+  on log scale)
+
+New dataset nsaids
+
+New help pages added and update of existing help pages

@@ -110,10 +110,6 @@ plot.copas <- function(x,
       points(x.slope, y.slope)
     }
     ##
-    ## TODO: remove next two lines?
-    ##xylab <- seq(along=x.slope)
-    ##text(x.slope-0.02, y.slope-0.05, labels=xylab)
-    ##
     if (lines){
       if (is.null(x$min.r.squared))
         min.r.squared <- -100
@@ -140,9 +136,6 @@ plot.copas <- function(x,
   ci.y <- meta::ci(yvalue, seTE.slope[ord], level=level)
   ci.y$lower[is.infinite(ci.y$lower)] <- NA
   ci.y$upper[is.infinite(ci.y$upper)] <- NA
-  ##
-  ## TODO: remove next line?
-  ##xylab <- seq(along=xvalue)[ord]
   ##
   if (show[3]){
     if (is.null(xlim.pp))
@@ -173,9 +166,6 @@ plot.copas <- function(x,
     mtext(sm, side=2, line=2)
     ##
     points(xvalue, yvalue)
-    ##
-    ## TODO: remove next line?
-    ##text(xvalue-0.01, yvalue-0.05, labels=xylab)
     ##
     abline(h=0)
     ##
@@ -226,9 +216,6 @@ plot.copas <- function(x,
     ##
     points(xvalue, yvalue)
     ##
-    ## TODO: remove next line?
-    ##text(xvalue-0.01, yvalue-0.05, labels=xylab)
-    ##
     axis(side=1, axTicks(1), labels=round(axTicks(1), 2))
     axis(side=2, axTicks(2), labels=round(axTicks(2), 2))
     ##
@@ -238,8 +225,7 @@ plot.copas <- function(x,
     ##
     abline(h=sign.rsb, lty=2)
     box()
-    ## TODO: remove next line?
-    ##text(xvalue-0.01, yvalue-0.05, labels=xylab)
+    ##
     title(main=caption[4])
   }
   

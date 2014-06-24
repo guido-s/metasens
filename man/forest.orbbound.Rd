@@ -2,7 +2,8 @@
 
 \alias{forest.orbbound}
 
-\title{Forest plot}
+\title{Forest plot for \code{orbbound} object (bound for outcome
+  reporting bias)}
 
 \description{
   Draws a forest plot in the active graphics window (using grid

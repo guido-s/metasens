@@ -1,11 +1,14 @@
 Package: metasens
-Title: Statistical methods to model and adjust for bias in meta-analysis
+Title: Advanced statistical methods to model and adjust for bias in meta-analysis
 Version: 0.1-0
 Authors@R: c(person("Guido","Schwarzer", email="sc@imbi.uni-freiburg.de", role=c("aut","cre")),
     person("James","Carpenter", role="aut"),
     person("Gerta","Rücker", role="aut"))
 Depends: meta (>= 0.8)
-Date: 2014-05-27
-Description: Sensitivity analyses to model and adjust for bias in meta-analysis
+Date: 2014-06-24
+Description: Advanced statistical methods to model and adjust for bias in meta-analysis. More standard methods, i.e. tests for bias in meta-analysis and the trim-and-fill method are provided in R package meta. Main purpose of these methods is to evaluate how sensitive the result of a meta-analysis is to potential bias in meta-analysis. The following methods are available:
+ - Copas selection model;
+ - limit meta-analysis;
+ - upper bound for outcome reporting bias.
 License: GPL (>= 2)
 Encoding: UTF-8

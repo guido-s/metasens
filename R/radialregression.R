@@ -16,6 +16,7 @@ radialregression <- function(TE, seTE, k){
               slope=slope,
               se.slope=se.slope,
               k=k,
+              sigma=summary(reg)$sigma,
               r.squared=summary(reg)$r.squared)
   res
 }
