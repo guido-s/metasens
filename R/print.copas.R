@@ -1,10 +1,24 @@
 print.copas <- function(x, sign.rsb=0.1,
-                        logscale=FALSE,
+                        backtransf=x$backtransf,
                         digits=max(3, .Options$digits - 3),
                         ...){
   
   if (!inherits(x, "copas"))
     stop("Argument 'x' must be an object of class \"copas\"")
+  
+  
+  cl <- class(x)[1]
+  addargs <- names(list(...))
+  ##
+  fun <- "print.copas"
+  ##
+  meta:::warnarg("logscale", addargs, fun, otherarg="backtransf")
+  ##
+  if (is.null(backtransf))
+    if (!is.null(list(...)[["logscale"]]))
+      backtransf <- !list(...)[["logscale"]]
+    else
+      backtransf <- TRUE
   
   
   meta:::crtitle(x)
@@ -49,7 +63,7 @@ print.copas <- function(x, sign.rsb=0.1,
   
   cat("\n\n")
   print(summary(x, sign.rsb=0.1),
-        digits=digits, header=FALSE, logscale=logscale)
+        digits=digits, header=FALSE, backtransf=backtransf)
   
   invisible(NULL)
 }

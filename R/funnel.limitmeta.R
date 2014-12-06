@@ -29,6 +29,7 @@ funnel.limitmeta <- function(x,
                              lwd.connect=0.8,
                              col.connect="black",
                              ##
+                             backtransf=x$backtransf,
                              ...){
   
   
@@ -69,7 +70,7 @@ funnel.limitmeta <- function(x,
   }
   
   
-  if (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR"){
+  if (backtransf & meta:::is.relative.effect(sm)){
     TE <- exp(TE)
     TE.limit <- exp(TE.limit)
     TE.adjust <- exp(TE.adjust)
@@ -79,7 +80,8 @@ funnel.limitmeta <- function(x,
   ##
   ## Generate funnel plot
   ##
-  funnel(x$x, pch=pch, cex=cex, col=col, bg=bg, lwd=lwd, ...)
+  funnel(x$x, pch=pch, cex=cex, col=col, bg=bg, lwd=lwd,
+         backtransf=backtransf, ...)
   
   
   ##
@@ -87,7 +89,7 @@ funnel.limitmeta <- function(x,
   ##
   if (line){
     if (x$method.adjust=="beta0"){
-      if (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR"){
+      if (backtransf & meta:::is.relative.effect(sm)){
         curve(sqrt((log(x)-beta.r)^2 / alpha.r^2 - tau^2),
               from=exp(xmin.line), to=exp(xmax.line),
               lty=lty.line, col=col.line, lwd=lwd.line, add=TRUE)

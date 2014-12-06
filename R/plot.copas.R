@@ -55,7 +55,7 @@ plot.copas <- function(x,
   on.exit(par(oldpar), add=TRUE)
   
   
-  if (sm == "RR" | sm == "OR" | sm == "HR")
+  if (meta:::is.relative.effect(sm))
     sm <- paste("log ", sm, sep="")
   
   
@@ -133,7 +133,7 @@ plot.copas <- function(x,
   xvalue <- publprob[ord]
   yvalue <- TE.slope[ord]
   ##
-  ci.y <- meta::ci(yvalue, seTE.slope[ord], level=level)
+  ci.y <- ci(yvalue, seTE.slope[ord], level=level)
   ci.y$lower[is.infinite(ci.y$lower)] <- NA
   ci.y$upper[is.infinite(ci.y$upper)] <- NA
   ##
@@ -169,7 +169,7 @@ plot.copas <- function(x,
     ##
     abline(h=0)
     ##
-    ci.random <- meta::ci(TE.random, seTE.random, level=level)
+    ci.random <- ci(TE.random, seTE.random, level=level)
     abline(h=TE.random, lty=1, col="darkgray")
     abline(h=ci.random$lower, lty=1, col="gray")
     abline(h=ci.random$upper, lty=1, col="gray")

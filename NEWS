@@ -1,3 +1,23 @@
+2014-12-06, version 0.2-0
+
+Argument 'backtransf' available in R package meta during creation of
+an R object is incorporated in R package metasens.
+
+R function copas, limitmeta, funnel.limitmeta:
+- new argument 'backtransf'
+
+R function orbbound:
+- new argument 'backtransf'
+- new argument 'left' to chose whether selection bias is expected on
+  the left or right side of the funnel plot
+
+R function forest.orbbound, print.copas, print.limitmeta,
+print.orbbound, print.summary.copas, print.summary.limitmeta:
+- new argument 'backtransf' which replaces argument 'logscale'
+
+Several help pages updated.
+
+
 2014-06-24, version 0.1-0
 
 First version of R package metasens published on CRAN (replacement of

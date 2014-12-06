@@ -7,12 +7,12 @@
    Print and summary method for objects of class \code{limitmeta}.
 }
 \usage{
-\method{print}{limitmeta}(x, sortvar, logscale=FALSE,
+\method{print}{limitmeta}(x, sortvar, backtransf=x$backtransf,
       digits=max(3, .Options$digits - 3), header=TRUE, ...)
 
 \method{summary}{limitmeta}(object, ...)
 
-\method{print}{summary.limitmeta}(x, logscale=FALSE,
+\method{print}{summary.limitmeta}(x, backtransf=x$backtransf,
       digits = max(3, .Options$digits - 3),
       header=TRUE, ...)
 }
@@ -21,9 +21,10 @@
   \item{object}{An object of class \code{limitmeta}.}
   \item{sortvar}{An optional vector used to sort the individual studies
     (must be of same length as \code{x$TE}).}
-  \item{logscale}{A logical indicating whether results for summary
-    measures 'RR', 'OR', 'HR', and 'IRR' will be printed on
-    logarithmic scale.}
+  \item{backtransf}{A logical indicating whether results should be
+    back transformed in printouts and plots. If \code{backtransf=TRUE}
+    (default), results for \code{sm="OR"} are printed as odds ratios
+    rather than log odds ratio, for example.}
   \item{digits}{Minimal number of significant digits, see \code{print.default}.}
   \item{header}{A logical indicating whether information on title of
     meta-analysis, comparison and outcome should be printed at the

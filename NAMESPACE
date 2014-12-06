@@ -19,5 +19,8 @@ S3method(print, summary.limitmeta)
 S3method(summary, limitmeta)
 S3method(funnel, limitmeta)
 
+importFrom(meta, ci)
 importFrom(meta, forest)
 importFrom(meta, funnel)
+importFrom(meta, metagen)
+importFrom(meta, metabias)

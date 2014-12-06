@@ -10,6 +10,7 @@
 
 \usage{limitmeta(x, method.adjust="beta0", sm=x$sm,
           level=x$level, level.comb=x$level.comb,
+          backtransf=x$backtransf,
           title=x$title, complab=x$complab, outclab=x$outclab)
 }
 
@@ -25,6 +26,10 @@
     individual studies.}
   \item{level.comb}{The level used to calculate confidence intervals for
     pooled estimates.}
+  \item{backtransf}{A logical indicating whether results should be
+    back transformed in printouts and plots. If \code{backtransf=TRUE}
+    (default), results for \code{sm="OR"} are printed as odds ratios
+    rather than log odds ratio, for example.}
   \item{title}{Title of meta-analysis / systematic review.}
   \item{complab}{Comparison label.}
   \item{outclab}{Outcome label.}

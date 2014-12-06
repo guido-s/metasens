@@ -7,14 +7,13 @@
    Print and summary method for objects of class \code{copas}.
 }
 \usage{
-\method{print}{copas}(x, sign.rsb=0.1, logscale=FALSE,
+\method{print}{copas}(x, sign.rsb=0.1, backtransf=x$backtransf,
       digits=max(3, .Options$digits - 3), ...)
 
 \method{summary}{copas}(object, level=0.95, sign.rsb=0.1, ...)
 
-\method{print}{summary.copas}(x, logscale=FALSE,
-      digits = max(3, .Options$digits - 3),
-      header=TRUE, ...)
+\method{print}{summary.copas}(x, digits = max(3, .Options$digits - 3),
+      backtransf=x$backtransf, header=TRUE, ...)
 }
 \arguments{
   \item{x}{An object of class \code{copas} or \code{summary.copas}.}
@@ -23,9 +22,10 @@
     0 and 1).}
   \item{sign.rsb}{The significance level for the test of residual
     selection bias (between 0 and 1).}
-  \item{logscale}{A logical indicating whether results for summary
-    measures 'RR', 'OR', 'HR', and 'IRR' will be printed on
-    logarithmic scale.}
+  \item{backtransf}{A logical indicating whether results should be
+    back transformed in printouts and plots. If \code{backtransf=TRUE}
+    (default), results for \code{sm="OR"} are printed as odds ratios
+    rather than log odds ratio, for example.}
   \item{digits}{Minimal number of significant digits, see \code{print.default}.}
   \item{header}{A logical indicating whether information on title of
     meta-analysis, comparison and outcome should be printed at the

@@ -1,18 +1,33 @@
 print.summary.copas <- function(x,
-                                logscale=FALSE,
                                 digits=max(3, .Options$digits - 3),
+                                backtransf=x$backtransf,
                                 header=TRUE,
                                 ...){
   
+  
+  cl <- class(x)[1]
+  addargs <- names(list(...))
+  ##
+  fun <- "print.summary.copas"
+  ##
+  meta:::warnarg("logscale", addargs, fun, otherarg="backtransf")
+  ##
+  if (is.null(backtransf))
+    if (!is.null(list(...)[["logscale"]]))
+      backtransf <- !list(...)[["logscale"]]
+    else
+      backtransf <- TRUE
+  
+  
   sm <- x$sm
   ##
-  if (logscale & (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR"))
+  if (!backtransf & meta:::is.relative.effect(sm))
     sm.lab <- paste("log", sm, sep="")
   else
     sm.lab <- sm
   
   
-  if (!logscale & (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR")){
+  if (backtransf & meta:::is.relative.effect(sm)){
     x$slope$TE    <- exp(x$slope$TE)
     x$slope$lower <- exp(x$slope$lower)
     x$slope$upper <- exp(x$slope$upper)

@@ -12,14 +12,14 @@
 
 \usage{
 \method{forest}{orbbound}(x,
-       comb.fixed=x$meta$comb.fixed,
-       comb.random=x$meta$comb.random,
+       comb.fixed=x$x$comb.fixed,
+       comb.random=x$x$comb.random,
        text.fixed="FE model",
        text.random="RE model",
        smlab=NULL,
        leftcols=c("studlab", "maxbias"),
        leftlabs=c("Missing\nstudies", "Maximum\nbias"),
-       logscale=FALSE,
+       backtransf=x$backtransf,
        digits=max(3, .Options$digits - 3),
        ...)
 }
@@ -43,9 +43,10 @@
   \item{leftlabs}{A character vector specifying labels for
     (additional) columns on left side of the forest plot (see
     \code{\link{forest.meta}} help page for details).}
-  \item{logscale}{A logical indicating whether results for summary
-    measures 'RR', 'OR', 'HR', and 'IRR' will be printed on
-    logarithmic scale.}
+  \item{backtransf}{A logical indicating whether results should be
+    back transformed in printouts and plots. If \code{backtransf=TRUE}
+    (default), results for \code{sm="OR"} are printed as odds ratios
+    rather than log odds ratio, for example.}
   \item{digits}{Minimal number of significant digits, see
     \code{print.default}.}
   \item{\dots}{Additional arguments for \code{\link{forest.meta}}
@@ -58,7 +59,7 @@
 
   For summary measures 'RR', 'OR', and 'HR' column labeled "Maximum
   bias" contains the relative bias, e.g. a value of 1.10 means a
-  maximum overestimation by 10 percent. If \code{logscale=TRUE} for
+  maximum overestimation by 10 percent. If \code{backtransf=FALSE} for
   these summary measures, maximum bias is instead printed as absolute
   bias.
 
@@ -81,6 +82,8 @@ orb1 <- orbbound(meta1, k.suspect=1:5)
 print(orb1, digits=2)
 
 forest(orb1, xlim=c(0.7, 1.5))
+
+forest(orb1, backtransf=FALSE)
 }
 
 \keyword{hplot}

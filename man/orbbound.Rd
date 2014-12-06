@@ -10,7 +10,7 @@
   with outcome reporting bias.
 }
 
-\usage{orbbound(x, k.suspect=1, tau=x$tau)
+\usage{orbbound(x, k.suspect=1, tau=x$tau, left=NULL, backtransf=x$backtransf)
 }
 
 \arguments{
@@ -18,6 +18,17 @@
   \item{k.suspect}{Number of studies with suspected outcome reporting bias.}
   \item{tau}{Square-root of between-study variance
     tau-squared.}
+  \item{left}{A logical indicating whether the cause of any selection
+    bias is due to missing studies on the left or right of the funnel
+    plot: left hand side if \code{left=TRUE}, right hand side if
+    \code{left=FALSE}. If not set, the linear regression test for
+    funnel plot asymmetry (i.e., function \code{metabias(...,
+    meth="linreg")}) is used to determine whether studies are missing
+    on the left or right hand side.}
+  \item{backtransf}{A logical indicating whether results should be
+    back transformed in printouts and plots. If \code{backtransf=TRUE}
+    (default), results for \code{sm="OR"} are printed as odds ratios
+    rather than log odds ratio, for example.}
 }
 
 \details{
@@ -45,7 +56,8 @@
   \item{random}{Adjusted treatment estimates and corresponding
     quantities for random effects model (a list with elements TE,
     seTE, lower, upper, z, p, level, df).}
-  \item{meta}{Meta-analysis object (i.e. argument \code{x} from function call).}
+  \item{left}{Whether selection bias expected on left or right}
+  \item{x}{Meta-analysis object (i.e. argument \code{x} from function call).}
   \item{call}{Function call.}
   \item{version}{Version of R package metasens used to create object.}
 }
@@ -67,8 +79,16 @@ meta1 <- metabin(event.e, n.e, event.c, n.c,
                  data=Fleiss93, sm="OR")
 
 orb1 <- orbbound(meta1, k.suspect=1:5)
-
 print(orb1, digits=2)
+forest(orb1, xlim=c(0.75, 1.5))
 
-forest(orb1, xlim=c(0.7, 1.5))
+# Same result
+orb2 <- orbbound(meta1, k.suspect=1:5, left=FALSE)
+print(orb2, digits=2)
+forest(orb2, xlim=c(0.75, 1.5))
+
+# Assuming bias in other direction
+orb3 <- orbbound(meta1, k.suspect=1:5, left=TRUE)
+print(orb3, digits=2)
+forest(orb3, xlim=c(0.75, 1.5))
 }

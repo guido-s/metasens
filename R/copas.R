@@ -7,6 +7,7 @@ copas <- function(x,
                   slope=NULL,
                   left=NULL,
                   rho.bound=0.9999,
+                  backtransf=x$backtransf,
                   silent=TRUE,
                   warn=options()$warn){
   
@@ -481,6 +482,8 @@ copas <- function(x,
     res$complab <- x$complab
   if (!is.null(x$outclab))
     res$outclab <- x$outclab
+  
+  res$backtransf <- backtransf
   
   class(res) <- c("copas")
   

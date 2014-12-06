@@ -18,7 +18,7 @@
        shrunken=FALSE, pch.shrunken=22, cex.shrunken=1,
        col.shrunken="black", bg.shrunken="white",
        lty.connect=1, lwd.connect=0.8, col.connect="black",
-       ...)
+       backtransf=x$backtransf, ...)
 }
 
 \arguments{
@@ -50,8 +50,12 @@
   \item{bg.shrunken}{Background colour of plotting symbol for shrunken effect estimates.}
   \item{lty.connect}{Line type for line connecting original and
     shrunken treatment estimates.}
-  \item{col.connect}{Color of the connecting lines.}
   \item{lwd.connect}{The line width of the connecting lines.}
+  \item{col.connect}{Color of the connecting lines.}
+  \item{backtransf}{A logical indicating whether results should be
+    back transformed in printouts and plots. If \code{backtransf=TRUE}
+    (default), results for \code{sm="OR"} are printed as odds ratios
+    rather than log odds ratio, for example.}
   \item{\dots}{Additional arguments for \code{\link{funnel.meta}}
     function.}
 }
@@ -88,6 +92,12 @@ m1 <- metabin(Ee, Ne, Ec, Nc,
 print(summary(limitmeta(m1)), digits=2)
 
 funnel(limitmeta(m1))
+
+#
+# Print results on log scale
+#
+print(summary(limitmeta(m1)), digits=2, backtransf=FALSE)
+funnel(limitmeta(m1), backtransf=FALSE)
 }
 
 \keyword{hplot}

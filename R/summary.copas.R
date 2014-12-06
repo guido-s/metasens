@@ -14,7 +14,7 @@ summary.copas <- function(object, level=0.95, sign.rsb=0.1, ...){
   pval.rsb <- object$pval.rsb
   N.unpubl <- object$N.unpubl
   ##
-  ci.random <- meta::ci(TE.random, seTE.random, level)
+  ci.random <- ci(TE.random, seTE.random, level)
   
   ci.lab <- paste(round(100*level, 1), "%-CI", sep="")
   
@@ -27,7 +27,7 @@ summary.copas <- function(object, level=0.95, sign.rsb=0.1, ...){
   pval.rsb <- pval.rsb[ord]
   N.unpubl <- N.unpubl[ord]
   ##
-  ci.slope <- meta::ci(TE.slope, seTE.slope, level)
+  ci.slope <- ci(TE.slope, seTE.slope, level)
   
   
   ##
@@ -61,7 +61,7 @@ summary.copas <- function(object, level=0.95, sign.rsb=0.1, ...){
     }
   }
   ##
-  adjust <- meta::ci(TE.adj, seTE.adj, level)
+  adjust <- ci(TE.adj, seTE.adj, level)
   
   res <- list(slope=ci.slope,
               publprob=pom,
@@ -81,6 +81,8 @@ summary.copas <- function(object, level=0.95, sign.rsb=0.1, ...){
   res$complab <- object$complab
   res$outclab <- object$outclab
   res$title   <- object$title
+  
+  res$backtransf <- object$backtransf
   
   res$version <- utils::packageDescription("metasens")$Version
   

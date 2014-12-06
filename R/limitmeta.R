@@ -2,6 +2,7 @@ limitmeta <- function(x,
                       method.adjust="beta0",
                       sm=x$sm,
                       level=x$level, level.comb=x$level.comb,
+                      backtransf=x$backtransf,
                       title=x$title, complab=x$complab, outclab=x$outclab){
   
   if (!inherits(x, "meta"))
@@ -89,7 +90,7 @@ limitmeta <- function(x,
     }
   }
   ##
-  ci.adjust <- meta::ci(TE.adjust, seTE.adjust, level=level.comb)
+  ci.adjust <- ci(TE.adjust, seTE.adjust, level=level.comb)
   ##
   lower.adjust <- ci.adjust$lower
   upper.adjust <- ci.adjust$upper
@@ -102,7 +103,7 @@ limitmeta <- function(x,
   ## is not missing
   ##
   if (!missing(level.comb)){
-    ci.r <- meta::ci(TE.random, seTE.random, level=level.comb)
+    ci.r <- ci(TE.random, seTE.random, level=level.comb)
     ##
     lower.random <- ci.r$lower
     upper.random <- ci.r$upper
@@ -164,8 +165,9 @@ limitmeta <- function(x,
               x=x)
   
   
-  res$version <- utils::packageDescription("metasens")$Version
+  res$backtransf <- backtransf
   
+  res$version <- utils::packageDescription("metasens")$Version
   
   class(res) <- c("limitmeta")
   

@@ -1,29 +1,43 @@
 print.orbbound <- function(x,
-                           comb.fixed=x$meta$comb.fixed, comb.random=x$meta$comb.random,
-                           header=TRUE, logscale=FALSE,
+                           comb.fixed=x$x$comb.fixed, comb.random=x$x$comb.random,
+                           header=TRUE, backtransf=x$backtransf,
                            digits=max(3, .Options$digits - 3),
                            ...){
   
   if (!inherits(x, "orbbound"))
     stop("Argument 'x' must be an object of class \"orbbound\"")
   
-  k <- x$meta$k
+  k <- x$x$k
   k.suspect <- x$k.suspect
-  sm <- x$meta$sm
+  sm <- x$x$sm
   
-  if (length(logscale)==0)
-    logscale <- FALSE
   
-  if (sm=="ZCOR")
-    sm.lab <- "COR"
-  else if (sm %in% c("PFT", "PAS", "PRAW", "PLOGIT"))
-    sm.lab <- "proportion"
-  else if (!logscale & sm == "PLN")
-    sm.lab <- "proportion"
-  else if (logscale & (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR"))
-    sm.lab <- paste("log", sm, sep="")
-  else
-    sm.lab <- sm
+  cl <- class(x)[1]
+  addargs <- names(list(...))
+  ##
+  fun <- "print.orbbound"
+  ##
+  meta:::warnarg("logscale", addargs, fun, otherarg="backtransf")
+  ##
+  if (is.null(backtransf))
+    if (!is.null(list(...)[["logscale"]]))
+      backtransf <- !list(...)[["logscale"]]
+    else
+      backtransf <- TRUE
+  
+  
+  sm.lab <- sm
+  ##
+  if (backtransf){
+    if (sm=="ZCOR")
+      sm.lab <- "COR"
+    if (sm %in% c("PFT", "PAS", "PRAW", "PLOGIT", "PLN"))
+      sm.lab <- "proportion"
+  }
+  else 
+    if (meta:::is.relative.effect(sm))
+      sm.lab <- paste("log", sm, sep="")
+  
   
   if (length(comb.fixed)==0)
     comb.fixed <- TRUE
@@ -31,7 +45,9 @@ print.orbbound <- function(x,
   if (length(comb.random)==0)
     comb.random <- TRUE
   
-  ci.lab <- paste(round(100*x$meta$level.comb, 1), "%-CI", sep="")
+  
+  ci.lab <- paste(round(100*x$x$level.comb, 1), "%-CI", sep="")
+  
   
   TE.fixed    <- x$fixed$TE
   lowTE.fixed <- x$fixed$lower
@@ -43,57 +59,28 @@ print.orbbound <- function(x,
   ##
   maxbias <- x$maxbias
   
-  if (!logscale & (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR" | sm=="PLN")){
-    TE.fixed    <- exp(TE.fixed)
-    lowTE.fixed <- exp(lowTE.fixed)
-    uppTE.fixed <- exp(uppTE.fixed)
-    ##
-    TE.random <- exp(TE.random)
-    lowTE.random <- exp(lowTE.random)
-    uppTE.random <- exp(uppTE.random)
-    ##
-    maxbias <- exp(maxbias)
-  }
-  else if (sm=="PAS"){
-    TE.fixed    <- meta:::asin2p(TE.fixed, value="mean",
-                                 warn=comb.fixed)
-    lowTE.fixed <- meta:::asin2p(lowTE.fixed, value="lower",
-                                 warn=comb.fixed)
-    uppTE.fixed <- meta:::asin2p(uppTE.fixed, value="upper",
-                                 warn=comb.fixed)
-    ##
-    TE.random    <- meta:::asin2p(TE.random, value="mean",
-                                  warn=comb.random)
-    lowTE.random <- meta:::asin2p(lowTE.random, value="lower",
-                                  warn=comb.random)
-    uppTE.random <- meta:::asin2p(uppTE.random, value="upper",
-                                  warn=comb.random)
-    ##
-    maxbias <- meta:::asin2p(maxbias, value="mean", warn=comb.fixed|comb.random)
-  }
-  else if (sm=="PLOGIT"){
-    TE.fixed    <- meta:::logit2p(TE.fixed)
-    lowTE.fixed <- meta:::logit2p(lowTE.fixed)
-    uppTE.fixed <- meta:::logit2p(uppTE.fixed)
-    ##
-    TE.random <- meta:::logit2p(TE.random)
-    lowTE.random <- meta:::logit2p(lowTE.random)
-    uppTE.random <- meta:::logit2p(uppTE.random)
-    ##
-    maxbias <- meta:::logit2p(maxbias)
-  }
-  else if (sm=="ZCOR"){
-    TE.fixed    <- meta:::z2cor(TE.fixed)
-    lowTE.fixed <- meta:::z2cor(lowTE.fixed)
-    uppTE.fixed <- meta:::z2cor(uppTE.fixed)
-    ##
-    TE.random    <- meta:::z2cor(TE.random)
-    lowTE.random <- meta:::z2cor(lowTE.random)
-    uppTE.random <- meta:::z2cor(uppTE.random)
-    ##
-    maxbias <- meta:::z2cor(maxbias)
-  }
   
+  if (backtransf){
+    ##
+    npft.ma <- 1/mean(1/x$x$n)
+    ##
+    TE.fixed    <- meta:::backtransf(TE.fixed, sm, "mean",
+                                     npft.ma, warn=comb.fixed)
+    lowTE.fixed <- meta:::backtransf(lowTE.fixed, sm, "lower",
+                                     npft.ma, warn=comb.fixed)
+    uppTE.fixed <- meta:::backtransf(uppTE.fixed, sm, "upper",
+                                     npft.ma, warn=comb.fixed)
+    ##
+    TE.random <- meta:::backtransf(TE.random, sm, "mean",
+                                   npft.ma, warn=comb.random)
+    lowTE.random <- meta:::backtransf(lowTE.random, sm, "lower",
+                                      npft.ma, warn=comb.random)
+    uppTE.random <- meta:::backtransf(uppTE.random, sm, "upper",
+                                      npft.ma, warn=comb.random)
+    ##
+    maxbias <- meta:::backtransf(maxbias, sm, "mean", npft.ma, warn=FALSE)
+  }
+  ##
   TE.fixed    <- round(TE.fixed, digits)
   lowTE.fixed <- round(lowTE.fixed, digits)
   uppTE.fixed <- round(uppTE.fixed, digits)
@@ -108,8 +95,10 @@ print.orbbound <- function(x,
   ##
   maxbias <- round(maxbias, digits)
   
+  
   if (header)
-    meta:::crtitle(x$meta)
+    meta:::crtitle(x$x)
+  
   
   if (comb.fixed|comb.random){
     if (!is.na(x$tau))
@@ -121,7 +110,7 @@ print.orbbound <- function(x,
     
     cat("\n        Sensitivity Analysis for Outcome Reporting Bias (ORB)\n\n")
     
-    cat(paste("Number of studies combined: k=", x$meta$k, "\n", sep=""))
+    cat(paste("Number of studies combined: k=", x$x$k, "\n", sep=""))
     cat(paste("Between-study variance: ", tau2, "\n\n", sep=""))
   }
   
@@ -176,8 +165,8 @@ print.orbbound <- function(x,
   
   if (comb.fixed|comb.random){
     ## Print information on summary method:
-    meta:::catmeth(method=x$meta$method,
-                   method.tau=if (comb.random) x$meta$method.tau else "",
+    meta:::catmeth(method=x$x$method,
+                   method.tau=if (comb.random) x$x$method.tau else "",
                    sm=sm,
                    k.all=666)
   }

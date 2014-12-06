@@ -1,5 +1,5 @@
 print.summary.limitmeta <- function(x,
-                                    logscale=FALSE,
+                                    backtransf=x$backtransf,
                                     digits=max(3, .Options$digits - 3),
                                     header=TRUE, ...){
   
@@ -8,11 +8,33 @@ print.summary.limitmeta <- function(x,
   
   
   sm <- x$sm
+  
+  
+  cl <- class(x)[1]
+  addargs <- names(list(...))
   ##
-  if (logscale & (sm=="RR" | sm=="OR" | sm=="HR" | sm=="IRR"))
-    sm.lab <- paste("log", sm, sep="")
-  else
-    sm.lab <- sm
+  fun <- "print.summary.limitmeta"
+  ##
+  meta:::warnarg("logscale", addargs, fun, otherarg="backtransf")
+  ##
+  if (is.null(backtransf))
+    if (!is.null(list(...)[["logscale"]]))
+      backtransf <- !list(...)[["logscale"]]
+    else
+      backtransf <- TRUE
+  
+  
+  sm.lab <- sm
+  ##
+  if (backtransf){
+    if (sm=="ZCOR")
+      sm.lab <- "COR"
+    if (sm %in% c("PFT", "PAS", "PRAW", "PLOGIT", "PLN"))
+      sm.lab <- "proportion"
+  }
+  else 
+    if (meta:::is.relative.effect(sm))
+      sm.lab <- paste("log", sm, sep="")
   
   
   TEs <- c(x$TE.adjust, x$TE.random)
@@ -20,10 +42,16 @@ print.summary.limitmeta <- function(x,
   upper <- c(x$upper.adjust, x$upper.random)
 
 
-  if (!logscale & (sm == "RR" | sm == "OR" | sm == "HR" | sm == "IRR")){
-    TEs   <- exp(TEs)
-    lower <- exp(lower)
-    upper <- exp(upper)
+  if (backtransf){
+    ##
+    npft.ma <- 1/mean(1/x$x$n)
+    ##
+    TEs   <- meta:::backtransf(TEs, sm, "mean",
+                               npft.ma, warn=TRUE)
+    lower <- meta:::backtransf(lower, sm, "lower",
+                               npft.ma, warn=TRUE)
+    upper <- meta:::backtransf(upper, sm, "upper",
+                               npft.ma, warn=TRUE)
   }
   ##
   TEs   <- round(TEs, digits)

@@ -10,8 +10,8 @@
 
 \usage{
 \method{print}{orbbound}(x,
-      comb.fixed=x$meta$comb.fixed, comb.random=x$meta$comb.random,
-      header=TRUE, logscale=FALSE,
+      comb.fixed=x$x$comb.fixed, comb.random=x$x$comb.random,
+      header=TRUE, backtransf=x$backtransf,
       digits=max(3, .Options$digits - 3),
       ...)
 }
@@ -24,9 +24,12 @@
     for random effects model should be printed.}
   \item{header}{A logical indicating whether information on
     meta-analysis should be printed at top of printout.}
-  \item{logscale}{A logical indicating whether results for summary
-    measures 'RR', 'OR', or 'HR' will be printed on logarithmic
-    scale.}
+  \item{backtransf}{A logical indicating whether printed results
+    should be back transformed. If \code{backtransf=TRUE}, results for
+    \code{sm="OR"} are printed as odds ratios rather than log odds
+    ratios and results for \code{sm="ZCOR"} are printed as
+    correlations rather than Fisher's z transformed correlations, for
+    example.}
   \item{digits}{Minimal number of significant digits, see \code{print.default}.}
   \item{\dots}{Additional arguments}
 }
@@ -52,7 +55,17 @@ orb1 <- orbbound(meta1, k.suspect=1:5)
 
 print(orb1, digits=2)
 
-print(orb1, digits=2, logscale=TRUE)
+#
+# Print log odds ratios instead of odds ratios
+#
+print(orb1, digits=2, backtransf=FALSE)
+
+#
+# Assuming that studies are missing on the left side
+#
+orb1.missleft <- orbbound(meta1, k.suspect=1:5, left=TRUE)
+
+orb1.missleft
 
 meta2 <- metabin(event.e, n.e, event.c, n.c,
                  data=Fleiss93, sm="OR", method="Inverse")
