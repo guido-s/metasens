@@ -7,6 +7,7 @@ copas <- function(x,
                   slope=NULL,
                   left=NULL,
                   rho.bound=0.9999,
+                  sign.rsb=0.1,
                   backtransf=x$backtransf,
                   silent=TRUE,
                   warn=options()$warn){
@@ -26,6 +27,11 @@ copas <- function(x,
       slope <- slope[1]
     }
   }
+  
+  
+  ## Check significance level for test of residual selection bias
+  ##
+  meta:::chklevel(sign.rsb)
   
   
   oldopt <- options(warn=warn)
@@ -471,6 +477,7 @@ copas <- function(x,
               ##
               publprob=publprob,
               pval.rsb=pval.rsb,
+              sign.rsb=sign.rsb,
               N.unpubl=N.unpubl,
               sm=x$sm, call=match.call(), x=x)
   

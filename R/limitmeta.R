@@ -1,6 +1,5 @@
 limitmeta <- function(x,
                       method.adjust="beta0",
-                      sm=x$sm,
                       level=x$level, level.comb=x$level.comb,
                       backtransf=x$backtransf,
                       title=x$title, complab=x$complab, outclab=x$outclab){
@@ -15,6 +14,7 @@ limitmeta <- function(x,
   w.random <- x$w.random
   k <- x$k
   Q <- x$Q
+  sm <- x$sm
   ##
   seTE.tau  <- sqrt(1/w.random)
   ##

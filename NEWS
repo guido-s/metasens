@@ -1,3 +1,29 @@
+2015-x-y, version 0.3-0
+
+Version of R package meta must be larger or equal 4.0-0
+
+Function copas:
+- new argument 'sign.rsb' (which has been available in function
+  summary.copas since version 0.6-3 of R package copas)
+- use internal chklevel function from R package meta to check
+  significance level
+
+Functions plot.copas, print.copas and summary.copas:
+- consider default value for argument 'sign.rsb' from copas object
+- use internal chklevel function from R package meta to check
+  significance level
+
+Function print.copas:
+- bug fix such that other values for sign.rsb than 0.1 are considered
+- use internal chklevel function from R package meta to check
+  significance level
+
+Function limitmeta:
+- argument 'sm' removed (not necessary)
+
+Help pages updated accordingly
+
+
 2014-12-06, version 0.2-0
 
 Argument 'backtransf' available in R package meta during creation of
@@ -15,7 +41,7 @@ R function forest.orbbound, print.copas, print.limitmeta,
 print.orbbound, print.summary.copas, print.summary.limitmeta:
 - new argument 'backtransf' which replaces argument 'logscale'
 
-Several help pages updated.
+Several help pages updated to reflect changes in version 0.3-0
 
 
 2014-06-24, version 0.1-0

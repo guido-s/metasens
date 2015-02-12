@@ -1,4 +1,4 @@
-print.copas <- function(x, sign.rsb=0.1,
+print.copas <- function(x, sign.rsb=x$sign.rsb,
                         backtransf=x$backtransf,
                         digits=max(3, .Options$digits - 3),
                         ...){
@@ -19,6 +19,11 @@ print.copas <- function(x, sign.rsb=0.1,
       backtransf <- !list(...)[["logscale"]]
     else
       backtransf <- TRUE
+  ##
+  if (is.null(sign.rsb))
+    sign.rsb <- 0.1
+  else
+    meta:::chklevel(sign.rsb)
   
   
   meta:::crtitle(x)
@@ -62,7 +67,7 @@ print.copas <- function(x, sign.rsb=0.1,
   prmatrix(res, quote=FALSE, right=TRUE)
   
   cat("\n\n")
-  print(summary(x, sign.rsb=0.1),
+  print(summary(x, sign.rsb=sign.rsb),
         digits=digits, header=FALSE, backtransf=backtransf)
   
   invisible(NULL)

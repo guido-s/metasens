@@ -7,7 +7,7 @@ plot.copas <- function(x,
                        level=0.95,
                        orthogonal.line=TRUE,
                        lines=FALSE,
-                       sign.rsb=0.1,
+                       sign.rsb=x$sign.rsb,
                        warn=-1,
                        ...){
   
@@ -16,6 +16,11 @@ plot.copas <- function(x,
   
   if (!is.numeric(which) || any(which < 1) || any(which > 4)) 
     stop("'Argument which' must be in 1:4")
+  
+  if (is.null(sign.rsb))
+    sign.rsb <- 0.1
+  else
+    meta:::chklevel(sign.rsb)
   
   
   oldwarn <- options()$warn

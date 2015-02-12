@@ -7,10 +7,10 @@
    Print and summary method for objects of class \code{copas}.
 }
 \usage{
-\method{print}{copas}(x, sign.rsb=0.1, backtransf=x$backtransf,
+\method{print}{copas}(x, sign.rsb=x$sign.rsb, backtransf=x$backtransf,
       digits=max(3, .Options$digits - 3), ...)
 
-\method{summary}{copas}(object, level=0.95, sign.rsb=0.1, ...)
+\method{summary}{copas}(object, level=0.95, sign.rsb=object$sign.rsb, ...)
 
 \method{print}{summary.copas}(x, digits = max(3, .Options$digits - 3),
       backtransf=x$backtransf, header=TRUE, ...)

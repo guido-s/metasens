@@ -23,6 +23,7 @@ copas(x,
       gamma0.range=NULL, gamma1.range=NULL,
       ngrid=20, nlevels=10, levels=NULL,
       slope=NULL, left=NULL, rho.bound=0.9999,
+      sign.rsb=0.1,
       backtransf = x$backtransf, silent=TRUE, warn=options()$warn)
 }
 
@@ -137,6 +138,8 @@ copas(x,
     must be < 1, and usually > 0.95. The lower bound is calculated as
     -(the upper bound).
   }
+  \item{sign.rsb}{The significance level for the test of residual
+    selection bias (between 0 and 1).}
   \item{backtransf}{A logical indicating whether results should be
     back transformed in printouts and plots. If \code{backtransf=TRUE}
     (default), results for \code{sm="OR"} are printed as odds ratios
@@ -257,6 +260,8 @@ copas(x,
     \code{plot.copas}}
   \item{pval.rsb}{P-values for tests on presence of residual selection
     bias, plotted in bottom right panel in \code{plot.copas}}
+  \item{sign.rsb}{The significance level for the test of residual
+    selection bias}
   \item{N.unpubl}{Approximate number of studies the model suggests
     remain unpublished}
   \item{sm}{Effect measure (OR - odds ratio, RR - risk ratio, RD - risk

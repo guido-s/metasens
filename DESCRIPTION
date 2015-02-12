@@ -1,12 +1,12 @@
 Package: metasens
 Title: Advanced Statistical Methods to Model and Adjust for Bias in Meta-Analysis
-Version: 0.2-0
+Version: 0.3-0
 Authors@R: c(person("Guido","Schwarzer", email="sc@imbi.uni-freiburg.de", role=c("aut","cre")),
     person("James","Carpenter", role="aut"),
     person("Gerta","Rücker", role="aut"))
-Depends: meta (>= 0.8)
-Date: 2014-12-06
-Description: The following methods to evaluate how sensitive the results of a meta-analysis are to potential bias in meta-analysis are implemented:
+Depends: meta (>= 4.0-0)
+Date: 2015-x-y
+Description: The following methods are implemented to evaluate how sensitive the results of a meta-analysis are to potential bias in meta-analysis:
  - Copas selection model;
  - limit meta-analysis;
  - upper bound for outcome reporting bias.

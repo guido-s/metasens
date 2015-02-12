@@ -8,7 +8,7 @@
   al. (2011) to adjust for bias in meta-analysis.
 }
 
-\usage{limitmeta(x, method.adjust="beta0", sm=x$sm,
+\usage{limitmeta(x, method.adjust="beta0",
           level=x$level, level.comb=x$level.comb,
           backtransf=x$backtransf,
           title=x$title, complab=x$complab, outclab=x$outclab)
@@ -19,17 +19,14 @@
   \item{method.adjust}{A character string indicating which adjustment
     method is to be used. One of \code{"beta0"}, \code{"betalim"}, or
     \code{"mulim"}, can be abbreviated.}
-  \item{sm}{A character string indicating underlying summary measure,
-    e.g., \code{"RD"}, \code{"RR"}, \code{"OR"}, \code{"MD"},
-    \code{"SMD"}.}
   \item{level}{The level used to calculate confidence intervals for
     individual studies.}
   \item{level.comb}{The level used to calculate confidence intervals for
     pooled estimates.}
   \item{backtransf}{A logical indicating whether results should be
-    back transformed in printouts and plots. If \code{backtransf=TRUE}
-    (default), results for \code{sm="OR"} are printed as odds ratios
-    rather than log odds ratio, for example.}
+    back transformed in printouts and plots. If
+    \code{backtransf=FALSE}, results for the odds ratio are printed as
+    log odds ratios rather than odds ratio, for example.}
   \item{title}{Title of meta-analysis / systematic review.}
   \item{complab}{Comparison label.}
   \item{outclab}{Outcome label.}
@@ -96,7 +93,7 @@
   is a list containing the following components:
 
   \item{x, level, level.com}{}
-  \item{sm, method.adjust}{}
+  \item{method.adjust}{}
   \item{title, complab, outclab}{As defined above.}
   \item{TE, seTE}{Estimated treatment effect and standard error of individual studies.}
   \item{TE.limit, seTE.limit}{Shrunken estimates and standard error of individual studies.}
