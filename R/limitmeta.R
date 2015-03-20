@@ -4,10 +4,9 @@ limitmeta <- function(x,
                       backtransf=x$backtransf,
                       title=x$title, complab=x$complab, outclab=x$outclab){
   
-  if (!inherits(x, "meta"))
-    stop("Argument 'x' must be an object of class \"meta\"")
+  meta:::chkclass(x, "meta")
   
-
+  
   TE <- x$TE
   seTE <- x$seTE
   tau <- x$tau

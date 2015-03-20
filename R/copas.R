@@ -12,8 +12,7 @@ copas <- function(x,
                   silent=TRUE,
                   warn=options()$warn){
   
-  if (!inherits(x, "meta"))
-    stop("Argument 'x' must be an object of class \"meta\"")
+  meta:::chkclass(x, "meta")
   
   if (!is.numeric(rho.bound) && (rho.bound<=0|rho.bound>1))
     stop("no valid value for 'rho.bound'")

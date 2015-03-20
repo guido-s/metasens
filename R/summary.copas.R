@@ -1,7 +1,6 @@
 summary.copas <- function(object, level=0.95, sign.rsb=object$sign.rsb, ...){
   
-  if (!inherits(object, "copas"))
-    stop("Argument 'object' must be an object of class \"copas\"")
+  meta:::chkclass(object, "copas")
   
   seTE <- object$seTE
   TE.random <- object$TE.random

@@ -3,8 +3,7 @@ print.summary.limitmeta <- function(x,
                                     digits=max(3, .Options$digits - 3),
                                     header=TRUE, ...){
   
-  if (!inherits(x, "summary.limitmeta"))
-    stop("Argument 'x' must be an object of class \"summary.limitmeta\"")
+  meta:::chkclass(x, "summary.limitmeta")
   
   
   sm <- x$sm

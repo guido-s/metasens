@@ -4,8 +4,7 @@ print.limitmeta <- function(x,
                             digits=max(3, .Options$digits - 3),
                             header=TRUE, ...){
   
-  if (!inherits(x, "limitmeta"))
-    stop("Argument 'x' must be an object of class \"limitmeta\"")
+  meta:::chkclass(x, "limitmeta")
   
   
   format.TE <- function(TE, na=FALSE){

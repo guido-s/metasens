@@ -4,8 +4,7 @@ print.orbbound <- function(x,
                            digits=max(3, .Options$digits - 3),
                            ...){
   
-  if (!inherits(x, "orbbound"))
-    stop("Argument 'x' must be an object of class \"orbbound\"")
+  meta:::chkclass(x, "orbbound")
   
   k <- x$x$k
   k.suspect <- x$k.suspect

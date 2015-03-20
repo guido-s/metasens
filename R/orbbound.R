@@ -6,8 +6,7 @@ orbbound <- function(x, k.suspect=1, tau=x$tau, left=NULL,
   ## Mar;60(1):146-53.
   
   
-  if (!inherits(x, "meta"))
-    stop("Argument 'x' must be an object of class \"meta\"")
+  meta:::chkclass(x, "meta")
   
   
   if (!(is.numeric(k.suspect)))

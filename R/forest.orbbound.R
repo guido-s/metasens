@@ -9,9 +9,8 @@ forest.orbbound <- function(x,
                             backtransf=x$backtransf,
                             digits=max(3, .Options$digits - 3),
                             ...){
-
-  if (!inherits(x, "orbbound"))
-    stop("Argument 'x' must be an object of class \"orbbound\"")
+  
+  meta:::chkclass(x, "orbbound")
   
   k <- x$x$k
   sm <- x$x$sm

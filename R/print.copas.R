@@ -3,8 +3,7 @@ print.copas <- function(x, sign.rsb=x$sign.rsb,
                         digits=max(3, .Options$digits - 3),
                         ...){
   
-  if (!inherits(x, "copas"))
-    stop("Argument 'x' must be an object of class \"copas\"")
+  meta:::chkclass(x, "copas")
   
   
   cl <- class(x)[1]

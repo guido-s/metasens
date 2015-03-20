@@ -11,8 +11,7 @@ plot.copas <- function(x,
                        warn=-1,
                        ...){
   
-  if (!inherits(x, "copas"))
-    stop("Argument 'x' must be an object of class \"copas\"")
+  meta:::chkclass(x, "copas")
   
   if (!is.numeric(which) || any(which < 1) || any(which > 4)) 
     stop("'Argument which' must be in 1:4")

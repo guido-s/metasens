@@ -33,8 +33,7 @@ funnel.limitmeta <- function(x,
                              ...){
   
   
-  if (!inherits(x, "limitmeta"))
-    stop("Argument 'x' must be an object of class \"limitmeta\"")
+  meta:::chkclass(x, "limitmeta")
   
   
   TE <- x$TE
