@@ -1,4 +1,4 @@
-2015-x-y, version 0.3-0
+2016-02-16, version 0.3-0
 
 Version of R package meta must be larger or equal 4.0-0
 
@@ -20,6 +20,10 @@ Function print.copas:
 
 Function limitmeta:
 - argument 'sm' removed (not necessary)
+- set z- and p-value of adjusted effect equal to NA for metaprop objects
+
+Function print.summary.limitmeta:
+- bug fix such that no error occurs for metaprop objects
 
 Help pages updated accordingly
 

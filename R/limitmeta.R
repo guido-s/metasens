@@ -95,6 +95,11 @@ limitmeta <- function(x,
   upper.adjust <- ci.adjust$upper
   zval.adjust <- ci.adjust$z
   pval.adjust <- ci.adjust$p
+  ##
+  if (inherits(x, c("metaprop"))){
+    zval.adjust <- NA
+    pval.adjust <- NA
+  }
   
   
   ##

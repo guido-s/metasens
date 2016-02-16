@@ -130,11 +130,11 @@ print.orbbound <- function(x,
     zlab <- "z"
     
     names(res) <- c("k.suspect", "maxbias",
-                    sm.lab, ci.lab, zlab, "p.value")
+                    sm.lab, ci.lab, zlab, "p-value")
     
     dimnames(res) <- list(rep("", length(k.suspect)),
                           c("k.suspect", "maxbias",
-                            sm.lab, ci.lab, zlab, "p.value"))
+                            sm.lab, ci.lab, zlab, "p-value"))
     
     prmatrix(res, quote=FALSE, right=TRUE)
   }
@@ -153,11 +153,11 @@ print.orbbound <- function(x,
     zlab <- "z"
     
     names(res) <- c("k.suspect", "maxbias",
-                    sm.lab, ci.lab, zlab, "p.value")
+                    sm.lab, ci.lab, zlab, "p-value")
     
     dimnames(res) <- list(rep("", length(k.suspect)),
                           c("k.suspect", "maxbias",
-                            sm.lab, ci.lab, zlab, "p.value"))
+                            sm.lab, ci.lab, zlab, "p-value"))
     
     prmatrix(res, quote=FALSE, right=TRUE)
   }

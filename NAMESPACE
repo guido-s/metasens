@@ -19,8 +19,12 @@ S3method(print, summary.limitmeta)
 S3method(summary, limitmeta)
 S3method(funnel, limitmeta)
 
-importFrom(meta, ci)
-importFrom(meta, forest)
-importFrom(meta, funnel)
-importFrom(meta, metagen)
-importFrom(meta, metabias)
+importFrom("meta", "ci", "forest", "funnel", "metagen", "metabias")
+
+importFrom("grDevices", "contourLines")
+
+importFrom("graphics", "abline", "axTicks", "axis", "box", "contour",
+           "curve", "mtext", "par", "plot", "points", "segments", "title")
+
+importFrom("stats", "coefficients", "dnorm", "lm", "loess",
+           "optim", "pchisq", "pnorm", "qnorm", "sd", "vcov")
