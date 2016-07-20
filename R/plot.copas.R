@@ -132,7 +132,7 @@ plot.copas <- function(x,
   
   ## Plot 3:
   ## mean (plus level%-CI) against prob of publishing trial
-  ## with largest SD down orthogonal line
+  ## with largest SE down orthogonal line
   ##
   xvalue <- publprob[ord]
   yvalue <- TE.slope[ord]
@@ -165,7 +165,7 @@ plot.copas <- function(x,
     axis(side=1, axTicks(1), labels=round(axTicks(1), 2))
     axis(side=2, axTicks(2), labels=round(axTicks(2), 2))
     ##
-    mtext("Probability of publishing the trial with largest sd",
+    mtext("Probability of publishing the trial with largest se",
           side=1, line=2)
     mtext(sm, side=2, line=2)
     ##
@@ -187,7 +187,7 @@ plot.copas <- function(x,
   
   ## Plot 4:
   ## goodness of fit (p-value) against prob of publishing
-  ## trial with largest SD
+  ## trial with largest SE
   ##
   yvalue <- pval.rsb[ord]
   sel.y <- !is.na(yvalue)
@@ -223,7 +223,7 @@ plot.copas <- function(x,
     axis(side=1, axTicks(1), labels=round(axTicks(1), 2))
     axis(side=2, axTicks(2), labels=round(axTicks(2), 2))
     ##
-    mtext("Probability of publishing the trial with largest sd",
+    mtext("Probability of publishing the trial with largest se",
           side=1, line=2)
     mtext("P-value for residual selection bias", side=2, line=2)
     ##

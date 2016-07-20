@@ -1,3 +1,12 @@
+*** metasens, version 0.3-1, 2016-mm-dd ***
+
+ ** User-visible changes **
+
+  * plot.copas():
+    - default label on x-axis in two bottom plots should read
+      '... largest se' instead of '... largest sd'
+
+
 2016-02-16, version 0.3-0
 
 Version of R package meta must be larger or equal 4.0-0
