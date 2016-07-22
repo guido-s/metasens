@@ -1,5 +1,5 @@
 # metasens: Advanced Statistical Methods to Model and Adjust for Bias in Meta-Analysis
-Official GitHub repository of R package metasens
+Official GitHub repository of R package **metasens**
 
 [![Build Status](https://travis-ci.org/guido-s/metasens.svg?branch=master)](https://travis-ci.org/guido-s/metasens)
 [![CRAN Version](http://www.r-pkg.org/badges/version/metasens)](https://cran.r-project.org/package=metasens)
@@ -14,6 +14,10 @@ The following methods are implemented to evaluate how sensitive the results of a
  - Copas selection model (Copas and Shi, 2001; Schwarzer et al., 2010);
  - limit meta-analysis (Rücker et al., 2011);
  - upper bound for outcome reporting bias (Copas and Jackson, 2004).
+
+Furthermore, R package **metasens** provides functions and datasets to
+support Schwarzer et al. (2015), Chapter 5 "Small-Study Effects in
+Meta-Analysis", http://meta-analysis-with-r.org/ .
 
 ### References
 
@@ -32,6 +36,9 @@ Schwarzer G, Carpenter J, Rücker G (2010), Empirical evaluation
 suggests Copas selection model preferable to trim-and-fill method for
 selection bias in meta-analysis.  *Journal of Clinical Epidemiology*,
 **63**, 282-288.
+
+Schwarzer G, Carpenter JR and Rücker G (2015), *Meta-Analysis with R
+(Use-R!)*. Springer International Publishing, Switzerland
 
 
 ## Installation
