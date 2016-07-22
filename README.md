@@ -21,24 +21,15 @@ Meta-Analysis", http://meta-analysis-with-r.org/ .
 
 ### References
 
-Copas J, Jackson D (2004), A bound for publication bias based on the
-fraction of unpublished studies.  *Biometrics*, **60**, 146-153.
+[Copas J, Jackson D (2004), A bound for publication bias based on the fraction of unpublished studies.  *Biometrics*, **60**, 146-153.](https://scholar.google.de/scholar?q=Copas+Jackson+2004+A+bound+for+publication+bias+based+on+the+fraction+of+unpublished+studies)
 
-Copas JB, Shi JQ (2001), A sensitivity analysis for publication bias
-in systematic reviews.  *Statistical Methods in Medical Research*,
-**10**, 251-265.
+[Copas JB, Shi JQ (2001), A sensitivity analysis for publication bias in systematic reviews.  *Statistical Methods in Medical Research*, **10**, 251-265.](https://scholar.google.de/scholar?q=Copas+Shi+2001+A+sensitivity+analysis+for+publication+bias+in+systematic+reviews)
 
-Rücker G, Schwarzer G, Carpenter JR, Binder H, Schumacher M (2011),
-Treatment-effect estimates adjusted for small-study effects via a
-limit meta-analysis. *Biostatistics*, **12**, 122-142.
+[Rücker G, Schwarzer G, Carpenter JR, Binder H, Schumacher M (2011), Treatment-effect estimates adjusted for small-study effects via a limit meta-analysis. *Biostatistics*, **12**, 122-142.](https://scholar.google.de/scholar?q=Rücker+Schwarzer+Carpenter+Binder+Schumacher+2011+Treatment-effect+estimates+adjusted+for+small-study+effects+via+a+limit+meta-analysis)
 
-Schwarzer G, Carpenter J, Rücker G (2010), Empirical evaluation
-suggests Copas selection model preferable to trim-and-fill method for
-selection bias in meta-analysis.  *Journal of Clinical Epidemiology*,
-**63**, 282-288.
+[Schwarzer G, Carpenter J, Rücker G (2010), Empirical evaluation suggests Copas selection model preferable to trim-and-fill method for selection bias in meta-analysis.  *Journal of Clinical Epidemiology*, **63**, 282-288.](https://scholar.google.de/scholar?q=Schwarzer+Carpenter+Rücker+2010+Empirical+evaluation+suggests+Copas+selection+model+preferable+to+trim-and-fill+method+for+selection+bias+in+meta-analysis)
 
-Schwarzer G, Carpenter JR and Rücker G (2015), *Meta-Analysis with R
-(Use-R!)*. Springer International Publishing, Switzerland
+[Schwarzer G, Carpenter JR and Rücker G (2015), *Meta-Analysis with R (Use-R!)*. Springer International Publishing, Switzerland](http://www.springer.com/gp/book/9783319214153)
 
 
 ## Installation
