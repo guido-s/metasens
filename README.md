@@ -45,3 +45,9 @@ install.packages("devtools")
 library("devtools")
 install_github("guido-s/metasens")
 ```
+
+### Bug Reports:
+
+```r
+bug.report(package = "metasens")
+```
