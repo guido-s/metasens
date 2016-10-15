@@ -133,11 +133,11 @@
 \references{
   Rücker G, Carpenter JR, Schwarzer G (2011),
   Detecting and adjusting for small-study effects in meta-analysis.
-  \emph{Biometrical Journal}, \bold{53}, 351--368. 
+  \emph{Biometrical Journal}, \bold{53}, 351--68. 
 
   Rücker G, Schwarzer G, Carpenter JR, Binder H, Schumacher M (2011),
   Treatment-effect estimates adjusted for small-study effects via a limit meta-analysis.
-  \emph{Biostatistics}, \bold{12}, 122--142.
+  \emph{Biostatistics}, \bold{12}, 122--42.
 }
 
 \author{Gerta Rücker \email{ruecker@imbi.uni-freiburg.de}, Guido Schwarzer \email{sc@imbi.uni-freiburg.de}}

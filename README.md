@@ -10,7 +10,7 @@ Official GitHub repository of R package **metasens**
 
 ## Description
 
-The following methods are implemented to evaluate how sensitive the results of a meta-analysis are to potential bias in meta-analysis:
+The following methods are implemented to evaluate how sensitive the results of a meta-analysis are to potential bias in meta-analysis and to support Schwarzer et al. (2015), Chapter 5 "Small-Study Effects in Meta-Analysis":
  - Copas selection model (Copas and Shi, 2001; Schwarzer et al., 2010);
  - limit meta-analysis (Rücker et al., 2011);
  - upper bound for outcome reporting bias (Copas and Jackson, 2004).

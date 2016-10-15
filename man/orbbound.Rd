@@ -65,7 +65,7 @@
 \references{
   Copas J, Jackson D (2004),
   A bound for publication bias based on the fraction of unpublished studies.
-  \emph{Biometrics}, \bold{60}, 146--153.
+  \emph{Biometrics}, \bold{60}, 146--53.
 }
 
 \author{Guido Schwarzer \email{sc@imbi.uni-freiburg.de}}
