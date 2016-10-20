@@ -1,4 +1,4 @@
-copas.gradient.without.beta <- function(x, gamma, TE, seTE){
+copas.gradient.without.beta <- function(x, gamma, TE, seTE) {
   
   
   mu  <- x[1]
@@ -7,30 +7,34 @@ copas.gradient.without.beta <- function(x, gamma, TE, seTE){
   ##
   ## TE   <=> estimated treatment effect
   ## seTE <=> standard error from trials, conditional on publication
+  ##
+  TE.mu <- TE - mu
+  rho2 <- rho^2
+  tau2 <- tau^2
+  varTE <- seTE^2
   
   
   ## Copas, Shi (2000), Biostatistics, p. 250:
   ##
-  u <- gamma[1] + gamma[2]/seTE
+  u <- gamma[1] + gamma[2] / seTE
   ##
-  sigma <- sqrt(seTE^2/(1-rho^2*lambda(u)*(u+lambda(u))))
-  rho.tilde <- rho*sigma/sqrt(tau^2+sigma^2)
+  sigma <- sqrt(varTE / (1 - rho2 * lambda(u) * (u + lambda(u))))
+  sigma2 <- sigma^2
   ##
-  v <- ((u +
-         rho.tilde *
-         (TE-mu)/(sqrt(tau^2+sigma^2))
-         ) /
-        sqrt(1-rho.tilde^2)
-        )
+  s2t2 <- sigma2 + tau2
+  rho.tilde <- rho * sigma / sqrt(s2t2)
+  rho2.tilde <- rho.tilde^2
+  ##
+  v <- (u + rho.tilde * TE.mu / (sqrt(s2t2))) / sqrt(1 - rho2.tilde)
   ##
   ## avoid numerical problems by replacing 0's in pnorm(v):
   ## qnorm(1e-320) = -38.26913
-  ## this is towards the smalles value for log
+  ## this is towards the smallest value for log
   ##
   v[v < -37] <- -37
   ##
   ##
-  ci2 <- lambda(u)*(u+lambda(u))
+  ci2 <- lambda(u) * (u + lambda(u))
   
   
   ##
@@ -40,71 +44,64 @@ copas.gradient.without.beta <- function(x, gamma, TE, seTE){
   ##
   ## term 2:
   ##
-  grad.mu <- (TE-mu)/(tau^2+sigma^2)
+  grad.mu <- TE.mu / s2t2
   ##
   ## term 3 is always 0
   ##
   ## term 4:
   ##
-  grad.mu <- (grad.mu -
-              (rho.tilde/(sqrt((tau^2+sigma^2)*(1-rho.tilde^2))))*lambda(v)
-              )
+  grad.mu <- grad.mu - (rho.tilde /
+                        (sqrt((s2t2) *
+                              (1 - rho2.tilde)))) * lambda(v)
+  
   
   ##
   ## Derivatives for rho:
   ##
   ## term 1:
   ##
-  grad.rho <- (-ci2*rho*sigma^2*sigma^2/
-               (seTE^2*(tau^2+sigma^2)))
+  grad.rho <- -ci2 * rho * sigma2 * sigma2 / (varTE * s2t2)
   ##
   ## term 2:
   ##
-  grad.rho <- (grad.rho +
-               (((TE-mu)^2)*
-                ci2*rho*sigma^2*sigma^2/
-                (seTE^2*((tau^2+sigma^2)^2))
-                )
-               )
+  grad.rho <- grad.rho +
+    TE.mu^2 * ci2 * rho * sigma2 * sigma2 / (varTE * (s2t2^2))
   ##
   ## term 4:
   ##
-  top <- u + rho.tilde*(TE-mu)/sqrt(tau^2+sigma^2) 
-  bottom <- sqrt((1-rho.tilde^2))
+  top <- u + rho.tilde * TE.mu / sqrt(s2t2)
+  bottom <- sqrt((1 - rho2.tilde))
   ##
-  diff.top <- ((top-u)/rho - (top-u)*rho*ci2/(1-ci2*rho^2) +
-               2*(top-u)*rho*tau^2*ci2/(seTE^2+tau^2*(1-ci2*rho^2))
-               )
+  diff.top <- (top - u) / rho - (top - u) * rho * ci2 / (1 - ci2 * rho2) +
+               2 * (top - u) * rho * tau2 * ci2 / (varTE + tau2 * (1 - ci2 * rho2))
   ##
-  eta <- seTE^2/(seTE^2 + tau^2*(1-ci2*rho^2))
+  eta <- varTE / (varTE + tau2 * (1 - ci2 * rho2))
   ##
-  diff.bottom <- ((1-rho.tilde^2)^(-1.5))*rho*eta*(1 + (rho^2*tau^2*ci2*eta)/seTE^2 )
+  diff.bottom <- ((1 - rho2.tilde)^(-1.5)) * rho * eta *
+                 (1 + (rho2 * tau2 * ci2 * eta) / varTE)
   ##
-  grad.rho <- grad.rho + (top*diff.bottom+diff.top/bottom)*lambda(v)
+  grad.rho <- grad.rho + (top * diff.bottom + diff.top / bottom) * lambda(v)
+  
   
   ##
   ## gradient for square-root of variance (tau)
   ##
   ## term 1:
   ##
-  grad.tau <- -0.5/(tau^2+sigma^2)
+  grad.tau <- -0.5 / s2t2
   ##
   ## term 2:
   ##
-  grad.tau <- (grad.tau +
-               0.5*((TE-mu)^2)/((tau^2+sigma^2)^2)
-               )
+  grad.tau <- grad.tau + 0.5 * TE.mu^2 / s2t2^2
   ##
   ## term 4:
   ##
-  grad.tau <- (grad.tau +
-               (-sqrt(sigma^2)*
-                (TE-mu)*
-                rho/(bottom*((tau^2+sigma^2)^2)) -
-                0.5*top*((1-rho.tilde^2)^(-1.5))*
-                sigma^2*rho^2/((tau^2+sigma^2)^2)
-                )*lambda(v)
-               )
+  grad.tau <- grad.tau +
+              (-sigma * TE.mu *
+                rho / (bottom * s2t2^2) -
+                0.5 * top * ((1 - rho2.tilde)^(-1.5)) *
+                sigma2 * rho2 / s2t2^2) *
+              lambda(v)
   ##
   grad.tau <- 2 * tau * grad.tau
   

@@ -1,9 +1,9 @@
-summary.limitmeta <- function(object, ...){
+summary.limitmeta <- function(object, ...) {
 
   meta:::chkclass(object, "limitmeta")
   
   res <- object
-  class(res) <- c("summary.limitmeta", "limitmeta")
+  class(res) <- c("summary.limitmeta", class(object))
   
   res
 }

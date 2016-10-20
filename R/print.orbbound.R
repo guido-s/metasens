@@ -1,8 +1,8 @@
 print.orbbound <- function(x,
-                           comb.fixed=x$x$comb.fixed, comb.random=x$x$comb.random,
-                           header=TRUE, backtransf=x$backtransf,
-                           digits=max(3, .Options$digits - 3),
-                           ...){
+                           comb.fixed = x$x$comb.fixed, comb.random = x$x$comb.random,
+                           header = TRUE, backtransf = x$backtransf,
+                           digits = max(3, .Options$digits - 3),
+                           ...) {
   
   meta:::chkclass(x, "orbbound")
   
@@ -16,7 +16,7 @@ print.orbbound <- function(x,
   ##
   fun <- "print.orbbound"
   ##
-  meta:::warnarg("logscale", addargs, fun, otherarg="backtransf")
+  meta:::warnarg("logscale", addargs, fun, otherarg = "backtransf")
   ##
   if (is.null(backtransf))
     if (!is.null(list(...)[["logscale"]]))
@@ -27,25 +27,25 @@ print.orbbound <- function(x,
   
   sm.lab <- sm
   ##
-  if (backtransf){
-    if (sm=="ZCOR")
+  if (backtransf) {
+    if (sm == "ZCOR")
       sm.lab <- "COR"
     if (sm %in% c("PFT", "PAS", "PRAW", "PLOGIT", "PLN"))
       sm.lab <- "proportion"
   }
   else 
     if (meta:::is.relative.effect(sm))
-      sm.lab <- paste("log", sm, sep="")
+      sm.lab <- paste("log", sm, sep = "")
   
   
-  if (length(comb.fixed)==0)
+  if (length(comb.fixed) == 0)
     comb.fixed <- TRUE
   ##
-  if (length(comb.random)==0)
+  if (length(comb.random) == 0)
     comb.random <- TRUE
   
   
-  ci.lab <- paste(round(100*x$x$level.comb, 1), "%-CI", sep="")
+  ci.lab <- paste(round(100 * x$x$level.comb, 1), "%-CI", sep = "")
   
   
   TE.fixed    <- x$fixed$TE
@@ -59,25 +59,25 @@ print.orbbound <- function(x,
   maxbias <- x$maxbias
   
   
-  if (backtransf){
+  if (backtransf) {
     ##
-    npft.ma <- 1/mean(1/x$x$n)
+    npft.ma <- 1 / mean(1 / x$x$n)
     ##
     TE.fixed    <- meta:::backtransf(TE.fixed, sm, "mean",
-                                     npft.ma, warn=comb.fixed)
+                                     npft.ma, warn = comb.fixed)
     lowTE.fixed <- meta:::backtransf(lowTE.fixed, sm, "lower",
-                                     npft.ma, warn=comb.fixed)
+                                     npft.ma, warn = comb.fixed)
     uppTE.fixed <- meta:::backtransf(uppTE.fixed, sm, "upper",
-                                     npft.ma, warn=comb.fixed)
+                                     npft.ma, warn = comb.fixed)
     ##
     TE.random <- meta:::backtransf(TE.random, sm, "mean",
-                                   npft.ma, warn=comb.random)
+                                   npft.ma, warn = comb.random)
     lowTE.random <- meta:::backtransf(lowTE.random, sm, "lower",
-                                      npft.ma, warn=comb.random)
+                                      npft.ma, warn = comb.random)
     uppTE.random <- meta:::backtransf(uppTE.random, sm, "upper",
-                                      npft.ma, warn=comb.random)
+                                      npft.ma, warn = comb.random)
     ##
-    maxbias <- meta:::backtransf(maxbias, sm, "mean", npft.ma, warn=FALSE)
+    maxbias <- meta:::backtransf(maxbias, sm, "mean", npft.ma, warn = FALSE)
   }
   ##
   TE.fixed    <- round(TE.fixed, digits)
@@ -99,22 +99,22 @@ print.orbbound <- function(x,
     meta:::crtitle(x$x)
   
   
-  if (comb.fixed|comb.random){
+  if (comb.fixed | comb.random) {
     if (!is.na(x$tau))
       tau2 <- ifelse(x$tau^2 < 0.0001, "tau^2 < 0.0001",
                      paste("tau^2=",
                            format(round(x$tau^2, 4), 4,
-                                  nsmall=4, scientific=FALSE),
-                           sep=""))
+                                  nsmall = 4, scientific = FALSE),
+                           sep = ""))
     
     cat("\n        Sensitivity Analysis for Outcome Reporting Bias (ORB)\n\n")
     
-    cat(paste("Number of studies combined: k=", x$x$k, "\n", sep=""))
-    cat(paste("Between-study variance: ", tau2, "\n\n", sep=""))
+    cat(paste("Number of studies combined: k=", x$x$k, "\n", sep = ""))
+    cat(paste("Between-study variance: ", tau2, "\n\n", sep = ""))
   }
   
-  if (comb.fixed){
-    if (comb.random & x$tau==0)
+  if (comb.fixed) {
+    if (comb.random & x$tau == 0)
       cat("Fixed effect model / Random effects model\n\n")
     else
       cat("Fixed effect model\n\n")
@@ -136,10 +136,10 @@ print.orbbound <- function(x,
                           c("k.suspect", "maxbias",
                             sm.lab, ci.lab, zlab, "p-value"))
     
-    prmatrix(res, quote=FALSE, right=TRUE)
+    prmatrix(res, quote = FALSE, right = TRUE)
   }
   
-  if (comb.random & (x$tau!=0 | !comb.fixed)){
+  if (comb.random & (x$tau != 0 | !comb.fixed)) {
     cat("\nRandom effects model\n\n")
     
     res <- cbind(k.suspect,
@@ -159,15 +159,15 @@ print.orbbound <- function(x,
                           c("k.suspect", "maxbias",
                             sm.lab, ci.lab, zlab, "p-value"))
     
-    prmatrix(res, quote=FALSE, right=TRUE)
+    prmatrix(res, quote = FALSE, right = TRUE)
   }
   
-  if (comb.fixed|comb.random){
+  if (comb.fixed | comb.random) {
     ## Print information on summary method:
-    meta:::catmeth(method=x$x$method,
-                   method.tau=if (comb.random) x$x$method.tau else "",
-                   sm=sm,
-                   k.all=666)
+    meta:::catmeth(method = x$x$method,
+                   method.tau = if (comb.random) x$x$method.tau else "",
+                   sm = sm,
+                   k.all = 666)
   }
   
   invisible(NULL)

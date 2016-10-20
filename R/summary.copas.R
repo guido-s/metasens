@@ -1,4 +1,4 @@
-summary.copas <- function(object, level=0.95, sign.rsb=object$sign.rsb, ...){
+summary.copas <- function(object, level = 0.95, sign.rsb = object$sign.rsb, ...) {
   
   meta:::chkclass(object, "copas")
   
@@ -21,7 +21,7 @@ summary.copas <- function(object, level=0.95, sign.rsb=object$sign.rsb, ...){
     meta:::chklevel(sign.rsb)
   
   
-  ci.lab <- paste(round(100*level, 1), "%-CI", sep="")
+  ci.lab <- paste(round(100 * level, 1), "%-CI", sep = "")
   
   
   ord <- rev(order(publprob)) 
@@ -38,27 +38,27 @@ summary.copas <- function(object, level=0.95, sign.rsb=object$sign.rsb, ...){
   ##
   ## Copas estimate adjusted for selection bias (added by sc, 24.09.2007):
   ##
-  tres <- data.frame(seq=seq(along=pval.rsb),
-                     cumsum=cumsum(pval.rsb <= sign.rsb),
-                     diff=seq(along=pval.rsb) - cumsum(pval.rsb <= sign.rsb))
-  pval.rsb.sign.all <- all(tres$diff==0)
-  pval.rsb.sign <- ifelse(sum(tres$diff==0)>0, TRUE, FALSE)
+  tres <- data.frame(seq = seq(along = pval.rsb),
+                     cumsum = cumsum(pval.rsb <= sign.rsb),
+                     diff = seq(along = pval.rsb) - cumsum(pval.rsb <= sign.rsb))
+  pval.rsb.sign.all <- all(tres$diff == 0)
+  pval.rsb.sign <- ifelse(sum(tres$diff == 0) > 0, TRUE, FALSE)
   ##
-  if (pval.rsb.sign.all){
+  if (pval.rsb.sign.all) {
     TE.adj <- NA
     seTE.adj <- NA
     pval.rsb.adj <- NA
     N.unpubl.adj <- NA
   }
-  else{
-    if(pval.rsb.sign){
-      sel.adj <- tres$seq[tres$diff>0][1]
+  else {
+    if(pval.rsb.sign) {
+      sel.adj <- tres$seq[tres$diff > 0][1]
       TE.adj <- TE.slope[sel.adj]
       seTE.adj <- seTE.slope[sel.adj]
       pval.rsb.adj <- pval.rsb[sel.adj]
       N.unpubl.adj <- N.unpubl[sel.adj]
     }
-    else{
+    else {
       TE.adj <- TE.slope[1]
       seTE.adj <- seTE.slope[1]
       pval.rsb.adj <- pval.rsb[1]
@@ -68,17 +68,17 @@ summary.copas <- function(object, level=0.95, sign.rsb=object$sign.rsb, ...){
   ##
   adjust <- ci(TE.adj, seTE.adj, level)
   
-  res <- list(slope=ci.slope,
-              publprob=pom,
-              pval.rsb=pval.rsb,
-              N.unpubl=N.unpubl,
-              adjust=adjust,
-              sign.rsb=sign.rsb,
-              pval.rsb.adj=pval.rsb.adj,
-              N.unpubl.adj=N.unpubl.adj,
-              random=ci.random,
-              sm=object$sm,
-              ci.lab=ci.lab
+  res <- list(slope = ci.slope,
+              publprob = pom,
+              pval.rsb = pval.rsb,
+              N.unpubl = N.unpubl,
+              adjust = adjust,
+              sign.rsb = sign.rsb,
+              pval.rsb.adj = pval.rsb.adj,
+              N.unpubl.adj = N.unpubl.adj,
+              random = ci.random,
+              sm = object$sm,
+              ci.lab = ci.lab
               )
   
   class(res) <- c("summary.copas")

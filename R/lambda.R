@@ -1,3 +1,3 @@
 lambda <- function(x)
-  dnorm(x)/pnorm(x)
+  dnorm(x) / pnorm(x)
 
