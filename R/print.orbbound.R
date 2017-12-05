@@ -1,10 +1,25 @@
 print.orbbound <- function(x,
-                           comb.fixed = x$x$comb.fixed, comb.random = x$x$comb.random,
+                           comb.fixed = x$x$comb.fixed,
+                           comb.random = x$x$comb.random,
                            header = TRUE, backtransf = x$backtransf,
-                           digits = max(3, .Options$digits - 3),
+                           digits = gs("digits"),
+                           digits.zval = gs("digits.zval"),
+                           digits.pval = max(gs("digits.pval"), 2),
+                           digits.tau2 = gs("digits.tau2"),
+                           scientific.pval = gs("scientific.pval"),
+                           big.mark = gs("big.mark"),
                            ...) {
   
+  
   meta:::chkclass(x, "orbbound")
+  ##
+  chklogical <- meta:::chklogical
+  chknumeric <- meta:::chknumeric
+  formatCI <- meta:::formatCI
+  formatN <- meta:::formatN
+  formatPT <- meta:::formatPT
+  rmSpace <- meta:::rmSpace
+  
   
   k <- x$x$k
   k.suspect <- x$k.suspect
@@ -23,6 +38,15 @@ print.orbbound <- function(x,
       backtransf <- !list(...)[["logscale"]]
     else
       backtransf <- TRUE
+  ##
+  chknumeric(digits, min = 0, single = TRUE)
+  chknumeric(digits.zval, min = 0, single = TRUE)
+  chknumeric(digits.pval, min = 1, single = TRUE)
+  chknumeric(digits.tau2, min = 0, single = TRUE)
+  ##
+  chklogical(header)
+  chklogical(backtransf)
+  chklogical(scientific.pval)
   
   
   sm.lab <- sm
@@ -100,12 +124,11 @@ print.orbbound <- function(x,
   
   
   if (comb.fixed | comb.random) {
-    if (!is.na(x$tau))
-      tau2 <- ifelse(x$tau^2 < 0.0001, "tau^2 < 0.0001",
-                     paste("tau^2=",
-                           format(round(x$tau^2, 4), 4,
-                                  nsmall = 4, scientific = FALSE),
-                           sep = ""))
+    tau2 <- formatPT(x$tau^2,
+                     lab = TRUE, labval = "tau^2",
+                     digits = digits.tau2,
+                     lab.NA = "NA",
+                     big.mark = big.mark)
     
     cat("\n        Sensitivity Analysis for Outcome Reporting Bias (ORB)\n\n")
     
@@ -120,12 +143,16 @@ print.orbbound <- function(x,
       cat("Fixed effect model\n\n")
     
     res <- cbind(k.suspect,
-                 format(maxbias),
-                 format(TE.fixed),
-                 meta:::rmSpace(meta:::p.ci(format(lowTE.fixed),
-                                            format(uppTE.fixed))),
-                 format(round(zTE.fixed, 4)),
-                 meta:::format.p(pTE.fixed))
+                 formatN(maxbias, digits, big.mark = big.mark),
+                 formatN(TE.fixed, digits, "NA", big.mark = big.mark),
+                 formatCI(formatN(lowTE.fixed, digits, "NA",
+                                  big.mark = big.mark),
+                          formatN(uppTE.fixed, digits, "NA",
+                                  big.mark = big.mark)),
+                 formatN(round(zTE.fixed, digits = digits.zval),
+                         digits.zval, big.mark = big.mark),
+                 formatPT(pTE.fixed, digits = digits.pval,
+                          scientific = scientific.pval))
     
     zlab <- "z"
     
@@ -139,16 +166,21 @@ print.orbbound <- function(x,
     prmatrix(res, quote = FALSE, right = TRUE)
   }
   
+  
   if (comb.random & (x$tau != 0 | !comb.fixed)) {
     cat("\nRandom effects model\n\n")
     
     res <- cbind(k.suspect,
-                 format(maxbias),
-                 format(TE.random),
-                 meta:::rmSpace(meta:::p.ci(format(lowTE.random),
-                                            format(uppTE.random))),
-                 format(round(zTE.random, 4)),
-                 meta:::format.p(pTE.random))
+                 formatN(maxbias, digits, big.mark = big.mark),
+                 formatN(TE.random, digits, "NA", big.mark = big.mark),
+                 formatCI(formatN(lowTE.random, digits, "NA",
+                                  big.mark = big.mark),
+                          formatN(uppTE.random, digits, "NA",
+                                  big.mark = big.mark)),
+                 formatN(round(zTE.random, digits = digits.zval),
+                         digits.zval, big.mark = big.mark),
+                 formatPT(pTE.random, digits = digits.pval,
+                          scientific = scientific.pval))
     
     zlab <- "z"
     
@@ -161,6 +193,7 @@ print.orbbound <- function(x,
     
     prmatrix(res, quote = FALSE, right = TRUE)
   }
+  
   
   if (comb.fixed | comb.random) {
     ## Print information on summary method:
@@ -169,6 +202,7 @@ print.orbbound <- function(x,
                    sm = sm,
                    k.all = 666)
   }
+  
   
   invisible(NULL)
 }

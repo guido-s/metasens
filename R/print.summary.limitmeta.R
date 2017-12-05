@@ -1,14 +1,18 @@
 print.summary.limitmeta <- function(x,
                                     backtransf = x$backtransf,
-                                    digits = meta:::.settings$digits,
+                                    digits = gs("digits"),
                                     header = TRUE,
                                     pscale = x$x$pscale,
                                     irscale = x$x$irscale,
                                     irunit = x$x$irunit,
-                                    digits.zval = meta:::.settings$digits.zval,
-                                    digits.Q = meta:::.settings$digits.Q,
-                                    digits.tau2 = meta:::.settings$digits.tau2,
-                                    digits.I2 = meta:::.settings$digits.I2,
+                                    digits.zval = gs("digits.zval"),
+                                    digits.pval = gs("digits.pval"),
+                                    digits.Q = gs("digits.Q"),
+                                    digits.tau2 = gs("digits.tau2"),
+                                    digits.I2 = gs("digits.I2"),
+                                    scientific.pval = gs("scientific.pval"),
+                                    big.mark = gs("big.mark"),
+                                    print.Rb = gs("print.Rb"),
                                     warn.backtransf = FALSE,
                                     ...) {
   
@@ -22,11 +26,9 @@ print.summary.limitmeta <- function(x,
   ##
   chklogical <- meta:::chklogical
   chknumeric <- meta:::chknumeric
-  chknumeric <- meta:::chknumeric
-  format.NA <- meta:::format.NA
-  format.p <- meta:::format.p
-  format.tau <- meta:::format.tau
-  p.ci <- meta:::p.ci
+  formatN <- meta:::formatN
+  formatPT <- meta:::formatPT
+  formatCI <- meta:::formatCI
   
   
   ##
@@ -37,12 +39,16 @@ print.summary.limitmeta <- function(x,
   chknumeric(digits, min = 0, single = TRUE)
   chknumeric(digits.tau2, min = 0, single = TRUE)
   chknumeric(digits.zval, min = 0, single = TRUE)
+  chknumeric(digits.pval, min = 1, single = TRUE)
   chknumeric(digits.Q, min = 0, single = TRUE)
   chknumeric(digits.I2, min = 0, single = TRUE)
   chklogical(backtransf)
+  chklogical(scientific.pval)
+  chklogical(print.Rb)
   chklogical(warn.backtransf)
-  is.prop <- x$sm %in% c("PLOGIT", "PLN", "PRAW", "PAS", "PFT")
-  is.rate <- x$sm %in% c("IR", "IRLN", "IRS", "IRFT")
+  ##
+  is.prop <- meta:::is.prop(x$sm)
+  is.rate <- meta:::is.rate(x$sm)
   ##
   if (!is.prop)
     pscale <- 1
@@ -179,11 +185,12 @@ print.summary.limitmeta <- function(x,
   ##
   res <- cbind(c("Adjusted estimate",
                  "Unadjusted estimate"),
-               format.NA(TEs, digits, "NA"),
-               p.ci(format.NA(lower, digits, "NA"),
-                           format.NA(upper, digits, "NA")),
-               format.NA(zvals, digits.zval),
-               format.p(pvals)
+               formatN(TEs, digits, "NA", big.mark = big.mark),
+               formatCI(formatN(lower, digits, "NA", big.mark = big.mark),
+                        formatN(upper, digits, "NA", big.mark = big.mark)),
+               formatN(zvals, digits.zval, big.mark = big.mark),
+               formatPT(pvals, digits = digits.pval,
+                        scientific = scientific.pval)
                )
   ##
   dimnames(res) <- list(rep("", dim(res)[[1]]),
@@ -196,37 +203,45 @@ print.summary.limitmeta <- function(x,
   ##  
   if (!is.na(x$tau)) {
     ##
-    cat(paste("\nQuantifying heterogeneity:\n ",
-              if (x$tau^2 > 0 & x$tau^2 < 0.0001)
-                paste("tau^2", format.tau(x$tau^2))
-              else
-                paste("tau^2 = ",
-                      ifelse(x$tau == 0,
-                             "0",
-                             format.NA(round(x$tau^2, digits.tau2), digits.tau2)),
-                      sep = ""),
+    cat(paste("\nQuantifying heterogeneity:\n",
+              ##
+              formatPT(x$tau^2,
+                       lab = TRUE, labval = gs("text.tau2"),
+                       digits = digits.tau2,
+                       big.mark = big.mark,
+                       lab.NA = "NA"),
+              ##
               paste("; ",
                     "I^2 = ",
-                    if (is.nan(I2)) "NA" else paste(format.NA(I2, digits.I2), "%", sep = ""),
+                    if (is.nan(I2)) "NA" else paste(formatN(I2, digits.I2),
+                                                    "%", sep = ""),
                     ifelse(k > 2 & !(is.na(lowI2) | is.na(uppI2)),
                            paste(" ",
-                                 p.ci(paste(format.NA(lowI2, digits.I2), "%", sep = ""),
-                                             paste(format.NA(uppI2, digits.I2), "%", sep = "")),
+                                 formatCI(paste(formatN(lowI2, digits.I2),
+                                                "%", sep = ""),
+                                          paste(formatN(uppI2, digits.I2),
+                                                "%", sep = "")),
                                  sep = ""),
                            ""),
                     "; ",
                     "G^2 = ",
-                    if (is.nan(G2)) "NA" else paste(format.NA(G2, digits.I2), "%", sep = ""),
-                    ";\n ",
-                    "Rb = ",
-                    if (is.nan(Rb)) "NA" else paste(format.NA(Rb, digits.I2), "%", sep = ""),
-                    ifelse(k > 2 & !(is.na(lowRb) | is.na(uppRb)),
-                           paste(" ",
-                                 p.ci(paste(format.NA(lowRb, digits.I2), "%", sep = ""),
-                                             paste(format.NA(uppRb, digits.I2), "%", sep = "")),
-                                 sep = ""),
-                           ""),
+                    if (is.nan(G2)) "NA" else paste(formatN(G2, digits.I2),
+                                                    "%", sep = ""),
                     sep = ""),
+              if (print.Rb)
+                paste(";\n ",
+                      "Rb = ",
+                      if (is.nan(Rb)) "NA" else paste(formatN(Rb, digits.I2),
+                                                      "%", sep = ""),
+                      ifelse(k > 2 & !(is.na(lowRb) | is.na(uppRb)),
+                             paste(" ",
+                                   formatCI(paste(formatN(lowRb, digits.I2),
+                                                  "%", sep = ""),
+                                            paste(formatN(uppRb, digits.I2),
+                                                  "%", sep = "")),
+                                   sep = ""),
+                             ""),
+                      sep = ""),
               "\n", sep = ""))
   }
   
@@ -239,7 +254,7 @@ print.summary.limitmeta <- function(x,
                Qd(x$Q.resid, k - 2))
   Qds$Q  <- format(Qds$Q)
   Qds$df <- format(Qds$df)
-  Qds$p  <- format.p(Qds$p)
+  Qds$p  <- formatPT(Qds$p, digits = digits.pval, scientific = scientific.pval)
   ##
   Qd1 <- Qds[1, ]
   Qd2 <- Qds[2, ]

@@ -1,20 +1,19 @@
 print.limitmeta <- function(x,
                             sortvar,
                             backtransf = x$backtransf,
-                            digits = max(3, .Options$digits - 3),
-                            header = TRUE, ...) {
+                            digits = gs("digits"),
+                            big.mark = gs("big.mark"),
+                            ...) {
+  
   
   meta:::chkclass(x, "limitmeta")
-  
-  
-  format.TE <- function(TE, na = FALSE) {
-    TE <- meta:::rmSpace(TE)
-    if (na) res <- format(TE)
-    else res <- ifelse(is.na(TE), "", format(TE))
-    res
-  }
-  
-  
+  ##
+  bt <- meta:::backtransf
+  chklogical <- meta:::chklogical
+  chknumeric <- meta:::chknumeric
+  formatN <- meta:::formatN
+  formatCI <- meta:::formatCI
+  ##
   sm <- x$sm
   
   
@@ -30,6 +29,10 @@ print.limitmeta <- function(x,
       backtransf <- !list(...)[["logscale"]]
     else
       backtransf <- TRUE
+  else
+    chklogical(backtransf)
+  ##
+  chknumeric(digits, min = 0, single = TRUE)
   
   
   sm.lab <- sm
@@ -76,19 +79,13 @@ print.limitmeta <- function(x,
     ##
     npft.ma <- 1 / mean(1 / x$x$n)
     ##
-    TE    <- meta:::backtransf(TE, sm, "mean",
-                               npft.ma, warn = TRUE)
-    lowTE <- meta:::backtransf(lowTE, sm, "lower",
-                               npft.ma, warn = TRUE)
-    uppTE <- meta:::backtransf(uppTE, sm, "upper",
-                               npft.ma, warn = TRUE)
+    TE    <- bt(TE, sm, "mean", npft.ma, warn = TRUE)
+    lowTE <- bt(lowTE, sm, "lower", npft.ma, warn = TRUE)
+    uppTE <- bt(uppTE, sm, "upper", npft.ma, warn = TRUE)
     ##
-    TE.limit <- meta:::backtransf(TE.limit, sm, "mean",
-                                  npft.ma, warn = TRUE)
-    lowTE.limit <- meta:::backtransf(lowTE.limit, sm, "lower",
-                                     npft.ma, warn = TRUE)
-    uppTE.limit <- meta:::backtransf(uppTE.limit, sm, "upper",
-                                     npft.ma, warn = TRUE)
+    TE.limit <- bt(TE.limit, sm, "mean", npft.ma, warn = TRUE)
+    lowTE.limit <- bt(lowTE.limit, sm, "lower", npft.ma, warn = TRUE)
+    uppTE.limit <- bt(uppTE.limit, sm, "upper", npft.ma, warn = TRUE)
   }
   ##
   TE    <- round(TE, digits)
@@ -98,22 +95,20 @@ print.limitmeta <- function(x,
   TE.limit    <- round(TE.limit, digits)
   lowTE.limit <- round(lowTE.limit, digits)
   uppTE.limit <- round(uppTE.limit, digits)
-  ##
-  TE    <- format.TE(TE, na = TRUE)
-  lowTE <- format(lowTE, trim = TRUE)
-  uppTE <- format(uppTE, trim = TRUE)
-  ##
-  TE.limit    <- format.TE(TE.limit, na = TRUE)
-  lowTE.limit <- format(lowTE.limit, trim = TRUE)
-  uppTE.limit <- format(uppTE.limit, trim = TRUE)
   
   
   res <- cbind(" ",
-               TE,
-               meta:::p.ci(lowTE, uppTE),
+               formatN(TE, digits, "NA", big.mark = big.mark),
+               formatCI(formatN(lowTE, digits, "NA",
+                                big.mark = big.mark),
+                        formatN(uppTE, digits, "NA",
+                                big.mark = big.mark)),
                "  ",
-               TE.limit,
-               meta:::p.ci(lowTE.limit, uppTE.limit))
+               formatN(TE.limit, digits, "NA", big.mark = big.mark),
+               formatCI(formatN(lowTE.limit, digits, "NA",
+                                big.mark = big.mark),
+                        formatN(uppTE.limit, digits, "NA",
+                                big.mark = big.mark)))
   ##
   dimnames(res) <-
     list(x$studlab, c("", sm.lab, ci.lab, "", sm.lab, ci.lab))
@@ -126,7 +121,9 @@ print.limitmeta <- function(x,
   
   
   print(summary(x),
-        digits = digits, header = FALSE, backtransf = backtransf)
+        header = FALSE,
+        digits = digits, backtransf = backtransf, big.mark = big.mark,
+        ...)
   
   
   invisible(NULL)

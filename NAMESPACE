@@ -19,7 +19,7 @@ S3method(print, summary.limitmeta)
 S3method(summary, limitmeta)
 S3method(funnel, limitmeta)
 
-importFrom("meta", "ci", "forest", "funnel", "metagen", "metabias")
+importFrom("meta", "ci", "forest", "funnel", "metagen", "metabias", "gs")
 
 importFrom("grDevices", "contourLines")
 

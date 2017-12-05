@@ -116,7 +116,7 @@ forest.orbbound <- function(x,
          leftlabs = leftlabs,
          smlab = smlab,
          just.studlab = "center",
-         weight = "same",
+         weight.study = "same",
          ...)
   
   

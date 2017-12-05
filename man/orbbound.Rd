@@ -85,10 +85,8 @@ forest(orb1, xlim=c(0.75, 1.5))
 # Same result
 orb2 <- orbbound(meta1, k.suspect=1:5, left=FALSE)
 print(orb2, digits=2)
-forest(orb2, xlim=c(0.75, 1.5))
 
 # Assuming bias in other direction
 orb3 <- orbbound(meta1, k.suspect=1:5, left=TRUE)
 print(orb3, digits=2)
-forest(orb3, xlim=c(0.75, 1.5))
 }

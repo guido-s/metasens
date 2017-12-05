@@ -1,8 +1,21 @@
 print.summary.copas <- function(x,
-                                digits = max(3, .Options$digits - 3),
                                 backtransf = x$backtransf,
+                                digits = gs("digits"),
+                                digits.pval = max(gs("digits.pval"), 2),
+                                digits.prop=gs("digits.prop"),
+                                scientific.pval=gs("scientific.pval"),
+                                big.mark=gs("big.mark"),
                                 header = TRUE,
                                 ...) {
+  
+  
+  meta:::chkclass(x, "summary.copas")
+  ##
+  chklogical <- meta:::chklogical
+  chknumeric <- meta:::chknumeric
+  formatCI <- meta:::formatCI
+  formatN <- meta:::formatN
+  formatPT <- meta:::formatPT
   
   
   cl <- class(x)[1]
@@ -17,17 +30,25 @@ print.summary.copas <- function(x,
       backtransf <- !list(...)[["logscale"]]
     else
       backtransf <- TRUE
+  else
+    chklogical(backtransf)
+  ##
+  chknumeric(digits, min = 0, single = TRUE)
+  chknumeric(digits.pval, min = 1, single = TRUE)
+  chknumeric(digits.prop, min = 0, single = TRUE)
+  chklogical(scientific.pval)
   
   
   sm <- x$sm
+  relative <- meta:::is.relative.effect(sm)
   ##
-  if (!backtransf & meta:::is.relative.effect(sm))
+  if (!backtransf & relative)
     sm.lab <- paste("log", sm, sep = "")
   else
     sm.lab <- sm
   
   
-  if (backtransf & meta:::is.relative.effect(sm)) {
+  if (backtransf & relative) {
     x$slope$TE    <- exp(x$slope$TE)
     x$slope$lower <- exp(x$slope$lower)
     x$slope$upper <- exp(x$slope$upper)
@@ -49,30 +70,33 @@ print.summary.copas <- function(x,
   TE.random    <- round(x$random$TE, digits)
   lowTE.random <- round(x$random$lower, digits)
   uppTE.random <- round(x$random$upper, digits)
-  
-  
+  ##  
   TE.slope    <- round(x$slope$TE, digits)
   lowTE.slope <- round(x$slope$lower, digits)
   uppTE.slope <- round(x$slope$upper, digits)
   ##
-  publprob <- x$publprob
-  N.unpubl <- x$N.unpubl
-  pval.TE  <- x$slope$p
-  pval.rsb <- x$pval.rsb
+  publprob <- round(x$publprob, digits.prop)
+  pval.TE  <- round(x$slope$p, digits.pval)
+  pval.rsb <- round(x$pval.rsb, digits.pval)
   
   
-  TE <- format(c(TE.slope, NA, TE.adj, TE.random), trim = TRUE)
-  N.unpubl <- format(c(round(N.unpubl), NA,
-                       round(x$N.unpubl.adj), NA), trim = TRUE)
-  ##
-  res <- cbind(c(format(round(publprob, 2)),
+  res <- cbind(c(formatN(publprob, digits.prop, ""),
                  "", "Copas model (adj)","Random effects model"),
-               ifelse(TE == "NA", "", TE),
-               meta:::p.ci(format(c(lowTE.slope, NA, lowTE.adj, lowTE.random)),
-                           format(c(uppTE.slope, NA, uppTE.adj, uppTE.random))),
-               meta:::format.p(c(pval.TE, NA, x$adjust$p, x$random$p)),
-               meta:::format.p(c(pval.rsb, NA, x$pval.rsb.adj, NA)),
-               ifelse(N.unpubl == "NA", "", N.unpubl)
+               formatN(c(TE.slope, NA, TE.adj, TE.random),
+                       digits, "", big.mark = big.mark),
+               formatCI(formatN(c(lowTE.slope, NA, lowTE.adj, lowTE.random),
+                                digits, "NA", big.mark = big.mark),
+                        formatN(c(uppTE.slope, NA, uppTE.adj, uppTE.random),
+                                digits, "NA", big.mark = big.mark)),
+               formatPT(c(pval.TE, NA, x$adjust$p, x$random$p),
+                        digits = digits.pval,
+                        scientific = scientific.pval),
+               formatPT(c(pval.rsb, NA, x$pval.rsb.adj, NA),
+                        digits = digits.pval,
+                        scientific = scientific.pval),
+               formatN(c(round(x$N.unpubl), NA,
+                         round(x$N.unpubl.adj), NA),
+                       0, "", big.mark = big.mark)
                )
   ##
   res[meta:::rmSpace(res) == "--"] <- ""

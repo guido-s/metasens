@@ -12,7 +12,12 @@
 \method{print}{orbbound}(x,
       comb.fixed=x$x$comb.fixed, comb.random=x$x$comb.random,
       header=TRUE, backtransf=x$backtransf,
-      digits=max(3, .Options$digits - 3),
+      digits=gs("digits"),
+      digits.zval=gs("digits.zval"),
+      digits.pval=max(gs("digits.pval"), 2),
+      digits.tau2=gs("digits.tau2"),
+      scientific.pval=gs("scientific.pval"),
+      big.mark=gs("big.mark"),
       ...)
 }
 
@@ -30,7 +35,18 @@
     ratios and results for \code{sm="ZCOR"} are printed as
     correlations rather than Fisher's z transformed correlations, for
     example.}
-  \item{digits}{Minimal number of significant digits, see \code{print.default}.}
+  \item{digits}{Minimal number of significant digits, see
+    \code{print.default}.}
+  \item{digits.zval}{Minimal number of significant digits for z- or
+    t-value, see \code{print.default}.}
+  \item{digits.pval}{Minimal number of significant digits for p-value
+    of overall treatment effect, see \code{print.default}.}
+  \item{digits.tau2}{Minimal number of significant digits for
+    between-study variance, see \code{print.default}.}
+  \item{scientific.pval}{A logical specifying whether p-values should
+    be printed in scientific notation, e.g., 1.2345e-01 instead of
+    0.12345.}
+  \item{big.mark}{A character used as thousands separator.} 
   \item{\dots}{Additional arguments}
 }
 

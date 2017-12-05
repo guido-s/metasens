@@ -7,13 +7,19 @@
    Print and summary method for objects of class \code{copas}.
 }
 \usage{
-\method{print}{copas}(x, sign.rsb=x$sign.rsb, backtransf=x$backtransf,
-      digits=max(3, .Options$digits - 3), ...)
+\method{print}{copas}(x,
+      sign.rsb=x$sign.rsb, backtransf=x$backtransf,
+      digits=gs("digits"), digits.se=gs("digits.se"),
+      ...)
 
 \method{summary}{copas}(object, level=0.95, sign.rsb=object$sign.rsb, ...)
 
-\method{print}{summary.copas}(x, digits = max(3, .Options$digits - 3),
-      backtransf=x$backtransf, header=TRUE, ...)
+\method{print}{summary.copas}(x,
+      backtransf=x$backtransf,
+      digits=gs("digits"), digits.pval=max(gs("digits.pval"), 2),
+      digits.prop=gs("digits.prop"),
+      scientific.pval=gs("scientific.pval"), big.mark=gs("big.mark"),
+      header=TRUE, ...)
 }
 \arguments{
   \item{x}{An object of class \code{copas} or \code{summary.copas}.}
@@ -26,7 +32,18 @@
     back transformed in printouts and plots. If \code{backtransf=TRUE}
     (default), results for \code{sm="OR"} are printed as odds ratios
     rather than log odds ratio, for example.}
-  \item{digits}{Minimal number of significant digits, see \code{print.default}.}
+  \item{digits}{Minimal number of significant digits, see
+    \code{print.default}.}
+  \item{digits.se}{Minimal number of significant digits for standard
+    deviations and standard errors, see \code{print.default}.}
+  \item{digits.pval}{Minimal number of significant digits for p-value
+    of overall treatment effect, see \code{print.default}.}
+  \item{digits.prop}{Minimal number of significant digits for
+    proportions, see \code{print.default}.} 
+  \item{scientific.pval}{A logical specifying whether p-values should
+    be printed in scientific notation, e.g., 1.2345e-01 instead of
+    0.12345.}
+  \item{big.mark}{A character used as thousands separator.}   
   \item{header}{A logical indicating whether information on title of
     meta-analysis, comparison and outcome should be printed at the
     beginning of the printout.}

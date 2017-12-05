@@ -83,7 +83,9 @@ print(orb1, digits=2)
 
 forest(orb1, xlim=c(0.7, 1.5))
 
+\dontrun{
 forest(orb1, backtransf=FALSE)
+}
 }
 
 \keyword{hplot}
