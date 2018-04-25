@@ -14,7 +14,7 @@ plot.copas <- function(x,
   meta:::chkclass(x, "copas")
   
   if (!is.numeric(which) || any(which < 1) || any(which > 4)) 
-    stop("'Argument which' must be in 1:4")
+    stop("Argument 'which' must be in 1:4")
   
   if (is.null(sign.rsb))
     sign.rsb <- 0.1
