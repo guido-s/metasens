@@ -36,74 +36,94 @@
       '... largest se' instead of '... largest sd'
 
 
-2016-02-16, version 0.3-0
+*** metasens, version 0.3-0, 2016-02-16 ***
 
-Version of R package meta must be larger or equal 4.0-0
+ ** Major changes **
 
-Function copas:
-- new argument 'sign.rsb' (which has been available in function
-  summary.copas since version 0.6-3 of R package copas)
-- use internal chklevel function from R package meta to check
-  significance level
+  * Version of R package meta must be larger or equal 4.0-0
 
-Functions plot.copas, print.copas and summary.copas:
-- consider default value for argument 'sign.rsb' from copas object
-- use internal chklevel function from R package meta to check
-  significance level
+  * Check implemented which are available in R package meta
 
-Function print.copas:
-- bug fix such that other values for sign.rsb than 0.1 are considered
-- use internal chklevel function from R package meta to check
-  significance level
+ ** User-visible changes **
 
-Function limitmeta:
-- argument 'sm' removed (not necessary)
-- set z- and p-value of adjusted effect equal to NA for metaprop objects
+  * copas():
+    - new argument 'sign.rsb' (which has been available in function
+      summary.copas since version 0.6-3 of R package copas)
 
-Function print.summary.limitmeta:
-- bug fix such that no error occurs for metaprop objects
+  * plot.copas(), print.copas(), and summary.copas():
+    - consider default value for argument 'sign.rsb' from copas object
 
-Help pages updated accordingly
+  * limitmeta():
+    - argument 'sm' removed (not necessary)
+    - set z- and p-value of adjusted effect equal to NA for metaprop
+      objects
+  
+  * Help pages updated
 
+ ** Bug fixes **
 
-2014-12-06, version 0.2-0
+  * print.copas():
+    - other values than 0.1 considered for argument 'sign.rsb'
+    
+  * print.summary.limitmeta():
+    - no error for metaprop objects
 
-Argument 'backtransf' available in R package meta during creation of
-an R object is incorporated in R package metasens.
+ ** Internal changes **
 
-R function copas, limitmeta, funnel.limitmeta:
-- new argument 'backtransf'
-
-R function orbbound:
-- new argument 'backtransf'
-- new argument 'left' to chose whether selection bias is expected on
-  the left or right side of the funnel plot
-
-R function forest.orbbound, print.copas, print.limitmeta,
-print.orbbound, print.summary.copas, print.summary.limitmeta:
-- new argument 'backtransf' which replaces argument 'logscale'
-
-Several help pages updated to reflect changes in version 0.3-0
+  * copas() and print.copas():
+    - use internal function chklevel() from R package meta to check
+      significance level
 
 
-2014-06-24, version 0.1-0
+*** metasens, version 0.2-0, 2014-12-06 ***
 
-First version of R package metasens published on CRAN (replacement of
-R package copas).
+ ** Major changes **
+ 
+  * Argument 'backtransf' added to R package meta, version 3.8-0,
+    considered in R package metasens.
 
-Changes compared to version 0.8-0 of R package copas.
+ ** User-visible changes **
 
-New functions:
-- limitmeta (limit meta-analysis)
-- print.limitmeta, summary.limitmeta, print.summary.limitmeta
-  (print and summary functions)
-- funnel.limitmeta (funnel plot for limit meta-analysis object)
-- radialregression (regression based on radial plot, used internally)
+  * copas(), limitmeta(), and funnel.limitmeta():
+    - new argument 'backtransf'
 
-Functions print.copas and print.summary.copas:
-- new argument 'logscale' (print results for relative effect measures
-  on log scale)
+  * orbbound():
+    - new argument 'backtransf'
+    - new argument 'left' to chose whether selection bias is expected
+      on the left or right side of the funnel plot
 
-New dataset nsaids
+  * forest.orbbound(), print.copas(), print.limitmeta(),
+    print.orbbound(), print.summary.copas(),
+    print.summary.limitmeta():
+    - new argument 'backtransf' which replaces argument 'logscale'
 
-New help pages added and update of existing help pages
+  * Several help pages updated
+
+
+*** metasens, version 0.1-0, 2014-06-24 ***
+
+ ** First version released on CRAN - replacement of R package copas **
+
+ ** Major changes **
+
+  * Limit meta-analysis implemented (Rücker et al. (2011)
+    <DOI:10.1093/biostatistics/kxq046>)
+
+ ** User-visible changes **
+
+  * New functions:
+    - limitmeta(), print.limitmeta()
+    - summary.limitmeta(), print.summary.limitmeta()
+    - funnel.limitmeta()
+
+  * print.copas() and print.summary.copas():
+    - new argument 'logscale' to print results for relative effect
+      measures on log scale
+
+  * New dataset 'nsaids'
+
+  * New help pages added and update of existing help pages
+
+ ** Internal changes **
+ 
+  * New internal function radialregression()
