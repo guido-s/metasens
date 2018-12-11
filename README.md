@@ -5,7 +5,6 @@ Official GitHub repository of R package **metasens**
 [![CRAN Version](http://www.r-pkg.org/badges/version/metasens)](https://cran.r-project.org/package=metasens)
 [![Monthly Downloads](http://cranlogs.r-pkg.org/badges/metasens)](http://cranlogs.r-pkg.org/badges/metasens)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/metasens)](http://cranlogs.r-pkg.org/badges/grand-total/metasens)
-[![Research software impact](http://depsy.org/api/package/cran/metasens/badge.svg)](http://depsy.org/package/r/metasens)
 
 
 ## Description
