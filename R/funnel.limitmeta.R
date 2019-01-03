@@ -1,3 +1,95 @@
+#' Funnel plot for limit meta-analysis
+#' 
+#' Draws a funnel plot in the active graphics window.
+#' 
+#' A funnel plot is drawn in the active graphics window. In addition
+#' this function adds the adjusted effect estimate as well as a
+#' nonlinear regression line (also called adjusted regression line) if
+#' argument \code{line} is \code{TRUE}. The adjusted regression line
+#' is representing the dependence of the treatment effect estimate on
+#' the standard error across studies. The adjusted regression line is
+#' only plotted in addition to the adjusted treatment effect if
+#' argument \code{method.adjust="beta0"} (default) has been used in
+#' the \code{\link{limitmeta}} function.
+#' 
+#' If argument \code{shrunken} is \code{TRUE} the shrunken effect
+#' estimates are also plotted. Lines are connecting original and
+#' shrunken effect estimates.
+#' 
+#' Internally, R function \code{\link{funnel.meta}} is called to
+#' create a funnel plot. For more information see help page of the
+#' \code{\link{funnel.meta}} function.
+#' 
+#' @param x An object of class \code{limitmeta}.
+#' @param pch The plotting symbol used for individual studies.
+#' @param cex The magnification to be used for plotting symbol.
+#' @param col A vector with colour of plotting symbols.
+#' @param bg A vector with background colour of plotting symbols (only
+#'   used if \code{pch} in \code{21:25}).
+#' @param lwd The line width for confidence intervals (see
+#'   \code{\link{funnel.meta}}).
+#' @param pch.adjust The plotting symbol used for the adjusted effect
+#'   estimate.
+#' @param cex.adjust The magnification to be used for the plotting
+#'   symbol of the adjusted effect estimate.
+#' @param col.adjust Colour of plotting symbol for adjusted effect
+#'   estimate.
+#' @param bg.adjust Background colour of plotting symbol for adjusted
+#'   effect estimate.
+#' @param line A logical indicating whether adjusted regression line
+#'   should be plotted.
+#' @param xmin.line Minimal value for the adjusted regression line (on
+#'   x-axis).
+#' @param xmax.line Maximum value for the adjusted regression line (on
+#'   x-axis).
+#' @param lty.line Line type of the adjusted regression line.
+#' @param col.line Color of the adjusted regression line.
+#' @param lwd.line The line width of the adjusted regression line.
+#' @param shrunken A logical indicating whether shrunken treatment
+#'   estimates should be plotted.
+#' @param pch.shrunken The plotting symbol used for shrunken effect
+#'   estimates.
+#' @param cex.shrunken The magnification to be used for the plotting
+#'   symbol of the shrunken effect estimates.
+#' @param col.shrunken Colour of plotting symbol for shrunken effect
+#'   estimates.
+#' @param bg.shrunken Background colour of plotting symbol for
+#'   shrunken effect estimates.
+#' @param lty.connect Line type for line connecting original and
+#'   shrunken treatment estimates.
+#' @param lwd.connect The line width of the connecting lines.
+#' @param col.connect Color of the connecting lines.
+#' @param backtransf A logical indicating whether results should be
+#'   back transformed in printouts and plots. If
+#'   \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
+#'   printed as odds ratios rather than log odds ratio, for example.
+#' @param \dots Additional arguments for \code{\link{funnel.meta}}
+#'   function.
+#' 
+#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}, Gerta
+#'   Rücker \email{ruecker@@imbi.uni-freiburg.de}
+#' 
+#' @seealso \code{\link{limitmeta}}, \code{\link[meta]{funnel.meta}}
+#' 
+#' @examples
+#' data(Moore1998)
+#' m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
+#'               data = Moore1998, sm = "OR", method = "Inverse")
+#' 
+#' print(summary(limitmeta(m1)), digits = 2)
+#' funnel(limitmeta(m1))
+#' 
+#' # Print results on log scale
+#' #
+#' print(summary(limitmeta(m1)), digits = 2, backtransf = FALSE)
+#' funnel(limitmeta(m1), backtransf = FALSE)
+#' @export funnel.limitmeta
+#' @export
+#'
+#' @importFrom meta funnel
+#' @importFrom graphics curve points segments
+
+
 funnel.limitmeta <- function(x,
                              ##
                              pch = 21,

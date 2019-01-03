@@ -1,3 +1,6 @@
+#' @importFrom stats pnorm
+
+
 copas.loglik.with.beta <- function(x, gamma = c(-1.5, 0.08),
                                    TE, seTE) {
   

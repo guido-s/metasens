@@ -1,3 +1,12 @@
+*** metasens, version 0.3-3, 2019-mm-dd ***
+
+ ** Major changes **
+ 
+  * Use roxygen2 for development of R package metasens
+
+  * Dataset 'nsaids' renamed to 'Moore1998'
+
+
 *** metasens, version 0.3-2, 2017-12-06 ***
 
  ** Major changes **

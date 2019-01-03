@@ -1,3 +1,49 @@
+#' Print method for limit meta-analysis
+#' 
+#' Print method for objects of class \code{limitmeta}.
+#' 
+#' This function prints the summary information from
+#' \code{summary.limitmeta} together with the following study
+#' information:
+#' 
+#' \itemize{
+#' \item Effect estimate with confidence interval
+#' \item Shrunken effect estimates with confidence interval
+#' }
+#' 
+#' @aliases print.limitmeta
+#' 
+#' @param x An object of class \code{limitmeta}
+#' @param sortvar An optional vector used to sort the individual
+#'   studies (must be of same length as \code{x$TE}).
+#' @param backtransf A logical indicating whether results should be
+#'   back transformed in printouts and plots. If
+#'   \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
+#'   printed as odds ratios rather than log odds ratio, for example.
+#' @param digits Minimal number of significant digits, see
+#'   \code{print.default}.
+#' @param big.mark A character used as thousands separator.
+#' @param \dots Additional arguments which are
+#'   passed on to \code{print.summary.limitmeta} called internally.
+#'
+#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#'
+#' @seealso \code{\link{limitmeta}}, \code{\link{summary.limitmeta}}
+#' 
+#' @keywords print
+#' 
+#' @examples
+#' data(Moore1998)
+#' m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
+#'               data = Moore1998, sm = "OR", method = "Inverse")
+#' 
+#' print(limitmeta(m1), digits = 2)
+#' @export print.limitmeta
+#' @export
+#'
+#' @importFrom meta ci gs
+
+
 print.limitmeta <- function(x,
                             sortvar,
                             backtransf = x$backtransf,

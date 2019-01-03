@@ -1,3 +1,72 @@
+#' Print method for summary of limit meta-analysis
+#' 
+#' Print method for objects of class \code{summary.limitmeta}.
+#' 
+#' This function prints summary information for a limit meta-analysis
+#' (Rücker et al., 2011); unadjusted as well as adjusted effect
+#' estimates in a random effects model are printed.
+#' 
+#' @aliases print.summary.limitmeta
+#' 
+#' @param x An object of class \code{summary.limitmeta}.
+#' @param backtransf A logical indicating whether results should be
+#'   back transformed in printouts and plots. If
+#'   \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
+#'   printed as odds ratios rather than log odds ratio, for example.
+#' @param digits Minimal number of significant digits, see
+#'   \code{print.default}.
+#' @param header A logical indicating whether information on title of
+#'   meta-analysis, comparison and outcome should be printed at the
+#'   beginning of the printout.
+#' @param pscale A numeric giving scaling factor for printing of
+#'   single event probabilities, i.e. if argument \code{sm} is equal
+#'   to \code{"PLOGIT"}, \code{"PLN"}, \code{"PRAW"}, \code{"PAS"}, or
+#'   \code{"PFT"}.
+#' @param irscale A numeric defining a scaling factor for printing of
+#'   rates, i.e. if argument \code{sm} is equal to \code{"IR"},
+#'   \code{"IRLN"}, \code{"IRS"}, or \code{"IRFT"}.
+#' @param irunit A character specifying the time unit used to
+#'   calculate rates, e.g. person-years.
+#' @param digits.zval Minimal number of significant digits for z- or
+#'   t-value, see \code{print.default}.
+#' @param digits.pval Minimal number of significant digits for p-value
+#'   of overall treatment effect, see \code{print.default}.
+#' @param digits.Q Minimal number of significant digits for
+#'   heterogeneity statistic Q, see \code{print.default}.
+#' @param digits.tau2 Minimal number of significant digits for
+#'   between-study variance, see \code{print.default}.
+#' @param digits.I2 Minimal number of significant digits for I-squared
+#'   and Rb statistic, see \code{print.default}.
+#' @param scientific.pval A logical specifying whether p-values should
+#'   be printed in scientific notation, e.g., 1.2345e-01 instead of
+#'   0.12345.
+#' @param big.mark A character used as thousands separator.
+#' @param print.Rb A logical specifying whether heterogeneity
+#'   statistic Rb should be printed.
+#' @param warn.backtransf A logical indicating whether a warning
+#'   should be printed if backtransformed proportions and rates are
+#'   below 0 and backtransformed proportions are above 1.
+#' @param \dots Additional arguments (ignored).
+#' 
+#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#'
+#' @seealso \code{\link{limitmeta}}, \code{\link{summary.limitmeta}}
+#' 
+#' @keywords print
+#' 
+#' @examples
+#' data(Moore1998)
+#' m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
+#'               data = Moore1998, sm = "OR", method = "Inverse")
+#' 
+#' print(summary(limitmeta(m1)), digits = 2)
+#' @export print.summary.limitmeta
+#' @export
+#'
+#' @importFrom meta gs
+#' @importFrom stats pchisq
+
+
 print.summary.limitmeta <- function(x,
                                     backtransf = x$backtransf,
                                     digits = gs("digits"),

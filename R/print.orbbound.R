@@ -1,3 +1,72 @@
+#' Print method for objects of class orbbound
+#' 
+#' Print method for objects of class \code{orbbound}.
+#' 
+#' For summary measures 'RR', 'OR', and 'HR' column labeled maxbias
+#' contains the relative bias, e.g. a value of 1.10 means a maximum
+#' overestimation by 10 percent. If \code{logscale=TRUE} for these
+#' summary measures, maximum bias is instead printed as absolute bias.
+#' 
+#' @param x An object of class \code{orbbound}.
+#' @param comb.fixed A logical indicating whether sensitivity analysis
+#'   for fixed effect model should be printed.
+#' @param comb.random A logical indicating whether sensitivity
+#'   analysis for random effects model should be printed.
+#' @param header A logical indicating whether information on
+#'   meta-analysis should be printed at top of printout.
+#' @param backtransf A logical indicating whether printed results
+#'   should be back transformed. If \code{backtransf=TRUE}, results
+#'   for \code{sm="OR"} are printed as odds ratios rather than log
+#'   odds ratios and results for \code{sm="ZCOR"} are printed as
+#'   correlations rather than Fisher's z transformed correlations, for
+#'   example.
+#' @param digits Minimal number of significant digits, see
+#'   \code{print.default}.
+#' @param digits.zval Minimal number of significant digits for z- or
+#'   t-value, see \code{print.default}.
+#' @param digits.pval Minimal number of significant digits for p-value
+#'   of overall treatment effect, see \code{print.default}.
+#' @param digits.tau2 Minimal number of significant digits for
+#'   between-study variance, see \code{print.default}.
+#' @param scientific.pval A logical specifying whether p-values should
+#'   be printed in scientific notation, e.g., 1.2345e-01 instead of
+#'   0.12345.
+#' @param big.mark A character used as thousands separator.
+#' @param \dots Additional arguments
+#' 
+#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' 
+#' @seealso \code{\link{orbbound}}, \code{\link{forest.orbbound}}
+#' 
+#' @keywords print
+#' 
+#' @examples
+#' data(Fleiss93, package = "meta")
+#' m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+#' 
+#' orb1 <- orbbound(m1, k.suspect = 1:5)
+#' print(orb1, digits = 2)
+#' 
+#' # Print log odds ratios instead of odds ratios
+#' #
+#' print(orb1, digits = 2, backtransf = FALSE)
+#' 
+#' # Assuming that studies are missing on the left side
+#' #
+#' orb1.missleft <- orbbound(m1, k.suspect = 1:5, left = TRUE)
+#' orb1.missleft
+#' 
+#' m2 <- metabin(event.e, n.e, event.c, n.c,
+#'               data = Fleiss93, sm = "OR", method = "Inverse")
+#' 
+#' orb2 <- orbbound(m2, k.suspect = 1:5)
+#' print(orb2, digits = 2)
+#' @export print.orbbound
+#' @export
+#'
+#' @importFrom meta gs
+
+
 print.orbbound <- function(x,
                            comb.fixed = x$x$comb.fixed,
                            comb.random = x$x$comb.random,
