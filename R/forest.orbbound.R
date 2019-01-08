@@ -59,8 +59,10 @@
 #' print(orb1, digits = 2)
 #' forest(orb1, xlim = c(0.7, 1.5))
 #' \dontrun{forest(orb1, backtransf = FALSE)}
-#' @export forest.orbbound
+#'
+#' @method forest orbbound
 #' @export
+#' @export forest.orbbound
 #'
 #' @importFrom meta forest metagen
 

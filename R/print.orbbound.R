@@ -61,8 +61,10 @@
 #' 
 #' orb2 <- orbbound(m2, k.suspect = 1:5)
 #' print(orb2, digits = 2)
-#' @export print.orbbound
+#'
+#' @method print orbbound
 #' @export
+#' @export print.orbbound
 #'
 #' @importFrom meta gs
 

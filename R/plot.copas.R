@@ -146,8 +146,10 @@
 #'                "Variation in estimated treatment\n effect with selection",
 #'                ""),
 #'      xlim.pp = c(1, 0.5))
-#' @export plot.copas
+#'
+#' @method plot copas
 #' @export
+#' @export plot.copas
 #'
 #' @importFrom meta ci funnel
 #' @importFrom graphics abline axTicks axis box contour mtext par plot

@@ -23,8 +23,10 @@
 #'               data = Moore1998, sm = "OR", method = "Inverse")
 #' 
 #' summary(limitmeta(m1))
-#' @export summary.limitmeta
+#'
+#' @method summary limitmeta
 #' @export
+#' @export summary.limitmeta
 
 
 summary.limitmeta <- function(object, ...) {

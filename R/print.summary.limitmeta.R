@@ -60,8 +60,10 @@
 #'               data = Moore1998, sm = "OR", method = "Inverse")
 #' 
 #' print(summary(limitmeta(m1)), digits = 2)
-#' @export print.summary.limitmeta
+#'
+#' @method print summary.limitmeta
 #' @export
+#' @export print.summary.limitmeta
 #'
 #' @importFrom meta gs
 #' @importFrom stats pchisq

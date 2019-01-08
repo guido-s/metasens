@@ -38,8 +38,10 @@
 #'               data = Moore1998, sm = "OR", method = "Inverse")
 #' 
 #' print(limitmeta(m1), digits = 2)
-#' @export print.limitmeta
+#'
+#' @method print limitmeta
 #' @export
+#' @export print.limitmeta
 #'
 #' @importFrom meta ci gs
 

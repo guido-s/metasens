@@ -57,8 +57,10 @@
 #' #
 #' cop1 <- copas(m1)
 #' cop1
-#' @export print.copas
+#'
+#' @method print copas
 #' @export
+#' @export print.copas
 #'
 #' @importFrom meta gs
 #' @importFrom stats pnorm

@@ -63,8 +63,10 @@
 #' # Print summary of Copas analysis
 #' #
 #' summary(copas(m1), level = 0.95)
-#' @export summary.copas
+#'
+#' @method summary copas
 #' @export
+#' @export summary.copas
 #'
 #' @importFrom meta ci
 

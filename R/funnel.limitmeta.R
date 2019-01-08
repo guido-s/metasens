@@ -85,8 +85,10 @@
 #' #
 #' print(summary(limitmeta(m1)), digits = 2, backtransf = FALSE)
 #' funnel(limitmeta(m1), backtransf = FALSE)
-#' @export funnel.limitmeta
+#'
+#' @method funnel limitmeta
 #' @export
+#' @export funnel.limitmeta
 #'
 #' @importFrom meta funnel
 #' @importFrom graphics curve points segments
