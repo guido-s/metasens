@@ -75,6 +75,8 @@
 #' Schwarzer G, Carpenter JR, Rücker G (2015):
 #' \emph{Meta-Analysis with R (Use-R!)}.
 #' Springer International Publishing, Switzerland
+#'
+#' @keywords package
 
 
 NULL

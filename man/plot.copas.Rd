@@ -168,3 +168,4 @@ trim-and-fill method for selection bias in meta-analysis.
 James Carpenter \email{James.Carpenter@lshtm.ac.uk}, Guido
   Schwarzer \email{sc@imbi.uni-freiburg.de}
 }
+\keyword{hplot}

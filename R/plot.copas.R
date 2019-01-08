@@ -116,6 +116,8 @@
 #' \emph{Journal of Clinical Epidemiology},
 #' \bold{63}, 282--8
 #' 
+#' @keywords hplot
+#' 
 #' @examples
 #' data(Fleiss93)
 #' 

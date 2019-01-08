@@ -83,3 +83,4 @@ forest(orb1, xlim = c(0.7, 1.5))
 \author{
 Guido Schwarzer \email{sc@imbi.uni-freiburg.de}
 }
+\keyword{hplot}

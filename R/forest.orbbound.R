@@ -48,6 +48,8 @@
 #' 
 #' @seealso \code{\link{orbbound}}, \code{\link{print.orbbound}}
 #'
+#' @keywords hplot
+#'
 #' @examples
 #' data(Fleiss93, package = "meta")
 #' 

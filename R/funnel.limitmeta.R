@@ -70,6 +70,8 @@
 #'   Rücker \email{ruecker@@imbi.uni-freiburg.de}
 #' 
 #' @seealso \code{\link{limitmeta}}, \code{\link[meta]{funnel.meta}}
+#'
+#' @keywords hplot
 #' 
 #' @examples
 #' data(Moore1998)

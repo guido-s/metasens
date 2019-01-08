@@ -127,3 +127,4 @@ funnel(limitmeta(m1), backtransf = FALSE)
 Guido Schwarzer \email{sc@imbi.uni-freiburg.de}, Gerta
   Rücker \email{ruecker@imbi.uni-freiburg.de}
 }
+\keyword{hplot}

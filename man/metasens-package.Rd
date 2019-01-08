@@ -76,3 +76,4 @@ Springer International Publishing, Switzerland
 \author{
 Guido Schwarzer \email{sc@imbi.uni-freiburg.de}
 }
+\keyword{package}
