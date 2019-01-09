@@ -146,6 +146,7 @@ plot(cop1,
                "Variation in estimated treatment\\n effect with selection",
                ""),
      xlim.pp = c(1, 0.5))
+
 }
 \references{
 Carpenter JR, Schwarzer G, Rücker G, Künstler R (2009):

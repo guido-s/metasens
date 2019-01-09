@@ -26,6 +26,7 @@ m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
               data = Moore1998, sm = "OR", method = "Inverse")
 
 summary(limitmeta(m1))
+
 }
 \seealso{
 \code{\link{limitmeta}}, \code{\link{funnel.limitmeta}},

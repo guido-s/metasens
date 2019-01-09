@@ -119,6 +119,7 @@ funnel(limitmeta(m1))
 #
 print(summary(limitmeta(m1)), digits = 2, backtransf = FALSE)
 funnel(limitmeta(m1), backtransf = FALSE)
+
 }
 \seealso{
 \code{\link{limitmeta}}, \code{\link[meta]{funnel.meta}}

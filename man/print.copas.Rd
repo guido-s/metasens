@@ -63,6 +63,7 @@ m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
 #
 cop1 <- copas(m1)
 cop1
+
 }
 \seealso{
 \code{\link{copas}}, \code{\link{plot.copas}},

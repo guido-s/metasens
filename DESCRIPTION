@@ -1,6 +1,8 @@
 Package: metasens
 Title: Advanced Statistical Methods to Model and Adjust for Bias in Meta-Analysis
 Version: 0.4-0
+Date: 2019-01-08
+Depends: meta (>= 4.9-0)
 Authors@R: c(person("Guido", "Schwarzer",
                     role = c("cre", "aut"),
                     email = "sc@imbi.uni-freiburg.de",
@@ -11,8 +13,6 @@ Authors@R: c(person("Guido", "Schwarzer",
              person("Gerta","Rücker",
                     role = "aut",
                     comment = c(ORCID = "0000-0002-2192-2560")))
-Depends: meta (>= 4.9-0)
-Date: 2019-01-08
 URL: https://github.com/guido-s/metasens http://meta-analysis-with-r.org
 Description: The following methods are implemented to evaluate how sensitive the results of a meta-analysis are to potential bias in meta-analysis and to support Schwarzer et al. (2015) <DOI:10.1007/978-3-319-21416-0>, Chapter 5 'Small-Study Effects in Meta-Analysis':
  - Copas selection model described in Copas & Shi (2001) <DOI:10.1177/096228020101000402>;

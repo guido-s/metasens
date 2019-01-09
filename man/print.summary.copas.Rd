@@ -87,6 +87,7 @@ m1 <- metabin(event.e, n.e, event.c, n.c, data=Fleiss93, sm="OR")
 # Print summary of Copas analysis
 #
 summary(copas(m1), level=0.95)
+
 }
 \seealso{
 \code{\link{copas}}, \code{\link{plot.copas}},

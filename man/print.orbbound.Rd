@@ -81,6 +81,7 @@ m2 <- metabin(event.e, n.e, event.c, n.c,
 
 orb2 <- orbbound(m2, k.suspect = 1:5)
 print(orb2, digits = 2)
+
 }
 \seealso{
 \code{\link{orbbound}}, \code{\link{forest.orbbound}}
