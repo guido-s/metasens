@@ -12,7 +12,8 @@ Official Git repository of R package **metasens**
 The following methods are implemented to evaluate how sensitive the results of a meta-analysis are to potential bias in meta-analysis and to support Schwarzer et al. (2015), Chapter 5 "Small-Study Effects in Meta-Analysis":
  - Copas selection model (Copas and Shi, 2001; Schwarzer et al., 2010);
  - limit meta-analysis (Rücker et al., 2011);
- - upper bound for outcome reporting bias (Copas and Jackson, 2004).
+ - upper bound for outcome reporting bias (Copas and Jackson, 2004);
+ - imputation methods for missing binary data (Gamble & Hollis, 2005; Higgins et al., 2008).
 
 Furthermore, R package **metasens** provides functions and datasets to
 support Schwarzer et al. (2015), Chapter 5 "Small-Study Effects in
@@ -23,6 +24,10 @@ Meta-Analysis", http://meta-analysis-with-r.org/ .
 [Copas J, Jackson D (2004): A bound for publication bias based on the fraction of unpublished studies. *Biometrics*, **60**, 146-53](https://scholar.google.de/scholar?q=Copas+Jackson+2004+A+bound+for+publication+bias+based+on+the+fraction+of+unpublished+studies)
 
 [Copas JB, Shi JQ (2001): A sensitivity analysis for publication bias in systematic reviews. *Statistical Methods in Medical Research*, **10**, 251-65](https://scholar.google.de/scholar?q=Copas+Shi+2001+A+sensitivity+analysis+for+publication+bias+in+systematic+reviews)
+
+[Gamble C, Hollis S (2005): Uncertainty method improved on best–worst case analysis in a binary meta-analysis. *Journal of Clinical Epidemiology*, **58**, 579-88](https://scholar.google.de/scholar?q=Gamble+Hollis+2005+Uncertainty+Meta)
+
+[Higgins JPT, White IR, Wood AM (2008): Imputation methods for missing outcome data in meta-analysis of clinical trials. *Clinical Trials*, **5**, 225-39](https://scholar.google.de/scholar?q=Higgins+White+Wood+2008+Imputation+methods+Clinical+Trials)
 
 [Rücker G, Schwarzer G, Carpenter JR, Binder H, Schumacher M (2011): Treatment-effect estimates adjusted for small-study effects via a limit meta-analysis. *Biostatistics*, **12**, 122-42](https://scholar.google.de/scholar?q=Rücker+Schwarzer+Carpenter+Binder+Schumacher+2011+Treatment-effect+estimates+adjusted+for+small-study+effects+via+a+limit+meta-analysis)
 
@@ -56,3 +61,5 @@ bug.report(package = "netmeta")
 
 The bug.report function is not supported in RStudio. Please send an
 email to Guido Schwarzer <sc@imbi.uni-freiburg.de> if you use RStudio.
+
+You can also report bugs on GitHub under [Issues](https://github.com/guido-s/metasens/issues).

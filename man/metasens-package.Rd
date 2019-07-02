@@ -20,7 +20,10 @@ providing the following meta-analysis methods:
 \item limit meta-analysis (\code{\link{limitmeta}}) by Rücker et
   al. (2011);
 \item upper bound for outcome reporting bias
-  (\code{\link{orbbound}}) described in Copas & Jackson (2004).
+  (\code{\link{orbbound}}) described in Copas & Jackson (2004);
+\item imputation methods for missing binary data
+  (\code{\link{metamiss}}) described in Gamble & Hollis (2005) and
+  Higgins et al. (2008).
 }
 
 Furthermore, functions and datasets from \bold{metasens} are
@@ -56,6 +59,18 @@ Copas JB, Shi JQ (2001):
 A sensitivity analysis for publication bias in systematic reviews.
 \emph{Statistical Methods in Medical Research},
 \bold{10}, 251--65
+
+Gamble C, Hollis S (2005):
+Uncertainty method improved on best–worst case analysis in a binary
+meta-analysis.
+\emph{Journal of Clinical Epidemiology},
+\bold{58}, 579--88
+
+Higgins JPT, White IR, Wood AM (2008):
+Imputation methods for missing outcome data in meta-analysis of
+clinical trials.
+\emph{Clinical Trials},
+\bold{5}, 225--39
 
 Rücker G, Schwarzer G, Carpenter JR, Binder H, Schumacher M (2011):
 Treatment-effect estimates adjusted for small-study effects via a limit

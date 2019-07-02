@@ -30,7 +30,7 @@
 #' largest standard error decreases.
 #' 
 #' The three horizontal grey lines are the usual random effects
-#' treatment estimate (centre) +/- the \code{100*level}\% confidence
+#' treatment estimate (center) +/- the \code{100*level}\% confidence
 #' interval (upper/lower grey lines).
 #' 
 #' Plot 4: For any degree of selection (i.e. probability of the study
