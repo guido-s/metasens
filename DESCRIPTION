@@ -1,8 +1,8 @@
 Package: metasens
 Title: Advanced Statistical Methods to Model and Adjust for Bias in Meta-Analysis
 Version: 0.4-0
-Date: 2019-07-02
-Depends: meta (>= 4.9-0)
+Date: 2019-07-03
+Depends: meta (>= 4.9-6)
 Authors@R: c(person("Guido", "Schwarzer",
                     role = c("cre", "aut"),
                     email = "sc@imbi.uni-freiburg.de",

@@ -242,6 +242,14 @@ metamiss <- function(x,
     ##
     res$method.miss <- method.miss
     res$small.values <- small.values
+    ##
+    res$event.e <- event.e
+    res$miss.e <- miss.e
+    res$n.e <- n.e + miss.e
+    ##
+    res$event.c <- event.c
+    res$miss.c <- miss.c
+    res$n.c <- n.c + miss.c
   }
   else {
     ##
@@ -372,13 +380,21 @@ metamiss <- function(x,
                    ##
                    control = x$control)
     ##
+    res$event.e <- event.e
+    res$miss.e <- miss.e
+    res$n.e <- n.e + miss.e
+    ##
+    res$event.c <- event.c
+    res$miss.c <- miss.c
+    res$n.c <- n.c + miss.c
+    ##
     res$IMOR.e <- IMOR.e
     res$IMOR.c <- IMOR.c
     ##
     res$method.miss <- method.miss
     res$small.values <- small.values
     ##
-    res$incr <- res$incr
+    res$incr <- incr
     res$p.e <- p.e
     res$p.c <- p.c
     ##
