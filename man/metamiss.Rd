@@ -89,10 +89,10 @@ ignored as these values are determined by the respective imputation
 method (see Table 2 in Higgins et al., 2008).
 
 For the best and worst case scenarios (i.e., argument
-\code{method.miss} equal to \code{"GH"}, \code{"b"}, or
-\code{"w"}), the user has to specify whether the outcome is
-beneficial (argument \code{small.values = "good"}) or harmful
-(\code{small.values = "bad"}).
+\code{method.miss} equal to \code{"b"} or \code{"w"}), the user has
+to specify whether the outcome is beneficial (argument
+\code{small.values = "good"}) or harmful (\code{small.values =
+"bad"}).
 }
 \examples{
 d1 <- data.frame(author = c("Beasley", "Selman"),
