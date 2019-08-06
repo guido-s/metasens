@@ -1,13 +1,13 @@
-*** metasens, version 0.4-0, 2019-mm-dd ***
+*** metasens, version 0.4-0, 2019-08-06 ***
 
  ** Major changes **
+
+  * New function metamiss() implementing imputation methods for
+    missing binary data (Gamble & Hollis, 2005; Higgins et al., 2008)
  
   * Use roxygen2 for development of R package metasens
 
   * Dataset 'nsaids' renamed to 'Moore1998'
-
-  * New function metamiss() implementing imputation methods for
-    missing binary data (Gamble & Hollis, 2005; Higgins et al., 2008)
 
 
 *** metasens, version 0.3-2, 2017-12-06 ***

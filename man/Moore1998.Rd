@@ -5,7 +5,6 @@
 \alias{Moore1998}
 \title{NSAIDS in acute pain}
 \format{A data frame with the following columns:
-
 \tabular{rl}{
 \bold{\emph{study}}\tab study number \cr
 \bold{\emph{succ.e}}\tab number of treatment successes in NSAIDS group \cr
@@ -20,14 +19,10 @@ anti-inflammatory drugs.
 \emph{British Medical Journal},
 \bold{316}, 333--8
 }
-\usage{
-Moore1998
-}
 \description{
 Meta-analysis on the effectiveness of topical non-steroidal
 anti-inflammatory drugs (NSAIDS) in acute pain.
-}
-\details{
+
 Treatment success is defined as a reduction in pain of at least
 50\%.
 }

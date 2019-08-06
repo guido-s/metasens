@@ -5,7 +5,6 @@
 \alias{Crowther2003}
 \title{Aspirin after Myocardial Infarction}
 \format{A data frame with the following columns:
-
 \tabular{rl}{
 \bold{\emph{study}}\tab study label \cr
 \bold{\emph{pvh.e}}\tab number of periventricular haemorrhages in experimental group \cr
@@ -18,9 +17,6 @@ Crowther CA, Henderson-Smart DJ (2003):
 Phenobarbital prior to preterm birth for preventing neonatal
 periventricular haemorrhage.
 \emph{Cochrane Database of Systematic Reviews}, CD000164
-}
-\usage{
-Crowther2003
 }
 \description{
 Meta-analysis on phenobarbital prior to preterm birth for

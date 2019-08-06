@@ -73,8 +73,8 @@ The method by Gamble & Hollis (2005) is based on uncertainty
 intervals for individual studies resulting from best and worst case
 scenarios taking the missing data into account. The uncertainty
 intervals are used to calculate (inflated) standard errors which
-are used in a generic inverse variance meta-analysis instead of the
-standard errors from the complete case meta-analysis.
+are considered in a generic inverse variance meta-analysis instead
+of the standard errors from the complete case meta-analysis.
 
 All other methods are based on the Informative Missingness Odds
 Ratio (IMOR) which is defined as the odds of an event in the

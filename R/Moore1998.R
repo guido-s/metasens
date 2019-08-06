@@ -1,17 +1,17 @@
 #' NSAIDS in acute pain
 #'
+#' @description
 #' Meta-analysis on the effectiveness of topical non-steroidal
 #' anti-inflammatory drugs (NSAIDS) in acute pain.
 #'
 #' Treatment success is defined as a reduction in pain of at least
 #' 50\%.
+#' 
+#' @name Moore1998
 #'
 #' @docType data
-#' 
-#' @usage Moore1998
 #'
 #' @format A data frame with the following columns:
-#' 
 #' \tabular{rl}{
 #' \bold{\emph{study}}\tab study number \cr
 #' \bold{\emph{succ.e}}\tab number of treatment successes in NSAIDS group \cr
@@ -21,12 +21,13 @@
 #' }
 #' 
 #' @source
-#'
 #' Moore RA, Tramer MR, Carroll D, Wiffen PJ, McQuay HJ (1998):
 #' Quantitive systematic review of topically applied non-steroidal
 #' anti-inflammatory drugs.
 #' \emph{British Medical Journal},
 #' \bold{316}, 333--8
+#'
+#' @keywords datasets
 #'
 #' @examples
 #' data(Moore1998)
@@ -36,4 +37,4 @@
 #' print(limitmeta(m1), digits = 2)
 
 
-"Moore1998"
+NULL
