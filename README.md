@@ -56,7 +56,7 @@ devtools::install_github("guido-s/metasens")
 ### Bug Reports:
 
 ```r
-bug.report(package = "netmeta")
+bug.report(package = "metasens")
 ```
 
 The bug.report function is not supported in RStudio. Please send an
