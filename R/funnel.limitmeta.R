@@ -18,7 +18,7 @@
 #' 
 #' Internally, R function \code{\link{funnel.meta}} is called to
 #' create a funnel plot. For more information see help page of the
-#' \code{\link{funnel.meta}} function.
+#' \code{\link[meta]{funnel}} function.
 #' 
 #' @param x An object of class \code{limitmeta}.
 #' @param pch The plotting symbol used for individual studies.
@@ -27,7 +27,7 @@
 #' @param bg A vector with background colour of plotting symbols (only
 #'   used if \code{pch} in \code{21:25}).
 #' @param lwd The line width for confidence intervals (see
-#'   \code{\link{funnel.meta}}).
+#'   \code{\link[meta]{funnel}}).
 #' @param pch.adjust The plotting symbol used for the adjusted effect
 #'   estimate.
 #' @param cex.adjust The magnification to be used for the plotting
@@ -63,13 +63,13 @@
 #'   back transformed in printouts and plots. If
 #'   \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
 #'   printed as odds ratios rather than log odds ratio, for example.
-#' @param \dots Additional arguments for \code{\link{funnel.meta}}
+#' @param \dots Additional arguments for \code{\link[meta]{funnel}}
 #'   function.
 #' 
 #' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}, Gerta
 #'   Rücker \email{ruecker@@imbi.uni-freiburg.de}
 #' 
-#' @seealso \code{\link{limitmeta}}, \code{\link[meta]{funnel.meta}}
+#' @seealso \code{\link{limitmeta}}, \code{\link[meta]{funnel}}
 #'
 #' @keywords hplot
 #' 

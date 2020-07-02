@@ -592,12 +592,13 @@ copas <- function(x,
   if (is.null(slope)) {
     ##
     if (all(!sel)) {
-      warning("No contour line with corresponding adjusted r.square larger than zero")
+      warning("No contour line with corresponding adjusted r.square ",
+              "larger than zero")
       slope <- NA
     }
     else
-      slope <- -1 / metagen(slopes[sel],
-                          1 / sqrt(nobs)[sel])$TE.fixed
+      slope <- -1 / metagen(slopes[sel], 1 / sqrt(nobs)[sel],
+                            method.tau.ci = "")$TE.fixed
   }
   ##
   ##x.slope <- ((1 - slope - intercepts ) / (slopes - slope))[sel]

@@ -4,9 +4,16 @@
 \alias{limitmeta}
 \title{Limit meta-analysis}
 \usage{
-limitmeta(x, method.adjust = "beta0", level = x$level,
-  level.comb = x$level.comb, backtransf = x$backtransf,
-  title = x$title, complab = x$complab, outclab = x$outclab)
+limitmeta(
+  x,
+  method.adjust = "beta0",
+  level = x$level,
+  level.comb = x$level.comb,
+  backtransf = x$backtransf,
+  title = x$title,
+  complab = x$complab,
+  outclab = x$outclab
+)
 }
 \arguments{
 \item{x}{An object of class \code{meta}.}

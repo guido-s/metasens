@@ -4,9 +4,14 @@
 \alias{print.copas}
 \title{Print method for Copas selection model}
 \usage{
-\method{print}{copas}(x, sign.rsb = x$sign.rsb,
-  backtransf = x$backtransf, digits = gs("digits"),
-  digits.se = gs("digits.se"), ...)
+\method{print}{copas}(
+  x,
+  sign.rsb = x$sign.rsb,
+  backtransf = x$backtransf,
+  digits = gs("digits"),
+  digits.se = gs("digits.se"),
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{copas}.}

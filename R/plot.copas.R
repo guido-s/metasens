@@ -225,8 +225,9 @@ plot.copas <- function(x,
   ## Plot 1: funnel plot
   ##
   if (show[1]) {
-    funnel(x = TE, y = seTE, level = 0.95, comb.fixed = TRUE,
-           sm = sm, xlab = "", ylab = "")
+    funnel(metagen(TE, seTE, level = 0.95,
+                   comb.fixed = TRUE, comb.random = FALSE, sm = sm),
+           xlab = "", ylab = "")
     abline(v = TE.random, lty = 1, col = "darkgray")
     ##
     mtext(sm, side = 1, line = 2)

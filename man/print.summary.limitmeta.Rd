@@ -4,14 +4,25 @@
 \alias{print.summary.limitmeta}
 \title{Print method for summary of limit meta-analysis}
 \usage{
-\method{print}{summary.limitmeta}(x, backtransf = x$backtransf,
-  digits = gs("digits"), header = TRUE, pscale = x$x$pscale,
-  irscale = x$x$irscale, irunit = x$x$irunit,
-  digits.zval = gs("digits.zval"), digits.pval = gs("digits.pval"),
-  digits.Q = gs("digits.Q"), digits.tau2 = gs("digits.tau2"),
-  digits.I2 = gs("digits.I2"), scientific.pval = gs("scientific.pval"),
-  big.mark = gs("big.mark"), print.Rb = gs("print.Rb"),
-  warn.backtransf = FALSE, ...)
+\method{print}{summary.limitmeta}(
+  x,
+  backtransf = x$backtransf,
+  digits = gs("digits"),
+  header = TRUE,
+  pscale = x$x$pscale,
+  irscale = x$x$irscale,
+  irunit = x$x$irunit,
+  digits.zval = gs("digits.zval"),
+  digits.pval = gs("digits.pval"),
+  digits.Q = gs("digits.Q"),
+  digits.tau2 = gs("digits.tau2"),
+  digits.I2 = gs("digits.I2"),
+  scientific.pval = gs("scientific.pval"),
+  big.mark = gs("big.mark"),
+  print.Rb = gs("print.Rb"),
+  warn.backtransf = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{summary.limitmeta}.}

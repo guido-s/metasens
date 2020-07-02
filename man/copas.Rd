@@ -4,10 +4,21 @@
 \alias{copas}
 \title{Copas selection model analysis}
 \usage{
-copas(x, gamma0.range = NULL, gamma1.range = NULL, ngrid = 20,
-  nlevels = 10, levels = NULL, slope = NULL, left = NULL,
-  rho.bound = 0.9999, sign.rsb = 0.1, backtransf = x$backtransf,
-  silent = TRUE, warn = options()$warn)
+copas(
+  x,
+  gamma0.range = NULL,
+  gamma1.range = NULL,
+  ngrid = 20,
+  nlevels = 10,
+  levels = NULL,
+  slope = NULL,
+  left = NULL,
+  rho.bound = 0.9999,
+  sign.rsb = 0.1,
+  backtransf = x$backtransf,
+  silent = TRUE,
+  warn = options()$warn
+)
 }
 \arguments{
 \item{x}{An object of class \code{meta}, obtained from one of the

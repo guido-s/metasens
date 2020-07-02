@@ -1,7 +1,7 @@
 Package: metasens
 Title: Advanced Statistical Methods to Model and Adjust for Bias in Meta-Analysis
-Version: 0.4-0
-Date: 2019-08-06
+Version: 0.4-1
+Date: 2020-07-02
 Depends: meta (>= 4.9-5)
 Authors@R: c(person("Guido", "Schwarzer",
                     role = c("cre", "aut"),
@@ -21,4 +21,4 @@ Description: The following methods are implemented to evaluate how sensitive the
  - imputation methods for missing binary data by Gamble & Hollis (2005) <DOI:10.1016/j.jclinepi.2004.09.013> and Higgins et al. (2008) <DOI:10.1177/1740774508091600>.
 License: GPL (>= 2)
 Encoding: UTF-8
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1

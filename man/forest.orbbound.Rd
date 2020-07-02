@@ -5,11 +5,19 @@
 \title{Forest plot for \code{orbbound} object (bound for outcome reporting
 bias)}
 \usage{
-\method{forest}{orbbound}(x, comb.fixed = x$x$comb.fixed,
-  comb.random = x$x$comb.random, text.fixed = "FE model",
-  text.random = "RE model", smlab = NULL, leftcols = c("studlab",
-  "maxbias"), leftlabs = c("Missing\\nstudies", "Maximum\\nbias"),
-  backtransf = x$backtransf, digits = max(3, .Options$digits - 3), ...)
+\method{forest}{orbbound}(
+  x,
+  comb.fixed = x$x$comb.fixed,
+  comb.random = x$x$comb.random,
+  text.fixed = "FE model",
+  text.random = "RE model",
+  smlab = NULL,
+  leftcols = c("studlab", "maxbias"),
+  leftlabs = c("Missing\\nstudies", "Maximum\\nbias"),
+  backtransf = x$backtransf,
+  digits = max(3, .Options$digits - 3),
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{orbbound}.}

@@ -156,9 +156,9 @@ forest.orbbound <- function(x,
   if (comb.fixed & comb.random)
     m1 <- metagen(TE, seTE, sm = sm.lab,
                   byvar = FEvsRE, print.byvar = FALSE,
-                  warn = FALSE)
+                  warn = FALSE, method.tau.ci = "")
   else
-    m1 <- metagen(TE, seTE, sm = sm.lab, warn = FALSE)
+    m1 <- metagen(TE, seTE, sm = sm.lab, warn = FALSE, method.tau.ci = "")
   ##
   if (comb.fixed & comb.random) {
     m1$studlab <- c(x$k.suspect, x$k.suspect)

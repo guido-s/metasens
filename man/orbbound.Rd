@@ -4,8 +4,7 @@
 \alias{orbbound}
 \title{Sensitivity Analysis for Outcome Reporting Bias (ORB)}
 \usage{
-orbbound(x, k.suspect = 1, tau = x$tau, left = NULL,
-  backtransf = x$backtransf)
+orbbound(x, k.suspect = 1, tau = x$tau, left = NULL, backtransf = x$backtransf)
 }
 \arguments{
 \item{x}{An object of class \code{meta}.}

@@ -4,8 +4,7 @@
 \alias{summary.copas}
 \title{Summary method for Copas selection model}
 \usage{
-\method{summary}{copas}(object, level = 0.95,
-  sign.rsb = object$sign.rsb, ...)
+\method{summary}{copas}(object, level = 0.95, sign.rsb = object$sign.rsb, ...)
 }
 \arguments{
 \item{object}{An object of class \code{copas}.}

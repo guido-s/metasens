@@ -201,9 +201,9 @@ metamiss <- function(x,
   
   if (method.miss == "GH") {
     lower <- metabin(event.e, n.e + miss.e, event.c + miss.c, n.c + miss.c,
-                     sm = x$sm)$lower
+                     sm = x$sm, method.tau.ci = "")$lower
     upper <- metabin(event.e + miss.e, n.e + miss.e, event.c, n.c + miss.c,
-                     sm = x$sm)$upper
+                     sm = x$sm, method.tau.ci = "")$upper
     ##
     seTE <- meta:::TE.seTE.ci(lower, upper)$seTE
     ##
@@ -220,6 +220,7 @@ metamiss <- function(x,
                    comb.fixed = comb.fixed, comb.random = comb.random,
                    ##
                    hakn = x$hakn, method.tau = x$method.tau,
+                   method.tau.ci = x$method.tau.ci,
                    tau.preset = x$tau.preset, TE.tau = x$TE.tau,
                    tau.common = x$tau.common,
                    ##
@@ -363,6 +364,7 @@ metamiss <- function(x,
                    comb.fixed = comb.fixed, comb.random = comb.random,
                    ##
                    hakn = x$hakn, method.tau = x$method.tau,
+                   method.tau.ci = x$method.tau.ci,
                    tau.preset = x$tau.preset, TE.tau = x$TE.tau,
                    tau.common = x$tau.common,
                    ##

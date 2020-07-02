@@ -4,13 +4,20 @@
 \alias{print.orbbound}
 \title{Print method for objects of class orbbound}
 \usage{
-\method{print}{orbbound}(x, comb.fixed = x$x$comb.fixed,
-  comb.random = x$x$comb.random, header = TRUE,
-  backtransf = x$backtransf, digits = gs("digits"),
-  digits.zval = gs("digits.zval"), digits.pval = max(gs("digits.pval"),
-  2), digits.tau2 = gs("digits.tau2"),
-  scientific.pval = gs("scientific.pval"), big.mark = gs("big.mark"),
-  ...)
+\method{print}{orbbound}(
+  x,
+  comb.fixed = x$x$comb.fixed,
+  comb.random = x$x$comb.random,
+  header = TRUE,
+  backtransf = x$backtransf,
+  digits = gs("digits"),
+  digits.zval = gs("digits.zval"),
+  digits.pval = max(gs("digits.pval"), 2),
+  digits.tau2 = gs("digits.tau2"),
+  scientific.pval = gs("scientific.pval"),
+  big.mark = gs("big.mark"),
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{orbbound}.}

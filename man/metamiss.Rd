@@ -4,10 +4,18 @@
 \alias{metamiss}
 \title{Imputation methods for missing binary data}
 \usage{
-metamiss(x, miss.e, miss.c, IMOR.e, IMOR.c = IMOR.e, method.miss = if
-  (missing(IMOR.e)) "0" else "IMOR", small.values = "good",
-  comb.fixed = x$comb.fixed, comb.random = x$comb.random,
-  prediction = x$prediction)
+metamiss(
+  x,
+  miss.e,
+  miss.c,
+  IMOR.e,
+  IMOR.c = IMOR.e,
+  method.miss = if (missing(IMOR.e)) "0" else "IMOR",
+  small.values = "good",
+  comb.fixed = x$comb.fixed,
+  comb.random = x$comb.random,
+  prediction = x$prediction
+)
 }
 \arguments{
 \item{x}{An object of class \code{metabin}.}

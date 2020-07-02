@@ -4,14 +4,16 @@
 \name{Moore1998}
 \alias{Moore1998}
 \title{NSAIDS in acute pain}
-\format{A data frame with the following columns:
+\format{
+A data frame with the following columns:
 \tabular{rl}{
 \bold{\emph{study}}\tab study number \cr
 \bold{\emph{succ.e}}\tab number of treatment successes in NSAIDS group \cr
 \bold{\emph{nobs.e}}\tab number of patients in NSAIDS group \cr
 \bold{\emph{succ.c}}\tab number of treatment successes in control group \cr
 \bold{\emph{nobs.c}}\tab number of patients in control group \cr
-}}
+}
+}
 \source{
 Moore RA, Tramer MR, Carroll D, Wiffen PJ, McQuay HJ (1998):
 Quantitive systematic review of topically applied non-steroidal

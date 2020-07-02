@@ -4,14 +4,34 @@
 \alias{funnel.limitmeta}
 \title{Funnel plot for limit meta-analysis}
 \usage{
-\method{funnel}{limitmeta}(x, pch = 21, cex = 1, col = "black",
-  bg = "darkgray", lwd = 1, pch.adjust = 18, cex.adjust = 1.5,
-  col.adjust = "gray", bg.adjust = "gray", line = TRUE, xmin.line,
-  xmax.line, lty.line = 1, lwd.line = lwd, col.line = "gray",
-  shrunken = FALSE, pch.shrunken = 22, cex.shrunken = 1,
-  col.shrunken = "black", bg.shrunken = "white", lty.connect = 1,
-  lwd.connect = 0.8, col.connect = "black",
-  backtransf = x$backtransf, ...)
+\method{funnel}{limitmeta}(
+  x,
+  pch = 21,
+  cex = 1,
+  col = "black",
+  bg = "darkgray",
+  lwd = 1,
+  pch.adjust = 18,
+  cex.adjust = 1.5,
+  col.adjust = "gray",
+  bg.adjust = "gray",
+  line = TRUE,
+  xmin.line,
+  xmax.line,
+  lty.line = 1,
+  lwd.line = lwd,
+  col.line = "gray",
+  shrunken = FALSE,
+  pch.shrunken = 22,
+  cex.shrunken = 1,
+  col.shrunken = "black",
+  bg.shrunken = "white",
+  lty.connect = 1,
+  lwd.connect = 0.8,
+  col.connect = "black",
+  backtransf = x$backtransf,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{limitmeta}.}
@@ -26,7 +46,7 @@
 used if \code{pch} in \code{21:25}).}
 
 \item{lwd}{The line width for confidence intervals (see
-\code{\link{funnel.meta}}).}
+\code{\link[meta]{funnel}}).}
 
 \item{pch.adjust}{The plotting symbol used for the adjusted effect
 estimate.}
@@ -82,7 +102,7 @@ back transformed in printouts and plots. If
 \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
 printed as odds ratios rather than log odds ratio, for example.}
 
-\item{\dots}{Additional arguments for \code{\link{funnel.meta}}
+\item{\dots}{Additional arguments for \code{\link[meta]{funnel}}
 function.}
 }
 \description{
@@ -105,7 +125,7 @@ shrunken effect estimates.
 
 Internally, R function \code{\link{funnel.meta}} is called to
 create a funnel plot. For more information see help page of the
-\code{\link{funnel.meta}} function.
+\code{\link[meta]{funnel}} function.
 }
 \examples{
 data(Moore1998)
@@ -122,7 +142,7 @@ funnel(limitmeta(m1), backtransf = FALSE)
 
 }
 \seealso{
-\code{\link{limitmeta}}, \code{\link[meta]{funnel.meta}}
+\code{\link{limitmeta}}, \code{\link[meta]{funnel}}
 }
 \author{
 Guido Schwarzer \email{sc@imbi.uni-freiburg.de}, Gerta

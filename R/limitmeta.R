@@ -153,6 +153,9 @@ limitmeta <- function(x,
                       title = x$title, complab = x$complab, outclab = x$outclab) {
   
   meta:::chkclass(x, "meta")
+  ##
+  method.adjust <-
+    meta:::setchar(method.adjust, c("beta0", "betalim", "mulim"))
   
   
   TE <- x$TE
@@ -171,15 +174,6 @@ limitmeta <- function(x,
   upper.random <- x$upper.random
   zval.random <- x$zval.random
   pval.random <- x$pval.random
-  
-  
-  imeth <- charmatch(tolower(method.adjust),
-                     c("beta0", "betalim", "mulim"), nomatch = NA)
-  ##
-  if(is.na(imeth))
-    stop("Argument 'method.adjust' should be \"beta0\", \"betalim\", or \"mulim\"")
-  ##
-  method.adjust <- c("beta0", "betalim", "mulim")[imeth]
   
   
   ##
@@ -203,7 +197,7 @@ limitmeta <- function(x,
   TE.limit <- beta.r + sqrt(tau^2 / seTE.tau^2) * (TE - beta.r)
   seTE.limit <- seTE / 1 # 1 == "Infinity"
   ##
-  m.lim <- metagen(TE.limit, seTE.limit, sm = sm)
+  m.lim <- metagen(TE.limit, seTE.limit, sm = sm, method.tau.ci = "")
   ##
   reg.l <- radialregression(m.lim$TE, m.lim$seTE, k)
   

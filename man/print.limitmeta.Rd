@@ -4,8 +4,14 @@
 \alias{print.limitmeta}
 \title{Print method for limit meta-analysis}
 \usage{
-\method{print}{limitmeta}(x, sortvar, backtransf = x$backtransf,
-  digits = gs("digits"), big.mark = gs("big.mark"), ...)
+\method{print}{limitmeta}(
+  x,
+  sortvar,
+  backtransf = x$backtransf,
+  digits = gs("digits"),
+  big.mark = gs("big.mark"),
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{limitmeta}}

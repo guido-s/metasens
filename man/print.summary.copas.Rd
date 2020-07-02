@@ -4,11 +4,17 @@
 \alias{print.summary.copas}
 \title{Print method for summary of Copas selection model}
 \usage{
-\method{print}{summary.copas}(x, backtransf = x$backtransf,
-  digits = gs("digits"), digits.pval = max(gs("digits.pval"), 2),
+\method{print}{summary.copas}(
+  x,
+  backtransf = x$backtransf,
+  digits = gs("digits"),
+  digits.pval = max(gs("digits.pval"), 2),
   digits.prop = gs("digits.prop"),
-  scientific.pval = gs("scientific.pval"), big.mark = gs("big.mark"),
-  header = TRUE, ...)
+  scientific.pval = gs("scientific.pval"),
+  big.mark = gs("big.mark"),
+  header = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{An object of class \code{summary.copas}.}
