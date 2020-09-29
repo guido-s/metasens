@@ -27,7 +27,7 @@
 #'   \code{"IRLN"}, \code{"IRS"}, or \code{"IRFT"}.
 #' @param irunit A character specifying the time unit used to
 #'   calculate rates, e.g. person-years.
-#' @param digits.zval Minimal number of significant digits for z- or
+#' @param digits.stat Minimal number of significant digits for z- or
 #'   t-value, see \code{print.default}.
 #' @param digits.pval Minimal number of significant digits for p-value
 #'   of overall treatment effect, see \code{print.default}.
@@ -76,7 +76,7 @@ print.summary.limitmeta <- function(x,
                                     pscale = x$x$pscale,
                                     irscale = x$x$irscale,
                                     irunit = x$x$irunit,
-                                    digits.zval = gs("digits.zval"),
+                                    digits.stat = gs("digits.stat"),
                                     digits.pval = gs("digits.pval"),
                                     digits.Q = gs("digits.Q"),
                                     digits.tau2 = gs("digits.tau2"),
@@ -107,12 +107,12 @@ print.summary.limitmeta <- function(x,
   ## (2) Check and set other arguments
   ##
   ##
-  chknumeric(digits, min = 0, single = TRUE)
-  chknumeric(digits.tau2, min = 0, single = TRUE)
-  chknumeric(digits.zval, min = 0, single = TRUE)
-  chknumeric(digits.pval, min = 1, single = TRUE)
-  chknumeric(digits.Q, min = 0, single = TRUE)
-  chknumeric(digits.I2, min = 0, single = TRUE)
+  chknumeric(digits, min = 0, length = 1)
+  chknumeric(digits.tau2, min = 0, length = 1)
+  chknumeric(digits.stat, min = 0, length = 1)
+  chknumeric(digits.pval, min = 1, length = 1)
+  chknumeric(digits.Q, min = 0, length = 1)
+  chknumeric(digits.I2, min = 0, length = 1)
   chklogical(backtransf)
   chklogical(scientific.pval)
   chklogical(print.Rb)
@@ -124,7 +124,7 @@ print.summary.limitmeta <- function(x,
   if (!is.prop)
     pscale <- 1
   if (!is.null(pscale))
-    chknumeric(pscale, single = TRUE)
+    chknumeric(pscale, length = 1)
   else
     pscale <- 1
   if (!backtransf & pscale != 1) {
@@ -134,7 +134,7 @@ print.summary.limitmeta <- function(x,
   if (!is.rate)
     irscale <- 1
   if (!is.null(irscale))
-    chknumeric(irscale, single = TRUE)
+    chknumeric(irscale, length = 1)
   else
     irscale <- 1
   if (!backtransf & irscale != 1) {
@@ -233,7 +233,7 @@ print.summary.limitmeta <- function(x,
   upper <- round(upper, digits)
   ##
   pvals <- c(x$pval.adjust, x$pval.random)
-  zvals <- round(c(x$zval.adjust, x$zval.random), digits.zval)
+  statistics <- round(c(x$statistic.adjust, x$statistic.random), digits.stat)
   ##
   I2 <- round(100 * x$x$I2, digits.I2)
   lowI2 <- round(100 * x$x$lower.I2, digits.I2)
@@ -259,7 +259,7 @@ print.summary.limitmeta <- function(x,
                formatN(TEs, digits, "NA", big.mark = big.mark),
                formatCI(formatN(lower, digits, "NA", big.mark = big.mark),
                         formatN(upper, digits, "NA", big.mark = big.mark)),
-               formatN(zvals, digits.zval, big.mark = big.mark),
+               formatN(statistics, digits.stat, big.mark = big.mark),
                formatPT(pvals, digits = digits.pval,
                         scientific = scientific.pval)
                )

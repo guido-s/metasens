@@ -6,7 +6,6 @@
 \usage{
 \method{print}{copas}(
   x,
-  sign.rsb = x$sign.rsb,
   backtransf = x$backtransf,
   digits = gs("digits"),
   digits.se = gs("digits.se"),
@@ -15,8 +14,6 @@
 }
 \arguments{
 \item{x}{An object of class \code{copas}.}
-
-\item{sign.rsb}{The significance level for the test of residual selection bias.}
 
 \item{backtransf}{A logical indicating whether results should be
 back transformed in printouts and plots. If
@@ -58,11 +55,11 @@ its standard error from fitting a straight line to this contour.
 Next, the printout of \code{summary.copas} is shown.
 }
 \examples{
-data(Fleiss93)
+data(Fleiss1993bin, package = "meta")
 
 # Perform meta analysis, effect measure is odds ratio (OR)
 #
-m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 
 # Perform Copas analysis
 #

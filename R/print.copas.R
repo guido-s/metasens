@@ -26,7 +26,6 @@
 #' @aliases print.copas
 #' 
 #' @param x An object of class \code{copas}.
-#' @param sign.rsb The significance level for the test of residual selection bias.
 #' @param backtransf A logical indicating whether results should be
 #'   back transformed in printouts and plots. If
 #'   \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
@@ -47,11 +46,11 @@
 #' @keywords print
 #' 
 #' @examples
-#' data(Fleiss93)
+#' data(Fleiss1993bin, package = "meta")
 #' 
 #' # Perform meta analysis, effect measure is odds ratio (OR)
 #' #
-#' m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 #' 
 #' # Perform Copas analysis
 #' #
@@ -66,15 +65,13 @@
 #' @importFrom stats pnorm
 
 
-print.copas <- function(x, sign.rsb = x$sign.rsb,
-                        backtransf = x$backtransf,
+print.copas <- function(x, backtransf = x$backtransf,
                         digits = gs("digits"),
                         digits.se = gs("digits.se"),
                         ...) {
   
   meta:::chkclass(x, "copas")
   ##
-  chklevel <- meta:::chklevel
   chklogical <- meta:::chklogical
   chknumeric <- meta:::chknumeric
   
@@ -86,11 +83,6 @@ print.copas <- function(x, sign.rsb = x$sign.rsb,
   ##
   meta:::warnarg("logscale", addargs, fun, otherarg = "backtransf")
   ##
-  if (is.null(sign.rsb))
-    sign.rsb <- 0.1
-  else
-    chklevel(sign.rsb)
-  ##
   if (is.null(backtransf))
     if (!is.null(list(...)[["logscale"]]))
       backtransf <- !list(...)[["logscale"]]
@@ -99,8 +91,8 @@ print.copas <- function(x, sign.rsb = x$sign.rsb,
   else
     chklogical(backtransf)
   ##
-  chknumeric(digits, min = 0, single = TRUE)
-  chknumeric(digits.se, min = 0, single = TRUE)
+  chknumeric(digits, min = 0, length = 1)
+  chknumeric(digits.se, min = 0, length = 1)
   
   
   meta:::crtitle(x)
@@ -143,7 +135,7 @@ print.copas <- function(x, sign.rsb = x$sign.rsb,
   prmatrix(res, quote = FALSE, right = TRUE)
   
   cat("\n\n")
-  print(summary(x, sign.rsb = sign.rsb),
+  print(summary(x),
         header = FALSE,
         digits = digits, backtransf = backtransf,
         ...)

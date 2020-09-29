@@ -10,10 +10,8 @@
   caption = c("Funnel plot", "Contour plot", "Treatment effect plot",
     "P-value for residual selection bias"),
   xlim.pp = NULL,
-  level = 0.95,
   orthogonal.line = TRUE,
   lines = FALSE,
-  sign.rsb = x$sign.rsb,
   warn = -1,
   ...
 )
@@ -39,9 +37,6 @@ i.e. for the probability of publishing the study with largest
 standard deviation. E.g. to specify limits between 0.3 and 0.1
 set \code{xlim.pp=c(0.3,0.1)}.}
 
-\item{level}{The level used to calculate confidence intervals for
-plot 3 (treatment effect plot) (between 0 and 1).}
-
 \item{orthogonal.line}{A logical indicating whether the orthogonal
 line should be displayed in plot 2 (contour plot).}
 
@@ -52,9 +47,6 @@ treatment effect by a straight line, prior to calculating the
 orthogonal line. Regression lines with a positive adjusted
 \code{R^2} will be printed in green color, others will be printed
 in red color.}
-
-\item{sign.rsb}{The significance level for the test of residual
-selection bias (between 0 and 1).}
 
 \item{warn}{A number setting the handling of warning messages. It
 is not uncommon for numerical problems to be encountered during
@@ -127,11 +119,11 @@ created by the \code{copas} function (see attributes list for
 \code{copas}) and used to create tailor-made plots.
 }
 \examples{
-data(Fleiss93)
+data(Fleiss1993bin, package = "meta")
 
 # Perform meta-analysis (outcome measure is OR = odds ratio)
 #
-m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 
 # Perform Copas analysis
 #

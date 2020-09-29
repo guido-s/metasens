@@ -63,9 +63,9 @@
 #'   \bold{60}, 146--53
 #' 
 #' @examples
-#' data(Fleiss93, package = "meta")
+#' data(Fleiss1993bin, package = "meta")
 #' 
-#' m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 #' 
 #' orb1 <- orbbound(m1, k.suspect = 1:5)
 #' print(orb1, digits = 2)

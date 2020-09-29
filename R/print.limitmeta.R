@@ -80,7 +80,7 @@ print.limitmeta <- function(x,
   else
     chklogical(backtransf)
   ##
-  chknumeric(digits, min = 0, single = TRUE)
+  chknumeric(digits, min = 0, length = 1)
   
   
   sm.lab <- sm

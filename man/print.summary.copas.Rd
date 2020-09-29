@@ -84,11 +84,11 @@ Lastly, the usual random effects estimate (based on the DerSimonian-Laird
 method) and 95\% confidence interval is printed.
 }
 \examples{
-data(Fleiss93)
+data(Fleiss1993bin, package = "meta")
 
 # Perform meta analysis, effect measure is odds ratio (OR)
 #
-m1 <- metabin(event.e, n.e, event.c, n.c, data=Fleiss93, sm="OR")
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data=Fleiss1993bin, sm="OR")
 
 # Print summary of Copas analysis
 #

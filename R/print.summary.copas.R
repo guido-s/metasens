@@ -67,11 +67,11 @@
 #' @keywords print
 #' 
 #' @examples
-#' data(Fleiss93)
+#' data(Fleiss1993bin, package = "meta")
 #' 
 #' # Perform meta analysis, effect measure is odds ratio (OR)
 #' #
-#' m1 <- metabin(event.e, n.e, event.c, n.c, data=Fleiss93, sm="OR")
+#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data=Fleiss1993bin, sm="OR")
 #' 
 #' # Print summary of Copas analysis
 #' #
@@ -119,9 +119,9 @@ print.summary.copas <- function(x,
   else
     chklogical(backtransf)
   ##
-  chknumeric(digits, min = 0, single = TRUE)
-  chknumeric(digits.pval, min = 1, single = TRUE)
-  chknumeric(digits.prop, min = 0, single = TRUE)
+  chknumeric(digits, min = 0, length = 1)
+  chknumeric(digits.pval, min = 1, length = 1)
+  chknumeric(digits.prop, min = 0, length = 1)
   chklogical(scientific.pval)
   
   

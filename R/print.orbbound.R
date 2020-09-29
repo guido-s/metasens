@@ -22,7 +22,7 @@
 #'   example.
 #' @param digits Minimal number of significant digits, see
 #'   \code{print.default}.
-#' @param digits.zval Minimal number of significant digits for z- or
+#' @param digits.stat Minimal number of significant digits for z- or
 #'   t-value, see \code{print.default}.
 #' @param digits.pval Minimal number of significant digits for p-value
 #'   of overall treatment effect, see \code{print.default}.
@@ -41,8 +41,9 @@
 #' @keywords print
 #' 
 #' @examples
-#' data(Fleiss93, package = "meta")
-#' m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+#' data(Fleiss1993bin, package = "meta")
+#' 
+#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 #' 
 #' orb1 <- orbbound(m1, k.suspect = 1:5)
 #' print(orb1, digits = 2)
@@ -56,8 +57,8 @@
 #' orb1.missleft <- orbbound(m1, k.suspect = 1:5, left = TRUE)
 #' orb1.missleft
 #' 
-#' m2 <- metabin(event.e, n.e, event.c, n.c,
-#'               data = Fleiss93, sm = "OR", method = "Inverse")
+#' m2 <- metabin(d.asp, n.asp, d.plac, n.plac,
+#'               data = Fleiss1993bin, sm = "OR", method = "Inverse")
 #' 
 #' orb2 <- orbbound(m2, k.suspect = 1:5)
 #' print(orb2, digits = 2)
@@ -74,7 +75,7 @@ print.orbbound <- function(x,
                            comb.random = x$x$comb.random,
                            header = TRUE, backtransf = x$backtransf,
                            digits = gs("digits"),
-                           digits.zval = gs("digits.zval"),
+                           digits.stat = gs("digits.stat"),
                            digits.pval = max(gs("digits.pval"), 2),
                            digits.tau2 = gs("digits.tau2"),
                            scientific.pval = gs("scientific.pval"),
@@ -110,10 +111,10 @@ print.orbbound <- function(x,
     else
       backtransf <- TRUE
   ##
-  chknumeric(digits, min = 0, single = TRUE)
-  chknumeric(digits.zval, min = 0, single = TRUE)
-  chknumeric(digits.pval, min = 1, single = TRUE)
-  chknumeric(digits.tau2, min = 0, single = TRUE)
+  chknumeric(digits, min = 0, length = 1)
+  chknumeric(digits.stat, min = 0, length = 1)
+  chknumeric(digits.pval, min = 1, length = 1)
+  chknumeric(digits.tau2, min = 0, length = 1)
   ##
   chklogical(header)
   chklogical(backtransf)
@@ -179,13 +180,13 @@ print.orbbound <- function(x,
   lowTE.fixed <- round(lowTE.fixed, digits)
   uppTE.fixed <- round(uppTE.fixed, digits)
   pTE.fixed <- x$fixed$p
-  zTE.fixed <- round(x$fixed$z, digits)
+  sTE.fixed <- round(x$fixed$statistic, digits)
   ##
   TE.random    <- round(TE.random, digits)
   lowTE.random <- round(lowTE.random, digits)
   uppTE.random <- round(uppTE.random, digits)
   pTE.random <- x$random$p
-  zTE.random <- round(x$random$z, digits)
+  sTE.random <- round(x$random$statistic, digits)
   ##
   maxbias <- round(maxbias, digits)
   
@@ -220,8 +221,8 @@ print.orbbound <- function(x,
                                   big.mark = big.mark),
                           formatN(uppTE.fixed, digits, "NA",
                                   big.mark = big.mark)),
-                 formatN(round(zTE.fixed, digits = digits.zval),
-                         digits.zval, big.mark = big.mark),
+                 formatN(round(sTE.fixed, digits = digits.stat),
+                         digits.stat, big.mark = big.mark),
                  formatPT(pTE.fixed, digits = digits.pval,
                           scientific = scientific.pval))
     
@@ -248,8 +249,8 @@ print.orbbound <- function(x,
                                   big.mark = big.mark),
                           formatN(uppTE.random, digits, "NA",
                                   big.mark = big.mark)),
-                 formatN(round(zTE.random, digits = digits.zval),
-                         digits.zval, big.mark = big.mark),
+                 formatN(round(sTE.random, digits = digits.stat),
+                         digits.stat, big.mark = big.mark),
                  formatPT(pTE.random, digits = digits.pval,
                           scientific = scientific.pval))
     

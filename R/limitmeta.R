@@ -88,8 +88,9 @@
 #'   and standard error (random effects model).}
 #' \item{lower.random, upper.random}{Lower and upper confidence
 #'   interval limits (random effects model).}
-#' \item{zval.random, pval.random}{z-value and corresponding p-value
-#'   for test of overall treatment effect (random effects model).}
+#' \item{statistic.random, pval.random}{Statistic and corresponding
+#'   p-value for test of overall treatment effect (random effects
+#'   model).}
 #' \item{w.random}{Weight of individual studies (in random effects
 #'   model).}
 #' \item{tau}{Square-root of between-study variance.}
@@ -98,9 +99,9 @@
 #' \item{lower.adjust, upper.adjust}{Lower and upper confidence
 #'   interval limits for adjusted effect estimate (random effects
 #'   model).}
-#' \item{zval.adjust, pval.adjust}{z-value and corresponding p-value
-#'   for test of overall treatment effect for adjusted estimate
-#'   (random effects model).}
+#' \item{statistic.adjust, pval.adjust}{Statistic and corresponding
+#'   p-value for test of overall treatment effect for adjusted
+#'   estimate (random effects model).}
 #' \item{alpha.r}{Intercept of the linear regression line on the
 #'   generalised radial plot, here interpreted as bias parameter in an
 #'   extended random effects model. Represents the expected shift in
@@ -172,7 +173,7 @@ limitmeta <- function(x,
   seTE.random <- x$seTE.random
   lower.random <- x$lower.random
   upper.random <- x$upper.random
-  zval.random <- x$zval.random
+  statistic.random <- x$statistic.random
   pval.random <- x$pval.random
   
   
@@ -235,11 +236,11 @@ limitmeta <- function(x,
   ##
   lower.adjust <- ci.adjust$lower
   upper.adjust <- ci.adjust$upper
-  zval.adjust <- ci.adjust$z
+  statistic.adjust <- ci.adjust$statistic
   pval.adjust <- ci.adjust$p
   ##
   if (inherits(x, c("metaprop"))) {
-    zval.adjust <- NA
+    statistic.adjust <- NA
     pval.adjust <- NA
   }
   
@@ -276,16 +277,15 @@ limitmeta <- function(x,
               seTE.random = seTE.random,
               lower.random = lower.random,
               upper.random = upper.random,
-              zval.random = zval.random,
+              statistic.random = statistic.random,
               pval.random = pval.random,
               w.random = w.random,
-              tau = tau,
               ##
               TE.adjust = TE.adjust,
               seTE.adjust = seTE.adjust,
               lower.adjust = lower.adjust,
               upper.adjust = upper.adjust,
-              zval.adjust = zval.adjust,
+              statistic.adjust = statistic.adjust,
               pval.adjust = pval.adjust,
               ##
               alpha.r = alpha.r,
@@ -296,6 +296,7 @@ limitmeta <- function(x,
               Q.small = Q.small,
               Q.resid = Q.resid,
               G.squared = G.squared,
+              tau = tau,
               ##
               level = level,
               level.comb = level.comb,

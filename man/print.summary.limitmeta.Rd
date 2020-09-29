@@ -12,7 +12,7 @@
   pscale = x$x$pscale,
   irscale = x$x$irscale,
   irunit = x$x$irunit,
-  digits.zval = gs("digits.zval"),
+  digits.stat = gs("digits.stat"),
   digits.pval = gs("digits.pval"),
   digits.Q = gs("digits.Q"),
   digits.tau2 = gs("digits.tau2"),
@@ -51,7 +51,7 @@ rates, i.e. if argument \code{sm} is equal to \code{"IR"},
 \item{irunit}{A character specifying the time unit used to
 calculate rates, e.g. person-years.}
 
-\item{digits.zval}{Minimal number of significant digits for z- or
+\item{digits.stat}{Minimal number of significant digits for z- or
 t-value, see \code{print.default}.}
 
 \item{digits.pval}{Minimal number of significant digits for p-value

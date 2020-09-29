@@ -59,6 +59,8 @@
 #' @param x An object of class \code{meta}, obtained from one of the
 #'   functions \code{metabin}, \code{metacont} and \code{metagen} in
 #'   the package meta.
+#' @param level.comb The level used to calculate confidence intervals
+#'   for pooled estimates.
 #' @param gamma0.range (Advanced users only) A numerical vector of
 #'   length two specifying the range of gamma0 values the program will
 #'   explore.
@@ -169,6 +171,9 @@
 #'   back transformed in printouts and plots. If
 #'   \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
 #'   printed as odds ratios rather than log odds ratio, for example.
+#' @param title Title of meta-analysis / systematic review.
+#' @param complab Comparison label.
+#' @param outclab Outcome label.
 #' @param silent A logical indicating whether information on progress
 #'   in fitting the Copas selection model should be printed:
 #'   \code{silent=TRUE}, do not print information (the default);
@@ -192,7 +197,26 @@
 #'   plot}
 #' \item{seTE}{Vector of standard error of \code{TE}}
 #' \item{TE.random}{Usual random effects estimate of treatment effect}
-#' \item{seTE.random}{Usual standard error of \code{TE.random}}
+#' \item{seTE.random}{Standard error of \code{TE.random}}
+#' \item{lower.random}{Lower confidence limit of usual random effects
+#'   estimate}
+#' \item{upper.random}{Upper confidence limit of usual random effects
+#'   estimate}
+#' \item{statistic.random}{Test statistic of an overall effect (usual
+#'   random effects model)}
+#' \item{pval.random}{P-value of test of overall effect (usual random
+#'   effects model)}
+#' \item{TE.adjust}{Adjusted random effects estimate from Copas
+#' selection model}
+#' \item{seTE.adjust}{Standard error of \code{TE.adjust}}
+#' \item{lower.adjust}{Lower confidence limit of adjusted treatment
+#'   estimate}
+#' \item{upper.adjust}{Upper confidence limit of adjusted treatment
+#'   estimate}
+#' \item{statistic.adjust}{Test statistic of an overall effect (Copas
+#'   selection model)}
+#' \item{pval.adjust}{P-value of test of overall effect (Copas
+#'   selection model)}
 #' \item{left}{Whether selection bias expected on left or right}
 #' \item{rho.bound}{Bound on \code{rho}}
 #' \item{gamma0.range}{Range of gamma0 (see help on \code{copas}
@@ -291,13 +315,13 @@
 #' \bold{63}, 282--8
 #' 
 #' @examples
-#' data(Fleiss93)
+#' data(Fleiss1993bin, package = "meta")
 #' 
 #' # Perform meta-analysis
-#' #  (Note event.e indicates events, n.e total in exposed arm;
-#' #        event.c indicates events, n.c total in control arm)
+#' #  (Note d.asp indicates deaths, n.asp total in aspirin group;
+#' #        d.plac indicates deaths, n.plac total in placebo group)
 #' #
-#' m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 #' summary(m1)
 #' 
 #' # Perform a basic Copas selection model analysis
@@ -369,6 +393,7 @@
 
 
 copas <- function(x,
+                  level.comb = x$level.comb,
                   gamma0.range = NULL,
                   gamma1.range = NULL,
                   ngrid = 20,
@@ -379,14 +404,21 @@ copas <- function(x,
                   rho.bound = 0.9999,
                   sign.rsb = 0.1,
                   backtransf = x$backtransf,
+                  title = x$title, complab = x$complab, outclab = x$outclab,
                   silent = TRUE,
                   warn = options()$warn) {
   
-  meta:::chkclass(x, "meta")
   
+  ##
+  ##
+  ## (1) Check arguments
+  ##
+  ##
+  meta:::chkclass(x, "meta")
+  ##
   if (!is.numeric(rho.bound) && (rho.bound <=0 | rho.bound > 1))
     stop("no valid value for 'rho.bound'")
-  
+  ##
   if (!is.null(slope)) {
     if (!is.numeric(slope))
       stop("Argument 'slope' must be numeric")
@@ -396,35 +428,73 @@ copas <- function(x,
       slope <- slope[1]
     }
   }
-  
-  
-  ## Check significance level for test of residual selection bias
   ##
+  meta:::chklevel(level.comb)
+  if (!is.null(gamma0.range))
+    meta:::chknumeric(gamma0.range, length = 2)
+  if (!is.null(gamma1.range))
+    meta:::chknumeric(gamma1.range, length = 2)
+  meta:::chknumeric(ngrid, length = 1)
+  meta:::chknumeric(nlevels, length = 1)
+  if (!is.null(levels))
+    meta:::chknumeric(levels)
+  if (!is.null(slope))
+    meta:::chknumeric(slope, length = 1)
+  if (!is.null(left))
+    meta:::chklogical(left)
+  meta:::chknumeric(rho.bound, max = 1, length = 1)
   meta:::chklevel(sign.rsb)
+  meta:::chklogical(backtransf)
+  meta:::chklogical(silent)
+  meta:::chklogical(warn)
   
   
+  ##
+  ##
+  ## (2) Extract results
+  ##
+  ##
   oldopt <- options(warn = warn)
   on.exit(options(oldopt))
-  
-  
+  ##
   TE <- x$TE
   seTE <- x$seTE
+  studlab <- x$studlab
+  ##
   sel <- !is.na(TE) & !is.na(seTE)
   if (length(TE) != sum(sel))
     warning(paste(length(TE) - sum(sel),
                   "observation(s) dropped due to missing values"))
   TE <- TE[sel]
   seTE <- seTE[sel]
+  studlab <- studlab[sel]
   ##
   TE.random <- x$TE.random
   seTE.random <- x$seTE.random
+  ##
+  if (x$level.comb != level.comb) {
+    if (x$hakn)
+      ci.random <- ci(TE.random, seTE.random, level = level.comb, df = x$df.hakn)
+    else
+      ci.random <- ci(TE.random, seTE.random, level = level.comb)
+    ##
+    lower.random <- ci.random$lower
+    upper.random <- ci.random$upper
+    statistic.random <- ci.random$statistic
+    pval.random <- ci.random$p
+  }
+  else {
+    lower.random <- x$lower.random
+    upper.random <- x$upper.random
+    statistic.random <- x$statistic.random
+    pval.random <- x$pval.random
+  }
   ##
   tau <- x$tau
   ##
   seTE.min <- min(seTE)
   seTE.max <- max(seTE)
-  
-  
+  ##  
   if (!silent) {
     cat("\n\n")
     cat("====================================\n")
@@ -443,16 +513,16 @@ copas <- function(x,
   }
   
   
-  ## calculate and display the range of gamma0,
-  ## gamma1 used subsequently,
-  ## unless options given by user override these
+  ##
+  ##
+  ## (3) Fit Copas selection model
+  ##
   ##
   if (is.null(gamma1.range)) {
     gamma1.range <- c(0, 1.29 / (1 / seTE.min - 1 / seTE.max))
   }
   if (is.null(gamma0.range))
     gamma0.range <- c(-0.25 - gamma1.range[2] / seTE.max, 2)
-  ##
   ##
   gamma0 <- seq(gamma0.range[1], gamma0.range[2], length = ngrid)
   gamma1 <- seq(gamma1.range[1], gamma1.range[2], length = ngrid)
@@ -461,7 +531,6 @@ copas <- function(x,
   gamma0.max <- max(gamma0)
   gamma1.min <- min(gamma1)
   gamma1.max <- max(gamma1)
-  ##
   ##
   if (!silent) {
     ##
@@ -490,9 +559,8 @@ copas <- function(x,
               round(publprob.seTE.min[1], 3),", ",
               round(publprob.seTE.min[2], 3),")",sep = "") ,"\n\n")
   }
-  
-  
-  ## calculate the contour plot
+  ##  
+  ## Calculate the contour plot
   ##
   if (!silent) {
     cat("\n")
@@ -506,9 +574,7 @@ copas <- function(x,
   if (left)
     rho0 <-  rho.bound / 2
   else
-    rho0 <- -rho.bound / 2
-  
-  
+    rho0 <- -rho.bound / 2  
   ##
   TE.contour <- matrix(NA, nrow = ngrid, ncol = ngrid)
   ##
@@ -535,9 +601,8 @@ copas <- function(x,
   if (!silent) {
     cat("Done\n\n")
   }
-  
-  
-  ## calculations to approximate route of orthogonal line
+  ##  
+  ## Calculations to approximate route of orthogonal line
   ##
   if (!silent) {
     cat("\n")
@@ -545,10 +610,10 @@ copas <- function(x,
     cat("==========================================\n")
   }
   ##
-  ## the approach of lowess smoothing the smallest distances
-  ## gives very bendy curves: try instead to calculate gradient of
-  ## each contour, then average (-1 / .) and then draw straight line through
-  ## top right value.
+  ## The approach of lowess smoothing the smallest distances gives
+  ## very bendy curves: try instead to calculate gradient of each
+  ## contour, then average (-1 / .) and then draw straight line
+  ## through top right value.
   ##
   gamma0.rescale <- (gamma0 - gamma0.min) / (gamma0.max - gamma0.min)
   gamma1.rescale <- (gamma1 - gamma1.min) / (gamma1.max - gamma1.min)
@@ -581,8 +646,8 @@ copas <- function(x,
     se.slopes[l] <- sqrt(diag(vcov(lm.op))[2])
     intercepts[l] <- lm.op$coef[1]
   }
-
-  ## calculate crossings of contours with approximate orthogonal line
+  ##
+  ## Calculate crossings of contours with approximate orthogonal line
   ## this provides the points to estimate the effect
   ##
   adj.r.squareds[is.nan(adj.r.squareds)] <- -100
@@ -605,15 +670,13 @@ copas <- function(x,
   ##
   x.slope <- ((1 - slope - intercepts ) / (slopes - slope))
   y.slope <- 1 + slope * (x.slope - 1)
-  
-  
+  ##  
   if (!silent) {
     cat("Done\n\n")
   }
-  
-  
-  ## calculations for plot how mean / se changes as
-  ## come down from the maximum
+  ##  
+  ## Calculations for plot how mean / se changes as come down from the
+  ## maximum
   ##
   if (!silent) {
     cat("\n")
@@ -668,8 +731,6 @@ copas <- function(x,
   ##
   publprob <- pnorm(gamma0.slope + gamma1.slope / seTE.max)
   ##
-  ##
-  ##
   TE.slope   <- rep(NA, n.gamma0.slope)
   seTE.slope <- rep(NA, n.gamma0.slope)
   rho.slope  <- rep(NA, n.gamma0.slope)
@@ -699,7 +760,7 @@ copas <- function(x,
     conv1[i]    <- junk1$convergence
     message1[i] <- junk1$message
     ##
-    ## in case of singular hessian, do the best we can:
+    ## In case of singular hessian, do the best we can:
     ##
     try(junk2 <- optim(c(TE.random, rho0, tau),
                        fn = copas.loglik.without.beta,
@@ -711,32 +772,30 @@ copas <- function(x,
                        method = "L-BFGS-B", hessian = TRUE),
         silent = TRUE)
     ##
-    ##print(junk2$hessian)
+    ## print(junk2$hessian)
     ##
     try(seTE.slope[i] <-
         sqrt(solve(junk2$hessian + 0.00000001)[1, 1]),
         silent = TRUE)
     ##
-    ## if this fails, take previous sd
+    ## If this fails, take previous sd
     ##
     if ((i > 1 & is.na(seTE.slope[i])) ||
         (i > 1 & seTE.slope[i] == 0))
       seTE.slope[i] <- seTE.slope[i - 1]
     ##
-    ## if that fails, try this!
+    ## If that fails, try this!
     ##
     if (is.na(seTE.slope[i]) || seTE.slope[i] == 0)
       try(seTE.slope[i] <- sqrt(1 / junk2$hessian[1, 1]),
           silent = TRUE)
   }
-  
-  
+  ##
   if (!silent) {
     cat("Done\n\n")
   }
-  
-  
-  ## calculations for goodness of fit plot along orthogonal line
+  ##
+  ## Calculations for goodness of fit plot along orthogonal line
   ## (above), calculate log-likelihood in model containing sd
   ##
   if (!silent) {  
@@ -784,15 +843,12 @@ copas <- function(x,
   ## P-value for test of residual selection bias:
   ##
   pval.rsb <- 1 - pchisq(2 * (loglik1 - loglik2), df = 1)
-
-  
+  ##  
   if (!silent) {
     cat("Done\n\n")
   }
-  
-  
   ##
-  ## compute no of unpublished studies
+  ## Compute number of unpublished studies
   ##
   N.unpubl <- rep(NA, length(publprob))
   ##
@@ -802,10 +858,78 @@ copas <- function(x,
   }
   
   
+  ##
+  ##
+  ## (4) Copas estimate adjusted for selection bias
+  ##    (added by sc, 24.09.2007)
+  ##
+  ##
+  ord <- rev(order(publprob))
+  pom <- publprob[ord]
+  ##
+  TE.slope <- TE.slope[ord]
+  seTE.slope <- seTE.slope[ord]
+  ci.slope <- ci(TE.slope, seTE.slope, level.comb)
+  rho.slope <- rho.slope[ord]
+  tau.slope <- tau.slope[ord]
+  ##
+  pval.rsb <- pval.rsb[ord]
+  N.unpubl <- N.unpubl[ord]
+  ##
+  tres <- data.frame(seq = seq(along = pval.rsb),
+                     cumsum = cumsum(pval.rsb <= sign.rsb),
+                     diff = seq(along = pval.rsb) - cumsum(pval.rsb <= sign.rsb))
+  pval.rsb.sign.all <- all(tres$diff == 0)
+  pval.rsb.sign <- ifelse(sum(tres$diff == 0) > 0, TRUE, FALSE)
+  ##
+  if (pval.rsb.sign.all) {
+    TE.adj <- NA
+    seTE.adj <- NA
+    pval.rsb.adj <- NA
+    N.unpubl.adj <- NA
+  }
+  else {
+    if (pval.rsb.sign) {
+      sel.adj <- tres$seq[tres$diff > 0][1]
+      TE.adj <- TE.slope[sel.adj]
+      seTE.adj <- seTE.slope[sel.adj]
+      pval.rsb.adj <- pval.rsb[sel.adj]
+      N.unpubl.adj <- N.unpubl[sel.adj]
+    }
+    else {
+      TE.adj <- TE.slope[1]
+      seTE.adj <- seTE.slope[1]
+      pval.rsb.adj <- pval.rsb[1]
+      N.unpubl.adj <- N.unpubl[1]
+    }
+  }
+  ##
+  ci.adjust <- ci(TE.adj, seTE.adj, level.comb)
+  
+  
   res <- list(TE = TE,
               seTE = seTE,
+              ##
+              studlab = x$studlab,
+              ##
               TE.random = TE.random,
               seTE.random = seTE.random,
+              lower.random = lower.random,
+              upper.random = upper.random,
+              statistic.random = statistic.random,
+              pval.random = pval.random,
+              ##
+              TE.adjust = TE.adj,
+              seTE.adjust = seTE.adj,
+              lower.adjust = ci.adjust$lower,
+              upper.adjust = ci.adjust$upper,
+              statistic.adjust = ci.adjust$statistic,
+              pval.adjust = ci.adjust$p,
+              pval.rsb.adj = pval.rsb.adj,
+              N.unpubl.adj = N.unpubl.adj,              
+              ##
+              level.comb = level.comb,
+              ##
               left = left,
               rho.bound = rho.bound,
               gamma0.range = gamma0.range,
@@ -829,6 +953,10 @@ copas <- function(x,
               ##
               TE.slope = TE.slope,
               seTE.slope = seTE.slope,
+              lower.slope = ci.slope$lower,
+              upper.slope = ci.slope$upper,
+              statistic.slope = ci.slope$statistic,
+              pval.slope = ci.slope$p,
               rho.slope = rho.slope,
               tau.slope = tau.slope,
               ##
@@ -845,11 +973,18 @@ copas <- function(x,
               conv2 = conv2,
               message2 = message2,
               ##
-              publprob = publprob,
+              publprob = pom,
               pval.rsb = pval.rsb,
               sign.rsb = sign.rsb,
               N.unpubl = N.unpubl,
-              sm = x$sm, call = match.call(), x = x)
+              sm = x$sm,
+              ##
+              title = title,
+              complab = complab,
+              outclab = outclab,
+              ##
+              call = match.call(),
+              x = x)
   
   res$version <- utils::packageDescription("metasens")$Version
   

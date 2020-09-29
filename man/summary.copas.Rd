@@ -4,16 +4,10 @@
 \alias{summary.copas}
 \title{Summary method for Copas selection model}
 \usage{
-\method{summary}{copas}(object, level = 0.95, sign.rsb = object$sign.rsb, ...)
+\method{summary}{copas}(object, ...)
 }
 \arguments{
 \item{object}{An object of class \code{copas}.}
-
-\item{level}{The level used to calculate confidence intervals
-(between 0 and 1).}
-
-\item{sign.rsb}{The significance level for the test of residual
-selection bias (between 0 and 1).}
 
 \item{...}{other arguments to the function will be ignored (this
 option included only to conform with R standards)}
@@ -24,7 +18,7 @@ An object of class "summary.copas" with corresponding print
   components:
 
 \item{slope}{Results for points on orthogonal line (a list with
-  elements TE, seTE, lower, upper, z, p, level).}
+  elements TE, seTE, lower, upper, statistic, p, level).}
 \item{publprob}{Vector of probabilities of publishing the smallest
   study.}
 \item{pval.rsb}{P-values for tests on presence of residual
@@ -32,8 +26,8 @@ An object of class "summary.copas" with corresponding print
 \item{N.unpubl}{Approximate number of studies the model suggests
   remain unpublished}
 \item{adjust}{Result of Copas selection model adjusted for
-  selection bias (a list with elements TE, seTE, lower, upper, z,
-  p, level).}
+  selection bias (a list with elements TE, seTE, lower, upper,
+  statistic, p, level).}
 \item{sign.rsb}{The significance level for the test of residual
   selection bias.}
 \item{pval.rsb.adj}{P-value for test on presence of residual
@@ -42,7 +36,7 @@ An object of class "summary.copas" with corresponding print
   suggests remain unpublished for adjusted effect given in
   \code{adjust}}
 \item{random}{Results for usual random effects model (a list with
-  elements TE, seTE, lower, upper, z, p, level).}
+  elements TE, seTE, lower, upper, statistic, p, level).}
 \item{sm}{A character string indicating underlying summary
   measure.}
 \item{ci.lab}{Label for confidence interval.}
@@ -59,15 +53,15 @@ This function complements the graphical summary of the results of a
 Copas selection model, generated using \code{plot.copas}.
 }
 \examples{
-data(Fleiss93)
+data(Fleiss1993bin, package = "meta")
 
 # Perform meta analysis, effect measure is odds ratio (OR)
 #
-m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 
 # Print summary of Copas analysis
 #
-summary(copas(m1), level = 0.95)
+summary(copas(m1, level.comb = 0.95))
 
 }
 \seealso{

@@ -8,10 +8,6 @@
 #' @aliases summary.copas
 #'
 #' @param object An object of class \code{copas}.
-#' @param level The level used to calculate confidence intervals
-#'   (between 0 and 1).
-#' @param sign.rsb The significance level for the test of residual
-#'   selection bias (between 0 and 1).
 #' @param ... other arguments to the function will be ignored (this
 #'   option included only to conform with R standards)
 #'
@@ -20,7 +16,7 @@
 #'   components:
 #'
 #' \item{slope}{Results for points on orthogonal line (a list with
-#'   elements TE, seTE, lower, upper, z, p, level).}
+#'   elements TE, seTE, lower, upper, statistic, p, level).}
 #' \item{publprob}{Vector of probabilities of publishing the smallest
 #'   study.}
 #' \item{pval.rsb}{P-values for tests on presence of residual
@@ -28,8 +24,8 @@
 #' \item{N.unpubl}{Approximate number of studies the model suggests
 #'   remain unpublished}
 #' \item{adjust}{Result of Copas selection model adjusted for
-#'   selection bias (a list with elements TE, seTE, lower, upper, z,
-#'   p, level).}
+#'   selection bias (a list with elements TE, seTE, lower, upper,
+#'   statistic, p, level).}
 #' \item{sign.rsb}{The significance level for the test of residual
 #'   selection bias.}
 #' \item{pval.rsb.adj}{P-value for test on presence of residual
@@ -38,7 +34,7 @@
 #'   suggests remain unpublished for adjusted effect given in
 #'   \code{adjust}}
 #' \item{random}{Results for usual random effects model (a list with
-#'   elements TE, seTE, lower, upper, z, p, level).}
+#'   elements TE, seTE, lower, upper, statistic, p, level).}
 #' \item{sm}{A character string indicating underlying summary
 #'   measure.}
 #' \item{ci.lab}{Label for confidence interval.}
@@ -54,15 +50,15 @@
 #' \code{\link[meta]{metabias}}, \code{\link[meta]{metagen}}
 #' 
 #' @examples
-#' data(Fleiss93)
+#' data(Fleiss1993bin, package = "meta")
 #' 
 #' # Perform meta analysis, effect measure is odds ratio (OR)
 #' #
-#' m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 #' 
 #' # Print summary of Copas analysis
 #' #
-#' summary(copas(m1), level = 0.95)
+#' summary(copas(m1, level.comb = 0.95))
 #'
 #' @method summary copas
 #' @export
@@ -71,85 +67,47 @@
 #' @importFrom meta ci
 
 
-summary.copas <- function(object, level = 0.95,
-                          sign.rsb = object$sign.rsb, ...) {
+summary.copas <- function(object, ...) {
+  
   
   meta:::chkclass(object, "copas")
   
-  seTE <- object$seTE
-  TE.random <- object$TE.random
-  seTE.random <- object$seTE.random
-  gamma0.slope <- object$gamma0.slope
-  gamma1.slope <- object$gamma1.slope
-  TE.slope <- object$TE.slope
-  seTE.slope <- object$seTE.slope
-  publprob <- object$publprob
-  pval.rsb <- object$pval.rsb
-  N.unpubl <- object$N.unpubl
-  ##
-  ci.random <- ci(TE.random, seTE.random, level)
-  ##
-  if (is.null(sign.rsb))
-    sign.rsb <- 0.1
-  else
-    meta:::chklevel(sign.rsb)
   
+  ci.random <- list(TE = object$TE.random,
+                    seTE = object$seTE.random,
+                    lower = object$lower.random,
+                    upper = object$upper.random,
+                    statistic = object$statistic.random,
+                    p = object$pval.random,
+                    level = object$level.comb)
+  ##
+  ci.slope <- list(TE = object$TE.slope,
+                   seTE = object$seTE.slope,
+                   lower = object$lower.slope,
+                   upper = object$upper.slope,
+                   statistic = object$statistic.slope,
+                   p = object$pval.slope,
+                   level = object$level.comb)
+  ##
+  ci.adjust <- list(TE = object$TE.adjust,
+                    seTE = object$seTE.adjust,
+                    lower = object$lower.adjust,
+                    upper = object$upper.adjust,
+                    statistic = object$statistic.adjust,
+                    p = object$pval.adjust,
+                    level = object$level.comb)
+  ## 
+  ci.lab <- paste(round(100 * object$level.comb, 1), "%-CI", sep = "")
   
-  ci.lab <- paste(round(100 * level, 1), "%-CI", sep = "")
-  
-  
-  ord <- rev(order(publprob)) 
-  pom <- publprob[ord]
-  ##
-  TE.slope <- TE.slope[ord]
-  seTE.slope <- seTE.slope[ord]
-  pval.rsb <- pval.rsb[ord]
-  N.unpubl <- N.unpubl[ord]
-  ##
-  ci.slope <- ci(TE.slope, seTE.slope, level)
-  
-  
-  ##
-  ## Copas estimate adjusted for selection bias (added by sc, 24.09.2007):
-  ##
-  tres <- data.frame(seq = seq(along = pval.rsb),
-                     cumsum = cumsum(pval.rsb <= sign.rsb),
-                     diff = seq(along = pval.rsb) - cumsum(pval.rsb <= sign.rsb))
-  pval.rsb.sign.all <- all(tres$diff == 0)
-  pval.rsb.sign <- ifelse(sum(tres$diff == 0) > 0, TRUE, FALSE)
-  ##
-  if (pval.rsb.sign.all) {
-    TE.adj <- NA
-    seTE.adj <- NA
-    pval.rsb.adj <- NA
-    N.unpubl.adj <- NA
-  }
-  else {
-    if(pval.rsb.sign) {
-      sel.adj <- tres$seq[tres$diff > 0][1]
-      TE.adj <- TE.slope[sel.adj]
-      seTE.adj <- seTE.slope[sel.adj]
-      pval.rsb.adj <- pval.rsb[sel.adj]
-      N.unpubl.adj <- N.unpubl[sel.adj]
-    }
-    else {
-      TE.adj <- TE.slope[1]
-      seTE.adj <- seTE.slope[1]
-      pval.rsb.adj <- pval.rsb[1]
-      N.unpubl.adj <- N.unpubl[1]
-    }
-  }
-  ##
-  adjust <- ci(TE.adj, seTE.adj, level)
   
   res <- list(slope = ci.slope,
-              publprob = pom,
-              pval.rsb = pval.rsb,
-              N.unpubl = N.unpubl,
-              adjust = adjust,
-              sign.rsb = sign.rsb,
-              pval.rsb.adj = pval.rsb.adj,
-              N.unpubl.adj = N.unpubl.adj,
+              publprob = object$publprob,
+              pval.rsb = object$pval.rsb,
+              N.unpubl = object$N.unpubl,
+              adjust = ci.adjust,
+              sign.rsb = object$sign.rsb,
+              pval.rsb.adj = object$pval.rsb.adj,
+              N.unpubl.adj = object$N.unpubl.adj,
               random = ci.random,
               sm = object$sm,
               ci.lab = ci.lab

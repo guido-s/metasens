@@ -258,8 +258,8 @@ metamiss <- function(x,
     p.c <- (event.c + incr) / (n.c + 1 * incr)
     ##
     if (method.miss == "IMOR") {
-      meta:::chknumeric(IMOR.e, single = TRUE)
-      meta:::chknumeric(IMOR.c, single = TRUE)
+      meta:::chknumeric(IMOR.e, length = 1)
+      meta:::chknumeric(IMOR.c, length = 1)
     }
     else if (method.miss == "0") {
       IMOR.e <- 0

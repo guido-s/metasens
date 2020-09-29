@@ -6,6 +6,7 @@
 \usage{
 copas(
   x,
+  level.comb = x$level.comb,
   gamma0.range = NULL,
   gamma1.range = NULL,
   ngrid = 20,
@@ -16,6 +17,9 @@ copas(
   rho.bound = 0.9999,
   sign.rsb = 0.1,
   backtransf = x$backtransf,
+  title = x$title,
+  complab = x$complab,
+  outclab = x$outclab,
   silent = TRUE,
   warn = options()$warn
 )
@@ -24,6 +28,9 @@ copas(
 \item{x}{An object of class \code{meta}, obtained from one of the
 functions \code{metabin}, \code{metacont} and \code{metagen} in
 the package meta.}
+
+\item{level.comb}{The level used to calculate confidence intervals
+for pooled estimates.}
 
 \item{gamma0.range}{(Advanced users only) A numerical vector of
   length two specifying the range of gamma0 values the program will
@@ -145,6 +152,12 @@ back transformed in printouts and plots. If
 \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
 printed as odds ratios rather than log odds ratio, for example.}
 
+\item{title}{Title of meta-analysis / systematic review.}
+
+\item{complab}{Comparison label.}
+
+\item{outclab}{Outcome label.}
+
 \item{silent}{A logical indicating whether information on progress
 in fitting the Copas selection model should be printed:
 \code{silent=TRUE}, do not print information (the default);
@@ -170,7 +183,26 @@ An object of class \code{copas} with corresponding
   plot}
 \item{seTE}{Vector of standard error of \code{TE}}
 \item{TE.random}{Usual random effects estimate of treatment effect}
-\item{seTE.random}{Usual standard error of \code{TE.random}}
+\item{seTE.random}{Standard error of \code{TE.random}}
+\item{lower.random}{Lower confidence limit of usual random effects
+  estimate}
+\item{upper.random}{Upper confidence limit of usual random effects
+  estimate}
+\item{statistic.random}{Test statistic of an overall effect (usual
+  random effects model)}
+\item{pval.random}{P-value of test of overall effect (usual random
+  effects model)}
+\item{TE.adjust}{Adjusted random effects estimate from Copas
+selection model}
+\item{seTE.adjust}{Standard error of \code{TE.adjust}}
+\item{lower.adjust}{Lower confidence limit of adjusted treatment
+  estimate}
+\item{upper.adjust}{Upper confidence limit of adjusted treatment
+  estimate}
+\item{statistic.adjust}{Test statistic of an overall effect (Copas
+  selection model)}
+\item{pval.adjust}{P-value of test of overall effect (Copas
+  selection model)}
 \item{left}{Whether selection bias expected on left or right}
 \item{rho.bound}{Bound on \code{rho}}
 \item{gamma0.range}{Range of gamma0 (see help on \code{copas}
@@ -292,13 +324,13 @@ specifically our approach to estimating the locally parallel
 contours, see Carpenter et al. (2009) and Schwarzer et al. (2010).
 }
 \examples{
-data(Fleiss93)
+data(Fleiss1993bin, package = "meta")
 
 # Perform meta-analysis
-#  (Note event.e indicates events, n.e total in exposed arm;
-#        event.c indicates events, n.c total in control arm)
+#  (Note d.asp indicates deaths, n.asp total in aspirin group;
+#        d.plac indicates deaths, n.plac total in placebo group)
 #
-m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 summary(m1)
 
 # Perform a basic Copas selection model analysis

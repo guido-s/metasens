@@ -1,3 +1,35 @@
+## metasens, version 0.5-0 (2020-09-29)
+
+### Major changes
+
+* Calculation of adjusted treatment estimate for Copas model in R
+  function copas() instead of summary.copas()
+
+### User-visible changes
+
+* copas():
+  - new argument 'level.comb' to calculate confidence interval for
+    pooled estimates
+  - new arguments 'title', 'complab' and 'outclab' to print
+    information on systematic review / meta-analysis
+
+* summary.copas() and plot.copas():
+  - arguments 'sign.rsb' and 'level' removed
+
+* print.copas():
+  - argument 'sign.rsb' removed
+
+* print.limitmeta(), print.orbbound(), print.summary.limitmeta():
+  - argument 'digits.zval' renamed to 'digits.stat'
+
+### Internal changes
+
+* copas():
+  - new list elements (with information for adjusted overall effect):
+    'TE.adjust', 'seTE.adjust', 'lower.adjust', 'upper.adjust',
+    'statistic.adjust' and 'pval.adjust'
+
+
 ## metasens, version 0.4-1 (2020-07-02)
 
 ### User-visible changes

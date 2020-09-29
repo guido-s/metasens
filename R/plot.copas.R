@@ -69,8 +69,6 @@
 #'   i.e. for the probability of publishing the study with largest
 #'   standard deviation. E.g. to specify limits between 0.3 and 0.1
 #'   set \code{xlim.pp=c(0.3,0.1)}.
-#' @param level The level used to calculate confidence intervals for
-#'   plot 3 (treatment effect plot) (between 0 and 1).
 #' @param orthogonal.line A logical indicating whether the orthogonal
 #'   line should be displayed in plot 2 (contour plot).
 #' @param lines (Diagnostic use only) A logical indicating whether
@@ -80,8 +78,6 @@
 #'   orthogonal line. Regression lines with a positive adjusted
 #'   \code{R^2} will be printed in green color, others will be printed
 #'   in red color.
-#' @param sign.rsb The significance level for the test of residual
-#'   selection bias (between 0 and 1).
 #' @param warn A number setting the handling of warning messages. It
 #'   is not uncommon for numerical problems to be encountered during
 #'   estimation over the grid of (gamma0, gamma1) values. Usually this
@@ -119,11 +115,11 @@
 #' @keywords hplot
 #' 
 #' @examples
-#' data(Fleiss93)
+#' data(Fleiss1993bin, package = "meta")
 #' 
 #' # Perform meta-analysis (outcome measure is OR = odds ratio)
 #' #
-#' m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 #' 
 #' # Perform Copas analysis
 #' #
@@ -163,10 +159,8 @@ plot.copas <- function(x,
                          "Treatment effect plot",
                          "P-value for residual selection bias"),
                        xlim.pp = NULL,
-                       level = 0.95,
                        orthogonal.line = TRUE,
                        lines = FALSE,
-                       sign.rsb = x$sign.rsb,
                        warn = -1,
                        ...) {
   
@@ -174,11 +168,6 @@ plot.copas <- function(x,
   
   if (!is.numeric(which) || any(which < 1) || any(which > 4)) 
     stop("Argument 'which' must be in 1:4")
-  
-  if (is.null(sign.rsb))
-    sign.rsb <- 0.1
-  else
-    meta:::chklevel(sign.rsb)
   
   
   oldwarn <- options()$warn
@@ -298,7 +287,7 @@ plot.copas <- function(x,
   xvalue <- publprob[ord]
   yvalue <- TE.slope[ord]
   ##
-  ci.y <- ci(yvalue, seTE.slope[ord], level = level)
+  ci.y <- ci(yvalue, seTE.slope[ord], level = x$level.comb)
   ci.y$lower[is.infinite(ci.y$lower)] <- NA
   ci.y$upper[is.infinite(ci.y$upper)] <- NA
   ##
@@ -334,10 +323,9 @@ plot.copas <- function(x,
     ##
     abline(h = 0)
     ##
-    ci.random <- ci(TE.random, seTE.random, level = level)
     abline(h = TE.random, lty = 1, col = "darkgray")
-    abline(h = ci.random$lower, lty = 1, col = "gray")
-    abline(h = ci.random$upper, lty = 1, col = "gray")
+    abline(h = x$lower.random, lty = 1, col = "gray")
+    abline(h = x$upper.random, lty = 1, col = "gray")
     ##
     lines(xvalue, ci.y$lower, lty = 1)
     lines(xvalue, ci.y$upper, lty = 1)
@@ -388,7 +376,7 @@ plot.copas <- function(x,
           side = 1, line = 2)
     mtext("P-value for residual selection bias", side = 2, line = 2)
     ##
-    abline(h = sign.rsb, lty = 2)
+    abline(h = x$sign.rsb, lty = 2)
     box()
     ##
     title(main = caption[4])

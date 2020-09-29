@@ -11,7 +11,7 @@
   header = TRUE,
   backtransf = x$backtransf,
   digits = gs("digits"),
-  digits.zval = gs("digits.zval"),
+  digits.stat = gs("digits.stat"),
   digits.pval = max(gs("digits.pval"), 2),
   digits.tau2 = gs("digits.tau2"),
   scientific.pval = gs("scientific.pval"),
@@ -41,7 +41,7 @@ example.}
 \item{digits}{Minimal number of significant digits, see
 \code{print.default}.}
 
-\item{digits.zval}{Minimal number of significant digits for z- or
+\item{digits.stat}{Minimal number of significant digits for z- or
 t-value, see \code{print.default}.}
 
 \item{digits.pval}{Minimal number of significant digits for p-value
@@ -68,8 +68,9 @@ overestimation by 10 percent. If \code{logscale=TRUE} for these
 summary measures, maximum bias is instead printed as absolute bias.
 }
 \examples{
-data(Fleiss93, package = "meta")
-m1 <- metabin(event.e, n.e, event.c, n.c, data = Fleiss93, sm = "OR")
+data(Fleiss1993bin, package = "meta")
+
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
 
 orb1 <- orbbound(m1, k.suspect = 1:5)
 print(orb1, digits = 2)
@@ -83,8 +84,8 @@ print(orb1, digits = 2, backtransf = FALSE)
 orb1.missleft <- orbbound(m1, k.suspect = 1:5, left = TRUE)
 orb1.missleft
 
-m2 <- metabin(event.e, n.e, event.c, n.c,
-              data = Fleiss93, sm = "OR", method = "Inverse")
+m2 <- metabin(d.asp, n.asp, d.plac, n.plac,
+              data = Fleiss1993bin, sm = "OR", method = "Inverse")
 
 orb2 <- orbbound(m2, k.suspect = 1:5)
 print(orb2, digits = 2)
