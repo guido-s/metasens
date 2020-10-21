@@ -60,7 +60,7 @@
 #' A bound for publication bias based on the fraction of unpublished
 #' studies.
 #' \emph{Biometrics},
-#'   \bold{60}, 146--53
+#' \bold{60}, 146--53
 #' 
 #' @examples
 #' data(Fleiss1993bin, package = "meta")

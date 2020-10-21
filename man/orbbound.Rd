@@ -88,7 +88,7 @@ Copas J, Jackson D (2004):
 A bound for publication bias based on the fraction of unpublished
 studies.
 \emph{Biometrics},
-  \bold{60}, 146--53
+\bold{60}, 146--53
 }
 \seealso{
 \code{\link{forest.orbbound}}, \code{\link{print.orbbound}}

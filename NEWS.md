@@ -1,3 +1,12 @@
+## metasens, version 0.6-0 (2020-mm-dd)
+
+### Major changes
+
+* Implementation of LFK index and Doi plot for asymmetry
+  ([Furuya-Kanamori et al.,
+  2018](https://doi.org/10.1097/XEB.0000000000000141))
+
+
 ## metasens, version 0.5-0 (2020-09-29)
 
 ### Major changes
@@ -46,8 +55,11 @@
 
 ### Major changes
 
-* New function metamiss() implementing imputation methods for
-  missing binary data (Gamble & Hollis, 2005; Higgins et al., 2008)
+* New function metamiss() implementing imputation methods for missing
+  binary data ([Gamble & Hollis,
+  2005](https://doi.org/10.1016/j.jclinepi.2004.09.013); [Higgins et
+  al., 2008](https://doi.org/10.1097/XEB.0000000000000141))
+  
 
 * Use **roxygen2** for development of R package **metasens**
 
@@ -61,7 +73,7 @@
 * Version of R package **meta** must be larger or equal 4.9-0
 
 * For limit meta-analysis, R_b measure of between-study heterogeneity
-  added (Crippa et al., 2016, <https://doi.org/10.1002/sim.6980>)
+  added ([Crippa et al., 2016](https://doi.org/10.1002/sim.6980))
 
 * P-values can be printed in scientific notation
 
@@ -162,8 +174,8 @@
 
 ### Major changes
 
-* Limit meta-analysis implemented (Rücker et al., 2011,
-  <https://doi.org/10.1093/biostatistics/kxq046>)
+* Limit meta-analysis implemented ([Rücker et al.,
+  2011](https://doi.org/10.1093/biostatistics/kxq046))
 
 ### User-visible changes
 
