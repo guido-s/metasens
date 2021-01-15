@@ -14,6 +14,7 @@ The following methods are implemented to evaluate how sensitive the results of a
  - limit meta-analysis (Rücker et al., 2011);
  - upper bound for outcome reporting bias (Copas and Jackson, 2004);
  - imputation methods for missing binary data (Gamble & Hollis, 2005; Higgins et al., 2008).
+ - LFK index test and Doi plot (Furuya-Kanamori et al., 2018).
 
 Furthermore, R package **metasens** provides functions and datasets to
 support Schwarzer et al. (2015), Chapter 5 "Small-Study Effects in
@@ -24,6 +25,9 @@ Meta-Analysis", http://meta-analysis-with-r.org/ .
 [Copas J, Jackson D (2004): A bound for publication bias based on the fraction of unpublished studies. *Biometrics*, **60**, 146-53](https://scholar.google.de/scholar?q=Copas+Jackson+2004+A+bound+for+publication+bias+based+on+the+fraction+of+unpublished+studies)
 
 [Copas JB, Shi JQ (2001): A sensitivity analysis for publication bias in systematic reviews. *Statistical Methods in Medical Research*, **10**, 251-65](https://scholar.google.de/scholar?q=Copas+Shi+2001+A+sensitivity+analysis+for+publication+bias+in+systematic+reviews)
+
+
+[Furuya-Kanamori L, Barendregt JJ, Doi S (2018): A new improved graphical and quantitative method for detecting bias in meta-analysis. *International Journal of Evidence-Based Healthcare*, **16**, 195-203](https://scholar.google.de/scholar?q=10.1097%2FXEB.0000000000000141)
 
 [Gamble C, Hollis S (2005): Uncertainty method improved on best–worst case analysis in a binary meta-analysis. *Journal of Clinical Epidemiology*, **58**, 579-88](https://scholar.google.de/scholar?q=Gamble+Hollis+2005+Uncertainty+Meta)
 
