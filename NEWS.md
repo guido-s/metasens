@@ -2,9 +2,18 @@
 
 ### Major changes
 
-* Implementation of LFK index and Doi plot for asymmetry
-  ([Furuya-Kanamori et al.,
-  2018](https://doi.org/10.1097/XEB.0000000000000141))
+* New functions doiplot() and lfkindex() implementing the Doi plot for
+  asymmetry and the LFK index to test for asymmetry ([Furuya-Kanamori
+  et al., 2018](https://doi.org/10.1097/XEB.0000000000000141))
+
+* Confidence interval of limit meta-analysis estimate can be shown in
+  funnel plot
+
+### User-visible changes
+
+* funnel.limitmeta():
+  - new argument 'show.ci.adjust' to show confidence interval of
+    adjusted estimate as a diamond
 
 
 ## metasens, version 0.5-0 (2020-09-29)

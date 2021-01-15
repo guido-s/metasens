@@ -11,6 +11,7 @@
   col = "black",
   bg = "darkgray",
   lwd = 1,
+  show.ci.adjust = FALSE,
   pch.adjust = 18,
   cex.adjust = 1.5,
   col.adjust = "gray",
@@ -47,6 +48,9 @@ used if \code{pch} in \code{21:25}).}
 
 \item{lwd}{The line width for confidence intervals (see
 \code{\link[meta]{funnel}}).}
+
+\item{show.ci.adjust}{A logical indicating whether to show the
+confidence interval of the adjusted estimate.}
 
 \item{pch.adjust}{The plotting symbol used for the adjusted effect
 estimate.}

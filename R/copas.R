@@ -887,6 +887,7 @@ copas <- function(x,
     seTE.adj <- NA
     pval.rsb.adj <- NA
     N.unpubl.adj <- NA
+    tau.adj <- NA
   }
   else {
     if (pval.rsb.sign) {
@@ -895,12 +896,14 @@ copas <- function(x,
       seTE.adj <- seTE.slope[sel.adj]
       pval.rsb.adj <- pval.rsb[sel.adj]
       N.unpubl.adj <- N.unpubl[sel.adj]
+      tau.adj <- tau.slope[sel.adj]
     }
     else {
       TE.adj <- TE.slope[1]
       seTE.adj <- seTE.slope[1]
       pval.rsb.adj <- pval.rsb[1]
       N.unpubl.adj <- N.unpubl[1]
+      tau.adj <- tau.slope[1]
     }
   }
   ##
@@ -925,8 +928,10 @@ copas <- function(x,
               upper.adjust = ci.adjust$upper,
               statistic.adjust = ci.adjust$statistic,
               pval.adjust = ci.adjust$p,
+              tau.adjust = tau.adj,
+              ##
               pval.rsb.adj = pval.rsb.adj,
-              N.unpubl.adj = N.unpubl.adj,              
+              N.unpubl.adj = N.unpubl.adj,
               ##
               level.comb = level.comb,
               ##

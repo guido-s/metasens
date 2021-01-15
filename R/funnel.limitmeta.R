@@ -28,6 +28,8 @@
 #'   used if \code{pch} in \code{21:25}).
 #' @param lwd The line width for confidence intervals (see
 #'   \code{\link[meta]{funnel}}).
+#' @param show.ci.adjust A logical indicating whether to show the
+#'   confidence interval of the adjusted estimate.
 #' @param pch.adjust The plotting symbol used for the adjusted effect
 #'   estimate.
 #' @param cex.adjust The magnification to be used for the plotting
@@ -91,7 +93,7 @@
 #' @export funnel.limitmeta
 #'
 #' @importFrom meta funnel
-#' @importFrom graphics curve points segments
+#' @importFrom graphics curve points polygon segments
 
 
 funnel.limitmeta <- function(x,
@@ -103,6 +105,7 @@ funnel.limitmeta <- function(x,
                              ##
                              lwd = 1,
                              ##
+                             show.ci.adjust = FALSE,
                              pch.adjust = 18,
                              cex.adjust = 1.5,
                              col.adjust = "gray",
@@ -130,6 +133,8 @@ funnel.limitmeta <- function(x,
   
   
   meta:::chkclass(x, "limitmeta")
+  ##
+  meta:::chklogical(show.ci.adjust)
   
   
   TE <- x$TE
@@ -140,9 +145,11 @@ funnel.limitmeta <- function(x,
   ##
   minTE <- min(TE, na.rm = TRUE)
   maxTE <- max(TE, na.rm = TRUE)
-  x.incr <- (maxTE-minTE) / 1000
+  x.incr <- (maxTE - minTE) / 1000
   ##
   TE.adjust <- x$TE.adjust
+  lower.adjust <- x$lower.adjust
+  upper.adjust <- x$upper.adjust
   ##
   tau <- x$tau
   alpha.r <- x$alpha.r
@@ -169,14 +176,16 @@ funnel.limitmeta <- function(x,
     TE <- exp(TE)
     TE.limit <- exp(TE.limit)
     TE.adjust <- exp(TE.adjust)
+    lower.adjust <- exp(lower.adjust)
+    upper.adjust <- exp(upper.adjust)
   }
   
   
   ##
   ## Generate funnel plot
   ##
-  funnel(x$x, pch = pch, cex = cex, col = col, bg = bg, lwd = lwd,
-         backtransf = backtransf, ...)
+  f1 <- funnel(x$x, pch = pch, cex = cex, col = col, bg = bg, lwd = lwd,
+               backtransf = backtransf, ...)
   
   
   ##
@@ -201,7 +210,20 @@ funnel.limitmeta <- function(x,
   ##
   ## Add adjusted treatment effect
   ##
-  points(TE.adjust, 0, pch = pch.adjust, cex = cex.adjust, col = col.adjust, bg = bg.adjust)
+  if (!show.ci.adjust)
+    points(TE.adjust, 0,
+           pch = pch.adjust, cex = cex.adjust,
+           col = col.adjust, bg = bg.adjust)
+  else {
+    if (!is.null(f1$ylim))
+      y.incr <- (f1$ylim[2] - f1$ylim[1]) / 50
+    else
+      y.incr <- 0.01
+    ##
+    polygon(c(lower.adjust, TE.adjust, upper.adjust, TE.adjust),
+            0 + c(0, -y.incr, 0, y.incr),
+            col = col.adjust, border = bg.adjust)
+    }
   
   
   ##
