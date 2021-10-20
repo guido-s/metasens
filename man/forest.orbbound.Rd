@@ -7,8 +7,8 @@ bias)}
 \usage{
 \method{forest}{orbbound}(
   x,
-  comb.fixed = x$x$comb.fixed,
-  comb.random = x$x$comb.random,
+  fixed = x$x$fixed,
+  random = x$x$random,
   text.fixed = "FE model",
   text.random = "RE model",
   smlab = NULL,
@@ -22,10 +22,10 @@ bias)}
 \arguments{
 \item{x}{An object of class \code{orbbound}.}
 
-\item{comb.fixed}{A logical indicating whether sensitivity analysis
+\item{fixed}{A logical indicating whether sensitivity analysis
 for fixed effect model should be plotted.}
 
-\item{comb.random}{A logical indicating whether sensitivity
+\item{random}{A logical indicating whether sensitivity
 analysis for random effects model should be plotted.}
 
 \item{text.fixed}{A character string used in the plot to label

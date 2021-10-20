@@ -6,8 +6,8 @@
 \usage{
 \method{print}{orbbound}(
   x,
-  comb.fixed = x$x$comb.fixed,
-  comb.random = x$x$comb.random,
+  fixed = x$x$fixed,
+  random = x$x$random,
   header = TRUE,
   backtransf = x$backtransf,
   digits = gs("digits"),
@@ -22,10 +22,10 @@
 \arguments{
 \item{x}{An object of class \code{orbbound}.}
 
-\item{comb.fixed}{A logical indicating whether sensitivity analysis
+\item{fixed}{A logical indicating whether sensitivity analysis
 for fixed effect model should be printed.}
 
-\item{comb.random}{A logical indicating whether sensitivity
+\item{random}{A logical indicating whether sensitivity
 analysis for random effects model should be printed.}
 
 \item{header}{A logical indicating whether information on

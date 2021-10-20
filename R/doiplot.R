@@ -59,11 +59,11 @@ doiplot <- function(TE, seTE, xlim, ylim,
   else
     lfk <- TE
   ##
-  meta:::chkchar(xlab, length = 1)
-  meta:::chkchar(ylab, length = 1)
-  meta:::chklogical(lfkindex)
+  chkchar(xlab, length = 1)
+  chkchar(ylab, length = 1)
+  chklogical(lfkindex)
   pos.lfkindex <-
-    meta:::setchar(pos.lfkindex,
+    setchar(pos.lfkindex,
                    c("left", "center", "right",
                      "bottomleft", "bottom","bottomright",
                      "topleft", "top", "topright"))

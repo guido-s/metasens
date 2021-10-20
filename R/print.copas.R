@@ -70,10 +70,7 @@ print.copas <- function(x, backtransf = x$backtransf,
                         digits.se = gs("digits.se"),
                         ...) {
   
-  meta:::chkclass(x, "copas")
-  ##
-  chklogical <- meta:::chklogical
-  chknumeric <- meta:::chknumeric
+  chkclass(x, "copas")
   
   
   cl <- class(x)[1]
@@ -81,7 +78,7 @@ print.copas <- function(x, backtransf = x$backtransf,
   ##
   fun <- "print.copas"
   ##
-  meta:::warnarg("logscale", addargs, fun, otherarg = "backtransf")
+  warnarg("logscale", addargs, fun, otherarg = "backtransf")
   ##
   if (is.null(backtransf))
     if (!is.null(list(...)[["logscale"]]))
@@ -95,7 +92,7 @@ print.copas <- function(x, backtransf = x$backtransf,
   chknumeric(digits.se, min = 0, length = 1)
   
   
-  meta:::crtitle(x)
+  crtitle(x)
   
   cat("Copas selection model analysis\n\n")
   

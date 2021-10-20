@@ -8,7 +8,7 @@ limitmeta(
   x,
   method.adjust = "beta0",
   level = x$level,
-  level.comb = x$level.comb,
+  level.ma = x$level.ma,
   backtransf = x$backtransf,
   title = x$title,
   complab = x$complab,
@@ -25,7 +25,7 @@ method is to be used. One of \code{"beta0"}, \code{"betalim"}, or
 \item{level}{The level used to calculate confidence intervals for
 individual studies.}
 
-\item{level.comb}{The level used to calculate confidence intervals
+\item{level.ma}{The level used to calculate confidence intervals
 for pooled estimates.}
 
 \item{backtransf}{A logical indicating whether results should be
@@ -44,7 +44,7 @@ An object of class \code{"limitmeta"} with corresponding
   \code{print}, \code{summary} and \code{funnel} function. The
   object is a list containing the following components:
 
-\item{x, level, level.comb,method.adjust,title, complab,
+\item{x, level, level.ma,method.adjust,title, complab,
   outclab}{As defined above.}
 \item{TE, seTE}{Estimated treatment effect and standard error of
   individual studies.}

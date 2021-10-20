@@ -95,7 +95,7 @@ orbbound <- function(x, k.suspect = 1, tau = x$tau, left = NULL,
   ## Mar;60(1):146-53.
   
   
-  meta:::chkclass(x, "meta")
+  chkclass(x, "meta")
   
   
   if (!(is.numeric(k.suspect)))

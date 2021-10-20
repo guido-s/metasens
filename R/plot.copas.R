@@ -164,7 +164,7 @@ plot.copas <- function(x,
                        warn = -1,
                        ...) {
   
-  meta:::chkclass(x, "copas")
+  chkclass(x, "copas")
   
   if (!is.numeric(which) || any(which < 1) || any(which > 4)) 
     stop("Argument 'which' must be in 1:4")
@@ -207,7 +207,7 @@ plot.copas <- function(x,
   on.exit(par(oldpar), add = TRUE)
   
   
-  if (meta:::is.relative.effect(sm))
+  if (is.relative.effect(sm))
     sm <- paste("log ", sm, sep = "")
   
   
@@ -215,7 +215,7 @@ plot.copas <- function(x,
   ##
   if (show[1]) {
     funnel(metagen(TE, seTE, level = 0.95,
-                   comb.fixed = TRUE, comb.random = FALSE, sm = sm),
+                   fixed = TRUE, random = FALSE, sm = sm),
            xlab = "", ylab = "")
     abline(v = TE.random, lty = 1, col = "darkgray")
     ##
@@ -287,7 +287,7 @@ plot.copas <- function(x,
   xvalue <- publprob[ord]
   yvalue <- TE.slope[ord]
   ##
-  ci.y <- ci(yvalue, seTE.slope[ord], level = x$level.comb)
+  ci.y <- ci(yvalue, seTE.slope[ord], level = x$level.ma)
   ci.y$lower[is.infinite(ci.y$lower)] <- NA
   ci.y$upper[is.infinite(ci.y$upper)] <- NA
   ##

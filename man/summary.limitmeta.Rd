@@ -14,7 +14,7 @@
 \value{
 This function returns the same list as the function
   \code{limitmeta}, however class "summary.limitmeta" is added to
-  the object in order to print a short summary of the limit
+  the object in order to print a detailed summary of the limit
   meta-analysis object.
 }
 \description{

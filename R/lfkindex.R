@@ -80,13 +80,13 @@ lfkindex <- function(TE, seTE, data = NULL) {
     TE <- TE$TE
   }
   else {
-    meta:::chknull(TE)
+    chknull(TE)
     ##
     seTE <- eval(mf[[match("seTE", names(mf))]],
                  data, enclos = sys.frame(sys.parent()))
-    meta:::chknull(seTE)
+    chknull(seTE)
     ##
-    meta:::chklength(seTE, length(TE), "lfkindex")
+    chklength(seTE, length(TE), "lfkindex")
   }
   
   
@@ -155,7 +155,7 @@ lfkindex <- function(TE, seTE, data = NULL) {
 
 print.lfkindex <- function(x, digits = 2, ...) {
   
-  meta:::chkclass(x, "lfkindex")
+  chkclass(x, "lfkindex")
   
   cat("        LFK index test\n\n")
 

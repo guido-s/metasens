@@ -9,7 +9,7 @@
 #' 
 #' @return This function returns the same list as the function
 #'   \code{limitmeta}, however class "summary.limitmeta" is added to
-#'   the object in order to print a short summary of the limit
+#'   the object in order to print a detailed summary of the limit
 #'   meta-analysis object.
 #' 
 #' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
@@ -31,7 +31,7 @@
 
 summary.limitmeta <- function(object, ...) {
 
-  meta:::chkclass(object, "limitmeta")
+  chkclass(object, "limitmeta")
   
   res <- object
   class(res) <- c("summary.limitmeta", class(object))

@@ -132,9 +132,9 @@ funnel.limitmeta <- function(x,
                              ...) {
   
   
-  meta:::chkclass(x, "limitmeta")
+  chkclass(x, "limitmeta")
   ##
-  meta:::chklogical(show.ci.adjust)
+  chklogical(show.ci.adjust)
   
   
   TE <- x$TE
@@ -172,7 +172,7 @@ funnel.limitmeta <- function(x,
   }
   
   
-  if (backtransf & meta:::is.relative.effect(sm)) {
+  if (backtransf & is.relative.effect(sm)) {
     TE <- exp(TE)
     TE.limit <- exp(TE.limit)
     TE.adjust <- exp(TE.adjust)
@@ -193,7 +193,7 @@ funnel.limitmeta <- function(x,
   ##
   if (line) {
     if (x$method.adjust == "beta0") {
-      if (backtransf & meta:::is.relative.effect(sm)) {
+      if (backtransf & is.relative.effect(sm)) {
         curve(sqrt((log(x) - beta.r)^2 / alpha.r^2 - tau^2),
               from = exp(xmin.line), to = exp(xmax.line),
               lty = lty.line, col = col.line, lwd = lwd.line, add = TRUE)

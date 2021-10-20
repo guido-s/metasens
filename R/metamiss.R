@@ -16,9 +16,9 @@
 #' @param small.values A character string specifying whether small
 #'   treatment effects indicate a beneficial (\code{"good"}) or
 #'   harmful (\code{"bad"}) effect, can be abbreviated (see Details).
-#' @param comb.fixed A logical indicating whether a fixed effect
+#' @param fixed A logical indicating whether a fixed effect
 #'   meta-analysis should be conducted.
-#' @param comb.random A logical indicating whether a random effects
+#' @param random A logical indicating whether a random effects
 #'   meta-analysis should be conducted.
 #' @param prediction A logical indicating whether a prediction
 #'   interval should be printed.
@@ -39,7 +39,8 @@
 #' \code{method.miss = "0"}\tab Imputed as no events, (i.e., 0) \cr
 #' \code{method.miss = "1"}\tab Imputed as events (i.e., 1) \cr
 #' \code{method.miss = "pc"}\tab Based on observed risk in control group \cr
-#' \code{method.miss = "pe"}\tab Based on observed risk in experimental group \cr
+#' \code{method.miss = "pe"}\tab Based on observed risk in
+#'   experimental group \cr
 #' \code{method.miss = "p"}\tab Based on group-specific risks \cr
 #' \code{method.miss = "b"}\tab Best case scenario for experimental group \cr
 #' \code{method.miss = "w"}\tab Worst case scenario for experimental group
@@ -130,8 +131,8 @@ metamiss <- function(x,
                      IMOR.e, IMOR.c = IMOR.e,
                      method.miss = if (missing(IMOR.e)) "0" else "IMOR",
                      small.values = "good",
-                     comb.fixed = x$comb.fixed,
-                     comb.random = x$comb.random,
+                     fixed = x$fixed,
+                     random = x$random,
                      prediction = x$prediction) {
   
   
@@ -140,10 +141,10 @@ metamiss <- function(x,
   ## (1) Check for meta object and upgrade older meta objects
   ##
   ##
-  meta:::chkclass(x, "metabin")
-  x <- meta:::updateversion(x)
+  chkclass(x, "metabin")
+  x <- updateversion(x)
   ##
-  ##if (!is.null(x$byvar)) {
+  ##if (!is.null(x$subgroup)) {
   ##  warning("Function metamiss() does not work with subgroup analyses.",
   ##          call. = FALSE)
   ##  return(NULL)
@@ -166,7 +167,7 @@ metamiss <- function(x,
   if (is.null(miss.c))
     stop("Argument 'miss.c' missing.", call. = FALSE)
   ##
-  if (meta:::isCol(x$data, ".subset")) {
+  if (isCol(x$data, ".subset")) {
     miss.e <- miss.e[x$data$.subset]
     miss.c <- miss.c[x$data$.subset]
   }
@@ -176,27 +177,27 @@ metamiss <- function(x,
   n.e <- x$n.e
   n.c <- x$n.c
   ##
-  meta:::chklength(miss.e, length(event.e),
-                   "metamiss",
-                   text = paste("Length of argument 'miss.e' must be equal to",
-                                "number of studies in meta-analysis."))
-  meta:::chklength(miss.c, length(event.e),
-                   "metamiss",
-                   text = paste("Length of argument 'miss.c' must be equal to",
-                                "number of studies in meta-analysis."))
+  chklength(miss.e, length(event.e),
+            "metamiss",
+            text = paste("Length of argument 'miss.e' must be equal to",
+                         "number of studies in meta-analysis."))
+  chklength(miss.c, length(event.e),
+            "metamiss",
+            text = paste("Length of argument 'miss.c' must be equal to",
+                         "number of studies in meta-analysis."))
   ##
   incr <- 0.5 * (event.e == 0 | event.c == 0 | n.e == event.e | n.c == event.c)
   
   
   mm <- c("gh", "imor", "0", "1", "pc", "pe", "p", "b", "w")
   ##
-  method.miss <- meta:::setchar(as.character(method.miss), mm)
+  method.miss <- setchar(as.character(method.miss), mm)
   if (method.miss == "imor")
     method.miss <- "IMOR"
   if (method.miss == "gh")
     method.miss <- "GH"
   ##
-  small.values <- meta:::setchar(small.values, c("good", "bad"))
+  small.values <- setchar(small.values, c("good", "bad"))
   
   
   if (method.miss == "GH") {
@@ -205,7 +206,7 @@ metamiss <- function(x,
     upper <- metabin(event.e + miss.e, n.e + miss.e, event.c, n.c + miss.c,
                      sm = x$sm, method.tau.ci = "")$upper
     ##
-    seTE <- meta:::TE.seTE.ci(lower, upper)$seTE
+    seTE <- TE.seTE.ci(lower, upper)$seTE
     ##
     res <- metagen(x$TE, seTE,
                    ##
@@ -216,8 +217,8 @@ metamiss <- function(x,
                    ##
                    sm = x$sm,
                    ##
-                   level = x$level, level.comb = x$level.comb,
-                   comb.fixed = comb.fixed, comb.random = comb.random,
+                   level = x$level, level.ma = x$level.ma,
+                   fixed = fixed, random = random,
                    ##
                    hakn = x$hakn, method.tau = x$method.tau,
                    method.tau.ci = x$method.tau.ci,
@@ -232,9 +233,9 @@ metamiss <- function(x,
                    label.e = x$label.e, label.c = x$label.c,
                    label.right = x$label.right, label.left = x$label.left,
                    ##
-                   byvar = x$byvar, bylab = x$bylab,
-                   print.byvar = x$print.byvar,
-                   byseparator = x$byseparator,
+                   subgroup = x$subgroup, subgroup.name = x$subgroup.name,
+                   print.subgroup.name = x$print.subgroup.name,
+                   sep.subgroup = x$sep.subgroup,
                    ##
                    control = x$control)
     ##
@@ -256,10 +257,24 @@ metamiss <- function(x,
     ##
     p.e <- (event.e + incr) / (n.e + 1 * incr)
     p.c <- (event.c + incr) / (n.c + 1 * incr)
+    k.All <- length(p.e)
     ##
     if (method.miss == "IMOR") {
-      meta:::chknumeric(IMOR.e, length = 1)
-      meta:::chknumeric(IMOR.c, length = 1)
+      chknumeric(IMOR.e, min = 0)
+      chknumeric(IMOR.c, min = 0)
+      ##
+      if (length(IMOR.e) == 1)
+        IMOR.e <- rep(IMOR.e, k.All)
+      if (length(IMOR.c) == 1)
+        IMOR.c <- rep(IMOR.c, k.All)
+      ##
+      txt1 <- "Argument 'IMOR."
+      txt2 <- paste("' must be of same length as number of",
+                    "studies in meta-analysis or a single number.")
+      txt.e <- paste0(txt1, "e", txt2)
+      txt.c <- paste0(txt1, "c", txt2)
+      chklength(IMOR.e, k.All, text = txt.e)
+      chklength(IMOR.c, k.All, text = txt.c)
     }
     else if (method.miss == "0") {
       IMOR.e <- 0
@@ -267,8 +282,8 @@ metamiss <- function(x,
     }
     ##
     if (method.miss == "1") {
-      IMOR.e <- 9999
-      IMOR.c <- 9999
+      IMOR.e <- 1e8
+      IMOR.c <- 1e8
     }
     ##
     if (method.miss == "pc") {
@@ -289,22 +304,22 @@ metamiss <- function(x,
     if (method.miss == "b") {
       if (small.values == "good") {
         IMOR.e <- 0
-        IMOR.c <- 9999
+        IMOR.c <- 1e8
       }
       else {
-        IMOR.e <- 9999
+        IMOR.e <- 1e8
         IMOR.c <- 0
       }
     }
     ##
     if (method.miss == "w") {
       if (small.values == "good") {
-        IMOR.e <- 9999
+        IMOR.e <- 1e8
         IMOR.c <- 0
       }
       else {
         IMOR.e <- 0
-        IMOR.c <- 9999
+        IMOR.c <- 1e8
       }
     }
     ##
@@ -360,8 +375,8 @@ metamiss <- function(x,
                    ##
                    sm = x$sm,
                    ##
-                   level = x$level, level.comb = x$level.comb,
-                   comb.fixed = comb.fixed, comb.random = comb.random,
+                   level = x$level, level.ma = x$level.ma,
+                   fixed = fixed, random = random,
                    ##
                    hakn = x$hakn, method.tau = x$method.tau,
                    method.tau.ci = x$method.tau.ci,
@@ -376,9 +391,9 @@ metamiss <- function(x,
                    label.e = x$label.e, label.c = x$label.c,
                    label.right = x$label.right, label.left = x$label.left,
                    ##
-                   byvar = x$byvar, bylab = x$bylab,
-                   print.byvar = x$print.byvar,
-                   byseparator = x$byseparator,
+                   subgroup = x$subgroup, subgroup.name = x$subgroup.name,
+                   print.subgroup.name = x$print.subgroup.name,
+                   sep.subgroup = x$sep.subgroup,
                    ##
                    control = x$control)
     ##

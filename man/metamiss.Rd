@@ -12,8 +12,8 @@ metamiss(
   IMOR.c = IMOR.e,
   method.miss = if (missing(IMOR.e)) "0" else "IMOR",
   small.values = "good",
-  comb.fixed = x$comb.fixed,
-  comb.random = x$comb.random,
+  fixed = x$fixed,
+  random = x$random,
   prediction = x$prediction
 )
 }
@@ -37,10 +37,10 @@ used to impute missing values. Either \code{"GH"}, \code{"IMOR"},
 treatment effects indicate a beneficial (\code{"good"}) or
 harmful (\code{"bad"}) effect, can be abbreviated (see Details).}
 
-\item{comb.fixed}{A logical indicating whether a fixed effect
+\item{fixed}{A logical indicating whether a fixed effect
 meta-analysis should be conducted.}
 
-\item{comb.random}{A logical indicating whether a random effects
+\item{random}{A logical indicating whether a random effects
 meta-analysis should be conducted.}
 
 \item{prediction}{A logical indicating whether a prediction
@@ -71,7 +71,8 @@ The following imputation methods for missing binary data are available.
 \code{method.miss = "0"}\tab Imputed as no events, (i.e., 0) \cr
 \code{method.miss = "1"}\tab Imputed as events (i.e., 1) \cr
 \code{method.miss = "pc"}\tab Based on observed risk in control group \cr
-\code{method.miss = "pe"}\tab Based on observed risk in experimental group \cr
+\code{method.miss = "pe"}\tab Based on observed risk in
+  experimental group \cr
 \code{method.miss = "p"}\tab Based on group-specific risks \cr
 \code{method.miss = "b"}\tab Best case scenario for experimental group \cr
 \code{method.miss = "w"}\tab Worst case scenario for experimental group

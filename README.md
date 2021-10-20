@@ -18,7 +18,7 @@ The following methods are implemented to evaluate how sensitive the results of a
 
 Furthermore, R package **metasens** provides functions and datasets to
 support Schwarzer et al. (2015), Chapter 5 "Small-Study Effects in
-Meta-Analysis", http://meta-analysis-with-r.org/ .
+Meta-Analysis", https://www.springer.com/gp/book/9783319214153 .
 
 ### References
 

@@ -1,8 +1,8 @@
 Package: metasens
 Title: Statistical Methods for Sensitivity Analysis in Meta-Analysis
-Version: 0.6-0
-Date: 2021-01-15
-Depends: meta (>= 4.15-1)
+Version: 1.0-0
+Date: 2021-10-20
+Depends: meta (>= 5.0-0)
 Authors@R: c(person("Guido", "Schwarzer",
                     role = c("cre", "aut"),
                     email = "sc@imbi.uni-freiburg.de",
@@ -13,7 +13,10 @@ Authors@R: c(person("Guido", "Schwarzer",
              person("Gerta","Rücker",
                     role = "aut",
                     comment = c(ORCID = "0000-0002-2192-2560")))
-URL: https://github.com/guido-s/metasens http://meta-analysis-with-r.org
+Author: Guido Schwarzer [cre, aut] (<https://orcid.org/0000-0001-6214-9087>),
+  James R. Carpenter [aut] (<https://orcid.org/0000-0003-3890-6206>),
+  Gerta Rücker [aut] (<https://orcid.org/0000-0002-2192-2560>)
+URL: https://github.com/guido-s/metasens https://www.springer.com/gp/book/9783319214153
 Description: The following methods are implemented to evaluate how sensitive the results of a meta-analysis are to potential bias in meta-analysis and to support Schwarzer et al. (2015) <DOI:10.1007/978-3-319-21416-0>, Chapter 5 'Small-Study Effects in Meta-Analysis':
  - Copas selection model described in Copas & Shi (2001) <DOI:10.1177/096228020101000402>;
  - limit meta-analysis by Rücker et al. (2011) <DOI:10.1093/biostatistics/kxq046>;
@@ -22,4 +25,4 @@ Description: The following methods are implemented to evaluate how sensitive the
  - LFK index test and Doi plot by Furuya-Kanamori et al. (2018) <DOI:10.1097/XEB.0000000000000141>.
 License: GPL (>= 2)
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

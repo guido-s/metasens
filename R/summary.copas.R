@@ -58,7 +58,7 @@
 #' 
 #' # Print summary of Copas analysis
 #' #
-#' summary(copas(m1, level.comb = 0.95))
+#' summary(copas(m1, level.ma = 0.95))
 #'
 #' @method summary copas
 #' @export
@@ -70,7 +70,7 @@
 summary.copas <- function(object, ...) {
   
   
-  meta:::chkclass(object, "copas")
+  chkclass(object, "copas")
   
   
   ci.random <- list(TE = object$TE.random,
@@ -79,7 +79,7 @@ summary.copas <- function(object, ...) {
                     upper = object$upper.random,
                     statistic = object$statistic.random,
                     p = object$pval.random,
-                    level = object$level.comb)
+                    level = object$level.ma)
   ##
   ci.slope <- list(TE = object$TE.slope,
                    seTE = object$seTE.slope,
@@ -87,7 +87,7 @@ summary.copas <- function(object, ...) {
                    upper = object$upper.slope,
                    statistic = object$statistic.slope,
                    p = object$pval.slope,
-                   level = object$level.comb)
+                   level = object$level.ma)
   ##
   ci.adjust <- list(TE = object$TE.adjust,
                     seTE = object$seTE.adjust,
@@ -95,9 +95,9 @@ summary.copas <- function(object, ...) {
                     upper = object$upper.adjust,
                     statistic = object$statistic.adjust,
                     p = object$pval.adjust,
-                    level = object$level.comb)
+                    level = object$level.ma)
   ## 
-  ci.lab <- paste(round(100 * object$level.comb, 1), "%-CI", sep = "")
+  ci.lab <- paste(round(100 * object$level.ma, 1), "%-CI", sep = "")
   
   
   res <- list(slope = ci.slope,

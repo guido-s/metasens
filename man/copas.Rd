@@ -6,7 +6,7 @@
 \usage{
 copas(
   x,
-  level.comb = x$level.comb,
+  level.ma = x$level.ma,
   gamma0.range = NULL,
   gamma1.range = NULL,
   ngrid = 20,
@@ -29,7 +29,7 @@ copas(
 functions \code{metabin}, \code{metacont} and \code{metagen} in
 the package meta.}
 
-\item{level.comb}{The level used to calculate confidence intervals
+\item{level.ma}{The level used to calculate confidence intervals
 for pooled estimates.}
 
 \item{gamma0.range}{(Advanced users only) A numerical vector of

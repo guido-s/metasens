@@ -2,22 +2,30 @@
 % Please edit documentation in R/print.limitmeta.R
 \name{print.limitmeta}
 \alias{print.limitmeta}
-\title{Print method for limit meta-analysis}
+\title{Print results for limit meta-analysis}
 \usage{
 \method{print}{limitmeta}(
   x,
-  sortvar,
   backtransf = x$backtransf,
   digits = gs("digits"),
+  header = TRUE,
+  pscale = x$x$pscale,
+  irscale = x$x$irscale,
+  irunit = x$x$irunit,
+  digits.stat = gs("digits.stat"),
+  digits.pval = gs("digits.pval"),
+  digits.Q = gs("digits.Q"),
+  digits.tau2 = gs("digits.tau2"),
+  digits.I2 = gs("digits.I2"),
+  scientific.pval = gs("scientific.pval"),
   big.mark = gs("big.mark"),
+  print.Rb = gs("print.Rb"),
+  warn.backtransf = FALSE,
   ...
 )
 }
 \arguments{
-\item{x}{An object of class \code{limitmeta}}
-
-\item{sortvar}{An optional vector used to sort the individual
-studies (must be of same length as \code{x$TE}).}
+\item{x}{An object of class \code{limitmeta}.}
 
 \item{backtransf}{A logical indicating whether results should be
 back transformed in printouts and plots. If
@@ -27,23 +35,58 @@ printed as odds ratios rather than log odds ratio, for example.}
 \item{digits}{Minimal number of significant digits, see
 \code{print.default}.}
 
+\item{header}{A logical indicating whether information on title of
+meta-analysis, comparison and outcome should be printed at the
+beginning of the printout.}
+
+\item{pscale}{A numeric giving scaling factor for printing of
+single event probabilities, i.e. if argument \code{sm} is equal
+to \code{"PLOGIT"}, \code{"PLN"}, \code{"PRAW"}, \code{"PAS"}, or
+\code{"PFT"}.}
+
+\item{irscale}{A numeric defining a scaling factor for printing of
+rates, i.e. if argument \code{sm} is equal to \code{"IR"},
+\code{"IRLN"}, \code{"IRS"}, or \code{"IRFT"}.}
+
+\item{irunit}{A character specifying the time unit used to
+calculate rates, e.g. person-years.}
+
+\item{digits.stat}{Minimal number of significant digits for z- or
+t-value, see \code{print.default}.}
+
+\item{digits.pval}{Minimal number of significant digits for p-value
+of overall treatment effect, see \code{print.default}.}
+
+\item{digits.Q}{Minimal number of significant digits for
+heterogeneity statistic Q, see \code{print.default}.}
+
+\item{digits.tau2}{Minimal number of significant digits for
+between-study variance, see \code{print.default}.}
+
+\item{digits.I2}{Minimal number of significant digits for I-squared
+and Rb statistic, see \code{print.default}.}
+
+\item{scientific.pval}{A logical specifying whether p-values should
+be printed in scientific notation, e.g., 1.2345e-01 instead of
+0.12345.}
+
 \item{big.mark}{A character used as thousands separator.}
 
-\item{\dots}{Additional arguments which are
-passed on to \code{print.summary.limitmeta} called internally.}
+\item{print.Rb}{A logical specifying whether heterogeneity
+statistic Rb should be printed.}
+
+\item{warn.backtransf}{A logical indicating whether a warning
+should be printed if backtransformed proportions and rates are
+below 0 and backtransformed proportions are above 1.}
+
+\item{\dots}{Additional arguments (ignored).}
 }
 \description{
 Print method for objects of class \code{limitmeta}.
 }
 \details{
-This function prints the summary information from
-\code{summary.limitmeta} together with the following study
-information:
-
-\itemize{
-\item Effect estimate with confidence interval
-\item Shrunken effect estimates with confidence interval
-}
+This function prints the main results of a limit meta-analysis
+(Rücker et al., 2011).
 }
 \examples{
 data(Moore1998)
@@ -54,7 +97,8 @@ print(limitmeta(m1), digits = 2)
 
 }
 \seealso{
-\code{\link{limitmeta}}, \code{\link{summary.limitmeta}}
+\code{\link{limitmeta}}, \code{\link{summary.limitmeta}},
+  \code{\link{print.summary.limitmeta}}
 }
 \author{
 Guido Schwarzer \email{sc@imbi.uni-freiburg.de}

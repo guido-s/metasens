@@ -59,7 +59,7 @@
 #' @param x An object of class \code{meta}, obtained from one of the
 #'   functions \code{metabin}, \code{metacont} and \code{metagen} in
 #'   the package meta.
-#' @param level.comb The level used to calculate confidence intervals
+#' @param level.ma The level used to calculate confidence intervals
 #'   for pooled estimates.
 #' @param gamma0.range (Advanced users only) A numerical vector of
 #'   length two specifying the range of gamma0 values the program will
@@ -393,7 +393,7 @@
 
 
 copas <- function(x,
-                  level.comb = x$level.comb,
+                  level.ma = x$level.ma,
                   gamma0.range = NULL,
                   gamma1.range = NULL,
                   ngrid = 20,
@@ -414,7 +414,7 @@ copas <- function(x,
   ## (1) Check arguments
   ##
   ##
-  meta:::chkclass(x, "meta")
+  chkclass(x, "meta")
   ##
   if (!is.numeric(rho.bound) && (rho.bound <=0 | rho.bound > 1))
     stop("no valid value for 'rho.bound'")
@@ -429,24 +429,24 @@ copas <- function(x,
     }
   }
   ##
-  meta:::chklevel(level.comb)
+  chklevel(level.ma)
   if (!is.null(gamma0.range))
-    meta:::chknumeric(gamma0.range, length = 2)
+    chknumeric(gamma0.range, length = 2)
   if (!is.null(gamma1.range))
-    meta:::chknumeric(gamma1.range, length = 2)
-  meta:::chknumeric(ngrid, length = 1)
-  meta:::chknumeric(nlevels, length = 1)
+    chknumeric(gamma1.range, length = 2)
+  chknumeric(ngrid, length = 1)
+  chknumeric(nlevels, length = 1)
   if (!is.null(levels))
-    meta:::chknumeric(levels)
+    chknumeric(levels)
   if (!is.null(slope))
-    meta:::chknumeric(slope, length = 1)
+    chknumeric(slope, length = 1)
   if (!is.null(left))
-    meta:::chklogical(left)
-  meta:::chknumeric(rho.bound, max = 1, length = 1)
-  meta:::chklevel(sign.rsb)
-  meta:::chklogical(backtransf)
-  meta:::chklogical(silent)
-  meta:::chklogical(warn)
+    chklogical(left)
+  chknumeric(rho.bound, max = 1, length = 1)
+  chklevel(sign.rsb)
+  chklogical(backtransf)
+  chklogical(silent)
+  chklogical(warn)
   
   
   ##
@@ -472,11 +472,11 @@ copas <- function(x,
   TE.random <- x$TE.random
   seTE.random <- x$seTE.random
   ##
-  if (x$level.comb != level.comb) {
+  if (x$level.ma != level.ma) {
     if (x$hakn)
-      ci.random <- ci(TE.random, seTE.random, level = level.comb, df = x$df.hakn)
+      ci.random <- ci(TE.random, seTE.random, level = level.ma, df = x$df.hakn)
     else
-      ci.random <- ci(TE.random, seTE.random, level = level.comb)
+      ci.random <- ci(TE.random, seTE.random, level = level.ma)
     ##
     lower.random <- ci.random$lower
     upper.random <- ci.random$upper
@@ -869,7 +869,7 @@ copas <- function(x,
   ##
   TE.slope <- TE.slope[ord]
   seTE.slope <- seTE.slope[ord]
-  ci.slope <- ci(TE.slope, seTE.slope, level.comb)
+  ci.slope <- ci(TE.slope, seTE.slope, level.ma)
   rho.slope <- rho.slope[ord]
   tau.slope <- tau.slope[ord]
   ##
@@ -907,7 +907,7 @@ copas <- function(x,
     }
   }
   ##
-  ci.adjust <- ci(TE.adj, seTE.adj, level.comb)
+  ci.adjust <- ci(TE.adj, seTE.adj, level.ma)
   
   
   res <- list(TE = TE,
@@ -933,7 +933,7 @@ copas <- function(x,
               pval.rsb.adj = pval.rsb.adj,
               N.unpubl.adj = N.unpubl.adj,
               ##
-              level.comb = level.comb,
+              level.ma = level.ma,
               ##
               left = left,
               rho.bound = rho.bound,

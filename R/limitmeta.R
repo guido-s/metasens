@@ -63,7 +63,7 @@
 #'   \code{"mulim"}, can be abbreviated.
 #' @param level The level used to calculate confidence intervals for
 #'   individual studies.
-#' @param level.comb The level used to calculate confidence intervals
+#' @param level.ma The level used to calculate confidence intervals
 #'   for pooled estimates.
 #' @param backtransf A logical indicating whether results should be
 #'   back transformed in printouts and plots. If
@@ -77,7 +77,7 @@
 #'   \code{print}, \code{summary} and \code{funnel} function. The
 #'   object is a list containing the following components:
 #' 
-#' \item{x, level, level.comb,method.adjust,title, complab,
+#' \item{x, level, level.ma,method.adjust,title, complab,
 #'   outclab}{As defined above.}
 #' \item{TE, seTE}{Estimated treatment effect and standard error of
 #'   individual studies.}
@@ -149,14 +149,14 @@
 
 limitmeta <- function(x,
                       method.adjust = "beta0",
-                      level = x$level, level.comb = x$level.comb,
+                      level = x$level, level.ma = x$level.ma,
                       backtransf = x$backtransf,
                       title = x$title, complab = x$complab, outclab = x$outclab) {
   
-  meta:::chkclass(x, "meta")
+  chkclass(x, "meta")
   ##
   method.adjust <-
-    meta:::setchar(method.adjust, c("beta0", "betalim", "mulim"))
+    setchar(method.adjust, c("beta0", "betalim", "mulim"))
   
   
   TE <- x$TE
@@ -232,7 +232,7 @@ limitmeta <- function(x,
     }
   }
   ##
-  ci.adjust <- ci(TE.adjust, seTE.adjust, level = level.comb)
+  ci.adjust <- ci(TE.adjust, seTE.adjust, level = level.ma)
   ##
   lower.adjust <- ci.adjust$lower
   upper.adjust <- ci.adjust$upper
@@ -246,11 +246,11 @@ limitmeta <- function(x,
   
   
   ##
-  ## Only recalculate RE confidence interval if argument 'level.comb'
+  ## Only recalculate RE confidence interval if argument 'level.ma'
   ## is not missing
   ##
-  if (!missing(level.comb)) {
-    ci.r <- ci(TE.random, seTE.random, level = level.comb)
+  if (!missing(level.ma)) {
+    ci.r <- ci(TE.random, seTE.random, level = level.ma)
     ##
     lower.random <- ci.r$lower
     upper.random <- ci.r$upper
@@ -299,7 +299,7 @@ limitmeta <- function(x,
               tau = tau,
               ##
               level = level,
-              level.comb = level.comb,
+              level.ma = level.ma,
               ##
               k = k,
               sm = sm,

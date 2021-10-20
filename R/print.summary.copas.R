@@ -55,6 +55,8 @@
 #' @param header A logical indicating whether information on title of
 #'   meta-analysis, comparison and outcome should be printed at the
 #'   beginning of the printout.
+#' @param legend A logical indicating whether a legend should be
+#'   printed.
 #' @param ... other arguments to the function will be ignored (this
 #'   option included only to conform with R standards)
 #'
@@ -91,17 +93,11 @@ print.summary.copas <- function(x,
                                 digits.prop=gs("digits.prop"),
                                 scientific.pval=gs("scientific.pval"),
                                 big.mark=gs("big.mark"),
-                                header = TRUE,
+                                header = TRUE, legend = TRUE,
                                 ...) {
   
   
-  meta:::chkclass(x, "summary.copas")
-  ##
-  chklogical <- meta:::chklogical
-  chknumeric <- meta:::chknumeric
-  formatCI <- meta:::formatCI
-  formatN <- meta:::formatN
-  formatPT <- meta:::formatPT
+  chkclass(x, "summary.copas")
   
   
   cl <- class(x)[1]
@@ -109,7 +105,7 @@ print.summary.copas <- function(x,
   ##
   fun <- "print.summary.copas"
   ##
-  meta:::warnarg("logscale", addargs, fun, otherarg = "backtransf")
+  warnarg("logscale", addargs, fun, otherarg = "backtransf")
   ##
   if (is.null(backtransf))
     if (!is.null(list(...)[["logscale"]]))
@@ -123,10 +119,13 @@ print.summary.copas <- function(x,
   chknumeric(digits.pval, min = 1, length = 1)
   chknumeric(digits.prop, min = 0, length = 1)
   chklogical(scientific.pval)
+  ##
+  chklogical(header)
+  chklogical(legend)
   
   
   sm <- x$sm
-  relative <- meta:::is.relative.effect(sm)
+  relative <- is.relative.effect(sm)
   ##
   if (!backtransf & relative)
     sm.lab <- paste("log", sm, sep = "")
@@ -162,22 +161,20 @@ print.summary.copas <- function(x,
   uppTE.slope <- round(x$slope$upper, digits)
   ##
   publprob <- round(x$publprob, digits.prop)
-  pval.TE  <- round(x$slope$p, digits.pval)
-  pval.rsb <- round(x$pval.rsb, digits.pval)
   
   
   res <- cbind(c(formatN(publprob, digits.prop, ""),
-                 "", "Copas model (adj)","Random effects model"),
+                 "", "Adjusted estimate","Unadjusted estimate"),
                formatN(c(TE.slope, NA, TE.adj, TE.random),
                        digits, "", big.mark = big.mark),
                formatCI(formatN(c(lowTE.slope, NA, lowTE.adj, lowTE.random),
                                 digits, "NA", big.mark = big.mark),
                         formatN(c(uppTE.slope, NA, uppTE.adj, uppTE.random),
                                 digits, "NA", big.mark = big.mark)),
-               formatPT(c(pval.TE, NA, x$adjust$p, x$random$p),
+               formatPT(c(x$slope$p, NA, x$adjust$p, x$random$p),
                         digits = digits.pval,
                         scientific = scientific.pval),
-               formatPT(c(pval.rsb, NA, x$pval.rsb.adj, NA),
+               formatPT(c(x$pval.rsb, NA, x$pval.rsb.adj, NA),
                         digits = digits.pval,
                         scientific = scientific.pval),
                formatN(c(round(x$N.unpubl), NA,
@@ -185,14 +182,14 @@ print.summary.copas <- function(x,
                        0, "", big.mark = big.mark)
                )
   ##
-  res[meta:::rmSpace(res) == "--"] <- ""
+  res[rmSpace(res) == "--"] <- ""
   ##
   dimnames(res) <- list(rep("", dim(res)[[1]]),
-                        c("publprob", sm.lab, x$ci.lab,
-                          "pval.treat", "pval.rsb", "N.unpubl"))
+                        c("p.publ", sm.lab, x$ci.lab,
+                          "p.trt", "p.rsb", "N"))
   
   if (header)
-    meta:::crtitle(x)
+    crtitle(x)
   
   cat("Summary of Copas selection model analysis:\n\n")
   ##
@@ -202,11 +199,14 @@ print.summary.copas <- function(x,
       "Significance level for test of residual selection bias:",
       ifelse(is.null(x$sign.rsb), 0.1, x$sign.rsb), "\n")
   ##
-  cat("\n Legend:\n")
-  cat(" publprob   - Probability of publishing study with largest standard error\n")
-  cat(" pval.treat - P-value for hypothesis of overall treatment effect\n")
-  cat(" pval.rsb   - P-value for hypothesis that no selection remains unexplained\n")
-  cat(" N.unpubl   - Approximate number of unpublished studies suggested by model\n")
+  if (legend) {
+    cat("\n Legend:\n")
+    cat(" p.publ - Probability of publishing study with largest SE\n")
+    cat(" p.trt  - P-value for test of overall treatment effect\n")
+    cat(" p.rsb  - P-value for test of residual selection bias\n")
+    cat(" N      - Estimated number of unpublished studies\n")
+  }
+  
   
   invisible(NULL)
 }

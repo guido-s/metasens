@@ -13,6 +13,7 @@
   scientific.pval = gs("scientific.pval"),
   big.mark = gs("big.mark"),
   header = TRUE,
+  legend = TRUE,
   ...
 )
 }
@@ -42,6 +43,9 @@ be printed in scientific notation, e.g., 1.2345e-01 instead of
 \item{header}{A logical indicating whether information on title of
 meta-analysis, comparison and outcome should be printed at the
 beginning of the printout.}
+
+\item{legend}{A logical indicating whether a legend should be
+printed.}
 
 \item{...}{other arguments to the function will be ignored (this
 option included only to conform with R standards)}

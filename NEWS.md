@@ -1,3 +1,24 @@
+## metasens, version 1.0-0 (2021-mm-dd)
+
+### Major changes
+
+* Behaviour of print and print.summary functions switched (to be in
+  line with other print and print.summary functions in R)
+
+* Renamed arguments:
+  - 'fixed' (instead of 'comb.fixed')
+  - 'random' (instead of 'comb.random')
+  - 'level.ma' (instead of 'level.comb')
+
+* In metamiss(), an infinite IMOR value is set to 1e10 instead of 9999
+
+### User-visible changes
+
+* metamiss():
+  - arguments 'IMOR.e' and 'IMOR.c' can be specified for each
+    individual study
+
+
 ## metasens, version 0.6-0 (2021-01-15)
 
 ### Major changes
