@@ -1,4 +1,12 @@
-## metasens, version 0.6-0 (2020-mm-dd)
+## metasens, version 0.7-0 (2021-10-22)
+
+### Major changes
+
+ * New branch to support first edition of *Meta-Analysis with R (Use
+   R!)*
+
+
+## metasens, version 0.6-0 (2021-01-15)
 
 ### Major changes
 
