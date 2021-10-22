@@ -1,4 +1,4 @@
-## metasens, version 1.0-0 (2021-mm-dd)
+## metasens, version 1.0-0 (2021-10-22)
 
 ### Major changes
 
