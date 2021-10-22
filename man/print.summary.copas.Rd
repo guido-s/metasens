@@ -2,18 +2,14 @@
 % Please edit documentation in R/print.summary.copas.R
 \name{print.summary.copas}
 \alias{print.summary.copas}
-\title{Print method for summary of Copas selection model}
+\title{Print detailed results of Copas selection model}
 \usage{
 \method{print}{summary.copas}(
   x,
   backtransf = x$backtransf,
-  digits = gs("digits"),
-  digits.pval = max(gs("digits.pval"), 2),
-  digits.prop = gs("digits.prop"),
-  scientific.pval = gs("scientific.pval"),
-  big.mark = gs("big.mark"),
-  header = TRUE,
   legend = TRUE,
+  digits = gs("digits"),
+  digits.se = gs("digits.se"),
   ...
 )
 }
@@ -21,71 +17,45 @@
 \item{x}{An object of class \code{summary.copas}.}
 
 \item{backtransf}{A logical indicating whether results should be
-back transformed in printouts and plots. If
-\code{backtransf=TRUE} (default), results for \code{sm="OR"} are
-printed as odds ratios rather than log odds ratio, for example.}
-
-\item{digits}{Minimal number of significant digits, see
-\code{print.default}.}
-
-\item{digits.pval}{Minimal number of significant digits for p-value
-of overall treatment effect, see \code{print.default}.}
-
-\item{digits.prop}{Minimal number of significant digits for
-proportions, see \code{print.default}.}
-
-\item{scientific.pval}{A logical specifying whether p-values should
-be printed in scientific notation, e.g., 1.2345e-01 instead of
-0.12345.}
-
-\item{big.mark}{A character used as thousands separator.}
-
-\item{header}{A logical indicating whether information on title of
-meta-analysis, comparison and outcome should be printed at the
-beginning of the printout.}
+back transformed in printouts and plots. If \code{backtransf =
+TRUE} (default), results are printed as odds ratios rather than
+log odds ratio, for example.}
 
 \item{legend}{A logical indicating whether a legend should be
 printed.}
 
-\item{...}{other arguments to the function will be ignored (this
-option included only to conform with R standards)}
+\item{digits}{Minimal number of significant digits, see
+\code{print.default}.}
+
+\item{digits.se}{Minimal number of significant digits for standard
+deviations and standard errors, see \code{print.default}.}
+
+\item{...}{Additional arguments (ignored).}
 }
 \description{
 Print method for objects of class \code{summary.copas}.
-}
-\details{
-This function prints a summary of a Copas analysis, performed using
-the function \code{copas}. It complements the graphical summary of
-the results, generated using \code{plot.copas}.
 
-Specifically it prints a table where the:
 
-first column corresponds to the x-axis in plots 3 & 4 from
-\code{plot.copas};
+This function prints the following information:
 
-second column corresponds to the treatment effect displayed in plot 3 from
-\code{plot.copas};
+Range of gamma0 values used (see \code{help(copas)});
 
-third and fourth columns give the confidence intervals for this treatment
-effect,
+Range of gamma1 values used (see \code{help(copas)});
 
-fifth colum gives the p-value for an overall treatment effect,
+Largest SE of all studies in meta-analysis;
 
-sixth column gives the p-value for residual publication bias (the y-axis of
-plot 4 from \code{plot.copas} (see help(plot.copas) under plot 4 for a
-further explanation of this p-value))
+Range of probability publishing trial with largest SE;
 
-seventh column gives an approximate estimate of the number of studies the
-model suggests remain unpublished if the probability of publishing the study
-with the largest SE is as in column 1.
+The next table gives details relating to the summary of the contour plot.
+Specifically, it gives details from fitting a straight line to each
+treatment-contour in the contour plot. Column 1 (headed level) shows the
+treatment-contours; column 2 (nobs) shows the number of observations used by
+the contour plot command within the \code{copas} function to plot this
+contour line; column 3 (adj.r.square) shows the adjusted r-square from
+fitting a straight line to this contour; columns 4 & 5 show the slope and
+its standard error from fitting a straight line to this contour.
 
-Below this is displayed the results of the Copas analysis for the smallest
-degree of selection for which the p-value for evidence of residual selection
-bias exceeds \code{sign.rsb} (default: 0.1). This is simply extracted from
-the corresponding row in the table above.
-
-Lastly, the usual random effects estimate (based on the DerSimonian-Laird
-method) and 95\% confidence interval is printed.
+Next, the printout of \code{summary.copas} is shown.
 }
 \examples{
 data(Fleiss1993bin, package = "meta")

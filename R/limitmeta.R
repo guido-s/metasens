@@ -140,7 +140,7 @@
 #' m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
 #'               data = Moore1998, sm = "OR", method = "Inverse")
 #' 
-#' print(summary(limitmeta(m1)), digits = 2)
+#' print(limitmeta(m1), digits = 2)
 #' @export limitmeta
 #'
 #' @importFrom meta ci metagen
@@ -151,7 +151,8 @@ limitmeta <- function(x,
                       method.adjust = "beta0",
                       level = x$level, level.ma = x$level.ma,
                       backtransf = x$backtransf,
-                      title = x$title, complab = x$complab, outclab = x$outclab) {
+                      title = x$title, complab = x$complab,
+                      outclab = x$outclab) {
   
   chkclass(x, "meta")
   ##

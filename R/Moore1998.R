@@ -14,9 +14,11 @@
 #' @format A data frame with the following columns:
 #' \tabular{rl}{
 #' \bold{\emph{study}}\tab study number \cr
-#' \bold{\emph{succ.e}}\tab number of treatment successes in NSAIDS group \cr
+#' \bold{\emph{succ.e}}\tab number of treatment successes in NSAIDS
+#'   group \cr
 #' \bold{\emph{nobs.e}}\tab number of patients in NSAIDS group \cr
-#' \bold{\emph{succ.c}}\tab number of treatment successes in control group \cr
+#' \bold{\emph{succ.c}}\tab number of treatment successes in control
+#'   group \cr
 #' \bold{\emph{nobs.c}}\tab number of patients in control group \cr
 #' }
 #' 

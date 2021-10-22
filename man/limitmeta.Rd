@@ -148,7 +148,7 @@ data(Moore1998)
 m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
               data = Moore1998, sm = "OR", method = "Inverse")
 
-print(summary(limitmeta(m1)), digits = 2)
+print(limitmeta(m1), digits = 2)
 }
 \references{
 Rücker G, Carpenter JR, Schwarzer G (2011):

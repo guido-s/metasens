@@ -135,14 +135,14 @@ create a funnel plot. For more information see help page of the
 data(Moore1998)
 m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
               data = Moore1998, sm = "OR", method = "Inverse")
-
-print(summary(limitmeta(m1)), digits = 2)
-funnel(limitmeta(m1))
+l1 <- limitmeta(m1)
+print(l1, digits = 2)
+funnel(l1)
 
 # Print results on log scale
 #
-print(summary(limitmeta(m1)), digits = 2, backtransf = FALSE)
-funnel(limitmeta(m1), backtransf = FALSE)
+print(l1, digits = 2, backtransf = FALSE)
+funnel(l1, backtransf = FALSE)
 
 }
 \seealso{

@@ -88,7 +88,7 @@ forest.orbbound <- function(x,
   cl <- class(x)[1]
   addargs <- names(list(...))
   ##
-  fun <- "print.summary.limitmeta"
+  fun <- "forest.orbbound"
   ##
   warnarg("logscale", addargs, fun, otherarg = "backtransf")
   ##

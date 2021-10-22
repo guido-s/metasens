@@ -1,4 +1,4 @@
-# metasens: Advanced Statistical Methods to Model and Adjust for Bias in Meta-Analysis
+# metasens: Statistical Methods for Sensitivity Analysis in Meta-Analysis
 Official Git repository of R package **metasens**
 
 [![Build Status](https://travis-ci.org/guido-s/metasens.svg?branch=master)](https://travis-ci.org/guido-s/metasens)
@@ -50,10 +50,10 @@ install.packages("metasens")
 ### Current beta / GitHub release:
 
 Installation using R package
-[**devtools**](https://cran.r-project.org/package=devtools):
+[**remotes**](https://cran.r-project.org/package=remotes):
 ```r
-install.packages("devtools")
-devtools::install_github("guido-s/metasens")
+install.packages("remotes")
+remotes::install_github("guido-s/metasens")
 ```
 
 

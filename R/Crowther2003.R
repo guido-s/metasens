@@ -11,9 +11,12 @@
 #' @format A data frame with the following columns:
 #' \tabular{rl}{
 #' \bold{\emph{study}}\tab study label \cr
-#' \bold{\emph{pvh.e}}\tab number of periventricular haemorrhages in experimental group \cr
-#' \bold{\emph{n.e}}\tab number of observations in experimental group \cr
-#' \bold{\emph{pvh.c}}\tab number of periventricular haemorrhages in control group \cr
+#' \bold{\emph{pvh.e}}\tab number of periventricular haemorrhages in
+#'   experimental group \cr
+#' \bold{\emph{n.e}}\tab number of observations in experimental group
+#'   \cr
+#' \bold{\emph{pvh.c}}\tab number of periventricular haemorrhages in
+#'   control group \cr
 #' \bold{\emph{n.c}}\tab number of observations in control group \cr
 #' }
 #'

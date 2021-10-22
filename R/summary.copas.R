@@ -110,7 +110,8 @@ summary.copas <- function(object, ...) {
               N.unpubl.adj = object$N.unpubl.adj,
               random = ci.random,
               sm = object$sm,
-              ci.lab = ci.lab
+              ci.lab = ci.lab,
+              x = object
               )
   
   class(res) <- c("summary.copas")

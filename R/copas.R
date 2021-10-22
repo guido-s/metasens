@@ -322,13 +322,13 @@
 #' #        d.plac indicates deaths, n.plac total in placebo group)
 #' #
 #' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
-#' summary(m1)
+#' m1
 #' 
 #' # Perform a basic Copas selection model analysis
 #' #
 #' cop1 <- copas(m1)
 #' plot(cop1)
-#' summary(cop1)
+#' cop1
 #' #
 #' # Interpretation: 
 #' #
@@ -384,7 +384,7 @@
 #' #
 #' # Print table of results used to draw treatment effect plot:
 #' #
-#' summary(cop2)
+#' cop2
 #' @export copas
 #'
 #' @importFrom meta metabias metagen
@@ -509,7 +509,7 @@ copas <- function(x,
     cat("\n")
     cat("1) Summary statistics and test for heterogeneity\n")
     cat("================================================\n")
-    print(summary(x))
+    print(x)
   }
   
   
