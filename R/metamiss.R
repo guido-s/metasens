@@ -121,6 +121,7 @@
 #'               sm = "OR")
 #' 
 #' metamiss(m2, miss.al, miss.ma, method = "GH")
+#' 
 #' @export metamiss
 #'
 #' @importFrom meta metabin

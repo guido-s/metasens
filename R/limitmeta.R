@@ -144,7 +144,7 @@
 #' @export limitmeta
 #'
 #' @importFrom meta ci metagen
-#' @importFrom stats sd
+#' @importFrom stats sd var
 
 
 limitmeta <- function(x,
@@ -213,8 +213,16 @@ limitmeta <- function(x,
     ##
     ## Expectation (beta-0)
     ##
-    TE.adjust   <- as.vector(beta.r + tau * alpha.r)
-    seTE.adjust <- as.vector(1 / sd(sqrt(1 / seTE^2)) / sqrt(k - 1))
+    TE.adjust <- as.vector(beta.r + tau * alpha.r)
+    ##
+    var.beta <-
+      as.vector(1 / var(sqrt(w.random)) / (k - 1))
+    var.alpha <-
+      as.vector(mean(w.random) / var(sqrt(w.random)) / (k - 1))
+    cov.alpha.beta <-
+      as.vector(- mean(sqrt(w.random)) / var(sqrt(w.random)) / (k - 1))
+    ##
+    seTE.adjust <- sqrt(var.beta + tau^2 * var.alpha + 2 * tau * cov.alpha.beta)
   }
   else {
     if (method.adjust == "mulim") {

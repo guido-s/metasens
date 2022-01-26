@@ -31,6 +31,6 @@ check("../metasens")
 
 
 ##
-## (6) Check R package (with dontrun examples)
+## (6) Check R package (with donttest examples)
 ##
 check("../metasens", run_dont_test = TRUE)

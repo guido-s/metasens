@@ -131,6 +131,7 @@ m2 <- metabin(para.al, n.al, para.ma, n.ma,
               sm = "OR")
 
 metamiss(m2, miss.al, miss.ma, method = "GH")
+
 }
 \references{
 Gamble C, Hollis S (2005):
