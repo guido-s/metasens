@@ -1,6 +1,3 @@
-#' @importFrom stats coefficients lm sd
-
-
 radialregression <- function(TE, seTE, k) {
   
   x <-  1 / seTE

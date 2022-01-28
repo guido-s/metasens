@@ -3,7 +3,7 @@
 #' R package \bold{metasens} provides advanced statistical methods to
 #' model and adjust bias in meta-analysis and supports Schwarzer et
 #' al. (2015), Chapter 5 "Small-Study Effects in Meta-Analysis"
-#' \url{https://www.springer.com/gp/book/9783319214153}.
+#' \url{https://link.springer.com/book/10.1007/978-3-319-21416-0}.
 #'
 #' @name metasens-package
 #' 
@@ -29,7 +29,7 @@
 #' Furthermore, functions and datasets from \bold{metasens} are
 #' utilised in Schwarzer et al. (2015), Chapter 5
 #' "Small-Study Effects in Meta-Analysis",
-#' \url{https://www.springer.com/gp/book/9783319214153}.
+#' \url{https://link.springer.com/book/10.1007/978-3-319-21416-0}.
 #' 
 #' Type \code{help(package = "metasens")} for a listing of R functions
 #' available in \bold{metasens}.
@@ -91,6 +91,10 @@
 #' Springer International Publishing, Switzerland
 #'
 #' @keywords package
+#'
+#' @importFrom meta ci forest funnel gs metabias metabin metagen
+#' @importFrom stats coefficients dnorm lm loess optim pchisq pnorm
+#'   qlogis qnorm qt sd update var vcov
 
 
 NULL

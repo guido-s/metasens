@@ -8,7 +8,7 @@
 R package \bold{metasens} provides advanced statistical methods to
 model and adjust bias in meta-analysis and supports Schwarzer et
 al. (2015), Chapter 5 "Small-Study Effects in Meta-Analysis"
-\url{https://www.springer.com/gp/book/9783319214153}.
+\url{https://link.springer.com/book/10.1007/978-3-319-21416-0}.
 }
 \details{
 R package \bold{metasens} is an add-on package for \bold{meta}
@@ -29,7 +29,7 @@ providing the following meta-analysis methods:
 Furthermore, functions and datasets from \bold{metasens} are
 utilised in Schwarzer et al. (2015), Chapter 5
 "Small-Study Effects in Meta-Analysis",
-\url{https://www.springer.com/gp/book/9783319214153}.
+\url{https://link.springer.com/book/10.1007/978-3-319-21416-0}.
 
 Type \code{help(package = "metasens")} for a listing of R functions
 available in \bold{metasens}.

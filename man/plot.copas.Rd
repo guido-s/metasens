@@ -7,9 +7,9 @@
 \method{plot}{copas}(
   x,
   which = 1:4,
-  caption = c("Funnel plot", "Contour plot", "Treatment effect plot",
+  main = c("Funnel plot", "Contour plot", "Treatment effect plot",
     "P-value for residual selection bias"),
-  xlim.pp = NULL,
+  xlim.pp,
   orthogonal.line = TRUE,
   lines = FALSE,
   warn = -1,
@@ -24,13 +24,8 @@
 (default); 3 produces plot 3 etc; c(1,3) produces plots 1 and 3,
 and so on.}
 
-\item{caption}{Specify plot captions. Note that four captions must
-be specified even if fewer graphs are displayed (which is the
-case if the predefined captions are utilised). This must be
-considered if user-defined captions are provided. Captions
-corresponding to plots that are not displayed can be left
-empty. For example, if only plot 3 is selected, we might specify
-\code{caption=c("","","Plot 3","")}.}
+\item{main}{Specify plot captions. Must be of same length as
+argument \code{which}.}
 
 \item{xlim.pp}{A vector of x-axis limits for plots 3 and 4,
 i.e. for the probability of publishing the study with largest
@@ -60,8 +55,8 @@ otherwise print a message saying warning messages were generated;
 the function when the first warning is generated. For further
 details see \code{help(options)}.}
 
-\item{...}{other arguments to the function will be ignored (this
-option only included to conform with R standards)}
+\item{\dots}{Other arguments (to check for deprecated argument
+'caption').}
 }
 \description{
 Four plots (selectable by 'which') are currently available: (1)
@@ -140,12 +135,8 @@ plot(cop1, which = 1:2, orth = FALSE)
 # Another example showing use of more arguments
 # Note the use of "\n" to create a new line in the caption
 #
-plot(cop1,
-     which = 3,
-     caption = c("", "",
-               "Variation in estimated treatment\n effect with selection",
-               ""),
-     xlim.pp = c(1, 0.5))
+plot(cop1, which = 3, xlim.pp = c(1, 0.5),
+  main = "Variation in estimated treatment\n effect with selection")
 
 }
 \references{

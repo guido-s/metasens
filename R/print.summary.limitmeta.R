@@ -40,14 +40,12 @@
 #' @examples
 #' data(Moore1998)
 #' m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
-#'               data = Moore1998, sm = "OR", method = "Inverse")
+#'   data = Moore1998, sm = "OR", method = "Inverse")
 #' 
 #' print(summary(limitmeta(m1)), digits = 2)
 #'
 #' @method print summary.limitmeta
 #' @export
-#'
-#' @importFrom meta ci gs
 
 
 print.summary.limitmeta <- function(x,
@@ -108,15 +106,14 @@ print.summary.limitmeta <- function(x,
   k.all <- length(TE)
   
   
-  mf <- match.call()
-  error <- try(sortvar <- eval(mf[[match("sortvar", names(mf))]],
-                               as.data.frame(x, stringsAsFactors = FALSE),
-                               enclos = sys.frame(sys.parent())),
-               silent = TRUE)
+  sfsp <- sys.frame(sys.parent())
+  mc <- match.call()
+  ##
+  error <-
+    try(sortvar <- catch("sortvar", mc, x, sfsp),
+        silent = TRUE)
   if (class(error) == "try-error") {
-    xd <- x$data
-    sortvar <- eval(mf[[match("sortvar", names(mf))]],
-                    xd, enclos = NULL)
+    sortvar <- catch("sortvar", mc, x$data, NULL)
     if (isCol(x$data, ".subset"))
       sortvar <- sortvar[x$data$.subset]
   }
@@ -131,12 +128,10 @@ print.summary.limitmeta <- function(x,
   ##
   missing.truncate <- missing(truncate)
   if (!missing.truncate) {
-    truncate <- eval(mf[[match("truncate", names(mf))]],
-                     x, enclos = sys.frame(sys.parent()))
+    truncate <- catch("truncate", mc, x, sfsp)
     ##
     if (is.null(truncate))
-      truncate <- eval(mf[[match("truncate", names(mf))]],
-                       x$data, enclos = sys.frame(sys.parent()))
+      truncate <- catch("truncate", mc, x$data, sfsp)
     ##
     if (length(truncate) > k.all)
       stop("Length of argument 'truncate' is too long.",

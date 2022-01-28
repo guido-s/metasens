@@ -63,8 +63,6 @@
 #' @method summary copas
 #' @export
 #' @export summary.copas
-#'
-#' @importFrom meta ci
 
 
 summary.copas <- function(object, ...) {

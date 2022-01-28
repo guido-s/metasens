@@ -18,7 +18,7 @@ The following methods are implemented to evaluate how sensitive the results of a
 
 Furthermore, R package **metasens** provides functions and datasets to
 support Schwarzer et al. (2015), Chapter 5 "Small-Study Effects in
-Meta-Analysis", https://www.springer.com/gp/book/9783319214153 .
+Meta-Analysis", https://link.springer.com/book/10.1007/978-3-319-21416-0 .
 
 ### References
 
@@ -37,7 +37,7 @@ Meta-Analysis", https://www.springer.com/gp/book/9783319214153 .
 
 [Schwarzer G, Carpenter J, Rücker G (2010): Empirical evaluation suggests Copas selection model preferable to trim-and-fill method for selection bias in meta-analysis. *Journal of Clinical Epidemiology*, **63**, 282-88](https://scholar.google.de/scholar?q=Schwarzer+Carpenter+Rücker+2010+Empirical+evaluation+suggests+Copas+selection+model+preferable+to+trim-and-fill+method+for+selection+bias+in+meta-analysis)
 
-[Schwarzer G, Carpenter JR and Rücker G (2015): *Meta-Analysis with R (Use-R!)*. Springer International Publishing, Switzerland](http://www.springer.com/gp/book/9783319214153)
+[Schwarzer G, Carpenter JR and Rücker G (2015): *Meta-Analysis with R (Use-R!)*. Springer International Publishing, Switzerland](https://link.springer.com/book/10.1007/978-3-319-21416-0)
 
 
 ## Installation

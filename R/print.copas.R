@@ -86,9 +86,6 @@
 #' @method print copas
 #' @export
 #' @export print.copas
-#'
-#' @importFrom meta gs
-#' @importFrom stats pnorm
 
 
 print.copas <- function(x,

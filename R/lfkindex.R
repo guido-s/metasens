@@ -53,8 +53,6 @@
 #' doiplot(lfk.pain)
 #' 
 #' @export lfkindex
-#'
-#' @importFrom stats qnorm
 
 
 lfkindex <- function(TE, seTE, data = NULL) {
@@ -64,16 +62,15 @@ lfkindex <- function(TE, seTE, data = NULL) {
   ## Read data
   ##
   nulldata <- is.null(data)
+  sfsp <- sys.frame(sys.parent())
+  mc <- match.call()
   ##
   if (nulldata)
-    data <- sys.frame(sys.parent())
-  ##
-  mf <- match.call()
+    data <- sfsp
   ##
   ## Catch 'TE' and 'seTE' from data:
   ##
-  TE <- eval(mf[[match("TE", names(mf))]],
-             data, enclos = sys.frame(sys.parent()))
+  TE <- catch("TE", mc, data, sfsp)
   ##
   if (inherits(TE, "meta")) {
     seTE <- TE$seTE
@@ -82,8 +79,7 @@ lfkindex <- function(TE, seTE, data = NULL) {
   else {
     chknull(TE)
     ##
-    seTE <- eval(mf[[match("seTE", names(mf))]],
-                 data, enclos = sys.frame(sys.parent()))
+    seTE <- catch("seTE", mc, data, sfsp)
     chknull(seTE)
     ##
     chklength(seTE, length(TE), "lfkindex")

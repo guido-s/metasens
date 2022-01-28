@@ -134,7 +134,7 @@ create a funnel plot. For more information see help page of the
 \examples{
 data(Moore1998)
 m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
-              data = Moore1998, sm = "OR", method = "Inverse")
+  data = Moore1998, sm = "OR", method = "Inverse")
 l1 <- limitmeta(m1)
 print(l1, digits = 2)
 funnel(l1)

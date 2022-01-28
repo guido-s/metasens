@@ -81,9 +81,6 @@
 #' orb3 <- orbbound(m1, k.suspect = 1:5, left = TRUE)
 #' print(orb3, digits = 2)
 #' @export orbbound
-#'
-#' @importFrom meta ci metabias
-#' @importFrom stats dnorm qnorm
 
 
 orbbound <- function(x, k.suspect = 1, tau = x$tau, left = NULL,

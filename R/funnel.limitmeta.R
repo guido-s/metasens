@@ -78,7 +78,7 @@
 #' @examples
 #' data(Moore1998)
 #' m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
-#'               data = Moore1998, sm = "OR", method = "Inverse")
+#'   data = Moore1998, sm = "OR", method = "Inverse")
 #' l1 <- limitmeta(m1)
 #' print(l1, digits = 2)
 #' funnel(l1)
@@ -92,7 +92,6 @@
 #' @export
 #' @export funnel.limitmeta
 #'
-#' @importFrom meta funnel
 #' @importFrom graphics curve points polygon segments
 
 

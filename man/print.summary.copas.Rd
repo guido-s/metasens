@@ -66,7 +66,7 @@ m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data=Fleiss1993bin, sm="OR")
 
 # Print summary of Copas analysis
 #
-summary(copas(m1), level=0.95)
+summary(copas(m1), level = 0.95)
 
 }
 \seealso{

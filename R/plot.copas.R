@@ -58,13 +58,8 @@
 #' @param which Specify plots required: 1:4 produces all plots
 #'   (default); 3 produces plot 3 etc; c(1,3) produces plots 1 and 3,
 #'   and so on.
-#' @param caption Specify plot captions. Note that four captions must
-#'   be specified even if fewer graphs are displayed (which is the
-#'   case if the predefined captions are utilised). This must be
-#'   considered if user-defined captions are provided. Captions
-#'   corresponding to plots that are not displayed can be left
-#'   empty. For example, if only plot 3 is selected, we might specify
-#'   \code{caption=c("","","Plot 3","")}.
+#' @param main Specify plot captions. Must be of same length as
+#'   argument \code{which}.
 #' @param xlim.pp A vector of x-axis limits for plots 3 and 4,
 #'   i.e. for the probability of publishing the study with largest
 #'   standard deviation. E.g. to specify limits between 0.3 and 0.1
@@ -89,8 +84,8 @@
 #'   \code{warn=1}: print warnings as they occur; \code{warn=2}: stop
 #'   the function when the first warning is generated. For further
 #'   details see \code{help(options)}.
-#' @param ... other arguments to the function will be ignored (this
-#'   option only included to conform with R standards)
+#' @param \dots Other arguments (to check for deprecated argument
+#'   'caption').
 #' 
 #' @author James Carpenter \email{James.Carpenter@@lshtm.ac.uk}, Guido
 #'   Schwarzer \email{sc@@imbi.uni-freiburg.de}
@@ -136,38 +131,86 @@
 #' # Another example showing use of more arguments
 #' # Note the use of "\n" to create a new line in the caption
 #' #
-#' plot(cop1,
-#'      which = 3,
-#'      caption = c("", "",
-#'                "Variation in estimated treatment\n effect with selection",
-#'                ""),
-#'      xlim.pp = c(1, 0.5))
+#' plot(cop1, which = 3, xlim.pp = c(1, 0.5),
+#'   main = "Variation in estimated treatment\n effect with selection")
 #'
 #' @method plot copas
 #' @export
 #' @export plot.copas
 #'
-#' @importFrom meta ci funnel
 #' @importFrom graphics abline axTicks axis box contour mtext par plot
-#'   points segments title
-#' @importFrom stats loess
+#'   title
 
 
 plot.copas <- function(x,
                        which = 1:4,
-                       caption = c("Funnel plot", "Contour plot",
+                       main = c("Funnel plot", "Contour plot",
                          "Treatment effect plot",
                          "P-value for residual selection bias"),
-                       xlim.pp = NULL,
+                       xlim.pp,
                        orthogonal.line = TRUE,
                        lines = FALSE,
                        warn = -1,
                        ...) {
   
+
+  ##
+  ## Check class and arguments
+  ##
   chkclass(x, "copas")
+  ##
+  missing.which <- missing(which)
+  chknumeric(which, min = 1, max = 4)
+  if (any(duplicated(which)))
+    stop("Duplicated values in argument 'which'.", call. = FALSE)
+  if (any(diff(which) < 0))
+    stop("Values of argument 'which' must be increasing.", call. = FALSE)
+  ##
+  missing.main <- missing(main)
+  ##
+  missing.xlim.pp <- missing(xlim.pp)
+  if (!missing.xlim.pp)
+    chknumeric(xlim.pp, length = 2)
+  ##
+  chklogical(orthogonal.line)
+  chklogical(lines)
+  chknumeric(warn, length = 1)
   
-  if (!is.numeric(which) || any(which < 1) || any(which > 4)) 
-    stop("Argument 'which' must be in 1:4")
+  
+  ##
+  ## Check for deprecated arguments in '...'
+  ##
+  args <- list(...)
+  ## Check whether first argument is a list. In this case only use
+  ## this list as input.
+  if (length(args) > 0 && is.list(args[[1]]))
+    args <- args[[1]]
+  ##
+  ## Argument 'caption' replaced by 'main'
+  ##
+  main <- deprecated(main, missing.main, args, "caption")
+  ##
+  if (missing.main) {
+    if (chkdeprecated(names(args), old = "caption", warn = FALSE)) {
+      if (length(main) == 4 & !missing.which)
+        main <- main[which]
+    }
+    else {
+      main <- main[which]
+    }
+  }
+  ##
+  if (length(main) != length(which))
+    stop(if (length(main) > length(which)) "More" else "Fewer",
+         " titles (argument 'main') provided than figures.",
+         call. = FALSE)
+  ##
+  if (length(main) == 4)
+    caption <- main
+  else {
+    caption <- rep("", 4)
+    caption[which] <- main
+  }
   
   
   oldwarn <- options()$warn
@@ -292,7 +335,7 @@ plot.copas <- function(x,
   ci.y$upper[is.infinite(ci.y$upper)] <- NA
   ##
   if (show[3]) {
-    if (is.null(xlim.pp))
+    if (missing.xlim.pp)
       xlim <- range(xvalue, na.rm = TRUE)[c(2, 1)]
     else
       xlim <- xlim.pp
@@ -344,7 +387,7 @@ plot.copas <- function(x,
   yvalue <- yvalue[sel.y]
   ##
   if (show[4]) {
-    if (is.null(xlim.pp))
+    if (missing.xlim.pp)
       xlim <- range(xvalue, na.rm = TRUE)[c(2, 1)]
     else
       xlim <- xlim.pp
@@ -361,7 +404,7 @@ plot.copas <- function(x,
            xlab = "", ylab = "", axes = FALSE)
     }
     else {
-      plot(loess(yvalue~xvalue),
+      plot(loess(yvalue ~ xvalue),
            type = "l",
            xlim = xlim, ylim = c(0, 1),
            xlab = "", ylab = "", axes = FALSE)

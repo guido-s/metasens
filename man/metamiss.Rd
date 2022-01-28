@@ -105,10 +105,10 @@ to specify whether the outcome is beneficial (argument
 }
 \examples{
 d1 <- data.frame(author = c("Beasley", "Selman"),
-                 resp.h = c(29, 17), fail.h = c(18, 1), drop.h = c(22, 11),
-                 resp.p = c(20, 7), fail.p = c(14, 4), drop.p = c(34, 18))
+  resp.h = c(29, 17), fail.h = c(18, 1), drop.h = c(22, 11),
+  resp.p = c(20, 7), fail.p = c(14, 4), drop.p = c(34, 18))
 m1 <- metabin(resp.h, resp.h + fail.h, resp.p, resp.p + fail.p,
-              data = d1, studlab = author, sm = "RR", method = "I")
+  data = d1, studlab = author, sm = "RR", method = "I")
 m1
 
 # Treat missings as no events
@@ -119,16 +119,16 @@ metamiss(m1, drop.h, drop.p, IMOR.e = 2)
 
 # Gamble & Hollis (2005)
 d2 <- data.frame(author = c("Lefevre", "van Vugt", "van Vugt"),
-                 year = c(2001, 2000, 1998),
-                 para.al = c(7, 4, 49), n.al = c(155, 134, 273),
-                 miss.al = c(9, 16, 36),
-                 para.ma = c(0, 0, 7), n.ma = c(53, 47, 264),
-                 miss.ma = c(2, 3, 44))
+  year = c(2001, 2000, 1998),
+  para.al = c(7, 4, 49), n.al = c(155, 134, 273),
+  miss.al = c(9, 16, 36),
+  para.ma = c(0, 0, 7), n.ma = c(53, 47, 264),
+  miss.ma = c(2, 3, 44))
 
 m2 <- metabin(para.al, n.al, para.ma, n.ma,
-              data = d2, studlab = paste0(author, " (", year, ")"),
-              method = "Inverse", method.tau = "DL",
-              sm = "OR")
+  data = d2, studlab = paste0(author, " (", year, ")"),
+  method = "Inverse", method.tau = "DL",
+  sm = "OR")
 
 metamiss(m2, miss.al, miss.ma, method = "GH")
 

@@ -369,17 +369,17 @@
 #' # function:
 #' #
 #' cop2 <- copas(m1,
-#'               gamma0.range = c(-0.5, 2.1), # range of gamma0 parameter
-#'               gamma1.range = c(0, 0.08),   # range of gamma1 parameter
-#'               ngrid = 20,                  # specify a 20x20 grid (finer than default)
-#'               levels = c(-0.13, -0.12, -0.1, -0.09,
-#'                          -0.07, -0.05, -0.03), # specify contour lines
-#'               slope = 0.2,       # specify slope of 'orthogonal' line in contour plot
-#'               left = FALSE,      # as any selection bias due to missing studies on right
-#'               rho.bound = 0.998, # constrain rho between [-0.998, 0.998]
-#'               silent = FALSE,    # update user on progress
-#'               warn = -1          # suppress warning messages
-#'              )
+#'    gamma0.range = c(-0.5, 2.1), # range of gamma0 parameter
+#'    gamma1.range = c(0, 0.08),   # range of gamma1 parameter
+#'    ngrid = 20,                  # specify a 20x20 grid (finer than default)
+#'    levels = c(-0.13, -0.12, -0.1, -0.09,
+#'               -0.07, -0.05, -0.03), # specify contour lines
+#'    slope = 0.2,       # specify slope of 'orthogonal' line in contour plot
+#'    left = FALSE,      # as any selection bias due to missing studies on right
+#'    rho.bound = 0.998, # constrain rho between [-0.998, 0.998]
+#'    silent = FALSE,    # update user on progress
+#'    warn = -1          # suppress warning messages
+#'   )
 #' plot(cop2)
 #' #
 #' # Print table of results used to draw treatment effect plot:
@@ -387,9 +387,7 @@
 #' cop2
 #' @export copas
 #'
-#' @importFrom meta metabias metagen
 #' @importFrom grDevices contourLines
-#' @importFrom stats lm optim pchisq pnorm vcov
 
 
 copas <- function(x,

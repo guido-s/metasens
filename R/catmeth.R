@@ -1,19 +1,3 @@
-#' @importFrom stats update qt
-
-
-updateversion <- function(x) {
-  ##
-  ## Update older meta objects
-  ##
-  if (!is.null(x$version))
-    meta.version <- as.numeric(unlist(strsplit(x$version, "-"))[1])
-  if (is.null(x$version) || meta.version < gs("version.update"))
-    x <- update(x, warn = FALSE, warn.deprecated = FALSE)
-  ##
-  x
-}
-
-
 catmeth <- function(method,
                     method.tau = NULL,
                     sm = "",
@@ -38,7 +22,7 @@ catmeth <- function(method,
                     pooledvar = FALSE,
                     method.smd,
                     sd.glass,
-                    exact.smd = FALSE,
+                    exact.smd = TRUE,
                     model.glmm,
                     pscale = 1,
                     irscale = 1,
@@ -410,35 +394,43 @@ catmeth <- function(method,
     ##
     if (trimfill)
       cat("\n- Trim-and-fill method to adjust for funnel plot asymmetry")
-    ##
-    if (metamiss) {
-      if (method.miss == "IMOR")
-        mmiss <- paste0("IMOR.e = ", IMOR.e, ", IMOR.c = ", IMOR.c)
-      else {
-        meths <- c("Gamble-Hollis analysis",
-                   "impute no events (ICA-0)",
-                   "impute events (ICA-1)",
-                   "observed risk in control group (ICA-pc)",
-                   "observed risk in experimental group (ICA-pe)",
-                   "observed group-specific risks (ICA-p)",
-                   "best-case scenario (ICA-b)",
-                   "worst-case scenario (ICA-w)")
-        ##
-        mm <- c("GH", "0", "1", "pc", "pe", "p", "b", "w")
-        ##
-        idx <- charmatch(method.miss, mm)
-        ##
-        mmiss <- meths[idx]
-      }
-      ##
-      cat(paste0("\n- Imputation method: ", mmiss))
-    }
   }
   else {
     if (method != "" | sm.details != "")
       cat("\nDetails:")
     if (method != "")
       cat(method)
+  }
+  ##
+  if (metamiss) {
+    if (method.miss == "IMOR") {
+      mmiss <- "Informative Missingness Odds Ratio"
+      if (length(unique(IMOR.e)) == 1 & length(unique(IMOR.c)) == 1)
+        mmiss <-
+          paste0("\n  ", mmiss,
+                 " (IMOR.e = ", round(unique(IMOR.e), 4),
+                 ", IMOR.c = ", round(unique(IMOR.c), 4), ")")
+      else
+        mmiss <- paste(mmiss, "(IMOR)")
+    }
+      else {
+      meths <- c("Gamble-Hollis analysis",
+                 "impute no events (ICA-0)",
+                 "impute events (ICA-1)",
+                 "observed risk in control group (ICA-pc)",
+                 "observed risk in experimental group (ICA-pe)",
+                 "observed group-specific risks (ICA-p)",
+                   "best-case scenario (ICA-b)",
+                 "worst-case scenario (ICA-w)")
+      ##
+      mm <- c("GH", "0", "1", "pc", "pe", "p", "b", "w")
+      ##
+      idx <- charmatch(method.miss, mm)
+      ##
+      mmiss <- meths[idx]
+    }
+    ##
+    cat(paste0("\n- Imputation method: ", mmiss))
   }
   ##
   if (sm.details != "")
@@ -448,88 +440,6 @@ catmeth <- function(method,
   
   
   invisible(NULL)
-}
-
-
-TE.seTE.ci <- function(lower, upper, level = 0.95,
-                       df = rep_len(NA, length(lower))) {
-  
-  
-  ##
-  ## Check arguments
-  ##
-  if (missing(lower))
-    stop("Mandatory argument 'lower' missing.", call. = FALSE)
-  if (missing(upper))
-    stop("Mandatory argument 'upper' missing.", call. = FALSE)
-  ##
-  k <- length(lower)
-  arg <- "lower"
-  chklength(upper, k, arg)
-  chklength(df, k, arg)
-  ##
-  if (any(lower >= upper, na.rm = TRUE))
-    stop("Lower limit must be smaller than upper limit.", call. = FALSE)
-  ##
-  chklevel(level, length = 0)
-  
-  
-  ##
-  ## Parmar et al. (1998), Stat Med
-  ##
-  ## Section 4.1 Indirect variance estimation
-  ##
-  ## Equation (7)
-  ##
-  varTE <- ifelse(is.na(df),
-                  ((upper - lower) /
-                   (2 * qnorm((1 - level) / 2, lower.tail = FALSE)))^2,
-                  ((upper - lower) /
-                   (2 * qt((1 - level) / 2, df = df, lower.tail = FALSE)))^2)
-  ##
-  seTE <- sqrt(varTE)
-  
-  
-  res <- list(TE = lower + (upper - lower) / 2, seTE = seTE,
-              lower = lower, upper = upper,
-              level = level, df = df)
-  ##
-  res
-}
-seTE.pval <- function(TE, pval, df = rep_len(NA, length(TE))) {
-  
-  
-  ##
-  ## Check arguments
-  ##
-  if (missing(TE))
-    stop("Mandatory argument 'TE' missing.", call. = FALSE)
-  if (missing(pval))
-    stop("Mandatory argument 'pval' missing", call. = FALSE)
-  ##
-  k <- length(TE)
-  arg <- "TE"
-  chklength(pval, k, arg)
-  chklength(df, k, arg)
-  ##
-  if (any(pval <= 0, na.rm = TRUE) | any(pval >= 1, na.rm = TRUE))
-    stop("No valid value for p-value", call. = FALSE)
-  
-  
-  ##
-  ## Parmar et al. (1998), Stat Med
-  ##
-  ## Equation (7)
-  ##
-  varTE <- ifelse(is.na(df),
-                  (TE / qnorm(pval / 2, lower.tail = FALSE))^2,
-                  (TE / qt(pval / 2, df = df, lower.tail = FALSE))^2)
-  seTE <- sqrt(varTE)
-  
-  
-  res <- list(TE = TE, seTE = seTE, pval = pval)
-  ##
-  res
 }
 
 

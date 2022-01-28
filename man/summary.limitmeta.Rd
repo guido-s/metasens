@@ -23,7 +23,7 @@ Summary method for objects of class \code{limitmeta}.
 \examples{
 data(Moore1998)
 m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
-              data = Moore1998, sm = "OR", method = "Inverse")
+  data = Moore1998, sm = "OR", method = "Inverse")
 
 summary(limitmeta(m1))
 

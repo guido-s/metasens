@@ -57,15 +57,12 @@
 #' @examples
 #' data(Moore1998)
 #' m1 <- metabin(succ.e, nobs.e, succ.c, nobs.c,
-#'               data = Moore1998, sm = "OR", method = "Inverse")
+#'   data = Moore1998, sm = "OR", method = "Inverse")
 #' 
 #' print(limitmeta(m1), digits = 2)
 #'
 #' @method print limitmeta
 #' @export
-#'
-#' @importFrom meta gs
-#' @importFrom stats pchisq
 
 
 print.limitmeta <- function(x,

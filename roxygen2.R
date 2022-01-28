@@ -31,6 +31,9 @@ check("../metasens")
 
 
 ##
-## (6) Check R package (with donttest examples)
+## (6) Check examples
 ##
-check("../metasens", run_dont_test = TRUE)
+setwd("..")
+library(numDeriv)
+run_examples("metasens", run_dontrun = TRUE, run_donttest = TRUE)
+warnings()

@@ -85,7 +85,7 @@ orb1.missleft <- orbbound(m1, k.suspect = 1:5, left = TRUE)
 orb1.missleft
 
 m2 <- metabin(d.asp, n.asp, d.plac, n.plac,
-              data = Fleiss1993bin, sm = "OR", method = "Inverse")
+  data = Fleiss1993bin, sm = "OR", method = "Inverse")
 
 orb2 <- orbbound(m2, k.suspect = 1:5)
 print(orb2, digits = 2)

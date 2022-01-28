@@ -63,8 +63,6 @@
 #' @method forest orbbound
 #' @export
 #' @export forest.orbbound
-#'
-#' @importFrom meta forest metagen
 
 
 forest.orbbound <- function(x,
@@ -155,7 +153,7 @@ forest.orbbound <- function(x,
   
   if (fixed & random)
     m1 <- metagen(TE, seTE, sm = sm.lab,
-                  byvar = FEvsRE, print.byvar = FALSE,
+                  subgroup = FEvsRE, print.subgroup.name = FALSE,
                   warn = FALSE, method.tau.ci = "")
   else
     m1 <- metagen(TE, seTE, sm = sm.lab, warn = FALSE, method.tau.ci = "")

@@ -57,13 +57,11 @@
 #' 
 #' # Print summary of Copas analysis
 #' #
-#' summary(copas(m1), level=0.95)
+#' summary(copas(m1), level = 0.95)
 #'
 #' @method print summary.copas
 #' @export
 #' @export print.summary.copas
-#'
-#' @importFrom meta gs
 
 
 print.summary.copas <- function(x, backtransf = x$backtransf,

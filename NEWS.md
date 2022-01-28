@@ -1,4 +1,4 @@
-## metasens, version 1.0-1 (2022-01-26)
+## metasens, version 1.0-1 (2022-01-28)
 
 ### Bug fixes
 
@@ -6,6 +6,11 @@
   method beta0 (default):
   - use random effects instead of fixed effect weights
   - consider covariance between alpha and beta
+
+### User-visible changes
+
+* plot.copas():
+  - new argument 'main' replacing deprecated argument 'caption'
 
 
 ## metasens, version 1.0-0 (2021-10-22)

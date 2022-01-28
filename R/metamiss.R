@@ -95,10 +95,10 @@
 #' 
 #' @examples
 #' d1 <- data.frame(author = c("Beasley", "Selman"),
-#'                  resp.h = c(29, 17), fail.h = c(18, 1), drop.h = c(22, 11),
-#'                  resp.p = c(20, 7), fail.p = c(14, 4), drop.p = c(34, 18))
+#'   resp.h = c(29, 17), fail.h = c(18, 1), drop.h = c(22, 11),
+#'   resp.p = c(20, 7), fail.p = c(14, 4), drop.p = c(34, 18))
 #' m1 <- metabin(resp.h, resp.h + fail.h, resp.p, resp.p + fail.p,
-#'               data = d1, studlab = author, sm = "RR", method = "I")
+#'   data = d1, studlab = author, sm = "RR", method = "I")
 #' m1
 #'
 #' # Treat missings as no events
@@ -109,22 +109,20 @@
 #'
 #' # Gamble & Hollis (2005)
 #' d2 <- data.frame(author = c("Lefevre", "van Vugt", "van Vugt"),
-#'                  year = c(2001, 2000, 1998),
-#'                  para.al = c(7, 4, 49), n.al = c(155, 134, 273),
-#'                  miss.al = c(9, 16, 36),
-#'                  para.ma = c(0, 0, 7), n.ma = c(53, 47, 264),
-#'                  miss.ma = c(2, 3, 44))
+#'   year = c(2001, 2000, 1998),
+#'   para.al = c(7, 4, 49), n.al = c(155, 134, 273),
+#'   miss.al = c(9, 16, 36),
+#'   para.ma = c(0, 0, 7), n.ma = c(53, 47, 264),
+#'   miss.ma = c(2, 3, 44))
 #' 
 #' m2 <- metabin(para.al, n.al, para.ma, n.ma,
-#'               data = d2, studlab = paste0(author, " (", year, ")"),
-#'               method = "Inverse", method.tau = "DL",
-#'               sm = "OR")
+#'   data = d2, studlab = paste0(author, " (", year, ")"),
+#'   method = "Inverse", method.tau = "DL",
+#'   sm = "OR")
 #' 
 #' metamiss(m2, miss.al, miss.ma, method = "GH")
 #' 
 #' @export metamiss
-#'
-#' @importFrom meta metabin
 
 
 metamiss <- function(x,
@@ -143,7 +141,7 @@ metamiss <- function(x,
   ##
   ##
   chkclass(x, "metabin")
-  x <- updateversion(x)
+  x <- meta:::updateversion(x)
   ##
   ##if (!is.null(x$subgroup)) {
   ##  warning("Function metamiss() does not work with subgroup analyses.",
@@ -155,18 +153,17 @@ metamiss <- function(x,
   ##
   ## Catch 'miss.e' and 'miss.c' from data:
   ##
-  mf <- match.call()
-  miss.e <- eval(mf[[match("miss.e", names(mf))]],
-                 x$data, enclos = sys.frame(sys.parent()))
+  sfsp <- sys.frame(sys.parent())
+  mc <- match.call()
   ##
-  miss.c <- eval(mf[[match("miss.c", names(mf))]],
-                 x$data, enclos = sys.frame(sys.parent()))
-  ##
-  if (is.null(miss.e))
+  if (missing(miss.e))
     stop("Argument 'miss.e' missing.", call. = FALSE)
   ##
-  if (is.null(miss.c))
+  if (missing(miss.c))
     stop("Argument 'miss.c' missing.", call. = FALSE)
+  ##  
+  miss.e <- catch("miss.e", mc, x$data, sfsp)
+  miss.c <- catch("miss.c", mc, x$data, sfsp)
   ##
   if (isCol(x$data, ".subset")) {
     miss.e <- miss.e[x$data$.subset]
@@ -186,6 +183,9 @@ metamiss <- function(x,
             "metamiss",
             text = paste("Length of argument 'miss.c' must be equal to",
                          "number of studies in meta-analysis."))
+  ##
+  chknumeric(miss.e, min = 0)
+  chknumeric(miss.c, min = 0)
   ##
   incr <- 0.5 * (event.e == 0 | event.c == 0 | n.e == event.e | n.c == event.c)
   
