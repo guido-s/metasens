@@ -18,16 +18,16 @@
 #' \code{\link{forest.meta}} function.
 #'
 #' @param x An object of class \code{orbbound}.
-#' @param fixed A logical indicating whether sensitivity analysis
-#'   for fixed effect model should be plotted.
-#' @param random A logical indicating whether sensitivity
-#'   analysis for random effects model should be plotted.
-#' @param text.fixed A character string used in the plot to label
-#'   subgroup with results for fixed effect model.
+#' @param common A logical indicating whether sensitivity analysis for
+#'   common effect model should be plotted.
+#' @param random A logical indicating whether sensitivity analysis for
+#'   random effects model should be plotted.
+#' @param text.common A character string used in the plot to label
+#'   subgroup with results for common effect model.
 #' @param text.random A character string used in the plot to label
 #'   subgroup with results for random effects model.
 #' @param smlab A label printed at top of figure. If only results for
-#'   either fixed effect or random effects model is plotted, text
+#'   either common effect or random effects model is plotted, text
 #'   indicates which model was used.
 #' @param leftcols A character vector specifying (additional) columns
 #'   to be plotted on the left side of the forest plot or a logical
@@ -41,8 +41,10 @@
 #'   printed as odds ratios rather than log odds ratio, for example.
 #' @param digits Minimal number of significant digits, see
 #'   \code{print.default}.
+#' @param warn.deprecated A logical indicating whether warnings should
+#'   be printed if deprecated arguments are used.
 #' @param \dots Additional arguments for \code{\link{forest.meta}}
-#'   function.
+#'   function and to catch deprecated arguments.
 #' 
 #' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
 #' 
@@ -66,42 +68,51 @@
 
 
 forest.orbbound <- function(x,
-                            fixed = x$x$fixed,
+                            common = x$x$common,
                             random = x$x$random,
-                            text.fixed = "FE model",
+                            text.common = "CE model",
                             text.random = "RE model",
                             smlab = NULL,
                             leftcols = c("studlab", "maxbias"),
                             leftlabs = c("Missing\nstudies", "Maximum\nbias"),
                             backtransf = x$backtransf,
                             digits = max(3, .Options$digits - 3),
+                            warn.deprecated = gs("warn.deprecated"),
                             ...) {
   
   chkclass(x, "orbbound")
+  x <- updateversion(x)
   
   k <- x$x$k
   sm <- x$x$sm
   
   
   cl <- class(x)[1]
-  addargs <- names(list(...))
+  args <- list(...)
+  addargs <- names(args)
   ##
   fun <- "forest.orbbound"
   ##
-  warnarg("logscale", addargs, fun, otherarg = "backtransf")
+  chklogical(warn.deprecated)
+  if (warn.deprecated)
+    warnarg("logscale", addargs, fun, otherarg = "backtransf")
   ##
   if (is.null(backtransf))
     if (!is.null(list(...)[["logscale"]]))
       backtransf <- !list(...)[["logscale"]]
     else
       backtransf <- TRUE
-  
-  
-  if (length(fixed) == 0)
-    fixed <- TRUE
+  chklogical(backtransf)
   ##
-  if (length(random) == 0)
-    random <- TRUE
+  common <- deprecated(common, missing(common), args, "fixed",
+                       warn.deprecated)
+  chklogical(common)
+  chklogical(random)
+  ##
+  chkchar(text.common, length = 1)
+  chkchar(text.random, length = 1)
+  ##
+  chknumeric(digits, min = 0, length = 1)
   
   
   sm.lab <- sm
@@ -120,45 +131,47 @@ forest.orbbound <- function(x,
   ci.lab <- paste(round(100 * x$x$level.ma, 1), "%-CI", sep = "")
   
   
-  TE.fixed   <- x$fixed$TE
-  seTE.fixed <- rep(x$fixed$seTE, length(TE.fixed))
+  TE.common   <- x$common$TE
+  seTE.common <- rep(x$common$seTE, length(TE.common))
   ##
   TE.random   <- x$random$TE
   seTE.random <- rep(x$random$seTE, length(TE.random))
   
   
-  if (fixed & random) {
-    TE <- c(TE.fixed, TE.random)
-    seTE <- c(seTE.fixed, seTE.random)
-    FEvsRE <- c(rep(text.fixed, length(TE.fixed)),
+  if (common & random) {
+    TE <- c(TE.common, TE.random)
+    seTE <- c(seTE.common, seTE.random)
+    FEvsRE <- c(rep(text.common, length(TE.common)),
                 rep(text.random, length(TE.random)))
   }
-  if (fixed & !random) {
-    TE <- TE.fixed
-    seTE <- seTE.fixed
+  if (common & !random) {
+    TE <- TE.common
+    seTE <- seTE.common
     if (is.null(smlab))
-      smlab <- "Fixed effect model"
+      smlab <- "Common effect model"
   }
-  if (!fixed & random) {
+  if (!common & random) {
     TE <- TE.random
     seTE <- seTE.random
     if (is.null(smlab))
       smlab <- "Random effects model"
   }
-  if (!fixed & !random) {
-    warning("No forest plot generated as both arguments 'fixed' and 'random' are FALSE")
+  if (!common & !random) {
+    warning("No forest plot generated as ",
+            "both arguments 'common' and 'random' are FALSE.",
+            call. = FALSE)
     return(invisible(NULL))
   }
   
   
-  if (fixed & random)
+  if (common & random)
     m1 <- metagen(TE, seTE, sm = sm.lab,
                   subgroup = FEvsRE, print.subgroup.name = FALSE,
                   warn = FALSE, method.tau.ci = "")
   else
     m1 <- metagen(TE, seTE, sm = sm.lab, warn = FALSE, method.tau.ci = "")
   ##
-  if (fixed & random) {
+  if (common & random) {
     m1$studlab <- c(x$k.suspect, x$k.suspect)
     m1$maxbias <- c(x$maxbias, x$maxbias)
     m1$npft.ma <- c(1 / mean(1 / x$x$n), 1 / mean(1 / x$x$n))
@@ -177,7 +190,7 @@ forest.orbbound <- function(x,
   m1$maxbias <- format(round(m1$maxbias, digits))
   
   forest(m1,
-         fixed = FALSE, random = FALSE,
+         common = FALSE, random = FALSE,
          hetstat = FALSE,
          leftcols = leftcols,
          leftlabs = leftlabs,

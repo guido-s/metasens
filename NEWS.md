@@ -1,3 +1,12 @@
+## meta, version 1.5-0 (2022-07-11)
+
+### Major changes
+
+* Use term 'common effect model' instead of 'fixed effect model' in
+  the documentation and argument 'common' instead of 'fixed' to (not)
+  show results for common effect model
+
+
 ## metasens, version 1.0-1 (2022-01-28)
 
 ### Bug fixes

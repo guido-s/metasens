@@ -8,10 +8,10 @@
 #' summary measures, maximum bias is instead printed as absolute bias.
 #' 
 #' @param x An object of class \code{orbbound}.
-#' @param fixed A logical indicating whether sensitivity analysis
-#'   for fixed effect model should be printed.
-#' @param random A logical indicating whether sensitivity
-#'   analysis for random effects model should be printed.
+#' @param common A logical indicating whether sensitivity analysis for
+#'   common effect model should be printed.
+#' @param random A logical indicating whether sensitivity analysis for
+#'   random effects model should be printed.
 #' @param header A logical indicating whether information on
 #'   meta-analysis should be printed at top of printout.
 #' @param backtransf A logical indicating whether printed results
@@ -32,7 +32,9 @@
 #'   be printed in scientific notation, e.g., 1.2345e-01 instead of
 #'   0.12345.
 #' @param big.mark A character used as thousands separator.
-#' @param \dots Additional arguments
+#' @param warn.deprecated A logical indicating whether warnings should
+#'   be printed if deprecated arguments are used.
+#' @param \dots Additional arguments to catch deprecated arguments.
 #' 
 #' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
 #' 
@@ -43,7 +45,8 @@
 #' @examples
 #' data(Fleiss1993bin, package = "meta")
 #' 
-#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
+#' m1 <- metabin(d.asp, n.asp, d.plac, n.plac,
+#'   data = Fleiss1993bin, sm = "OR")
 #' 
 #' orb1 <- orbbound(m1, k.suspect = 1:5)
 #' print(orb1, digits = 2)
@@ -69,7 +72,7 @@
 
 
 print.orbbound <- function(x,
-                           fixed = x$x$fixed,
+                           common = x$x$common,
                            random = x$x$random,
                            header = TRUE, backtransf = x$backtransf,
                            digits = gs("digits"),
@@ -78,10 +81,12 @@ print.orbbound <- function(x,
                            digits.tau2 = gs("digits.tau2"),
                            scientific.pval = gs("scientific.pval"),
                            big.mark = gs("big.mark"),
+                           warn.deprecated = gs("warn.deprecated"),
                            ...) {
   
   
   chkclass(x, "orbbound")
+  x <- updateversion(x)
   
   
   k <- x$x$k
@@ -90,25 +95,33 @@ print.orbbound <- function(x,
   
   
   cl <- class(x)[1]
-  addargs <- names(list(...))
+  args <- list(...)
+  addargs <- names(args)
   ##
   fun <- "print.orbbound"
   ##
-  warnarg("logscale", addargs, fun, otherarg = "backtransf")
+  chklogical(warn.deprecated)
+  if (warn.deprecated)
+    warnarg("logscale", addargs, fun, otherarg = "backtransf")
   ##
   if (is.null(backtransf))
-    if (!is.null(list(...)[["logscale"]]))
-      backtransf <- !list(...)[["logscale"]]
+    if (!is.null(args[["logscale"]]))
+      backtransf <- !args[["logscale"]]
     else
       backtransf <- TRUE
+  ##
+  common <- deprecated(common, missing(common), args, "fixed",
+                       warn.deprecated)
+  chklogical(common)
+  chklogical(random)
+  chklogical(header)
+  chklogical(backtransf)
   ##
   chknumeric(digits, min = 0, length = 1)
   chknumeric(digits.stat, min = 0, length = 1)
   chknumeric(digits.pval, min = 1, length = 1)
   chknumeric(digits.tau2, min = 0, length = 1)
   ##
-  chklogical(header)
-  chklogical(backtransf)
   chklogical(scientific.pval)
   
   
@@ -125,19 +138,12 @@ print.orbbound <- function(x,
       sm.lab <- paste("log", sm, sep = "")
   
   
-  if (length(fixed) == 0)
-    fixed <- TRUE
-  ##
-  if (length(random) == 0)
-    random <- TRUE
-  
-  
   ci.lab <- paste(round(100 * x$x$level.ma, 1), "%-CI", sep = "")
   
   
-  TE.fixed    <- x$fixed$TE
-  lowTE.fixed <- x$fixed$lower
-  uppTE.fixed <- x$fixed$upper
+  TE.common    <- x$common$TE
+  lowTE.common <- x$common$lower
+  uppTE.common <- x$common$upper
   ##
   TE.random    <- x$random$TE
   lowTE.random <- x$random$lower
@@ -150,28 +156,28 @@ print.orbbound <- function(x,
     ##
     npft.ma <- 1 / mean(1 / x$x$n)
     ##
-    TE.fixed    <- backtransf(TE.fixed, sm, "mean",
-                                     npft.ma, warn = fixed)
-    lowTE.fixed <- backtransf(lowTE.fixed, sm, "lower",
-                                     npft.ma, warn = fixed)
-    uppTE.fixed <- backtransf(uppTE.fixed, sm, "upper",
-                                     npft.ma, warn = fixed)
+    TE.common    <- backtransf(TE.common, sm, "mean",
+                               npft.ma, warn = common)
+    lowTE.common <- backtransf(lowTE.common, sm, "lower",
+                               npft.ma, warn = common)
+    uppTE.common <- backtransf(uppTE.common, sm, "upper",
+                               npft.ma, warn = common)
     ##
     TE.random <- backtransf(TE.random, sm, "mean",
-                                   npft.ma, warn = random)
+                            npft.ma, warn = random)
     lowTE.random <- backtransf(lowTE.random, sm, "lower",
-                                      npft.ma, warn = random)
+                               npft.ma, warn = random)
     uppTE.random <- backtransf(uppTE.random, sm, "upper",
-                                      npft.ma, warn = random)
+                               npft.ma, warn = random)
     ##
     maxbias <- backtransf(maxbias, sm, "mean", npft.ma, warn = FALSE)
   }
   ##
-  TE.fixed    <- round(TE.fixed, digits)
-  lowTE.fixed <- round(lowTE.fixed, digits)
-  uppTE.fixed <- round(uppTE.fixed, digits)
-  pTE.fixed <- x$fixed$p
-  sTE.fixed <- round(x$fixed$statistic, digits)
+  TE.common    <- round(TE.common, digits)
+  lowTE.common <- round(lowTE.common, digits)
+  uppTE.common <- round(uppTE.common, digits)
+  pTE.common <- x$common$p
+  sTE.common <- round(x$common$statistic, digits)
   ##
   TE.random    <- round(TE.random, digits)
   lowTE.random <- round(lowTE.random, digits)
@@ -186,7 +192,7 @@ print.orbbound <- function(x,
     crtitle(x$x)
   
   
-  if (fixed | random) {
+  if (common | random) {
     tau2 <- formatPT(x$tau^2,
                      lab = TRUE, labval = "tau^2",
                      digits = digits.tau2,
@@ -199,22 +205,22 @@ print.orbbound <- function(x,
     cat(paste("Between-study variance: ", tau2, "\n\n", sep = ""))
   }
   
-  if (fixed) {
+  if (common) {
     if (random & x$tau == 0)
-      cat("Fixed effect model / Random effects model\n\n")
+      cat("Common effect model / Random effects model\n\n")
     else
-      cat("Fixed effect model\n\n")
+      cat("Common effect model\n\n")
     
     res <- cbind(k.suspect,
                  formatN(maxbias, digits, big.mark = big.mark),
-                 formatN(TE.fixed, digits, "NA", big.mark = big.mark),
-                 formatCI(formatN(lowTE.fixed, digits, "NA",
+                 formatN(TE.common, digits, "NA", big.mark = big.mark),
+                 formatCI(formatN(lowTE.common, digits, "NA",
                                   big.mark = big.mark),
-                          formatN(uppTE.fixed, digits, "NA",
+                          formatN(uppTE.common, digits, "NA",
                                   big.mark = big.mark)),
-                 formatN(round(sTE.fixed, digits = digits.stat),
+                 formatN(round(sTE.common, digits = digits.stat),
                          digits.stat, big.mark = big.mark),
-                 formatPT(pTE.fixed, digits = digits.pval,
+                 formatPT(pTE.common, digits = digits.pval,
                           scientific = scientific.pval))
     
     zlab <- "z"
@@ -230,7 +236,7 @@ print.orbbound <- function(x,
   }
   
   
-  if (random & (x$tau != 0 | !fixed)) {
+  if (random & (x$tau != 0 | !common)) {
     cat("\nRandom effects model\n\n")
     
     res <- cbind(k.suspect,
@@ -258,12 +264,12 @@ print.orbbound <- function(x,
   }
   
   
-  if (fixed | random) {
+  if (common | random) {
     ## Print information on summary method:
     catmeth(method = x$x$method,
-                   method.tau = if (random) x$x$method.tau else "",
-                   sm = sm,
-                   k.all = 666)
+            method.tau = if (random) x$x$method.tau else "",
+            sm = sm,
+            k.all = 666)
   }
   
   

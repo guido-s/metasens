@@ -37,8 +37,8 @@
 #'   containing the following components:
 #' \item{k.suspect, tau}{As defined above.}
 #' \item{maxbias}{Maximum bias for given values of \code{k.suspect}.}
-#' \item{fixed}{Adjusted treatment estimates and corresponding
-#'   quantities for fixed effect model (a list with elements TE, seTE,
+#' \item{common}{Adjusted treatment estimates and corresponding
+#'   quantities for common effect model (a list with elements TE, seTE,
 #'   lower, upper, z, p, level, df).}
 #' \item{random}{Adjusted treatment estimates and corresponding
 #'   quantities for random effects model (a list with elements TE,
@@ -93,7 +93,7 @@ orbbound <- function(x, k.suspect = 1, tau = x$tau, left = NULL,
   
   
   chkclass(x, "meta")
-  
+  x <- updateversion(x)
   
   if (!(is.numeric(k.suspect)))
     stop("Argument 'k.suspect' must be a numeric vector")
@@ -139,14 +139,14 @@ orbbound <- function(x, k.suspect = 1, tau = x$tau, left = NULL,
   maxbias <- direction.bias * maxbias
   
   
-  ci.f <- ci(x$TE.fixed  + maxbias, x$seTE.fixed)
-  ci.r <- ci(x$TE.random + maxbias, x$seTE.random)
+  ci.c <- ci(x$TE.common + maxbias, x$seTE.common, level = x$level.ma)
+  ci.r <- ci(x$TE.random + maxbias, x$seTE.random, level = x$level.ma)
   
   
   res <- list(maxbias = maxbias,
               k.suspect = k.suspect,
               tau = tau,
-              fixed = ci.f,
+              common = ci.c,
               random = ci.r,
               left = left,
               x = x,

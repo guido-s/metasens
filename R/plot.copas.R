@@ -14,7 +14,7 @@
 #' 
 #' Plot 1: Funnel plot of studies in meta-analysis. Vertical grey line
 #' is usual random effects estimate (DerSimonian-Laird method);
-#' vertical broken line is fixed effects estimate.
+#' vertical broken line is common effects estimate.
 #' 
 #' Plot 2: Plot of contours of treatment effect (estimated by the
 #' Copas model) as the selection probability varies (the selection
@@ -258,7 +258,7 @@ plot.copas <- function(x,
   ##
   if (show[1]) {
     funnel(metagen(TE, seTE, level = 0.95,
-                   fixed = TRUE, random = FALSE, sm = sm),
+                   common = TRUE, random = FALSE, sm = sm),
            xlab = "", ylab = "")
     abline(v = TE.random, lty = 1, col = "darkgray")
     ##

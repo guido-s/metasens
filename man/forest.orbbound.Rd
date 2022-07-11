@@ -7,35 +7,36 @@ bias)}
 \usage{
 \method{forest}{orbbound}(
   x,
-  fixed = x$x$fixed,
+  common = x$x$common,
   random = x$x$random,
-  text.fixed = "FE model",
+  text.common = "CE model",
   text.random = "RE model",
   smlab = NULL,
   leftcols = c("studlab", "maxbias"),
   leftlabs = c("Missing\\nstudies", "Maximum\\nbias"),
   backtransf = x$backtransf,
   digits = max(3, .Options$digits - 3),
+  warn.deprecated = gs("warn.deprecated"),
   ...
 )
 }
 \arguments{
 \item{x}{An object of class \code{orbbound}.}
 
-\item{fixed}{A logical indicating whether sensitivity analysis
-for fixed effect model should be plotted.}
+\item{common}{A logical indicating whether sensitivity analysis for
+common effect model should be plotted.}
 
-\item{random}{A logical indicating whether sensitivity
-analysis for random effects model should be plotted.}
+\item{random}{A logical indicating whether sensitivity analysis for
+random effects model should be plotted.}
 
-\item{text.fixed}{A character string used in the plot to label
-subgroup with results for fixed effect model.}
+\item{text.common}{A character string used in the plot to label
+subgroup with results for common effect model.}
 
 \item{text.random}{A character string used in the plot to label
 subgroup with results for random effects model.}
 
 \item{smlab}{A label printed at top of figure. If only results for
-either fixed effect or random effects model is plotted, text
+either common effect or random effects model is plotted, text
 indicates which model was used.}
 
 \item{leftcols}{A character vector specifying (additional) columns
@@ -54,8 +55,11 @@ printed as odds ratios rather than log odds ratio, for example.}
 \item{digits}{Minimal number of significant digits, see
 \code{print.default}.}
 
+\item{warn.deprecated}{A logical indicating whether warnings should
+be printed if deprecated arguments are used.}
+
 \item{\dots}{Additional arguments for \code{\link{forest.meta}}
-function.}
+function and to catch deprecated arguments.}
 }
 \description{
 Draws a forest plot in the active graphics window (using grid

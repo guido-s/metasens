@@ -112,7 +112,7 @@ print.summary.limitmeta <- function(x,
   error <-
     try(sortvar <- catch("sortvar", mc, x, sfsp),
         silent = TRUE)
-  if (class(error) == "try-error") {
+  if (inherits(error, "try-error")) {
     sortvar <- catch("sortvar", mc, x$data, NULL)
     if (isCol(x$data, ".subset"))
       sortvar <- sortvar[x$data$.subset]

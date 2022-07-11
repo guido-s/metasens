@@ -12,9 +12,11 @@ metamiss(
   IMOR.c = IMOR.e,
   method.miss = if (missing(IMOR.e)) "0" else "IMOR",
   small.values = "good",
-  fixed = x$fixed,
+  common = x$common,
   random = x$random,
-  prediction = x$prediction
+  prediction = x$prediction,
+  warn.deprecated = gs("warn.deprecated"),
+  fixed
 )
 }
 \arguments{
@@ -37,7 +39,7 @@ used to impute missing values. Either \code{"GH"}, \code{"IMOR"},
 treatment effects indicate a beneficial (\code{"good"}) or
 harmful (\code{"bad"}) effect, can be abbreviated (see Details).}
 
-\item{fixed}{A logical indicating whether a fixed effect
+\item{common}{A logical indicating whether a common effect
 meta-analysis should be conducted.}
 
 \item{random}{A logical indicating whether a random effects
@@ -45,6 +47,11 @@ meta-analysis should be conducted.}
 
 \item{prediction}{A logical indicating whether a prediction
 interval should be printed.}
+
+\item{warn.deprecated}{A logical indicating whether warnings should
+be printed if deprecated arguments are used.}
+
+\item{fixed}{Deprecated argument (replaced by 'common').}
 }
 \value{
 An object of class \code{c("metamiss", "metagen", "meta")} with

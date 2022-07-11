@@ -341,9 +341,9 @@ cop1
 #
 # Interpretation: 
 #
-# a. The initial meta-analysis shows the fixed and random effects
+# a. The initial meta-analysis shows the common and random effects
 #    pooled ORs differ; consistent with asymmetry in the funnel
-#    plot and possible selection bias. Both fixed effect and random
+#    plot and possible selection bias. Both common effect and random
 #    effects model show a significant treatment effect in this
 #    dataset.
 #

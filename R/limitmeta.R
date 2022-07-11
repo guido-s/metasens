@@ -226,8 +226,8 @@ limitmeta <- function(x,
       ##
       ## Limit radial plot, slope through origin (mu-lim)
       ##
-      TE.adjust   <- m.lim$TE.fixed
-      seTE.adjust <- m.lim$seTE.fixed
+      TE.adjust   <- m.lim$TE.common
+      seTE.adjust <- m.lim$seTE.common
     }
     else if (method.adjust == "betalim") {
       ##

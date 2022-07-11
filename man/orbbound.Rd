@@ -33,8 +33,8 @@ An object of class \code{c("orbbound")} with corresponding
   containing the following components:
 \item{k.suspect, tau}{As defined above.}
 \item{maxbias}{Maximum bias for given values of \code{k.suspect}.}
-\item{fixed}{Adjusted treatment estimates and corresponding
-  quantities for fixed effect model (a list with elements TE, seTE,
+\item{common}{Adjusted treatment estimates and corresponding
+  quantities for common effect model (a list with elements TE, seTE,
   lower, upper, z, p, level, df).}
 \item{random}{Adjusted treatment estimates and corresponding
   quantities for random effects model (a list with elements TE,

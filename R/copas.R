@@ -332,9 +332,9 @@
 #' #
 #' # Interpretation: 
 #' #
-#' # a. The initial meta-analysis shows the fixed and random effects
+#' # a. The initial meta-analysis shows the common and random effects
 #' #    pooled ORs differ; consistent with asymmetry in the funnel
-#' #    plot and possible selection bias. Both fixed effect and random
+#' #    plot and possible selection bias. Both common effect and random
 #' #    effects model show a significant treatment effect in this
 #' #    dataset.
 #' #
@@ -500,7 +500,7 @@ copas <- function(x,
     cat("====================================\n\n")
     ##
     ## print:
-    ## (a) fixed effect analysis
+    ## (a) common effect analysis
     ## (b) random effect analysis
     ## (c) test for heterogeneity, using appropriate function
     ##  
@@ -661,7 +661,7 @@ copas <- function(x,
     }
     else
       slope <- -1 / metagen(slopes[sel], 1 / sqrt(nobs)[sel],
-                            method.tau.ci = "")$TE.fixed
+                            method.tau.ci = "")$TE.common
   }
   ##
   ##x.slope <- ((1 - slope - intercepts ) / (slopes - slope))[sel]

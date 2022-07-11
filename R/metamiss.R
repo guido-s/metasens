@@ -16,13 +16,16 @@
 #' @param small.values A character string specifying whether small
 #'   treatment effects indicate a beneficial (\code{"good"}) or
 #'   harmful (\code{"bad"}) effect, can be abbreviated (see Details).
-#' @param fixed A logical indicating whether a fixed effect
+#' @param common A logical indicating whether a common effect
 #'   meta-analysis should be conducted.
 #' @param random A logical indicating whether a random effects
 #'   meta-analysis should be conducted.
 #' @param prediction A logical indicating whether a prediction
 #'   interval should be printed.
-#'
+#' @param warn.deprecated A logical indicating whether warnings should
+#'   be printed if deprecated arguments are used.
+#' @param fixed Deprecated argument (replaced by 'common').
+#' 
 #' @details
 #' This function provides several imputation methods to deal with
 #' missing data in the meta-analysis of binary outcomes (Gamble &
@@ -130,9 +133,12 @@ metamiss <- function(x,
                      IMOR.e, IMOR.c = IMOR.e,
                      method.miss = if (missing(IMOR.e)) "0" else "IMOR",
                      small.values = "good",
-                     fixed = x$fixed,
+                     common = x$common,
                      random = x$random,
-                     prediction = x$prediction) {
+                     prediction = x$prediction,
+                     ##
+                     warn.deprecated = gs("warn.deprecated"),
+                     fixed) {
   
   
   ##
@@ -199,6 +205,12 @@ metamiss <- function(x,
     method.miss <- "GH"
   ##
   small.values <- setchar(small.values, c("good", "bad"))
+  ##
+  common <-
+    deprecated2(common, missing(common), fixed, missing(fixed),
+                warn.deprecated)
+  chklogical(common)
+  chklogical(random)
   
   
   if (method.miss == "GH") {
@@ -213,13 +225,14 @@ metamiss <- function(x,
                    ##
                    studlab = x$studlab,
                    exclude = x$exclude,
+                   cluster = x$cluster,
                    ##
                    data = x$data,
                    ##
                    sm = x$sm,
                    ##
                    level = x$level, level.ma = x$level.ma,
-                   fixed = fixed, random = random,
+                   common = common, random = random,
                    ##
                    hakn = x$hakn, method.tau = x$method.tau,
                    method.tau.ci = x$method.tau.ci,
@@ -377,7 +390,7 @@ metamiss <- function(x,
                    sm = x$sm,
                    ##
                    level = x$level, level.ma = x$level.ma,
-                   fixed = fixed, random = random,
+                   common = common, random = random,
                    ##
                    hakn = x$hakn, method.tau = x$method.tau,
                    method.tau.ci = x$method.tau.ci,

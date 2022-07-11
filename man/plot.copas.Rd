@@ -74,7 +74,7 @@ numbers below will be produced by setting \code{which=1}, etc.
 
 Plot 1: Funnel plot of studies in meta-analysis. Vertical grey line
 is usual random effects estimate (DerSimonian-Laird method);
-vertical broken line is fixed effects estimate.
+vertical broken line is common effects estimate.
 
 Plot 2: Plot of contours of treatment effect (estimated by the
 Copas model) as the selection probability varies (the selection

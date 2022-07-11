@@ -6,7 +6,7 @@
 \usage{
 \method{print}{orbbound}(
   x,
-  fixed = x$x$fixed,
+  common = x$x$common,
   random = x$x$random,
   header = TRUE,
   backtransf = x$backtransf,
@@ -16,17 +16,18 @@
   digits.tau2 = gs("digits.tau2"),
   scientific.pval = gs("scientific.pval"),
   big.mark = gs("big.mark"),
+  warn.deprecated = gs("warn.deprecated"),
   ...
 )
 }
 \arguments{
 \item{x}{An object of class \code{orbbound}.}
 
-\item{fixed}{A logical indicating whether sensitivity analysis
-for fixed effect model should be printed.}
+\item{common}{A logical indicating whether sensitivity analysis for
+common effect model should be printed.}
 
-\item{random}{A logical indicating whether sensitivity
-analysis for random effects model should be printed.}
+\item{random}{A logical indicating whether sensitivity analysis for
+random effects model should be printed.}
 
 \item{header}{A logical indicating whether information on
 meta-analysis should be printed at top of printout.}
@@ -56,7 +57,10 @@ be printed in scientific notation, e.g., 1.2345e-01 instead of
 
 \item{big.mark}{A character used as thousands separator.}
 
-\item{\dots}{Additional arguments}
+\item{warn.deprecated}{A logical indicating whether warnings should
+be printed if deprecated arguments are used.}
+
+\item{\dots}{Additional arguments to catch deprecated arguments.}
 }
 \description{
 Print method for objects of class \code{orbbound}.
@@ -70,7 +74,8 @@ summary measures, maximum bias is instead printed as absolute bias.
 \examples{
 data(Fleiss1993bin, package = "meta")
 
-m1 <- metabin(d.asp, n.asp, d.plac, n.plac, data = Fleiss1993bin, sm = "OR")
+m1 <- metabin(d.asp, n.asp, d.plac, n.plac,
+  data = Fleiss1993bin, sm = "OR")
 
 orb1 <- orbbound(m1, k.suspect = 1:5)
 print(orb1, digits = 2)
