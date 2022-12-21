@@ -79,7 +79,7 @@
 #' corresponding \code{print}, \code{summary}, and \code{forest}
 #' functions. See \code{\link[meta]{metagen}} for more information.
 #' 
-#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' @author Guido Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
 #' @seealso \code{\link[meta]{metabin}}, \code{\link[meta]{metagen}}
 #' 
@@ -147,7 +147,7 @@ metamiss <- function(x,
   ##
   ##
   chkclass(x, "metabin")
-  x <- meta:::updateversion(x)
+  x <- updateversion(x)
   ##
   ##if (!is.null(x$subgroup)) {
   ##  warning("Function metamiss() does not work with subgroup analyses.",

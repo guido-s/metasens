@@ -31,7 +31,7 @@
 #' @param \dots Additional arguments which are
 #'   passed on to \code{print.limitmeta} called internally.
 #' 
-#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' @author Guido Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #'
 #' @seealso \code{\link{limitmeta}}, \code{\link{summary.limitmeta}}
 #' 

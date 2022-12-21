@@ -42,7 +42,7 @@ To report problems and bugs
 \item type \code{bug.report(package = "metasens")} if you do not
   use RStudio,
 \item send an email to Guido Schwarzer
-  \email{sc@imbi.uni-freiburg.de} if you use RStudio.
+  \email{guido.schwarzer@uniklinik-freiburg.de} if you use RStudio.
 }
 
 The development version of \bold{metasens} is available on GitHub
@@ -89,6 +89,6 @@ Schwarzer G, Carpenter JR, Rücker G (2015):
 Springer International Publishing, Switzerland
 }
 \author{
-Guido Schwarzer \email{sc@imbi.uni-freiburg.de}
+Guido Schwarzer \email{guido.schwarzer@uniklinik-freiburg.de}
 }
 \keyword{package}

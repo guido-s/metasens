@@ -101,6 +101,6 @@ print(limitmeta(m1), digits = 2)
   \code{\link{print.summary.limitmeta}}
 }
 \author{
-Guido Schwarzer \email{sc@imbi.uni-freiburg.de}
+Guido Schwarzer \email{guido.schwarzer@uniklinik-freiburg.de}
 }
 \keyword{print}

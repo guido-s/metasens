@@ -94,6 +94,6 @@ forest(orb1, xlim = c(0.7, 1.5))
 \code{\link{orbbound}}, \code{\link{print.orbbound}}
 }
 \author{
-Guido Schwarzer \email{sc@imbi.uni-freiburg.de}
+Guido Schwarzer \email{guido.schwarzer@uniklinik-freiburg.de}
 }
 \keyword{hplot}

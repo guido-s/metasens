@@ -46,7 +46,7 @@
 #' @param \dots Additional arguments for \code{\link{forest.meta}}
 #'   function and to catch deprecated arguments.
 #' 
-#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' @author Guido Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
 #' @seealso \code{\link{orbbound}}, \code{\link{print.orbbound}}
 #'
@@ -162,7 +162,6 @@ forest.orbbound <- function(x,
             call. = FALSE)
     return(invisible(NULL))
   }
-  
   
   if (common & random)
     m1 <- metagen(TE, seTE, sm = sm.lab,

@@ -107,6 +107,6 @@ cop1
 }
 \author{
 James Carpenter \email{James.Carpenter@lshtm.ac.uk}, Guido
-Schwarzer \email{sc@imbi.uni-freiburg.de}
+Schwarzer \email{guido.schwarzer@uniklinik-freiburg.de}
 }
 \keyword{print}

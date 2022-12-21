@@ -33,5 +33,5 @@ summary(limitmeta(m1))
   \code{\link{print.summary.limitmeta}}
 }
 \author{
-Guido Schwarzer \email{sc@imbi.uni-freiburg.de}
+Guido Schwarzer \email{guido.schwarzer@uniklinik-freiburg.de}
 }

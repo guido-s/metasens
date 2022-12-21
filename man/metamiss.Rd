@@ -157,5 +157,5 @@ clinical trials.
 \code{\link[meta]{metabin}}, \code{\link[meta]{metagen}}
 }
 \author{
-Guido Schwarzer \email{sc@imbi.uni-freiburg.de}
+Guido Schwarzer \email{guido.schwarzer@uniklinik-freiburg.de}
 }

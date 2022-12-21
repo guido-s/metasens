@@ -18,8 +18,8 @@
 #' @param \dots Additional arguments (passed on to
 #'   \code{\link{plot.default}}).
 #' 
-#' @author Gerta Rücker \email{ruecker@@imbi.uni-freiburg.de}, Guido
-#'   Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' @author Gerta Rücker \email{gerta.ruecker@@uniklinik-freiburg.de}, Guido
+#'   Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
 #' @seealso \code{\link{lfkindex}}, \code{\link{metabias}},
 #'   \code{\link{funnel.meta}}

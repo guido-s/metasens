@@ -88,7 +88,7 @@
 #'   'caption').
 #' 
 #' @author James Carpenter \email{James.Carpenter@@lshtm.ac.uk}, Guido
-#'   Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#'   Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
 #' @seealso \code{\link{copas}}, \code{\link{summary.copas}},
 #'   \code{\link[meta]{metabias}}, \code{\link[meta]{metagen}}

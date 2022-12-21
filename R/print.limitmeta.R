@@ -47,7 +47,7 @@
 #'   below 0 and backtransformed proportions are above 1.
 #' @param \dots Additional arguments (ignored).
 #'
-#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' @author Guido Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #'
 #' @seealso \code{\link{limitmeta}}, \code{\link{summary.limitmeta}},
 #'   \code{\link{print.summary.limitmeta}}

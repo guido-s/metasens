@@ -12,7 +12,7 @@
 #'   the object in order to print a detailed summary of the limit
 #'   meta-analysis object.
 #' 
-#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' @author Guido Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
 #' @seealso \code{\link{limitmeta}}, \code{\link{funnel.limitmeta}},
 #'   \code{\link{print.summary.limitmeta}}

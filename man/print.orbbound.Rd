@@ -100,6 +100,6 @@ print(orb2, digits = 2)
 \code{\link{orbbound}}, \code{\link{forest.orbbound}}
 }
 \author{
-Guido Schwarzer \email{sc@imbi.uni-freiburg.de}
+Guido Schwarzer \email{guido.schwarzer@uniklinik-freiburg.de}
 }
 \keyword{print}

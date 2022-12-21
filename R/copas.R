@@ -280,7 +280,7 @@
 #'   \code{copas} function}
 #' 
 #' @author James Carpenter \email{James.Carpenter@@lshtm.ac.uk}, Guido
-#'   Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#'   Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
 #' @seealso \code{\link{plot.copas}}, \code{\link{summary.copas}},
 #' \code{\link[meta]{metabias}}, \code{\link[meta]{metagen}},

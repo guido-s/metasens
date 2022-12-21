@@ -1,4 +1,15 @@
-## meta, version 1.5-0 (2022-07-11)
+## metasens, version 1.5-1 (2022-12-21)
+
+### User-visible changes
+
+* Change maintainer's email address
+
+### Internal changes
+
+* Remove 'meta:::' call
+
+
+## metasens, version 1.5-0 (2022-07-11)
 
 ### Major changes
 

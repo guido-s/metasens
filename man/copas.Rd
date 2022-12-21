@@ -429,5 +429,5 @@ trim-and-fill method for selection bias in meta-analysis.
 }
 \author{
 James Carpenter \email{James.Carpenter@lshtm.ac.uk}, Guido
-  Schwarzer \email{sc@imbi.uni-freiburg.de}
+  Schwarzer \email{guido.schwarzer@uniklinik-freiburg.de}
 }

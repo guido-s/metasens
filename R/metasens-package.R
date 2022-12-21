@@ -42,13 +42,13 @@
 #' \item type \code{bug.report(package = "metasens")} if you do not
 #'   use RStudio,
 #' \item send an email to Guido Schwarzer
-#'   \email{sc@imbi.uni-freiburg.de} if you use RStudio.
+#'   \email{guido.schwarzer@uniklinik-freiburg.de} if you use RStudio.
 #' }
 #' 
 #' The development version of \bold{metasens} is available on GitHub
 #' \url{https://github.com/guido-s/metasens}.
 #' 
-#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' @author Guido Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
 #' @references
 #' Copas J, Jackson D (2004):

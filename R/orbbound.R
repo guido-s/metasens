@@ -50,7 +50,7 @@
 #' \item{version}{Version of R package metasens used to create
 #'   object.}
 #' 
-#' @author Guido Schwarzer \email{sc@@imbi.uni-freiburg.de}
+#' @author Guido Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
 #' @seealso \code{\link{forest.orbbound}}, \code{\link{print.orbbound}}
 #' 
@@ -131,10 +131,10 @@ orbbound <- function(x, k.suspect = 1, tau = x$tau, left = NULL,
   
   
   maxbias <- (x$k + k.suspect) / x$k *
-             dnorm(qnorm(x$k / (x$k + k.suspect))) *
-             sum(sqrt(x$seTE[sel]^2 + tau^2)^(-1)) /
-             sum(sqrt(x$seTE[sel]^2 + tau^2)^(-2))
-
+    dnorm(qnorm(x$k / (x$k + k.suspect))) *
+    sum(sqrt(x$seTE[sel]^2 + tau^2)^(-1)) /
+    sum(sqrt(x$seTE[sel]^2 + tau^2)^(-2))
+  
   ##
   maxbias <- direction.bias * maxbias
   
