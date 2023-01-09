@@ -17,11 +17,11 @@ doiplot(
 )
 }
 \arguments{
-\item{TE}{An object of class \code{lfkindex} or estimated treatment
-effect in individual studies.}
+\item{TE}{An object of class \code{lfkindex} or \code{meta} or
+estimated treatment effect in individual studies.}
 
 \item{seTE}{Standard error of estimated treatment effect (mandatory
-if \code{TE} not of class \code{meta}).}
+if \code{TE} not of class \code{lfkindex} or \code{meta}).}
 
 \item{xlim}{The x limits (min,max) of the plot.}
 

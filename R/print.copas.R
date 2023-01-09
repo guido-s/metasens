@@ -50,6 +50,11 @@
 #'   of overall treatment effect, see \code{print.default}.
 #' @param digits.prop Minimal number of significant digits for
 #'   proportions, see \code{print.default}.
+#' @param digits.tau2 Minimal number of significant digits for
+#'   between-study variance \eqn{\tau^2}, see \code{print.default}.
+#' @param digits.tau Minimal number of significant digits for
+#'   \eqn{\tau}, the square root of the between-study variance
+#'   \eqn{\tau^2}.
 #' @param scientific.pval A logical specifying whether p-values should
 #'   be printed in scientific notation, e.g., 1.2345e-01 instead of
 #'   0.12345.
@@ -59,6 +64,10 @@
 #'   beginning of the printout.
 #' @param legend A logical indicating whether a legend should be
 #'   printed.
+#' @param text.tau2 Text printed to identify between-study variance
+#'   \eqn{\tau^2}.
+#' @param text.tau Text printed to identify \eqn{\tau}, the square
+#'   root of the between-study variance \eqn{\tau^2}.
 #' @param digits Minimal number of significant digits, see
 #'   \code{print.default}.
 #' @param ... Additional arguments (ignored).
@@ -93,9 +102,13 @@ print.copas <- function(x,
                         digits = gs("digits"),
                         digits.pval = max(gs("digits.pval"), 2),
                         digits.prop=gs("digits.prop"),
+                        digits.tau2 = gs("digits.tau2"),
+                        digits.tau = gs("digits.tau"),
                         scientific.pval=gs("scientific.pval"),
                         big.mark=gs("big.mark"),
                         header = TRUE, legend = TRUE,
+                        text.tau2 = gs("text.tau2"),
+                        text.tau = gs("text.tau"),
                         ...) {
   
   
@@ -120,10 +133,15 @@ print.copas <- function(x,
   chknumeric(digits, min = 0, length = 1)
   chknumeric(digits.pval, min = 1, length = 1)
   chknumeric(digits.prop, min = 0, length = 1)
+  chknumeric(digits.tau2, min = 0, length = 1)
+  chknumeric(digits.tau, min = 0, length = 1)
   chklogical(scientific.pval)
   ##
   chklogical(header)
   chklogical(legend)
+  ##
+  chkchar(text.tau2, length = 1)
+  chkchar(text.tau, length = 1)
   
   
   sm <- x$sm
@@ -153,14 +171,20 @@ print.copas <- function(x,
   TE.adj    <- round(x$TE.adjust, digits)
   lowTE.adj <- round(x$lower.adjust, digits)
   uppTE.adj <- round(x$upper.adjust, digits)
+  tau2.adj  <- round(x$tau.adjust^2, digits.tau2)
+  tau.adj   <- round(x$tau.adjust, digits.tau)
   ##
   TE.random    <- round(x$TE.random, digits)
   lowTE.random <- round(x$lower.random, digits)
   uppTE.random <- round(x$upper.random, digits)
+  tau2         <- round(replaceNULL(x$tau, NA)^2, digits.tau2)
+  tau          <- round(replaceNULL(x$tau), digits.tau)
   ##  
   TE.slope    <- round(x$TE.slope, digits)
   lowTE.slope <- round(x$lower.slope, digits)
   uppTE.slope <- round(x$upper.slope, digits)
+  tau2.slope  <- round(x$tau.slope^2, digits.tau2)
+  tau.slope   <- round(x$tau.slope, digits.tau)
   ##
   publprob <- round(x$publprob, digits.prop)
   ## 
@@ -168,13 +192,19 @@ print.copas <- function(x,
   
   
   res <- cbind(c(formatN(publprob, digits.prop, ""),
-                 "", "Adjusted estimate","Unadjusted estimate"),
+                 "", "Adjusted estimate", "Unadjusted estimate"),
                formatN(c(TE.slope, NA, TE.adj, TE.random),
                        digits, "", big.mark = big.mark),
                formatCI(formatN(c(lowTE.slope, NA, lowTE.adj, lowTE.random),
                                 digits, "NA", big.mark = big.mark),
                         formatN(c(uppTE.slope, NA, uppTE.adj, uppTE.random),
                                 digits, "NA", big.mark = big.mark)),
+               formatPT(c(tau2.slope, NA, tau2.adj, tau2),
+                        digits = digits.tau2, lab.NA = "",
+                        big.mark = big.mark),
+               formatPT(c(tau.slope, NA, tau.adj, tau),
+                        digits = digits.tau, lab.NA = "",
+                        big.mark = big.mark),
                formatPT(c(x$pval.slope, NA, x$pval.adjust, x$pval.random),
                         digits = digits.pval,
                         scientific = scientific.pval),
@@ -190,6 +220,7 @@ print.copas <- function(x,
   ##
   dimnames(res) <- list(rep("", dim(res)[[1]]),
                         c("p.publ", sm.lab, ci.lab,
+                          text.tau2, text.tau,
                           "p.trt", "p.rsb", "N"))
   
   if (header)

@@ -1,3 +1,15 @@
+## metasens, version 1.5-2 (2023-mm-dd)
+
+### Major changes
+
+* For Copas selection model, show value of between-study variance and
+  standard deviation in printouts
+
+### Bug fixes
+
+* Argument 'lfkindex' was ignored in doiplot()
+
+
 ## metasens, version 1.5-1 (2022-12-21)
 
 ### User-visible changes

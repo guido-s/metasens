@@ -919,6 +919,7 @@ copas <- function(x,
               upper.random = upper.random,
               statistic.random = statistic.random,
               pval.random = pval.random,
+              tau = tau,
               ##
               TE.adjust = TE.adj,
               seTE.adjust = seTE.adj,

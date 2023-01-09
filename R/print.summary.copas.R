@@ -38,7 +38,8 @@
 #'   \code{print.default}.
 #' @param digits.se Minimal number of significant digits for standard
 #'   deviations and standard errors, see \code{print.default}.
-#' @param ... Additional arguments (ignored).
+#' @param ... Additional arguments (passed on to
+#'   \code{\link{print.copas}}).
 #'
 #' @author James Carpenter \email{James.Carpenter@@lshtm.ac.uk}, Guido
 #' Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}

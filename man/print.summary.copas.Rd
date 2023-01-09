@@ -30,7 +30,8 @@ printed.}
 \item{digits.se}{Minimal number of significant digits for standard
 deviations and standard errors, see \code{print.default}.}
 
-\item{...}{Additional arguments (ignored).}
+\item{...}{Additional arguments (passed on to
+\code{\link{print.copas}}).}
 }
 \description{
 Print method for objects of class \code{summary.copas}.

@@ -10,10 +10,14 @@
   digits = gs("digits"),
   digits.pval = max(gs("digits.pval"), 2),
   digits.prop = gs("digits.prop"),
+  digits.tau2 = gs("digits.tau2"),
+  digits.tau = gs("digits.tau"),
   scientific.pval = gs("scientific.pval"),
   big.mark = gs("big.mark"),
   header = TRUE,
   legend = TRUE,
+  text.tau2 = gs("text.tau2"),
+  text.tau = gs("text.tau"),
   ...
 )
 }
@@ -34,6 +38,13 @@ of overall treatment effect, see \code{print.default}.}
 \item{digits.prop}{Minimal number of significant digits for
 proportions, see \code{print.default}.}
 
+\item{digits.tau2}{Minimal number of significant digits for
+between-study variance \eqn{\tau^2}, see \code{print.default}.}
+
+\item{digits.tau}{Minimal number of significant digits for
+\eqn{\tau}, the square root of the between-study variance
+\eqn{\tau^2}.}
+
 \item{scientific.pval}{A logical specifying whether p-values should
 be printed in scientific notation, e.g., 1.2345e-01 instead of
 0.12345.}
@@ -46,6 +57,12 @@ beginning of the printout.}
 
 \item{legend}{A logical indicating whether a legend should be
 printed.}
+
+\item{text.tau2}{Text printed to identify between-study variance
+\eqn{\tau^2}.}
+
+\item{text.tau}{Text printed to identify \eqn{\tau}, the square
+root of the between-study variance \eqn{\tau^2}.}
 
 \item{...}{Additional arguments (ignored).}
 }
