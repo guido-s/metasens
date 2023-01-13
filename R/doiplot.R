@@ -48,17 +48,28 @@
 
 
 doiplot <- function(TE, seTE, xlim, ylim,
-                    xlab = "ES", ylab = "|Z-score|",
+                    xlab = NULL, ylab = "|Z-score|",
                     lfkindex = TRUE, pos.lfkindex = "topleft",
                     ...) {
   
   
-  if (!inherits(TE, "lfkindex"))
-    lfk <- lfkindex(TE, seTE)
+  if (!inherits(TE, "lfkindex")) {
+    if (missing(seTE))
+      lfk <- lfkindex(TE)
+    else
+      lfk <- lfkindex(TE, seTE)
+  }
   else
     lfk <- TE
   ##
+  if (missing(xlab)) {
+    if (!is.null(lfk$x))
+      xlab <- xlab(lfk$x$sm, FALSE)
+    else
+      xlab <- "ES"
+  }
   chkchar(xlab, length = 1)
+  ##
   chkchar(ylab, length = 1)
   chklogical(lfkindex)
   pos.lfkindex <-
@@ -75,7 +86,7 @@ doiplot <- function(TE, seTE, xlim, ylim,
   
   
   plot(lfk$TE, lfk$abs.zscore, type = "b",
-       ylim = ylim, xlab = xlab, ylab = ylab,
+       xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab,
        ...)
   ##
   if (lfkindex)

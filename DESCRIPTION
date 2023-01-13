@@ -25,4 +25,4 @@ Description: The following methods are implemented to evaluate how sensitive the
  - LFK index test and Doi plot by Furuya-Kanamori et al. (2018) <DOI:10.1097/XEB.0000000000000141>.
 License: GPL (>= 2)
 Encoding: UTF-8
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3

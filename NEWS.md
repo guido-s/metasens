@@ -7,7 +7,18 @@
 
 ### Bug fixes
 
-* Argument 'lfkindex' was ignored in doiplot()
+* Arguments 'lfkindex' and 'xlim' were ignored in doiplot()
+
+### User-visible changes
+
+* doiplot():
+  - print more informative label on horizontal axis for meta-analysis
+    objects
+
+### Internal changes
+
+* lfkindex():
+  - new list element 'x' with meta-analysis object used as input
 
 
 ## metasens, version 1.5-1 (2022-12-21)

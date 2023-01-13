@@ -73,10 +73,14 @@ lfkindex <- function(TE, seTE, data = NULL) {
   TE <- catch("TE", mc, data, sfsp)
   ##
   if (inherits(TE, "meta")) {
+    x <- TE
+    ##
     seTE <- TE$seTE
     TE <- TE$TE
   }
   else {
+    x <- NULL
+    ##
     chknull(TE)
     ##
     seTE <- catch("seTE", mc, data, sfsp)
@@ -131,6 +135,7 @@ lfkindex <- function(TE, seTE, data = NULL) {
               N = N, MidRank = MidRank,
               percentile = percentile, zscore = zscore,
               TE = TE, seTE = seTE,
+              x = x,
               version = utils::packageDescription("metasens")$Version)
   
   

@@ -9,7 +9,7 @@ doiplot(
   seTE,
   xlim,
   ylim,
-  xlab = "ES",
+  xlab = NULL,
   ylab = "|Z-score|",
   lfkindex = TRUE,
   pos.lfkindex = "topleft",
