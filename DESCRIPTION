@@ -1,7 +1,7 @@
 Package: metasens
 Title: Statistical Methods for Sensitivity Analysis in Meta-Analysis
 Version: 1.5-2
-Date: 2023-01-09
+Date: 2023-02-28
 Depends: meta (>= 5.5-0)
 Authors@R: c(person("Guido", "Schwarzer",
                     role = c("cre", "aut"),

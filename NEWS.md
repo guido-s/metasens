@@ -1,4 +1,4 @@
-## metasens, version 1.5-2 (2023-mm-dd)
+## metasens, version 1.5-2 (2023-02-28)
 
 ### Major changes
 

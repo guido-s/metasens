@@ -8,26 +8,26 @@ library(roxygen2)
 ##
 ## (2) Create documentation file(s)
 ##
-document("../metasens")
+document()
 
 
 ##
 ## (3) Build R package and PDF file with help pages
 ##
-build("../metasens")
-build_manual("../metasens")
+build()
+build_manual()
 
 
 ##
 ## (4) Install R package
 ##
-install("../metasens")
+install()
 
 
 ##
 ## (5) Check R package
 ##
-check("../metasens")
+check()
 
 
 ##

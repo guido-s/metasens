@@ -1,19 +1,25 @@
 ## Auxiliary functions to check function arguments
 ##
-## Package: meta
+## Package: metasens
 ## Author: Guido Schwarzer <guido.schwarzer@uniklinik-freiburg.de>
 ## License: GPL (>= 2)
 ##
+
 chkchar <- function(x, length = 0, name = NULL, nchar = NULL, single = FALSE) {
   if (!missing(single) && single)
     length <- 1
   if (is.null(name))
     name <- deparse(substitute(x))
   ##
-  if (length && length(x) != length)
-    stop("Argument '", name, "' must be a character vector of length ",
-         length, ".",
-         call. = FALSE)
+  if (length && length(x) != length) {
+    if (length == 1)
+      stop("Argument '", name, "' must be a character string.",
+           call. = FALSE)
+    else
+      stop("Argument '", name, "' must be a character vector of length ",
+           length, ".",
+           call. = FALSE)
+  }
   ##
   if (length == 1) {
     if (!is.null(nchar) && !(nchar(x) %in% nchar))
@@ -48,6 +54,7 @@ chkchar <- function(x, length = 0, name = NULL, nchar = NULL, single = FALSE) {
              call. = FALSE)
   }
 }
+
 chkclass <- function(x, class, name = NULL) {
   ##
   ## Check class of R object
@@ -65,12 +72,12 @@ chkclass <- function(x, class, name = NULL) {
                     ', or ', '"', class[n.class], '"')
   ##
   if (!inherits(x, class))
-    stop("Argument '", name,
-         "' must be an object of class \"",
-         text.class, "\".", call. = FALSE)
+    stop("Argument '", name, "' must be an object of class ", text.class, ".",
+         call. = FALSE)
   ##
   invisible(NULL)
 }
+
 chkcolor <- function(x, length = 0, name = NULL, single = FALSE) {
   if (!missing(single) && single)
     length <- 1
@@ -85,6 +92,7 @@ chkcolor <- function(x, length = 0, name = NULL, single = FALSE) {
     stop("Argument '", name, "' must be a character or numeric vector.",
          call. = FALSE)
 }
+
 chklength <- function(x, k.all, fun = "", text, name = NULL) {
   ##
   ## Check length of vector
@@ -118,6 +126,7 @@ chklength <- function(x, k.all, fun = "", text, name = NULL) {
   ##
   invisible(NULL)
 }
+
 chklevel <- function(x, length = 0, ci = TRUE, name = NULL, single = FALSE) {
   if (!missing(single) && single)
     length <- 1
@@ -149,6 +158,7 @@ chklevel <- function(x, length = 0, ci = TRUE, name = NULL, single = FALSE) {
   ##
   invisible(NULL)
 }
+
 chklogical <- function(x, name = NULL) {
   ##
   ## Check whether argument is logical
@@ -164,6 +174,7 @@ chklogical <- function(x, name = NULL) {
   ##
   invisible(NULL)
 }
+
 chkmiss <- function(x, name = NULL) {
   ##
   ## Check for missing values
@@ -177,6 +188,7 @@ chkmiss <- function(x, name = NULL) {
   ##
   invisible(NULL)
 }
+
 chknull <- function(x, name = NULL) {
   ##
   ## Check whether argument is NULL
@@ -189,8 +201,9 @@ chknull <- function(x, name = NULL) {
   ##
   invisible(NULL)
 }
+
 chknumeric <- function(x, min, max, zero = FALSE, length = 0,
-                       name = NULL, single = FALSE) {
+                       name = NULL, single = FALSE, integer = FALSE) {
   if (!missing(single) && single)
     length <- 1
   ##
@@ -234,8 +247,18 @@ chknumeric <- function(x, min, max, zero = FALSE, length = 0,
     stop("Argument '", name, "' must be between ",
          min, " and ", max, ".", call. = FALSE)
   ##
+  if (integer && any(!is.wholenumber(x))) {
+    if (length(x) == 1)
+      stop("Argument '", name, "' must be an integer.",
+           call. = FALSE)
+    else
+      stop("Argument '", name, "' may only contain integers.",
+           call. = FALSE)
+  }
+  ##
   invisible(NULL)
 }
+
 argid <- function(x, value) {
   if (any(x == value))
     res <- seq(along = x)[x == value]
@@ -243,11 +266,13 @@ argid <- function(x, value) {
     res <- NA
   res
 }
+
 chkdeprecated <- function(x, new, old, warn = TRUE) {
   depr <- !is.na(argid(x, old))
   if (depr & warn)
     warning("Deprecated argument '", old, "' ignored. ",
             "Use argument '", new, "' instead.",
             call. = FALSE)
+  ##
   invisible(depr)
 }
