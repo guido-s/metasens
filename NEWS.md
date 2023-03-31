@@ -20,6 +20,9 @@
 * lfkindex():
   - new list element 'x' with meta-analysis object used as input
 
+* New branch 'release' on GitHub starting with **metasens**, version
+  1.5-2
+
 
 ## metasens, version 1.5-1 (2022-12-21)
 
