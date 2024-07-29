@@ -414,6 +414,10 @@ copas <- function(x,
   ##
   chkclass(x, "meta")
   ##
+  if (!is.null(x$three.level) && x$three.level)
+    stop("Copas selection model not defined for three-level model.",
+         call. = FALSE)
+  ##
   if (!is.numeric(rho.bound) && (rho.bound <=0 | rho.bound > 1))
     stop("no valid value for 'rho.bound'")
   ##

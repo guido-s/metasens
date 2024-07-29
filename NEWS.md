@@ -1,3 +1,11 @@
+## metasens, version 1.5-3 (2023-mm-dd)
+
+### Internal changes
+
+* copas(), lfkindex(), limitmeta(), orbbound:
+  - check for three-level meta-analysis
+
+
 ## metasens, version 1.5-2 (2023-02-28)
 
 ### Major changes

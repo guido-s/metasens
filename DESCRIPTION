@@ -1,7 +1,7 @@
 Package: metasens
 Title: Statistical Methods for Sensitivity Analysis in Meta-Analysis
-Version: 1.5-2
-Date: 2023-02-28
+Version: 1.5-4
+Date: 2024-03-04
 Depends: meta (>= 5.5-0)
 Authors@R: c(person("Guido", "Schwarzer",
                     role = c("cre", "aut"),
@@ -25,4 +25,4 @@ Description: The following methods are implemented to evaluate how sensitive the
  - LFK index test and Doi plot by Furuya-Kanamori et al. (2018) <DOI:10.1097/XEB.0000000000000141>.
 License: GPL (>= 2)
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1

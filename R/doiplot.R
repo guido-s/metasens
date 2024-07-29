@@ -31,6 +31,12 @@
 #' \emph{International Journal of Evidence-Based Healthcare},
 #' \bold{16}, 195--203
 #' 
+#' Schwarzer G, Rücker G, Semaca C (2024):
+#' LFK index does not reliably detect small-study effects in meta-analysis:
+#' a simulation study.
+#' \emph{Research Synthesis Methods},
+#' Accepted for publication
+#' 
 #' @examples
 #' # Example from Furuya-Kanamori et al. (2018)
 #' #
