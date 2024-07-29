@@ -43,7 +43,7 @@ Meta-Analysis", https://link.springer.com/book/10.1007/978-3-319-21416-0 .
 
 ## Installation
 
-### Current official [![CRAN Version](http://www.r-pkg.org/badges/version/metasens)](https://cran.r-project.org/package=metasens) release:
+### Current official [![CRAN Version](https://www.r-pkg.org/badges/version/metasens)](https://cran.r-project.org/package=metasens) release:
 ```r
 install.packages("metasens")
 ```
