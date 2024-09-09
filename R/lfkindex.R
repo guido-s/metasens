@@ -117,18 +117,23 @@ lfkindex <- function(TE, seTE, data = NULL) {
     MidRank[i] <- MidRank[i - 1] + (N[i - 1] + N[i]) / 2
   }
   ##
-  percentile <- (MidRank - 0.5) / sum(N)
+  percentile <- (MidRank - 0.5) / sum(N, na.rm = TRUE)
   zscore <- qnorm(percentile)
   abs.zscore <- abs(zscore)
-  ##
+  #
+  sel <- !is.na(zscore) & !is.na(zscore)
+  if (length(zscore) != sum(sel))
+    warning(paste(length(zscore) - sum(sel),
+                  "observation(s) dropped due to missing values"))  #
+  #
   TE.j <- TE[which.min(abs.zscore)]
   ##
   lfkindex <-
     5 / (2 * sum(!is.na(TE))) *
     sum(zscore +
-        (max(zscore) - min(zscore)) /
-        (max(TE - TE.j) - min(TE - TE.j)) *
-        (TE - TE.j))
+        (max(zscore, na.rm = TRUE) - min(zscore, na.rm = TRUE)) /
+        (max(TE - TE.j, na.rm = TRUE) - min(TE - TE.j, na.rm = TRUE)) *
+        (TE - TE.j), na.rm = TRUE)
   ##
   interpretation <-
     if (abs(lfkindex) <= 1)

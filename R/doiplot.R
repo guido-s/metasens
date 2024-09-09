@@ -88,7 +88,7 @@ doiplot <- function(TE, seTE, xlim, ylim,
     xlim <- range(lfk$TE, na.rm = TRUE)
   ##
   if (missing(ylim))
-    ylim <- c(max(lfk$abs.zscore), 0)
+    ylim <- c(max(lfk$abs.zscore, na.rm = TRUE), 0)
   
   
   plot(lfk$TE, lfk$abs.zscore, type = "b",
