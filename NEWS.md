@@ -1,4 +1,14 @@
-## metasens, version 1.5-3 (2023-mm-dd)
+## metasens, version 1.6-0 (2024-mm-dd)
+
+### Major changes
+
+* R functions lfkindex() and doiplot() can be used in meta-analyses with
+  missing treatment effect or standard error
+
+### User-visible changes
+
+* Do not print the start-up message concerning older version of R package
+  **metasens** for readers of 'Meta-Analysis with R (Use R!)'
 
 ### Internal changes
 

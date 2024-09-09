@@ -176,7 +176,7 @@ print.limitmeta <- function(x,
     }
   }
   else
-    if (is.relative.effect(sm))
+    if (is_relative_effect(sm))
       sm.lab <- paste("log", sm, sep = "")
   
   
@@ -195,12 +195,9 @@ print.limitmeta <- function(x,
     else
       harmonic.mean <- 1 / mean(1 / x$x$n)
     #
-    TEs   <- backtransf(TEs, sm, "mean",
-                               harmonic.mean, warn = warn.backtransf)
-    lower <- backtransf(lower, sm, "lower",
-                               harmonic.mean, warn = warn.backtransf)
-    upper <- backtransf(upper, sm, "upper",
-                               harmonic.mean, warn = warn.backtransf)
+    TEs   <- backtransf(TEs, sm, harmonic.mean)
+    lower <- backtransf(lower, sm, harmonic.mean)
+    upper <- backtransf(upper, sm, harmonic.mean)
   }
   #
   # Apply argument 'pscale' to proportions and 'irscale' to rates

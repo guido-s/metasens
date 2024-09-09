@@ -124,7 +124,7 @@ forest.orbbound <- function(x,
       sm.lab <- "proportion"
   }
   else 
-    if (is.relative.effect(sm))
+    if (is_relative_effect(sm))
       sm.lab <- paste("log", sm, sep = "")
   
   
@@ -183,8 +183,7 @@ forest.orbbound <- function(x,
   
   
   if (backtransf)
-    m1$maxbias <- backtransf(m1$maxbias, sm, "mean",
-                                    m1$npft.ma, warn = FALSE)
+    m1$maxbias <- backtransf(m1$maxbias, sm, m1$npft.ma)
   ##
   m1$maxbias <- format(round(m1$maxbias, digits))
   

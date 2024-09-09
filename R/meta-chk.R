@@ -247,7 +247,7 @@ chknumeric <- function(x, min, max, zero = FALSE, length = 0,
     stop("Argument '", name, "' must be between ",
          min, " and ", max, ".", call. = FALSE)
   ##
-  if (integer && any(!is.wholenumber(x))) {
+  if (integer && any(!is_wholenumber(x))) {
     if (length(x) == 1)
       stop("Argument '", name, "' must be an integer.",
            call. = FALSE)

@@ -145,7 +145,7 @@ print.copas <- function(x,
   
   
   sm <- x$sm
-  relative <- is.relative.effect(sm)
+  relative <- is_relative_effect(sm)
   ##
   if (!backtransf & relative)
     sm.lab <- paste("log", sm, sep = "")

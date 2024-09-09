@@ -6,8 +6,6 @@
 #' \url{https://link.springer.com/book/10.1007/978-3-319-21416-0}.
 #'
 #' @name metasens-package
-#' 
-#' @docType package
 #'
 #' @details
 #'
@@ -108,5 +106,6 @@
 #' @importFrom stats coefficients dnorm lm loess optim pchisq pnorm
 #'   qlogis qnorm qt sd update var vcov
 
+"_PACKAGE"
 
 NULL

@@ -250,7 +250,7 @@ plot.copas <- function(x,
   on.exit(par(oldpar), add = TRUE)
   
   
-  if (is.relative.effect(sm))
+  if (is_relative_effect(sm))
     sm <- paste("log ", sm, sep = "")
   
   
