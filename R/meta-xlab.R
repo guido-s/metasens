@@ -1,9 +1,10 @@
 xlab <- function(sm, backtransf,
                  pscale = 1, irscale = 1, irunit = "person-years",
                  newline = FALSE, revman5 = FALSE,
-                 big.mark = gs("big.mark")) {
+                 big.mark = gs("big.mark"),
+                 func.transf = NULL, func.backtransf = NULL) {
   
-  res <- NULL
+  res <- sm
   
   
   newline <- if (newline) "\n" else " "
@@ -66,7 +67,10 @@ xlab <- function(sm, backtransf,
     else if (sm == "IRR")
       res <- paste0("Incidence Rate", newline, "Ratio")
     ##
-    else if (is.prop(sm)) {
+    else if (sm == "VE")
+      res <- "Vaccine Eff."
+    ##
+    else if (is_prop(sm)) {
       if (pscale == 1)
         res <- ""
       else
@@ -75,7 +79,7 @@ xlab <- function(sm, backtransf,
                       newline, "observations")
     }
     ##
-    else if (is.rate(sm)) {
+    else if (is_rate(sm)) {
       if (irscale == 1)
         res <- "Incidence Rate"
       else
@@ -109,6 +113,9 @@ xlab <- function(sm, backtransf,
     else if (sm == "ZCOR")
       res <- paste0("Fisher's z transformed", newline, "correlation")
     ##
+    else if (sm == "VE")
+      res <- "Log Vaccine Ratio"
+    ##
     else if (sm == "PFT")
       res <- paste0("Freeman-Tukey Double Arcsine", newline,
                     "Transformed Proportion")
@@ -140,8 +147,19 @@ xlab <- function(sm, backtransf,
     ##
     else if (sm == "MLN")
       res <- "Log Mean"
+    else if (!is.null(func.transf))
+      res <- paste0(func.transf, "(", sm, ")")
+    else if (!is.null(func.backtransf)) {
+      if (func.backtransf == "exp")
+        res <- paste0("log(", sm, ")")
+      else if (func.backtransf == "z2cor")
+        res <-  paste0("Fisher's z transformed", newline, "correlation")
+      else if (func.backtransf == "logit2p")
+        res <-  paste0("Logit Transformed", newline, "Proportion")
+      else if (func.backtransf == "logVR2VE")
+        res <-  "Log Vaccine Ratio"
+    }
   }
-  
   
   if (is.null(res))
     res <- sm
@@ -149,19 +167,3 @@ xlab <- function(sm, backtransf,
   
   res
 }
-
-
-is.cor <- function(x)
-  x %in% gs("sm4cor")
-
-
-is.mean <- function(x)
-  x %in% gs("sm4mean")
-
-
-is.prop <- function(x)
-  x %in% gs("sm4prop")
-
-
-is.rate <- function(x)
-  x %in% gs("sm4rate")

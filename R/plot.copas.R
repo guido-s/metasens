@@ -191,7 +191,7 @@ plot.copas <- function(x,
   main <- deprecated(main, missing.main, args, "caption")
   ##
   if (missing.main) {
-    if (chkdeprecated(names(args), old = "caption", warn = FALSE)) {
+    if (chkdeprecated(names(args), new = "main", old = "caption", warn = FALSE)) {
       if (length(main) == 4 & !missing.which)
         main <- main[which]
     }

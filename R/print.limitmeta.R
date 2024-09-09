@@ -108,10 +108,10 @@ print.limitmeta <- function(x,
   chklogical(print.Rb)
   chklogical(warn.backtransf)
   #
-  is.prop <- is.prop(x$sm)
-  is.rate <- is.rate(x$sm)
+  is_prop <- is_prop(x$sm)
+  is_rate <- is_rate(x$sm)
   #
-  if (!is.prop)
+  if (!is_prop)
     pscale <- 1
   if (!is.null(pscale))
     chknumeric(pscale, length = 1)
@@ -121,7 +121,7 @@ print.limitmeta <- function(x,
     warning("Argument 'pscale' set to 1 as argument 'backtransf' is FALSE.")
     pscale <- 1
   }
-  if (!is.rate)
+  if (!is_rate)
     irscale <- 1
   if (!is.null(irscale))
     chknumeric(irscale, length = 1)
@@ -162,13 +162,13 @@ print.limitmeta <- function(x,
   if (backtransf) {
     if (sm == "ZCOR")
       sm.lab <- "COR"
-    else if (is.prop) {
+    else if (is_prop) {
       if (pscale == 1)
         sm.lab <- "proportion"
       else
         sm.lab <- "events"
     }
-    else if (is.rate) {
+    else if (is_rate) {
       if (irscale == 1)
         sm.lab <- "rate"
       else
@@ -202,10 +202,10 @@ print.limitmeta <- function(x,
   #
   # Apply argument 'pscale' to proportions and 'irscale' to rates
   #
-  if (is.prop | is.rate) {
-    if (is.prop)
+  if (is_prop | is_rate) {
+    if (is_prop)
       scale <- pscale
-    else if (is.rate)
+    else if (is_rate)
       scale <- irscale
     #
     TEs    <- scale * TEs

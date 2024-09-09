@@ -1,6 +1,6 @@
 ## Auxiliary functions
 ##
-## Package: meta
+## Package: metasens
 ## Author: Guido Schwarzer <guido.schwarzer@uniklinik-freiburg.de>
 ## License: GPL (>= 2)
 ##
