@@ -3,7 +3,7 @@ Official Git repository of R package **metasens**
 
 [![License: GPL (>=2)](https://img.shields.io/badge/license-GPL-blue)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![CRAN Version](https://www.r-pkg.org/badges/version/metasens)](https://cran.r-project.org/package=metasens)
-[![GitHub develop](https://img.shields.io/badge/develop-1.5--4-purple)](https://img.shields.io/badge/develop-1.5--4-purple)
+[![GitHub develop](https://img.shields.io/badge/develop-1.6--0-purple)](https://img.shields.io/badge/develop-1.6--0-purple)
 [![Monthly Downloads](https://cranlogs.r-pkg.org/badges/metasens)](https://cranlogs.r-pkg.org/badges/metasens)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/metasens)](https://cranlogs.r-pkg.org/badges/grand-total/metasens)
 
@@ -48,7 +48,7 @@ Meta-Analysis", https://link.springer.com/book/10.1007/978-3-319-21416-0 .
 install.packages("metasens")
 ```
 
-### Current [![GitHub develop](https://img.shields.io/badge/develop-1.5--4-purple)](https://img.shields.io/badge/develop-1.5--4-purple) release on GitHub:
+### Current [![GitHub develop](https://img.shields.io/badge/develop-1.6--0-purple)](https://img.shields.io/badge/develop-1.6--0-purple) release on GitHub:
 
 Installation using R package
 [**remotes**](https://cran.r-project.org/package=remotes):
