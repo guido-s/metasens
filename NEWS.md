@@ -1,14 +1,21 @@
-## metasens, version 1.6-0 (2024-mm-dd)
+## metasens, version 1.5-3 (2025-03-16)
 
 ### Major changes
 
-* R functions lfkindex() and doiplot() can be used in meta-analyses with
+* R functions lfkindex() and doiplot() can be used in meta-analysis with
   missing treatment effect or standard error
 
 ### User-visible changes
 
 * Do not print the start-up message concerning older version of R package
   **metasens** for readers of 'Meta-Analysis with R (Use R!)'
+
+* print.copas():
+  - new arguments 'text.adj' and 'text.unadj' to label results for the adjusted
+    and unadjusted treatment estimate
+
+* limitmeta():
+  - print informative error message if input is a generalised linear mixed model
 
 ### Internal changes
 

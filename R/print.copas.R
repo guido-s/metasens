@@ -64,6 +64,10 @@
 #'   beginning of the printout.
 #' @param legend A logical indicating whether a legend should be
 #'   printed.
+#' @param text.adj Text printed for to identify between-study variance
+#'   \eqn{\tau^2}.
+#' @param text.adj A character string used to label the adjusted estimate.
+#' @param text.unadj A character string used to label the unadjusted estimate.
 #' @param text.tau2 Text printed to identify between-study variance
 #'   \eqn{\tau^2}.
 #' @param text.tau Text printed to identify \eqn{\tau}, the square
@@ -107,6 +111,8 @@ print.copas <- function(x,
                         scientific.pval=gs("scientific.pval"),
                         big.mark=gs("big.mark"),
                         header = TRUE, legend = TRUE,
+                        text.adj = "Adjusted estimate",
+                        text.unadj = "Unadjusted estimate",
                         text.tau2 = gs("text.tau2"),
                         text.tau = gs("text.tau"),
                         ...) {
@@ -139,7 +145,10 @@ print.copas <- function(x,
   ##
   chklogical(header)
   chklogical(legend)
-  ##
+  #
+  chkchar(text.adj, length = 1)
+  chkchar(text.unadj, length = 1)
+  #
   chkchar(text.tau2, length = 1)
   chkchar(text.tau, length = 1)
   
@@ -192,7 +201,7 @@ print.copas <- function(x,
   
   
   res <- cbind(c(formatN(publprob, digits.prop, ""),
-                 "", "Adjusted estimate", "Unadjusted estimate"),
+                 "", text.adj, text.unadj),
                formatN(c(TE.slope, NA, TE.adj, TE.random),
                        digits, "", big.mark = big.mark),
                formatCI(formatN(c(lowTE.slope, NA, lowTE.adj, lowTE.random),

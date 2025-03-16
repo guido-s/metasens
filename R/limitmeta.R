@@ -156,7 +156,11 @@ limitmeta <- function(x,
   if (!is.null(x$three.level) && x$three.level)
     stop("Limit meta-analysis not defined for three-level model.",
          call. = FALSE)
-  ##
+  #
+  if (x$method == "GLMM")
+    stop("Limit meta-analysis not defined for generalised linear mixed model.",
+         call. = FALSE)
+  #
   method.adjust <-
     setchar(method.adjust, c("beta0", "betalim", "mulim"))
   
