@@ -93,7 +93,12 @@ orbbound <- function(x, k.suspect = 1, tau = x$tau, left = NULL,
   
   
   chkclass(x, "meta")
+  ##
   x <- updateversion(x)
+  ##
+  if (!is.null(x$three.level) && x$three.level)
+    stop("Outcome reporting bias method not defined for three-level model.",
+         call. = FALSE)
   
   if (!(is.numeric(k.suspect)))
     stop("Argument 'k.suspect' must be a numeric vector")

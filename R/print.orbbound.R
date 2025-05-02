@@ -134,7 +134,7 @@ print.orbbound <- function(x,
       sm.lab <- "proportion"
   }
   else 
-    if (is.relative.effect(sm))
+    if (is_relative_effect(sm))
       sm.lab <- paste("log", sm, sep = "")
   
   
@@ -156,21 +156,15 @@ print.orbbound <- function(x,
     ##
     npft.ma <- 1 / mean(1 / x$x$n)
     ##
-    TE.common    <- backtransf(TE.common, sm, "mean",
-                               npft.ma, warn = common)
-    lowTE.common <- backtransf(lowTE.common, sm, "lower",
-                               npft.ma, warn = common)
-    uppTE.common <- backtransf(uppTE.common, sm, "upper",
-                               npft.ma, warn = common)
+    TE.common    <- backtransf(TE.common, sm, npft.ma)
+    lowTE.common <- backtransf(lowTE.common, sm, npft.ma)
+    uppTE.common <- backtransf(uppTE.common, sm, npft.ma)
     ##
-    TE.random <- backtransf(TE.random, sm, "mean",
-                            npft.ma, warn = random)
-    lowTE.random <- backtransf(lowTE.random, sm, "lower",
-                               npft.ma, warn = random)
-    uppTE.random <- backtransf(uppTE.random, sm, "upper",
-                               npft.ma, warn = random)
+    TE.random <- backtransf(TE.random, sm, npft.ma)
+    lowTE.random <- backtransf(lowTE.random, sm, npft.ma)
+    uppTE.random <- backtransf(uppTE.random, sm, npft.ma)
     ##
-    maxbias <- backtransf(maxbias, sm, "mean", npft.ma, warn = FALSE)
+    maxbias <- backtransf(maxbias, sm, npft.ma)
   }
   ##
   TE.common    <- round(TE.common, digits)
@@ -262,15 +256,18 @@ print.orbbound <- function(x,
     
     prmatrix(res, quote = FALSE, right = TRUE)
   }
-  
-  
-  if (common | random) {
-    ## Print information on summary method:
-    catmeth(method = x$x$method,
-            method.tau = if (random) x$x$method.tau else "",
-            sm = sm,
-            k.all = 666)
-  }
+   
+   
+  # Print information on summary method:
+  if (common | random)
+    catmeth(x$x, common = common, random = random,
+            prediction = FALSE,
+            overall = TRUE, overall.hetstat = TRUE,
+            text.tau2 = gs("text.tau2"),
+            text.tau = gs("text.tau"),
+            func.transf = x$x$func.transf,
+            backtransf = backtransf,
+            func.backtransf = x$x$func.backtransf)
   
   
   invisible(NULL)

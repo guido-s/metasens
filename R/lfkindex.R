@@ -31,8 +31,8 @@
 #' @author Gerta Rücker \email{gerta.ruecker@@uniklinik-freiburg.de}, Guido
 #'   Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
-#' @seealso \code{\link{doiplot}}, \code{\link{metabias}},
-#'   \code{\link{funnel.meta}}
+#' @seealso \code{\link{doiplot}}, \code{\link[meta]{metabias}},
+#'   \code{\link[meta]{funnel.meta}}
 #' 
 #' @references
 #' Furuya-Kanamori L, Barendregt JJ, Doi SAR (2018):
@@ -40,6 +40,12 @@
 #' in meta-analysis.
 #' \emph{International Journal of Evidence-Based Healthcare},
 #' \bold{16}, 195--203
+#' 
+#' Schwarzer G, Rücker G, Semaca C (2024):
+#' LFK index does not reliably detect small-study effects in meta-analysis:
+#' a simulation study.
+#' \emph{Research Synthesis Methods},
+#' Accepted for publication
 #' 
 #' @examples
 #' # Example from Furuya-Kanamori et al. (2018)
@@ -73,6 +79,11 @@ lfkindex <- function(TE, seTE, data = NULL) {
   TE <- catch("TE", mc, data, sfsp)
   ##
   if (inherits(TE, "meta")) {
+    ##
+    if (!is.null(TE$three.level) && TE$three.level)
+      stop("LFK index not defined for three-level model.",
+           call. = FALSE)
+    ##
     x <- TE
     ##
     seTE <- TE$seTE
@@ -106,18 +117,23 @@ lfkindex <- function(TE, seTE, data = NULL) {
     MidRank[i] <- MidRank[i - 1] + (N[i - 1] + N[i]) / 2
   }
   ##
-  percentile <- (MidRank - 0.5) / sum(N)
+  percentile <- (MidRank - 0.5) / sum(N, na.rm = TRUE)
   zscore <- qnorm(percentile)
   abs.zscore <- abs(zscore)
-  ##
+  #
+  sel <- !is.na(zscore) & !is.na(zscore)
+  if (length(zscore) != sum(sel))
+    warning(paste(length(zscore) - sum(sel),
+                  "observation(s) dropped due to missing values"))  #
+  #
   TE.j <- TE[which.min(abs.zscore)]
   ##
   lfkindex <-
     5 / (2 * sum(!is.na(TE))) *
     sum(zscore +
-        (max(zscore) - min(zscore)) /
-        (max(TE - TE.j) - min(TE - TE.j)) *
-        (TE - TE.j))
+        (max(zscore, na.rm = TRUE) - min(zscore, na.rm = TRUE)) /
+        (max(TE - TE.j, na.rm = TRUE) - min(TE - TE.j, na.rm = TRUE)) *
+        (TE - TE.j), na.rm = TRUE)
   ##
   interpretation <-
     if (abs(lfkindex) <= 1)

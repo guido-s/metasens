@@ -1,6 +1,7 @@
 *~
 *.bak
 symbols.rds
+metasens.Rproj
 .Rproj.user
 .Rhistory
 .RData

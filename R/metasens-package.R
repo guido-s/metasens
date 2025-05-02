@@ -6,8 +6,6 @@
 #' \url{https://link.springer.com/book/10.1007/978-3-319-21416-0}.
 #'
 #' @name metasens-package
-#' 
-#' @docType package
 #'
 #' @details
 #'
@@ -62,6 +60,12 @@
 #' \emph{Statistical Methods in Medical Research},
 #' \bold{10}, 251--65
 #' 
+#' Furuya-Kanamori L, Barendregt JJ, Doi SAR (2018):
+#' A new improved graphical and quantitative method for detecting bias
+#' in meta-analysis.
+#' \emph{International Journal of Evidence-Based Healthcare},
+#' \bold{16}, 195--203
+#' 
 #' Gamble C, Hollis S (2005):
 #' Uncertainty method improved on best–worst case analysis in a binary
 #' meta-analysis.
@@ -89,6 +93,12 @@
 #' Schwarzer G, Carpenter JR, Rücker G (2015):
 #' \emph{Meta-Analysis with R (Use-R!)}.
 #' Springer International Publishing, Switzerland
+#' 
+#' Schwarzer G, Rücker G, Semaca C (2024):
+#' LFK index does not reliably detect small-study effects in meta-analysis:
+#' a simulation study.
+#' \emph{Research Synthesis Methods},
+#' Accepted for publication
 #'
 #' @keywords package
 #'
@@ -96,5 +106,6 @@
 #' @importFrom stats coefficients dnorm lm loess optim pchisq pnorm
 #'   qlogis qnorm qt sd update var vcov
 
+"_PACKAGE"
 
 NULL

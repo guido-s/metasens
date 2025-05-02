@@ -62,10 +62,16 @@ A new improved graphical and quantitative method for detecting bias
 in meta-analysis.
 \emph{International Journal of Evidence-Based Healthcare},
 \bold{16}, 195--203
+
+Schwarzer G, Rücker G, Semaca C (2024):
+LFK index does not reliably detect small-study effects in meta-analysis:
+a simulation study.
+\emph{Research Synthesis Methods},
+Accepted for publication
 }
 \seealso{
-\code{\link{lfkindex}}, \code{\link{metabias}},
-  \code{\link{funnel.meta}}
+\code{\link{lfkindex}}, \code{\link[meta]{metabias}},
+  \code{\link[meta]{funnel.meta}}
 }
 \author{
 Gerta Rücker \email{gerta.ruecker@uniklinik-freiburg.de}, Guido

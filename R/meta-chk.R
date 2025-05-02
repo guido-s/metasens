@@ -5,7 +5,11 @@
 ## License: GPL (>= 2)
 ##
 
-chkchar <- function(x, length = 0, name = NULL, nchar = NULL, single = FALSE) {
+chkchar <- function(x, length = 0, name = NULL, nchar = NULL, single = FALSE,
+                    NULL.ok = FALSE) {
+  if (is.null(x) & NULL.ok)
+    return(invisible(NULL))
+  ##
   if (!missing(single) && single)
     length <- 1
   if (is.null(name))
@@ -36,7 +40,7 @@ chkchar <- function(x, length = 0, name = NULL, nchar = NULL, single = FALSE) {
              call. = FALSE)
   }
   ##
-  if (!is.character(x))
+  if (!is.character(x) & !is.numeric(x))
     stop("Argument '", name, "' must be a character vector.")
   else {
     if (!is.null(nchar) & any(!(nchar(x) %in% nchar)))
@@ -53,6 +57,8 @@ chkchar <- function(x, length = 0, name = NULL, nchar = NULL, single = FALSE) {
              " characters.",
              call. = FALSE)
   }
+  ##
+  invisible(NULL)
 }
 
 chkclass <- function(x, class, name = NULL) {
@@ -159,7 +165,7 @@ chklevel <- function(x, length = 0, ci = TRUE, name = NULL, single = FALSE) {
   invisible(NULL)
 }
 
-chklogical <- function(x, name = NULL) {
+chklogical <- function(x, name = NULL, text = "") {
   ##
   ## Check whether argument is logical
   ##
@@ -170,8 +176,9 @@ chklogical <- function(x, name = NULL) {
     x <- as.logical(x)
   ##
   if (length(x) !=  1 || !is.logical(x) || is.na(x))
-    stop("Argument '", name, "' must be a logical.", call. = FALSE)
-  ##
+    stop("Argument '", name, "' must be a logical",
+         if (text != "") " ", text, ".", call. = FALSE)
+  #
   invisible(NULL)
 }
 
@@ -247,7 +254,7 @@ chknumeric <- function(x, min, max, zero = FALSE, length = 0,
     stop("Argument '", name, "' must be between ",
          min, " and ", max, ".", call. = FALSE)
   ##
-  if (integer && any(!is.wholenumber(x))) {
+  if (integer && any(!is_wholenumber(x))) {
     if (length(x) == 1)
       stop("Argument '", name, "' must be an integer.",
            call. = FALSE)
@@ -269,10 +276,18 @@ argid <- function(x, value) {
 
 chkdeprecated <- function(x, new, old, warn = TRUE) {
   depr <- !is.na(argid(x, old))
-  if (depr & warn)
-    warning("Deprecated argument '", old, "' ignored. ",
-            "Use argument '", new, "' instead.",
-            call. = FALSE)
+  new.given <- !is.na(argid(x, new))
+  ##
+  if (depr & warn) {
+    if (new.given)
+      warning("Deprecated argument '", old, "' ignored as ",
+              "'", new, "' is also provided, see help(meta).",
+              call. = FALSE)
+    else
+      warning("Use argument '", new, "' instead of '",
+              old, "' (deprecated), see help(meta).",
+              call. = FALSE)
+  }
   ##
   invisible(depr)
 }
