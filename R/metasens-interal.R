@@ -3,8 +3,74 @@
     paste0("Loading 'metasens' package (version ",
            utils::packageDescription("metasens")$Version,
            ").",
-           "\nReaders of 'Meta-Analysis with R (Use R!)' should install",
-           "\nolder version of 'metasens' package: ",
-           "https://tinyurl.com/jhv33bfm")           
+           "\nType 'help(metasens)' for a brief overview.")
   packageStartupMessage(msg)
+}
+
+updateversion <- function(x) {
+  
+  if (inherits(x, "meta")) {
+    #
+    # Update older meta objects
+    #
+    x <- update(x, warn = FALSE, warn.deprecated = FALSE)
+    #
+    return(x)
+  }
+  #
+  if (inherits(x, "orbbound")) {
+    if (update_needed(x$version, 1, 5, pkg = "metasens")) {
+      x$common <- x$fixed
+      x$x <- updateversion(x$x)
+    }
+  }
+  #
+  x
+}
+
+update_needed <- function(version,  major = 1, minor = 5,
+                          verbose = FALSE,
+                          pkg = NULL) {
+  if (is.null(version)) {
+    version <- 0.1
+    major.cur <- 0
+    minor.cur <- 1
+  }
+  else {
+    version <- unlist(strsplit(version, "-")[1])
+    major.cur <-
+      as.numeric(unlist(strsplit(version, ".", fixed = TRUE))[1])
+    minor.cur <-
+      as.numeric(unlist(strsplit(version, ".", fixed = TRUE))[2])
+  }
+  #
+  res <-
+    ifelse(major.cur < major,
+           TRUE, ifelse(major.cur > major,
+                        FALSE, minor.cur < minor))
+  if (res & verbose) {
+    if (!is.null(pkg))
+      addtext <- paste0(pkg, " ")
+    else
+      addtext <- ""
+    #
+    message(paste0("Update to ", addtext, "version ", major, ".", minor))
+  }
+  #
+  res
+}
+
+setsv <- function(x, add = NULL) {
+  if (is.null(x))
+    res <- "desirable"
+  else {
+    res <- setchar(x, c("good", "bad"), stop.at.error = FALSE)
+    #
+    if (!is.null(res))
+      res <- switch(res, good = "desirable", bad = "undesirable")
+    else
+      res <- x
+  }
+  #
+  setchar(res, c("desirable", "undesirable", add))
 }

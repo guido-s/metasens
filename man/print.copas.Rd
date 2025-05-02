@@ -16,6 +16,8 @@
   big.mark = gs("big.mark"),
   header = TRUE,
   legend = TRUE,
+  text.adj = "Adjusted estimate",
+  text.unadj = "Unadjusted estimate",
   text.tau2 = gs("text.tau2"),
   text.tau = gs("text.tau"),
   ...
@@ -57,6 +59,10 @@ beginning of the printout.}
 
 \item{legend}{A logical indicating whether a legend should be
 printed.}
+
+\item{text.adj}{A character string used to label the adjusted estimate.}
+
+\item{text.unadj}{A character string used to label the unadjusted estimate.}
 
 \item{text.tau2}{Text printed to identify between-study variance
 \eqn{\tau^2}.}

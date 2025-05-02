@@ -127,9 +127,9 @@ If argument \code{shrunken} is \code{TRUE} the shrunken effect
 estimates are also plotted. Lines are connecting original and
 shrunken effect estimates.
 
-Internally, R function \code{\link{funnel.meta}} is called to
+Internally, R function \code{\link[meta]{funnel.meta}} is called to
 create a funnel plot. For more information see help page of the
-\code{\link[meta]{funnel}} function.
+\code{\link[meta]{funnel.meta}} function.
 }
 \examples{
 data(Moore1998)

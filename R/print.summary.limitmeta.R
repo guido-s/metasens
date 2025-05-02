@@ -90,7 +90,7 @@ print.summary.limitmeta <- function(x,
       sm.lab <- "proportion"
   }
   else 
-    if (is.relative.effect(sm))
+    if (is_relative_effect(sm))
       sm.lab <- paste("log", sm, sep = "")
   
   
@@ -176,13 +176,13 @@ print.summary.limitmeta <- function(x,
     ##
     npft.ma <- 1 / mean(1 / x$x$n)
     ##
-    TE    <- backtransf(TE, sm, "mean", npft.ma, warn = TRUE)
-    lowTE <- backtransf(lowTE, sm, "lower", npft.ma, warn = TRUE)
-    uppTE <- backtransf(uppTE, sm, "upper", npft.ma, warn = TRUE)
+    TE    <- backtransf(TE, sm, npft.ma)
+    lowTE <- backtransf(lowTE, sm, npft.ma)
+    uppTE <- backtransf(uppTE, sm, npft.ma)
     ##
-    TE.limit <- backtransf(TE.limit, sm, "mean", npft.ma, warn = TRUE)
-    lowTE.limit <- backtransf(lowTE.limit, sm, "lower", npft.ma, warn = TRUE)
-    uppTE.limit <- backtransf(uppTE.limit, sm, "upper", npft.ma, warn = TRUE)
+    TE.limit <- backtransf(TE.limit, sm, npft.ma)
+    lowTE.limit <- backtransf(lowTE.limit, sm, npft.ma)
+    uppTE.limit <- backtransf(uppTE.limit, sm, npft.ma)
   }
   ##
   TE    <- round(TE, digits)

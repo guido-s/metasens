@@ -1,7 +1,10 @@
 README.md
+.github
 .travis.yml
 .*[.]Rproj
 .Rproj.user
 roxygen2.*[.]R
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^.*\.Rproj$
+^\.Rproj\.user$

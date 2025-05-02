@@ -191,7 +191,7 @@ plot.copas <- function(x,
   main <- deprecated(main, missing.main, args, "caption")
   ##
   if (missing.main) {
-    if (chkdeprecated(names(args), old = "caption", warn = FALSE)) {
+    if (chkdeprecated(names(args), new = "main", old = "caption", warn = FALSE)) {
       if (length(main) == 4 & !missing.which)
         main <- main[which]
     }
@@ -250,7 +250,7 @@ plot.copas <- function(x,
   on.exit(par(oldpar), add = TRUE)
   
   
-  if (is.relative.effect(sm))
+  if (is_relative_effect(sm))
     sm <- paste("log ", sm, sep = "")
   
   

@@ -16,9 +16,9 @@
 #' estimates are also plotted. Lines are connecting original and
 #' shrunken effect estimates.
 #' 
-#' Internally, R function \code{\link{funnel.meta}} is called to
+#' Internally, R function \code{\link[meta]{funnel.meta}} is called to
 #' create a funnel plot. For more information see help page of the
-#' \code{\link[meta]{funnel}} function.
+#' \code{\link[meta]{funnel.meta}} function.
 #' 
 #' @param x An object of class \code{limitmeta}.
 #' @param pch The plotting symbol used for individual studies.
@@ -171,7 +171,7 @@ funnel.limitmeta <- function(x,
   }
   
   
-  if (backtransf & is.relative.effect(sm)) {
+  if (backtransf & is_relative_effect(sm)) {
     TE <- exp(TE)
     TE.limit <- exp(TE.limit)
     TE.adjust <- exp(TE.adjust)
@@ -192,7 +192,7 @@ funnel.limitmeta <- function(x,
   ##
   if (line) {
     if (x$method.adjust == "beta0") {
-      if (backtransf & is.relative.effect(sm)) {
+      if (backtransf & is_relative_effect(sm)) {
         curve(sqrt((log(x) - beta.r)^2 / alpha.r^2 - tau^2),
               from = exp(xmin.line), to = exp(xmax.line),
               lty = lty.line, col = col.line, lwd = lwd.line, add = TRUE)
