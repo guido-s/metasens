@@ -13,9 +13,9 @@
 #' \code{backtransf=FALSE} for these summary measures, maximum bias is
 #' instead printed as absolute bias.
 #'
-#' Internally, R function \code{\link{forest.meta}} is called to
+#' Internally, R function \code{\link[meta]{forest.meta}} is called to
 #' create a forest plot. For more information see help page of the
-#' \code{\link{forest.meta}} function.
+#' \code{\link[meta]{forest.meta}} function.
 #'
 #' @param x An object of class \code{orbbound}.
 #' @param common A logical indicating whether sensitivity analysis for
@@ -31,10 +31,10 @@
 #'   indicates which model was used.
 #' @param leftcols A character vector specifying (additional) columns
 #'   to be plotted on the left side of the forest plot or a logical
-#'   value (see \code{\link{forest.meta}} help page for details).
+#'   value (see \code{\link[meta]{forest.meta}} help page for details).
 #' @param leftlabs A character vector specifying labels for
 #'   (additional) columns on left side of the forest plot (see
-#'   \code{\link{forest.meta}} help page for details).
+#'   \code{\link[meta]{forest.meta}} help page for details).
 #' @param backtransf A logical indicating whether results should be
 #'   back transformed in printouts and plots. If
 #'   \code{backtransf=TRUE} (default), results for \code{sm="OR"} are
@@ -43,7 +43,7 @@
 #'   \code{print.default}.
 #' @param warn.deprecated A logical indicating whether warnings should
 #'   be printed if deprecated arguments are used.
-#' @param \dots Additional arguments for \code{\link{forest.meta}}
+#' @param \dots Additional arguments for \code{\link[meta]{forest.meta}}
 #'   function and to catch deprecated arguments.
 #' 
 #' @author Guido Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}

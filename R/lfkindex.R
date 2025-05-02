@@ -31,8 +31,8 @@
 #' @author Gerta Rücker \email{gerta.ruecker@@uniklinik-freiburg.de}, Guido
 #'   Schwarzer \email{guido.schwarzer@@uniklinik-freiburg.de}
 #' 
-#' @seealso \code{\link{doiplot}}, \code{\link{metabias}},
-#'   \code{\link{funnel.meta}}
+#' @seealso \code{\link{doiplot}}, \code{\link[meta]{metabias}},
+#'   \code{\link[meta]{funnel.meta}}
 #' 
 #' @references
 #' Furuya-Kanamori L, Barendregt JJ, Doi SAR (2018):

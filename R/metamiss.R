@@ -14,8 +14,8 @@
 #'   \code{"0"}, \code{"1"}, \code{"pc"}, \code{"pe"}, \code{"p"},
 #'   \code{"b"}, or \code{"w"}, can be abbreviated (see Details).
 #' @param small.values A character string specifying whether small
-#'   treatment effects indicate a beneficial (\code{"good"}) or
-#'   harmful (\code{"bad"}) effect, can be abbreviated (see Details).
+#'   treatment effects indicate a beneficial (\code{"desirable"}) or
+#'   harmful (\code{"undesirable"}) effect, can be abbreviated (see Details).
 #' @param common A logical indicating whether a common effect
 #'   meta-analysis should be conducted.
 #' @param random A logical indicating whether a random effects
@@ -66,13 +66,15 @@
 #' \code{IMOR.c}) must be specified by the user. For all other
 #' methods, the input for arguments \code{IMOR.e} and \code{IMOR.c} is
 #' ignored as these values are determined by the respective imputation
-#' method (see Table 2 in Higgins et al., 2008).
+#' method (see Table 2 in Higgins et al., 2008). Note, an infinite IMOR is
+#' internally replaced by the value 1e8 to calculate the pooled estimate and
+#' its standard error.
 #'
-#' For the best and worst case scenarios (i.e., argument
-#' \code{method.miss} equal to \code{"b"} or \code{"w"}), the user has
-#' to specify whether the outcome is beneficial (argument
-#' \code{small.values = "good"}) or harmful (\code{small.values =
-#' "bad"}).
+#' For the best and worst case scenarios (i.e., argument \code{method.miss}
+#' equal to \code{"b"} or \code{"w"}), the user has to specify whether the aim
+#' is to reduce the number of events, e.g., deaths (argument
+#' \code{small.values = "desirable"}) or to increase the number of events, e.g.,
+#' treatment responders (\code{small.values = "undesirable"}).
 #' 
 #' @return
 #' An object of class \code{c("metamiss", "metagen", "meta")} with
@@ -132,7 +134,7 @@ metamiss <- function(x,
                      miss.e, miss.c,
                      IMOR.e, IMOR.c = IMOR.e,
                      method.miss = if (missing(IMOR.e)) "0" else "IMOR",
-                     small.values = "good",
+                     small.values = "desirable",
                      common = x$common,
                      random = x$random,
                      prediction = x$prediction,
@@ -204,7 +206,7 @@ metamiss <- function(x,
   if (method.miss == "gh")
     method.miss <- "GH"
   ##
-  small.values <- setchar(small.values, c("good", "bad"))
+  small.values <- setsv(small.values)
   ##
   common <-
     deprecated2(common, missing(common), fixed, missing(fixed),
@@ -276,7 +278,13 @@ metamiss <- function(x,
     if (method.miss == "IMOR") {
       chknumeric(IMOR.e, min = 0)
       chknumeric(IMOR.c, min = 0)
-      ##
+      #
+      if (is.infinite(IMOR.e))
+         IMOR.e <- 1e8
+      #
+      if (is.infinite(IMOR.c))
+         IMOR.c <- 1e8
+      #
       if (length(IMOR.e) == 1)
         IMOR.e <- rep(IMOR.e, k.All)
       if (length(IMOR.c) == 1)
@@ -316,7 +324,7 @@ metamiss <- function(x,
     }
     ##
     if (method.miss == "b") {
-      if (small.values == "good") {
+      if (small.values == "desirable") {
         IMOR.e <- 0
         IMOR.c <- 1e8
       }
@@ -327,7 +335,7 @@ metamiss <- function(x,
     }
     ##
     if (method.miss == "w") {
-      if (small.values == "good") {
+      if (small.values == "desirable") {
         IMOR.e <- 1e8
         IMOR.c <- 0
       }
@@ -420,8 +428,8 @@ metamiss <- function(x,
     res$miss.c <- miss.c
     res$n.c <- n.c + miss.c
     ##
-    res$IMOR.e <- IMOR.e
-    res$IMOR.c <- IMOR.c
+    res$IMOR.e <- ifelse(IMOR.e == 1e8, Inf, IMOR.e)
+    res$IMOR.c <- ifelse(IMOR.c == 1e8, Inf, IMOR.c)
     ##
     res$method.miss <- method.miss
     res$small.values <- small.values

@@ -41,11 +41,11 @@ indicates which model was used.}
 
 \item{leftcols}{A character vector specifying (additional) columns
 to be plotted on the left side of the forest plot or a logical
-value (see \code{\link{forest.meta}} help page for details).}
+value (see \code{\link[meta]{forest.meta}} help page for details).}
 
 \item{leftlabs}{A character vector specifying labels for
 (additional) columns on left side of the forest plot (see
-\code{\link{forest.meta}} help page for details).}
+\code{\link[meta]{forest.meta}} help page for details).}
 
 \item{backtransf}{A logical indicating whether results should be
 back transformed in printouts and plots. If
@@ -58,7 +58,7 @@ printed as odds ratios rather than log odds ratio, for example.}
 \item{warn.deprecated}{A logical indicating whether warnings should
 be printed if deprecated arguments are used.}
 
-\item{\dots}{Additional arguments for \code{\link{forest.meta}}
+\item{\dots}{Additional arguments for \code{\link[meta]{forest.meta}}
 function and to catch deprecated arguments.}
 }
 \description{
@@ -75,9 +75,9 @@ value of 1.10 means a maximum overestimation by 10 percent. If
 \code{backtransf=FALSE} for these summary measures, maximum bias is
 instead printed as absolute bias.
 
-Internally, R function \code{\link{forest.meta}} is called to
+Internally, R function \code{\link[meta]{forest.meta}} is called to
 create a forest plot. For more information see help page of the
-\code{\link{forest.meta}} function.
+\code{\link[meta]{forest.meta}} function.
 }
 \examples{
 data(Fleiss1993bin, package = "meta")

@@ -11,7 +11,7 @@ metamiss(
   IMOR.e,
   IMOR.c = IMOR.e,
   method.miss = if (missing(IMOR.e)) "0" else "IMOR",
-  small.values = "good",
+  small.values = "desirable",
   common = x$common,
   random = x$random,
   prediction = x$prediction,
@@ -36,8 +36,8 @@ used to impute missing values. Either \code{"GH"}, \code{"IMOR"},
 \code{"b"}, or \code{"w"}, can be abbreviated (see Details).}
 
 \item{small.values}{A character string specifying whether small
-treatment effects indicate a beneficial (\code{"good"}) or
-harmful (\code{"bad"}) effect, can be abbreviated (see Details).}
+treatment effects indicate a beneficial (\code{"desirable"}) or
+harmful (\code{"undesirable"}) effect, can be abbreviated (see Details).}
 
 \item{common}{A logical indicating whether a common effect
 meta-analysis should be conducted.}
@@ -102,13 +102,15 @@ experimental (argument \code{IMOR.e}) and control group (argument
 \code{IMOR.c}) must be specified by the user. For all other
 methods, the input for arguments \code{IMOR.e} and \code{IMOR.c} is
 ignored as these values are determined by the respective imputation
-method (see Table 2 in Higgins et al., 2008).
+method (see Table 2 in Higgins et al., 2008). Note, an infinite IMOR is
+internally replaced by the value 1e8 to calculate the pooled estimate and
+its standard error.
 
-For the best and worst case scenarios (i.e., argument
-\code{method.miss} equal to \code{"b"} or \code{"w"}), the user has
-to specify whether the outcome is beneficial (argument
-\code{small.values = "good"}) or harmful (\code{small.values =
-"bad"}).
+For the best and worst case scenarios (i.e., argument \code{method.miss}
+equal to \code{"b"} or \code{"w"}), the user has to specify whether the aim
+is to reduce the number of events, e.g., deaths (argument
+\code{small.values = "desirable"}) or to increase the number of events, e.g.,
+treatment responders (\code{small.values = "undesirable"}).
 }
 \examples{
 d1 <- data.frame(author = c("Beasley", "Selman"),

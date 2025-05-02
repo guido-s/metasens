@@ -70,8 +70,8 @@ a simulation study.
 Accepted for publication
 }
 \seealso{
-\code{\link{lfkindex}}, \code{\link{metabias}},
-  \code{\link{funnel.meta}}
+\code{\link{lfkindex}}, \code{\link[meta]{metabias}},
+  \code{\link[meta]{funnel.meta}}
 }
 \author{
 Gerta Rücker \email{gerta.ruecker@uniklinik-freiburg.de}, Guido

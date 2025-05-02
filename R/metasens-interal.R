@@ -59,3 +59,18 @@ update_needed <- function(version,  major = 1, minor = 5,
   #
   res
 }
+
+setsv <- function(x, add = NULL) {
+  if (is.null(x))
+    res <- "desirable"
+  else {
+    res <- setchar(x, c("good", "bad"), stop.at.error = FALSE)
+    #
+    if (!is.null(res))
+      res <- switch(res, good = "desirable", bad = "undesirable")
+    else
+      res <- x
+  }
+  #
+  setchar(res, c("desirable", "undesirable", add))
+}

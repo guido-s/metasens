@@ -1,4 +1,4 @@
-## metasens, version 1.5-3 (2025-03-16)
+## metasens, version 1.5-3 (2025-05-02)
 
 ### Major changes
 
@@ -7,15 +7,18 @@
 
 ### User-visible changes
 
-* Do not print the start-up message concerning older version of R package
-  **metasens** for readers of 'Meta-Analysis with R (Use R!)'
-
 * print.copas():
   - new arguments 'text.adj' and 'text.unadj' to label results for the adjusted
     and unadjusted treatment estimate
 
 * limitmeta():
   - print informative error message if input is a generalised linear mixed model
+
+* metamiss():
+  - replace infinite values in argument 'IMOR.e' and 'IMOR.c' with value 1e8
+
+* Do not print the start-up message concerning older version of R package
+  **metasens** for readers of 'Meta-Analysis with R (Use R!)'
 
 ### Internal changes
 

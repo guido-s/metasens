@@ -16,9 +16,9 @@
 #' estimates are also plotted. Lines are connecting original and
 #' shrunken effect estimates.
 #' 
-#' Internally, R function \code{\link{funnel.meta}} is called to
+#' Internally, R function \code{\link[meta]{funnel.meta}} is called to
 #' create a funnel plot. For more information see help page of the
-#' \code{\link[meta]{funnel}} function.
+#' \code{\link[meta]{funnel.meta}} function.
 #' 
 #' @param x An object of class \code{limitmeta}.
 #' @param pch The plotting symbol used for individual studies.

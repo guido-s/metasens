@@ -104,7 +104,8 @@ Accepted for publication
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/guido-s/metasens https://link.springer.com/book/10.1007/978-3-319-21416-0}
+  \item \url{https://github.com/guido-s/metasens}
+  \item \url{https://link.springer.com/book/10.1007/978-3-319-21416-0}
 }
 
 }
